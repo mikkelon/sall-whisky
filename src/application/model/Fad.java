@@ -1,20 +1,21 @@
 package application.model;
 
 public class Fad {
-    private fadType fadType;
+    private FadType FadType;
     private double størrelseILiter;
     private int fadNr;
     private double indeholdtVæskeILiter;
 
-    public Fad(fadType fadType, double størrelseILiter, int fadNr, double indeholdtVæskeILiter) {
-        this.fadType = fadType;
+    public Fad(FadType fadType, double størrelseILiter, int fadNr, double indeholdtVæskeILiter) {
+        // TODO: fadNr skal måske automatisk tilføjes eller valideres, så der ikke kan være to fade med samme fadNr?
+        this.FadType = fadType;
         this.størrelseILiter = størrelseILiter;
         this.fadNr = fadNr;
         this.indeholdtVæskeILiter = indeholdtVæskeILiter;
     }
 
-    public fadType getFadType() {
-        return fadType;
+    public FadType getFadType() {
+        return FadType;
     }
 
     public double getStørrelseILiter() {
@@ -29,8 +30,8 @@ public class Fad {
         return indeholdtVæskeILiter;
     }
 
-    public void setFadType(fadType fadType) {
-        this.fadType = fadType;
+    public void setFadType(FadType fadType) {
+        this.FadType = fadType;
     }
 
     public void setStørrelseILiter(double størrelseILiter) {
