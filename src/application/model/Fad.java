@@ -1,20 +1,20 @@
 package application.model;
 
 public class Fad {
-    private FadType FadType;
+    private FadType fadType;
     private double størrelseILiter;
     private int fadNr;
     private double indeholdtVæskeILiter;
 
     public Fad(FadType fadType, double størrelseILiter, int fadNr, double indeholdtVæskeILiter) {
-        this.FadType = fadType;
+        this.fadType = fadType;
         this.størrelseILiter = størrelseILiter;
         this.fadNr = fadNr;
         this.indeholdtVæskeILiter = indeholdtVæskeILiter;
     }
 
     public FadType getFadType() {
-        return FadType;
+        return fadType;
     }
 
     public double getStørrelseILiter() {
@@ -30,7 +30,7 @@ public class Fad {
     }
 
     public void setFadType(FadType fadType) {
-        this.FadType = fadType;
+        this.fadType = fadType;
     }
 
     public void setStørrelseILiter(double størrelseILiter) {
