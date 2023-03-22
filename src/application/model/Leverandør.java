@@ -1,8 +1,11 @@
 package application.model;
 
+import java.util.ArrayList;
+
 public class Leverandør {
     private String navn;
     private String land;
+
 
     public Leverandør(String navn, String land) {
         this.navn = navn;
@@ -16,4 +19,6 @@ public class Leverandør {
     public String getLand() {
         return land;
     }
+
 }
+

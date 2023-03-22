@@ -1,21 +1,24 @@
 package application.model;
 
 public class Fad {
-    private FadType FadType;
+    private FadType fadType;
     private double størrelseILiter;
     private int fadNr;
     private double indeholdtVæskeILiter;
+    private Hylde hylde;
 
-    public Fad(FadType fadType, double størrelseILiter, int fadNr, double indeholdtVæskeILiter) {
+    private Leverandør leverandør;
+
+    public Fad(FadType fadType, double størrelseILiter, int fadNr, double indeholdtVæskeILiter, Leverandør leverandør, Hylde hylde) {
         // TODO: fadNr skal måske automatisk tilføjes eller valideres, så der ikke kan være to fade med samme fadNr?
-        this.FadType = fadType;
+        this.fadType = fadType;
         this.størrelseILiter = størrelseILiter;
         this.fadNr = fadNr;
         this.indeholdtVæskeILiter = indeholdtVæskeILiter;
     }
 
     public FadType getFadType() {
-        return FadType;
+        return fadType;
     }
 
     public double getStørrelseILiter() {
@@ -30,19 +33,29 @@ public class Fad {
         return indeholdtVæskeILiter;
     }
 
-    public void setFadType(FadType fadType) {
-        this.FadType = fadType;
-    }
 
-    public void setStørrelseILiter(double størrelseILiter) {
-        this.størrelseILiter = størrelseILiter;
-    }
-
-    public void setFadNr(int fadNr) {
-        this.fadNr = fadNr;
+    public Hylde getHylde() {
+        return hylde;
     }
 
     public void setIndeholdtVæskeILiter(double indeholdtVæskeILiter) {
         this.indeholdtVæskeILiter = indeholdtVæskeILiter;
+    }
+
+    public Leverandør getLeverandør() {
+        return leverandør;
+    }
+
+    public void setHylde(Hylde hylde){
+        if(this.hylde != hylde){
+            Hylde oldhylde = this.hylde;
+            if(oldhylde != null){
+                oldhylde.removeFad(this);
+            }
+            this.hylde = hylde;
+            if(hylde != null){
+                hylde.addFad(this);
+            }
+        }
     }
 }
