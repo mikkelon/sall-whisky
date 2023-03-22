@@ -15,6 +15,8 @@ public class Fad {
         this.størrelseILiter = størrelseILiter;
         this.fadNr = fadNr;
         this.indeholdtVæskeILiter = indeholdtVæskeILiter;
+        this.leverandør = leverandør;
+        this.hylde = hylde;
     }
 
     public FadType getFadType() {
