@@ -32,7 +32,13 @@ public class Fad {
         return indeholdtVæskeILiter;
     }
 
+    public void setIndeholdtVæskeILiter(double indeholdtVæskeILiter) {
+        this.indeholdtVæskeILiter = indeholdtVæskeILiter;
+    }
+
     public Leverandør getLeverandør() {
         return leverandør;
     }
+
+
 }
