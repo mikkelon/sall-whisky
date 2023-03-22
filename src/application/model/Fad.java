@@ -5,14 +5,16 @@ public class Fad {
     private double størrelseILiter;
     private int fadNr;
     private double indeholdtVæskeILiter;
+    private Hylde hylde;
 
     private Leverandør leverandør;
 
-    public Fad(FadType fadType, double størrelseILiter, int fadNr, double indeholdtVæskeILiter, Leverandør leverandør) {
+    public Fad(FadType fadType, double størrelseILiter, int fadNr, double indeholdtVæskeILiter, Leverandør leverandør, Hylde hylde) {
         this.fadType = fadType;
         this.størrelseILiter = størrelseILiter;
         this.fadNr = fadNr;
         this.indeholdtVæskeILiter = indeholdtVæskeILiter;
+        this.hylde = hylde;
         this.leverandør = leverandør;
     }
 
@@ -32,6 +34,11 @@ public class Fad {
         return indeholdtVæskeILiter;
     }
 
+
+    public Hylde getHylde() {
+        return hylde;
+    }
+
     public void setIndeholdtVæskeILiter(double indeholdtVæskeILiter) {
         this.indeholdtVæskeILiter = indeholdtVæskeILiter;
     }
@@ -40,5 +47,16 @@ public class Fad {
         return leverandør;
     }
 
-
+    public void setHylde(Hylde hylde){
+        if(this.hylde != hylde){
+            Hylde oldhylde = this.hylde;
+            if(oldhylde != null){
+                oldhylde.removeFad(this);
+            }
+            this.hylde = hylde;
+            if(hylde != null){
+                hylde.addFad(this);
+            }
+        }
+    }
 }
