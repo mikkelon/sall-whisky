@@ -35,13 +35,13 @@ class HyldeTest {
     }
 
     @Test
-    void getHyldeNr() {
+    void getHyldeNrTC2() {
         assertTrue(hylde.getHyldeNr() > 0);
 
     }
 
     @Test
-    void getOgSetLager() {
+    void getOgSetLagerTC3() {
         hylde.setLager(lager);
         assertTrue(hylde.getLager().equals(lager));
 
@@ -49,20 +49,20 @@ class HyldeTest {
 
 
     @Test
-    void getFade() {
+    void getFadeTC4() {
         hylde.addFad(fad);
         assertTrue(hylde.getFade().contains(fad));
     }
 
     @Test
-    void addFad() {
+    void addFadTC5() {
 
         hylde.addFad(fad);
         assertTrue(hylde.getFade().contains(fad));
     }
 
     @Test
-    void removeFad() {
+    void removeFadTC6() {
         hylde.addFad(fad);
         hylde.removeFad(fad);
         assertTrue(hylde.getFade().isEmpty());
