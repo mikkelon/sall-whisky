@@ -28,6 +28,7 @@ public class BekræftSletVindue extends Stage {
         this.setScene(scene);
     }
 
+    private boolean valg = false;
     private void initContent(GridPane pane) {
         // Formateringsjusteringer
         pane.setAlignment(Pos.CENTER);
@@ -50,9 +51,25 @@ public class BekræftSletVindue extends Stage {
         pane.add(lblBekræftelse4, 0, 3, 2,1);
 
         Button btnJa = new Button("Ja");
+        btnJa.setOnAction(event -> jaAction());
         pane.add(btnJa, 0, 4, 1,1);
 
         Button btnNej = new Button("Nej");
+        btnNej.setOnAction(event -> nejAction());
         pane.add(btnNej, 1, 4, 1,1);
+    }
+
+    public boolean getValg() {
+        return valg;
+    }
+
+    private void jaAction() {
+        valg = true;
+        this.close();
+    }
+
+    private void nejAction() {
+        valg = false;
+        this.close();
     }
 }
