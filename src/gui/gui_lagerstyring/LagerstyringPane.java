@@ -3,6 +3,7 @@ package gui.gui_lagerstyring;
 import application.model.Fad;
 import application.model.Hylde;
 import application.model.Lager;
+import gui.BekræftSletVindue;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -68,7 +69,11 @@ public class LagerstyringPane extends GridPane {
     }
 
     private void sletFad() {
-
+        BekræftSletVindue window = new BekræftSletVindue();
+        window.showAndWait();
+        boolean valg = window.getValg();
+        if (valg)
+            System.out.println("Slet fad"); //TODO
     }
 
     public void updateControls() {
