@@ -3,32 +3,29 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-
 class FadTest {
     private Fad fad;
-    private Lager l1;
-    private Hylde h1;
+    private Lager lager;
+    private Hylde hylde;
+    private FadLeverandør fadLeverandør;
 
     @BeforeEach
     void setUp() {
-       l1 = new Lager("Baldersgade 39", "Sall Whisky Lager", 100.0);
-       h1 = new Hylde(l1);
-       FadLeverandør fl1 = new FadLeverandør("Garrison Brothers", "USA");
-       fad = new Fad(FadType.BOURBON, 80, fl1, h1);
+       lager = new Lager("Baldersgade 39", "Sall Whisky Lager", 100.0);
+       hylde = new Hylde(lager);
+       fadLeverandør = new FadLeverandør("Garrison Brothers", "USA");
+       fad = new Fad(FadType.BOURBON, 80, fadLeverandør, hylde);
     }
 
     @Test
-    void ConstructorTC1() {
-        FadLeverandør fl1 = new FadLeverandør("Garrison Brothers", "USA");
-        fad = new Fad(FadType.BOURBON, 80, fl1, h1);
-
+    void constructorTC1() {
         assertEquals(FadType.BOURBON, fad.getFadType());
         assertEquals(80, fad.getStørrelseILiter());
         assertTrue(fad.getFadNr() > 0);
         assertEquals(0, fad.getIndeholdtVæskeILiter());
-        assertEquals(h1, fad.getHylde());
-        assertEquals(fl1, fad.getFadLeverandør());
-        assertTrue(h1.getFade().contains(fad));
+        assertEquals(hylde, fad.getHylde());
+        assertEquals(fadLeverandør, fad.getFadLeverandør());
+        assertTrue(hylde.getFade().contains(fad));
     }
 
 
@@ -38,35 +35,41 @@ class FadTest {
         assertEquals(FadType.SHERRY, fad.getFadType());
     }
 
-    @Test
-    void getStørrelseILiter() {
+    @org.junit.jupiter.api.Test
+    void getStørrelseILiterTC3() {
+        assertEquals(80, fad.getStørrelseILiter());
     }
 
-    @Test
-    void getFadNr() {
+    @org.junit.jupiter.api.Test
+    void getFadNrTC4() {
+        assertTrue(fad.getFadNr() > 0);
     }
 
-    @Test
-    void getIndeholdtVæskeILiter() {
+    @org.junit.jupiter.api.Test
+    void getSetIndeholdtVæskeILiterTC5() {
+        fad.setIndeholdtVæskeILiter(50);
+        assertEquals(50, fad.getIndeholdtVæskeILiter());
     }
 
-    @Test
-    void setFadType() {
+    @org.junit.jupiter.api.Test
+    void getHyldeTC6() {
+        assertEquals(hylde, fad.getHylde());
     }
 
-    @Test
-    void getHylde() {
+    @org.junit.jupiter.api.Test
+    void getFadLeverandørTC7() {
+        assertEquals(fadLeverandør, fad.getFadLeverandør());
     }
 
-    @Test
-    void setIndeholdtVæskeILiter() {
+    @org.junit.jupiter.api.Test
+    void setHyldeNormalTC8() {
+        Hylde h2 = new Hylde(lager);
+        fad.setHylde(h2);
+        assertEquals(h2, fad.getHylde());
     }
 
-    @Test
-    void getFadLeverandør() {
-    }
-
-    @Test
-    void setHylde() {
+    @org.junit.jupiter.api.Test
+    void setHyldeFejlTC9() {
+        assertThrows(RuntimeException.class, () -> fad.setHylde(null));
     }
 }

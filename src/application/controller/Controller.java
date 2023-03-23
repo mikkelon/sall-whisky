@@ -25,15 +25,21 @@ public class Controller {
     }
 
     /**
-     * Opretter et nyt lager
+     * Opretter et nyt lager med en angivet antal hylder
      * @param adresse lagerets adresse
      * @param navn lagerets navn
      * @param kvm lagerets kvm
+     * @param antalHylder antal hylder der skal oprettes
      * @return det oprettede lager
      */
-    public Lager createLager(String adresse, String navn, double kvm) {
+    public Lager createLagerWithAntalHylder(String adresse, String navn, double kvm, int antalHylder) {
         Lager lager = new Lager(adresse, navn, kvm);
         storage.addLager(lager);
+
+        for (int i = 0; i < antalHylder; i++) {
+            lager.createHylde();
+        }
+
         return lager;
     }
 
@@ -143,7 +149,6 @@ public class Controller {
 
     }
 
-
     /**
      * Tilføjer mockdata til Storage
      */
@@ -158,7 +163,7 @@ public class Controller {
         storage.addFadLeverandør(l3);
 
         // Tilføjer et lager
-        Lager lager1 = controller.createLager("Baldersgade 39", "Sall Whisky Lager", 100);
+        Lager lager1 = controller.createLagerWithAntalHylder("Baldersgade 39", "Sall Whisky Lager", 100, 0);
         storage.addLager(lager1);
 
         //Tilføjer hylder til et lager

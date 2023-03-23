@@ -6,48 +6,56 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class LagerTest {
+    private Lager lager;
 
     @BeforeEach
     void setUp() {
+        lager = new Lager("Baldersgade 39", "Sall Whisky Lager", 100.0);
     }
 
     @Test
-    void getAdresse() {
+    void constructorTC1() {
+        assertEquals("Baldersgade 39", lager.getAdresse());
+        assertEquals("Sall Whisky Lager", lager.getNavn());
+        assertEquals(100.0, lager.getKvm());
     }
 
     @Test
-    void setAdresse() {
+    void getSetAdresseTC2() {
+        lager.setAdresse("Otte Ruds Gade 24");
+        assertEquals("Otte Ruds Gade 24", lager.getAdresse());
     }
 
     @Test
-    void getNavn() {
+    void getSetNavnTC3() {
+        lager.setNavn("Sall Whisky Fjernlager");
+        assertEquals("Sall Whisky Fjernlager", lager.getNavn());
     }
 
     @Test
-    void setNavn() {
+    void getSetKvmTC4() {
+        lager.setKvm(200);
+        assertEquals(200, lager.getKvm());
     }
 
     @Test
-    void getKvm() {
+    void getHylderTC5() {
+        lager.createHylde();
+        assertEquals(1, lager.getHylder().size());
     }
 
     @Test
-    void setKvm() {
+    void createHyldeTC6() {
+        Hylde hylde = lager.createHylde();
+        assertTrue(lager.getHylder().contains(hylde));
     }
 
     @Test
-    void getHylder() {
-    }
+    void removeHyldeTC7() {
+        Hylde hylde = lager.createHylde();
+        assertTrue(lager.getHylder().contains(hylde));
 
-    @Test
-    void createHylde() {
-    }
-
-    @Test
-    void addHylde() {
-    }
-
-    @Test
-    void removeHylde() {
+        lager.removeHylde(hylde);
+        assertFalse(lager.getHylder().contains(hylde));
     }
 }
