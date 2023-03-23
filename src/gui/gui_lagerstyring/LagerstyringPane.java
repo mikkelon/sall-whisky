@@ -5,6 +5,7 @@ import application.model.Fad;
 import application.model.Hylde;
 import application.model.Lager;
 import gui.BekræftSletVindue;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -13,6 +14,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
 public class LagerstyringPane extends GridPane {
+    private Label lblError;
     private Controller controller = Controller.getController();
     private ListView<Lager> lvwLagre;
     private ListView<Hylde> lvwHylder;
@@ -89,6 +91,12 @@ public class LagerstyringPane extends GridPane {
         btnSletFad.setOnAction(event -> sletFad());
         hBoxFade.getChildren().add(btnSletFad);
 
+        // #--- Error label ---#
+        lblError = new Label(" ");
+        this.add(lblError, 0, 3, 3, 1);
+        GridPane.setHalignment(lblError, HPos.CENTER);
+        lblError.setStyle("-fx-text-fill: red");
+
         // #--- Opdatér listviews ---#
         updateControls();
     }
@@ -105,27 +113,41 @@ public class LagerstyringPane extends GridPane {
         if (valg) {
             Lager valgtLager = lvwLagre.getSelectionModel().getSelectedItem();
             if (valgtLager != null) {
-                controller.removeLager(valgtLager);
+                try {
+                    controller.removeLager(valgtLager);
+                }
+                catch (RuntimeException e) {
+                    lblError.setText(e.getMessage());
+                }
                 updateControls();
             }
         }
     }
 
     private void opretHylde() {
-        OpretHyldeVindue window = new OpretHyldeVindue(this);
-        window.showAndWait();
+        Lager valgtLager = lvwLagre.getSelectionModel().getSelectedItem();
+        if (valgtLager != null) {
+            controller.createHylde(valgtLager);
+            updateHylder();
+            clearError();
+        } else {
+            lblError.setText("Vælg et lager");
+        }
     }
 
     private void sletHylde() {
-        BekræftSletVindue window = new BekræftSletVindue();
-        window.showAndWait();
-        boolean valg = window.getValg();
-        if (valg) {
-            Hylde valgtHylde = lvwHylder.getSelectionModel().getSelectedItem();
-            if (valgtHylde != null) {
-//                controller.removeHylde(valgtHylde); //TODO: Fjern kommentar når metoden er lavet
-                updateHylder();
+        Hylde valgtHylde = lvwHylder.getSelectionModel().getSelectedItem();
+        if (valgtHylde != null) {
+            try {
+//            controller.removeHylde(valgtHylde); //TODO: Fjern kommentar når metoden er lavet
             }
+            catch (RuntimeException e) {
+                lblError.setText(e.getMessage());
+            }
+            updateHylder();
+            clearError();
+        } else {
+            lblError.setText("Vælg en hylde");
         }
     }
 
@@ -173,5 +195,9 @@ public class LagerstyringPane extends GridPane {
         } else {
             lvwFade.getItems().clear();
         }
+    }
+
+    private void clearError() {
+        lblError.setText(" ");
     }
 }
