@@ -10,8 +10,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class BekræftelsesVindue extends Stage {
-    public BekræftelsesVindue() {
+public class BekræftSletVindue extends Stage {
+    public BekræftSletVindue() {
         this.initStyle(StageStyle.DECORATED);
         this.initModality(Modality.APPLICATION_MODAL);
         this.setResizable(false);
