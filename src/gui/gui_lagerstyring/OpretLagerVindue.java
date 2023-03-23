@@ -21,13 +21,10 @@ import java.util.Arrays;
 
 public class OpretLagerVindue extends Stage {
     private Controller controller = Controller.getController();
-    private LagerstyringPane lagerstyringPane;
-    public OpretLagerVindue(LagerstyringPane lagerstyringPane) {
+    public OpretLagerVindue() {
         this.initStyle(StageStyle.DECORATED);
         this.initModality(Modality.APPLICATION_MODAL);
         this.setResizable(false);
-
-        this.lagerstyringPane = lagerstyringPane;
 
         this.setHeight(300);
         this.setWidth(300);
@@ -41,6 +38,7 @@ public class OpretLagerVindue extends Stage {
         this.setScene(scene);
     }
     private TextField txfAdresse, txfNavn, txfKvm, txfAntalHylder;
+    private Label lblError;
 
     private void initContent(GridPane pane) {
         // Formateringsjusteringer
@@ -76,6 +74,10 @@ public class OpretLagerVindue extends Stage {
         txfAntalHylder = new TextField();
         pane.add(txfAntalHylder, 1, 3);
 
+        lblError = new Label(" ");
+        pane.add(lblError, 0, 6, 2, 1);
+        lblError.setStyle("-fx-text-fill: red");
+
         // Opret og Annullér knapper
         HBox hBox = new HBox();
         pane.add(hBox, 0, 7, 2, 1);
@@ -96,7 +98,36 @@ public class OpretLagerVindue extends Stage {
     }
 
     private void opretLagerAction() {
-       //TODO
+        String navn = txfNavn.getText().trim();
+        String adresse = txfAdresse.getText().trim();
+        double kvm = 0;
+        int antalHylder = 0;
+
+        if (navn.length() == 0) lblError.setText("Navn skal udfyldes");
+        else if (adresse.length() == 0) lblError.setText("Adresse skal udfyldes");
+
+        else {
+            try {
+                kvm = Double.parseDouble(txfKvm.getText().trim());
+            } catch (NumberFormatException e) {
+                lblError.setText("Kvm skal være et tal");
+                return;
+            }
+            try {
+                antalHylder = Integer.parseInt(txfAntalHylder.getText().trim());
+            } catch (NumberFormatException e) {
+                lblError.setText("Antal hylder skal være et tal");
+                return;
+            }
+            if (kvm < 0) lblError.setText("Kvm skal være større end 0");
+            else if (antalHylder < 0) lblError.setText("Antal hylder skal være større end 0");
+            else {
+                controller.createLagerWithAntalHylder(adresse, navn, kvm, antalHylder);
+                this.close();
+            }
+        }
+
+
     }
 
     private void updateControls() {
