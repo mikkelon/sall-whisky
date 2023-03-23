@@ -6,29 +6,27 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class FadTest {
     private Fad fad;
-    private Lager l1;
-    private Hylde h1;
-    private FadLeverandør fl1;
+    private Lager lager;
+    private Hylde hylde;
+    private FadLeverandør fadLeverandør;
 
     @org.junit.jupiter.api.BeforeEach
     void setUp() {
-       l1 = new Lager("Baldersgade 39", "Sall Whisky Lager", 100.0);
-       h1 = new Hylde(l1);
-       fl1 = new FadLeverandør("Garrison Brothers", "USA");
-       fad = new Fad(FadType.BOURBON, 80, fl1, h1);
+       lager = new Lager("Baldersgade 39", "Sall Whisky Lager", 100.0);
+       hylde = new Hylde(lager);
+       fadLeverandør = new FadLeverandør("Garrison Brothers", "USA");
+       fad = new Fad(FadType.BOURBON, 80, fadLeverandør, hylde);
     }
 
     @Test
     void constructorTC1() {
-        fad = new Fad(FadType.BOURBON, 80, fl1, h1);
-
         assertEquals(FadType.BOURBON, fad.getFadType());
         assertEquals(80, fad.getStørrelseILiter());
         assertTrue(fad.getFadNr() > 0);
         assertEquals(0, fad.getIndeholdtVæskeILiter());
-        assertEquals(h1, fad.getHylde());
-        assertEquals(fl1, fad.getFadLeverandør());
-        assertTrue(h1.getFade().contains(fad));
+        assertEquals(hylde, fad.getHylde());
+        assertEquals(fadLeverandør, fad.getFadLeverandør());
+        assertTrue(hylde.getFade().contains(fad));
     }
 
     @org.junit.jupiter.api.Test
@@ -55,17 +53,17 @@ class FadTest {
 
     @org.junit.jupiter.api.Test
     void getHyldeTC6() {
-        assertEquals(h1, fad.getHylde());
+        assertEquals(hylde, fad.getHylde());
     }
 
     @org.junit.jupiter.api.Test
     void getFadLeverandørTC7() {
-        assertEquals(fl1, fad.getFadLeverandør());
+        assertEquals(fadLeverandør, fad.getFadLeverandør());
     }
 
     @org.junit.jupiter.api.Test
     void setHyldeNormalTC8() {
-        Hylde h2 = new Hylde(l1);
+        Hylde h2 = new Hylde(lager);
         fad.setHylde(h2);
         assertEquals(h2, fad.getHylde());
     }

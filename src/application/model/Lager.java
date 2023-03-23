@@ -83,19 +83,7 @@ public class Lager {
     public Hylde createHylde() {
         Hylde hylde = new Hylde(this);
         hylder.add(hylde);
-        hylde.setLager(this);
         return hylde;
-    }
-
-    /**
-     * Registrerer en ny hylde til lageret.
-     * @param hylde lagerets hylde
-     */
-    public void addHylde(Hylde hylde) {
-        if (!hylder.contains(hylde)) {
-            hylder.add(hylde);
-            hylde.setLager(this);
-        }
     }
 
     /**
@@ -109,7 +97,6 @@ public class Lager {
 
         if (hylder.contains(hylde)) {
             hylder.remove(hylde);
-            hylde.setLager(null);
         }
     }
 }

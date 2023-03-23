@@ -11,11 +11,10 @@ public class Hylde {
     private Lager lager;
     private final ArrayList<Fad> fade = new ArrayList<>();
 
-    public Hylde(Lager lager) {
+    Hylde(Lager lager) {
         antalHylder++;
         this.hyldeNr = antalHylder;
         this.lager = lager;
-        lager.addHylde(this);
     }
 
     /**
@@ -32,23 +31,6 @@ public class Hylde {
      */
     public Lager getLager() {
         return lager;
-    }
-
-    /**
-     * Registrerer lageret hvor hylden er placeret.
-     * @param lager er hyldens nye lager
-     */
-    public void setLager(Lager lager) {
-        if (lager == null) {
-            throw new RuntimeException("En hylde skal være tilknyttet et lager.");
-        }
-
-        if (this.lager != lager) {
-            Lager oldLager = this.lager;
-            oldLager.removeHylde(this);
-            this.lager = lager;
-            lager.addHylde(this);
-        }
     }
 
     /**
