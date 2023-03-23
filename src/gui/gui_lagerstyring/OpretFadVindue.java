@@ -1,4 +1,4 @@
-package gui;
+package gui.gui_lagerstyring;
 
 import application.model.Hylde;
 import application.model.Lager;
@@ -17,8 +17,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class OpretFad extends Stage {
-    public OpretFad() {
+public class OpretFadVindue extends Stage {
+    public OpretFadVindue() {
         this.initStyle(StageStyle.DECORATED);
         this.initModality(Modality.APPLICATION_MODAL);
         this.setResizable(false);
