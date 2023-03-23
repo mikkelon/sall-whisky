@@ -1,41 +1,40 @@
 package storage;
 
-import application.model.Fad;
-import application.model.Leverandør;
+import application.model.Lager;
+import application.model.FadLeverandør;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.LinkedList;
 
 public class Storage {
 
-    // #--- Leverandører ---#
-    private static HashSet<Leverandør> leverandører = new HashSet<>();
+    // #--- Fadleverandører ---#
+    private static HashSet<FadLeverandør> fadLeverandører = new HashSet<>();
 
-    public static void addLeverandør(Leverandør leverandør) {
-        leverandører.add(leverandør);
+    public static void addFadLeverandør(FadLeverandør fadLeverandør) {
+        fadLeverandører.add(fadLeverandør);
     }
 
-    public static void removeLeverandør(Leverandør leverandør) {
-        leverandører.remove(leverandør);
+    public static void removeFadLeverandør(FadLeverandør fadLeverandør) {
+        fadLeverandører.remove(fadLeverandør);
     }
 
-    public static HashSet<Leverandør> getLeverandører() {
-        return new HashSet<>(leverandører);
+    public static HashSet<FadLeverandør> getFadLeverandører() {
+        return new HashSet<>(fadLeverandører);
     }
 
-    // #--- Fade ---#
-    private static HashSet<Fad> fade = new HashSet<>();
+    // #--- Lager ---#
 
-    public static void addFad(Fad fad) {
-        fade.add(fad);
+    private static HashSet <Lager> lagre = new HashSet<>();
+
+    public static void addLager(Lager lager){
+        lagre.add(lager);
     }
 
-    public static void removeFad(Fad fad) {
-        fade.remove(fad);
+    public static void removeLager(Lager lager){
+        lagre.remove(lager);
     }
 
-    public static HashSet<Fad> getFade() {
-        return new HashSet<>(fade);
+    public static HashSet<Lager> getLagre() {
+        return new HashSet<>(lagre);
     }
 }
