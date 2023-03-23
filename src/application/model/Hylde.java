@@ -15,6 +15,7 @@ public class Hylde {
         antalHylder++;
         this.hyldeNr = antalHylder;
         this.lager = lager;
+        lager.addHylde(this);
     }
 
     /**
