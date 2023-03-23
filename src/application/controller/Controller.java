@@ -15,8 +15,8 @@ public class Controller {
     }
 
 
-    public static Controller getController(){
-        if (controller == null){
+    public static Controller getController() {
+        if (controller == null) {
             controller = new Controller();
         }
         return controller;
@@ -43,6 +43,25 @@ public class Controller {
         Fad fad = new Fad(fadType, størrelseILiter, fadLeverandør, hylde);
         return fad;
     }
+
+
+    /**
+     * Fjerner det specifikke fad fra en hylde
+     * @param fad
+     */
+    public void removeFad(Fad fad) {
+        fad.getHylde().removeFad(fad);
+    }
+
+    /**
+     * Fjerne den specifikke hylde fra et lager
+     * @param hylde
+     */
+    public void removeHylde(Hylde hylde) {
+        hylde.getLager().removeHylde(hylde);
+
+    }
+
 
     /**
      * Tilføjer mockdata til Storage
