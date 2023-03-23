@@ -35,7 +35,8 @@ public class Fad {
     }
 
     public void setFadType(FadType fadType) {
-        this.FadType = fadType;
+        this.fadType = fadType;
+    }
         
     public Hylde getHylde() {
         return hylde;
