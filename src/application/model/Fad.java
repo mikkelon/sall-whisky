@@ -8,13 +8,22 @@ public class Fad {
     private double indeholdtVæskeILiter;
     private Hylde hylde;
     private Leverandør leverandør;
-    
-    public Fad(FadType fadType, double størrelseILiter, double indeholdtVæskeILiter, Leverandør leverandør, Hylde hylde) {
+
+    /**
+     * Opretter et nyt objekt af Fad-klassen.
+     * indeholdtVæskeILiter sættes til 0.
+     * fadNr sættes til et unikt nummer baseret på antallet af fade-objekter.
+     * @param fadType fadets tidligere indhold, f.eks. sherry, bourbon, osv.
+     * @param størrelseILiter fadets volumen i liter.
+     * @param leverandør fadets leverandør.
+     * @param hylde hylden, fadet er placeret på i lageret.
+     */
+    public Fad(FadType fadType, double størrelseILiter, Leverandør leverandør, Hylde hylde) {
         antalFade++;
         this.fadNr = antalFade;
         this.fadType = fadType;
         this.størrelseILiter = størrelseILiter;
-        this.indeholdtVæskeILiter = indeholdtVæskeILiter;
+        this.indeholdtVæskeILiter = 0;
         this.leverandør = leverandør;
         this.hylde = hylde;
     }
