@@ -3,6 +3,7 @@ package storage;
 import application.model.Fad;
 import application.model.Lager;
 import application.model.Leverandør;
+import com.sun.source.tree.InstanceOfTree;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -10,34 +11,49 @@ import java.util.LinkedList;
 
 public class Storage {
 
+    private static Storage storage;
+
+    private Storage(){
+
+    }
+
+    public static Storage getStorage(){
+        if (storage == null){
+            storage = new Storage();
+        }
+        return storage;
+    }
+
+
+
     // #--- Leverandører ---#
-    private static HashSet<Leverandør> leverandører = new HashSet<>();
+    private HashSet<Leverandør> leverandører = new HashSet<>();
 
-    public static void addLeverandør(Leverandør leverandør) {
-        leverandører.add(leverandør);
+    public void addLeverandør(Leverandør leverandør) {
+        storage.leverandører.add(leverandør);
     }
 
-    public static void removeLeverandør(Leverandør leverandør) {
-        leverandører.remove(leverandør);
+    public void removeLeverandør(Leverandør leverandør) {
+        storage.leverandører.remove(leverandør);
     }
 
-    public static HashSet<Leverandør> getLeverandører() {
-        return new HashSet<>(leverandører);
+    public HashSet<Leverandør> getLeverandører() {
+        return new HashSet<>(storage.leverandører);
     }
 
     // #--- Lager ---#
 
-    private static HashSet <Lager> lagre = new HashSet<>();
+    private HashSet <Lager> lagre = new HashSet<>();
 
-    public static void addLager(Lager lager){
-        lagre.add(lager);
+    public void addLager(Lager lager){
+        storage.lagre.add(lager);
     }
 
-    public static void removeLager(Lager lager){
-        lagre.remove(lager);
+    public void removeLager(Lager lager){
+        storage.lagre.remove(lager);
     }
 
-    public static HashSet<Lager> getLagre() {
-        return new HashSet<>(lagre);
+    public HashSet<Lager> getLagre() {
+        return new HashSet<>(storage.lagre);
     }
 }
