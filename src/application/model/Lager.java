@@ -82,6 +82,8 @@ public class Lager {
      */
     public Hylde createHylde() {
         Hylde hylde = new Hylde(this);
+        hylder.add(hylde);
+        hylde.setLager(this);
         return hylde;
     }
 

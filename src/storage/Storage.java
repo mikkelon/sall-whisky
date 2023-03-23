@@ -1,6 +1,7 @@
 package storage;
 
 import application.model.Fad;
+import application.model.Lager;
 import application.model.Leverandør;
 
 import java.util.ArrayList;
@@ -24,18 +25,19 @@ public class Storage {
         return new HashSet<>(leverandører);
     }
 
-    // #--- Fade ---#
-    private static HashSet<Fad> fade = new HashSet<>();
+    // #--- Lager ---#
 
-    public static void addFad(Fad fad) {
-        fade.add(fad);
+    private static HashSet <Lager> lagre = new HashSet<>();
+
+    public static void addLager(Lager lager){
+        lagre.add(lager);
     }
 
-    public static void removeFad(Fad fad) {
-        fade.remove(fad);
+    public static void removeLager(Lager lager){
+        lagre.remove(lager);
     }
 
-    public static HashSet<Fad> getFade() {
-        return new HashSet<>(fade);
+    public static HashSet<Lager> getLagre() {
+        return new HashSet<>(lagre);
     }
 }
