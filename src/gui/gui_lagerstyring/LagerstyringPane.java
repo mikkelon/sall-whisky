@@ -28,12 +28,11 @@ public class LagerstyringPane extends GridPane {
         this.add(lblLagre, 0, 0);
 
         lvwLagre = new ListView<>();
+        lvwLagre.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> updateHylder());
         lvwLagre.setMinWidth(200);
         lvwLagre.setMaxWidth(200);
         lvwLagre.setMinHeight(400);
         this.add(lvwLagre, 0, 1);
-
-
 
         Label lblHylder = new Label("Hylder");
         this.add(lblHylder, 1, 0);
@@ -42,6 +41,7 @@ public class LagerstyringPane extends GridPane {
         lvwHylder.setMinWidth(200);
         lvwHylder.setMaxWidth(200);
         lvwHylder.setMinHeight(400);
+        lvwHylder.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> updateFade());
         this.add(lvwHylder, 1, 1);
 
         Label lblFade = new Label("Fade");
