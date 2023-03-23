@@ -2,10 +2,12 @@ package application.model;
 
 public class Hylde {
     private int hyldeNr;
+    private static int antalHylder = 0;
     private Lager lager;
 
-    public Hylde(int hyldeNr, Lager lager) {
-        this.hyldeNr = hyldeNr;
+    public Hylde(Lager lager) {
+        antalHylder++;
+        this.hyldeNr = antalHylder;
         this.lager = lager;
     }
 
@@ -13,24 +15,20 @@ public class Hylde {
         return hyldeNr;
     }
 
-    public void setHyldeNr(int hyldeNr) {
-        this.hyldeNr = hyldeNr;
-    }
-
     public Lager getLager() {
         return lager;
     }
 
     public void setLager(Lager lager) {
-        if (this.lager == lager) {
+        if (lager == null) {
+            throw new RuntimeException("En hylde skal være tilknyttet et lager.");
+        }
+
+        if (this.lager != lager) {
             Lager oldLager = this.lager;
-            if (oldLager != null) {
-                oldLager.removeHylde(this);
-            }
+            oldLager.removeHylde(this);
             this.lager = lager;
-            if (lager != null) {
-                lager.addHylde(this);
-            }
+            lager.addHylde(this);
         }
     }
 }

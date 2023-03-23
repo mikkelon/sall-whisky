@@ -42,8 +42,8 @@ public class Lager {
         return new ArrayList<>(hylder);
     }
 
-    public Hylde createHylde(int hyldenr) {
-        Hylde hylde = new Hylde(hyldenr, this);
+    public Hylde createHylde() {
+        Hylde hylde = new Hylde(this);
         return hylde;
     }
 
