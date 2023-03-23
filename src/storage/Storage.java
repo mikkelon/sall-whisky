@@ -7,34 +7,47 @@ import java.util.HashSet;
 
 public class Storage {
 
-    // #--- Fadleverandører ---#
-    private static HashSet<FadLeverandør> fadLeverandører = new HashSet<>();
+    private static Storage storage;
 
-    public static void addFadLeverandør(FadLeverandør fadLeverandør) {
+    private Storage(){
+
+    }
+
+    public static Storage getStorage(){
+        if (storage == null){
+            storage = new Storage();
+        }
+        return storage;
+    }
+
+    // #--- Fadleverandører ---#
+    private HashSet<FadLeverandør> fadLeverandører = new HashSet<>();
+
+    public void addFadLeverandør(FadLeverandør fadLeverandør) {
         fadLeverandører.add(fadLeverandør);
     }
 
-    public static void removeFadLeverandør(FadLeverandør fadLeverandør) {
+    public void removeFadLeverandør(FadLeverandør fadLeverandør) {
         fadLeverandører.remove(fadLeverandør);
     }
 
-    public static HashSet<FadLeverandør> getFadLeverandører() {
+    public HashSet<FadLeverandør> getFadLeverandører() {
         return new HashSet<>(fadLeverandører);
     }
 
     // #--- Lager ---#
 
-    private static HashSet <Lager> lagre = new HashSet<>();
+    private HashSet <Lager> lagre = new HashSet<>();
 
-    public static void addLager(Lager lager){
-        lagre.add(lager);
+    public void addLager(Lager lager){
+        storage.lagre.add(lager);
     }
 
-    public static void removeLager(Lager lager){
-        lagre.remove(lager);
+    public void removeLager(Lager lager){
+        storage.lagre.remove(lager);
     }
 
-    public static HashSet<Lager> getLagre() {
-        return new HashSet<>(lagre);
+    public HashSet<Lager> getLagre() {
+        return new HashSet<>(storage.lagre);
     }
 }
