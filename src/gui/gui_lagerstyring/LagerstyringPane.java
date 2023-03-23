@@ -1,5 +1,6 @@
 package gui.gui_lagerstyring;
 
+import application.controller.Controller;
 import application.model.Fad;
 import application.model.Hylde;
 import application.model.Lager;
@@ -12,6 +13,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
 public class LagerstyringPane extends GridPane {
+    private Controller controller = Controller.getController();
     private ListView<Lager> lvwLagre;
     private ListView<Hylde> lvwHylder;
     private ListView<Fad> lvwFade;
@@ -78,5 +80,9 @@ public class LagerstyringPane extends GridPane {
 
     public void updateControls() {
         //TODO: Update controls
+    }
+
+    private void updateLagre() {
+        lvwLagre.getItems().setAll(controller.getLagre());
     }
 }
