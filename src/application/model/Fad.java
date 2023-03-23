@@ -6,9 +6,8 @@ public class Fad {
     private int fadNr;
     private double indeholdtVæskeILiter;
     private Hylde hylde;
-
     private Leverandør leverandør;
-
+    
     public Fad(FadType fadType, double størrelseILiter, int fadNr, double indeholdtVæskeILiter, Leverandør leverandør, Hylde hylde) {
         // TODO: fadNr skal måske automatisk tilføjes eller valideres, så der ikke kan være to fade med samme fadNr?
         this.fadType = fadType;
@@ -35,7 +34,9 @@ public class Fad {
         return indeholdtVæskeILiter;
     }
 
-
+    public void setFadType(FadType fadType) {
+        this.FadType = fadType;
+        
     public Hylde getHylde() {
         return hylde;
     }
