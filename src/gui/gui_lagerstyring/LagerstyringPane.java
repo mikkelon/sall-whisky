@@ -102,8 +102,9 @@ public class LagerstyringPane extends GridPane {
     }
 
     private void opretLager() {
-        OpretLagerVindue window = new OpretLagerVindue(this);
+        OpretLagerVindue window = new OpretLagerVindue();
         window.showAndWait();
+        updateControls();
     }
 
     private void sletLager() {
@@ -152,8 +153,15 @@ public class LagerstyringPane extends GridPane {
     }
 
     private void opretFad() {
-        OpretFadVindue window = new OpretFadVindue(this);
-        window.showAndWait();
+        Hylde valgtHylde = lvwHylder.getSelectionModel().getSelectedItem();
+        if (valgtHylde != null) {
+            OpretFadVindue window = new OpretFadVindue(valgtHylde);
+            window.showAndWait();
+            updateControls();
+            clearError();
+        } else {
+            lblError.setText("Vælg en hylde");
+        }
     }
 
     private void sletFad() {
