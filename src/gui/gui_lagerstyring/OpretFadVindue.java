@@ -22,14 +22,14 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 public class OpretFadVindue extends Stage {
+    private Hylde hylde;
     private Controller controller = Controller.getController();
-    private LagerstyringPane lagerstyringPane;
-    public OpretFadVindue(LagerstyringPane lagerstyringPane) {
+    public OpretFadVindue(Hylde hylde) {
         this.initStyle(StageStyle.DECORATED);
         this.initModality(Modality.APPLICATION_MODAL);
         this.setResizable(false);
 
-        this.lagerstyringPane = lagerstyringPane;
+        this.hylde = hylde;
 
         this.setHeight(300);
         this.setWidth(300);
@@ -85,30 +85,13 @@ public class OpretFadVindue extends Stage {
         cbxFadType.setMaxWidth(100);
         pane.add(cbxFadType, 1, 3,2,1);
 
-        Label lblLager = new Label("Lager");
-        pane.add(lblLager, 0, 4);
-
-        cbxLagre = new ComboBox<>();
-        cbxLagre.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> updateHylder());
-        cbxLagre.setMinWidth(100);
-        cbxLagre.setMaxWidth(100);
-        pane.add(cbxLagre,0,5);
-
-        Label lblHylde = new Label("Hylde");
-        pane.add(lblHylde, 1, 4);
-
-        cbxHylder = new ComboBox<>();
-        cbxHylder.setMinWidth(100);
-        cbxHylder.setMaxWidth(100);
-        pane.add(cbxHylder, 1, 5);
-
         lblError = new Label(" ");
-        pane.add(lblError, 0, 6, 2, 1);
+        pane.add(lblError, 0, 4, 2, 1);
         lblError.setStyle("-fx-text-fill: red");
 
         // Opret og Annullér knapper
         HBox hBox = new HBox();
-        pane.add(hBox, 0, 7, 2, 1);
+        pane.add(hBox, 0, 5, 2, 1);
         hBox.setPadding(new Insets(10, 0, 0, 0));
         hBox.setSpacing(10);
         hBox.setAlignment(Pos.BASELINE_CENTER);
@@ -127,22 +110,17 @@ public class OpretFadVindue extends Stage {
 
     private void opretFadAction() {
         FadLeverandør fadLeverandør = cbxFadLeverandører.getSelectionModel().getSelectedItem();
-        Lager lager = cbxLagre.getSelectionModel().getSelectedItem();
-        Hylde hylde = cbxHylder.getSelectionModel().getSelectedItem();
         FadType fadType = cbxFadType.getSelectionModel().getSelectedItem();
         double størrelse = 0;
         try {
             størrelse = Double.parseDouble(txfStørrelse.getText());
         } catch (NumberFormatException e) {
-            System.out.println("Størrelse skal være et tal");
+            lblError.setText("Størrelse skal være et tal");
+            return;
         }
 
         if (fadLeverandør == null) {
             lblError.setText("Vælg en leverandør");
-        } else if (lager == null) {
-            lblError.setText("Vælg et lager");
-        } else if (hylde == null) {
-            lblError.setText("Vælg en hylde");
         } else if (fadType == null) {
             lblError.setText("Vælg en fadtype");
         } else if (størrelse == 0) {
@@ -150,15 +128,12 @@ public class OpretFadVindue extends Stage {
         } else {
             controller.createFad(fadType, størrelse, fadLeverandør, hylde);
             this.close();
-            lagerstyringPane.updateControls();
         }
     }
 
     private void updateControls() {
         updateFadLeverandører();
         updateFadTyper();
-        updateLagre();
-        updateHylder();
     }
 
     private void updateFadLeverandører() {
@@ -169,16 +144,4 @@ public class OpretFadVindue extends Stage {
         cbxFadType.getItems().setAll(Arrays.asList(FadType.values()));
     }
 
-    private void updateLagre() {
-        cbxLagre.getItems().setAll(controller.getLagre());
-    }
-
-    private void updateHylder() {
-        Lager valgtLager = cbxLagre.getSelectionModel().getSelectedItem();
-        if (valgtLager != null) {
-            cbxHylder.getItems().setAll(valgtLager.getHylder());
-        } else {
-            cbxHylder.getItems().clear();
-        }
-    }
 }
