@@ -55,6 +55,10 @@ public class Lager {
     }
 
     public void removeHylde(Hylde hylde) {
+        if (!hylde.getFade().isEmpty()) {
+            throw new RuntimeException("Hylden kan ikke slettes, når der er fade liggende på hylden.");
+        }
+
         if (hylder.contains(hylde)) {
             hylder.remove(hylde);
             hylde.setLager(null);

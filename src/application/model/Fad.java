@@ -4,15 +4,16 @@ public class Fad {
     private FadType fadType;
     private double størrelseILiter;
     private int fadNr;
+    private static int antalFade;
     private double indeholdtVæskeILiter;
     private Hylde hylde;
     private Leverandør leverandør;
     
-    public Fad(FadType fadType, double størrelseILiter, int fadNr, double indeholdtVæskeILiter, Leverandør leverandør, Hylde hylde) {
-        // TODO: fadNr skal måske automatisk tilføjes eller valideres, så der ikke kan være to fade med samme fadNr?
+    public Fad(FadType fadType, double størrelseILiter, double indeholdtVæskeILiter, Leverandør leverandør, Hylde hylde) {
+        antalFade++;
+        this.fadNr = antalFade;
         this.fadType = fadType;
         this.størrelseILiter = størrelseILiter;
-        this.fadNr = fadNr;
         this.indeholdtVæskeILiter = indeholdtVæskeILiter;
         this.leverandør = leverandør;
         this.hylde = hylde;
@@ -51,15 +52,15 @@ public class Fad {
     }
 
     public void setHylde(Hylde hylde){
+        if (hylde == null) {
+            throw new RuntimeException("Fadet skal være tilknyttet en hylde.");
+        }
+
         if(this.hylde != hylde){
             Hylde oldhylde = this.hylde;
-            if(oldhylde != null){
-                oldhylde.removeFad(this);
-            }
+            oldhylde.removeFad(this);
             this.hylde = hylde;
-            if(hylde != null){
-                hylde.addFad(this);
-            }
+            hylde.addFad(this);
         }
     }
 }
