@@ -10,12 +10,13 @@ public class Fad {
     private Leverandør leverandør;
 
     public Fad(FadType fadType, double størrelseILiter, int fadNr, double indeholdtVæskeILiter, Leverandør leverandør, Hylde hylde) {
+        // TODO: fadNr skal måske automatisk tilføjes eller valideres, så der ikke kan være to fade med samme fadNr?
         this.fadType = fadType;
         this.størrelseILiter = størrelseILiter;
         this.fadNr = fadNr;
         this.indeholdtVæskeILiter = indeholdtVæskeILiter;
-        this.hylde = hylde;
         this.leverandør = leverandør;
+        this.hylde = hylde;
     }
 
     public FadType getFadType() {
