@@ -100,10 +100,10 @@ public class OpretFadVindue extends Stage {
         }
 
         // Tilføj leverandører til drop-down
-        // TODO
+
     }
 
     private void opretFadAction() {
-        // TODO
+
     }
 }
