@@ -63,6 +63,9 @@ public class LagerstyringPane extends GridPane {
         Button btnSletFad = new Button("Slet Fad");
         btnSletFad.setOnAction(event -> sletFad());
         hBoxFade.getChildren().add(btnSletFad);
+
+        // #--- Opdatér listviews ---#
+        updateControls();
     }
 
     private void opretFad() {
@@ -79,10 +82,26 @@ public class LagerstyringPane extends GridPane {
     }
 
     public void updateControls() {
-        //TODO: Update controls
+        updateLagre();
+        updateHylder();
+        updateFade();
     }
 
     private void updateLagre() {
         lvwLagre.getItems().setAll(controller.getLagre());
+    }
+
+    private void updateHylder() {
+        Lager valgtLager = lvwLagre.getSelectionModel().getSelectedItem();
+        if (valgtLager != null) {
+            lvwHylder.getItems().setAll(controller.getHylder(valgtLager));
+        }
+    }
+
+    private void updateFade() {
+        Hylde valgtHylde = lvwHylder.getSelectionModel().getSelectedItem();
+        if (valgtHylde != null) {
+            lvwFade.getItems().setAll(valgtHylde.getFade());
+        }
     }
 }
