@@ -50,21 +50,18 @@ public class Controller {
         Hylde h4 = Controller.createHyldeForLager(lager1);
 
         //Tilføjer fade til hylderne
-        Fad fad1 = Controller.createFadForHylde(FadType.BOURBON,80,70,l1,h1);
-        Fad fad2 = Controller.createFadForHylde(FadType.BOURBON,90,88,l1,h1);
-        Fad fad3 = Controller.createFadForHylde(FadType.BOURBON,90,88,l1,h1);
-        Fad fad4 = Controller.createFadForHylde(FadType.RØDVIN,60,50,l1,h2);
-        Fad fad5 = Controller.createFadForHylde(FadType.RØDVIN,70,69,l1,h2);
-        Fad fad6 = Controller.createFadForHylde(FadType.RØDVIN,80,65,l1,h2);
-        Fad fad7 = Controller.createFadForHylde(FadType.SHERRY,110,100,l1,h3);
-        Fad fad8 = Controller.createFadForHylde(FadType.SHERRY,120,115,l1,h3);
-        Fad fad9 = Controller.createFadForHylde(FadType.SHERRY,105,102,l1,h3);
-        Fad fad10 = Controller.createFadForHylde(FadType.UBRUGT,90,0,l1,h4);
-        Fad fad11 = Controller.createFadForHylde(FadType.UBRUGT,70,0,l1,h4);
-        Fad fad12 = Controller.createFadForHylde(FadType.UBRUGT,60,0,l1,h4);
-
-
-
+        Fad fad1 = Controller.createFadForHylde(FadType.BOURBON, 80, 70, l1, h1);
+        Fad fad2 = Controller.createFadForHylde(FadType.BOURBON, 90, 88, l1, h1);
+        Fad fad3 = Controller.createFadForHylde(FadType.BOURBON, 90, 88, l1, h1);
+        Fad fad4 = Controller.createFadForHylde(FadType.RØDVIN, 60, 50, l1, h2);
+        Fad fad5 = Controller.createFadForHylde(FadType.RØDVIN, 70, 69, l1, h2);
+        Fad fad6 = Controller.createFadForHylde(FadType.RØDVIN, 80, 65, l1, h2);
+        Fad fad7 = Controller.createFadForHylde(FadType.SHERRY, 110, 100, l1, h3);
+        Fad fad8 = Controller.createFadForHylde(FadType.SHERRY, 120, 115, l1, h3);
+        Fad fad9 = Controller.createFadForHylde(FadType.SHERRY, 105, 102, l1, h3);
+        Fad fad10 = Controller.createFadForHylde(FadType.UBRUGT, 90, 0, l1, h4);
+        Fad fad11 = Controller.createFadForHylde(FadType.UBRUGT, 70, 0, l1, h4);
+        Fad fad12 = Controller.createFadForHylde(FadType.UBRUGT, 60, 0, l1, h4);
 
 
     }
