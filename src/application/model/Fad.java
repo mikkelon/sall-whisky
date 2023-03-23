@@ -4,16 +4,19 @@ public class Fad {
     private FadType fadType;
     private double størrelseILiter;
     private int fadNr;
+    private static int antalFade;
     private double indeholdtVæskeILiter;
-
+    private Hylde hylde;
     private Leverandør leverandør;
-
-    public Fad(FadType fadType, double størrelseILiter, int fadNr, double indeholdtVæskeILiter, Leverandør leverandør) {
+    
+    public Fad(FadType fadType, double størrelseILiter, double indeholdtVæskeILiter, Leverandør leverandør, Hylde hylde) {
+        antalFade++;
+        this.fadNr = antalFade;
         this.fadType = fadType;
         this.størrelseILiter = størrelseILiter;
-        this.fadNr = fadNr;
         this.indeholdtVæskeILiter = indeholdtVæskeILiter;
         this.leverandør = leverandør;
+        this.hylde = hylde;
     }
 
     public FadType getFadType() {
@@ -32,6 +35,14 @@ public class Fad {
         return indeholdtVæskeILiter;
     }
 
+    public void setFadType(FadType fadType) {
+        this.fadType = fadType;
+    }
+        
+    public Hylde getHylde() {
+        return hylde;
+    }
+
     public void setIndeholdtVæskeILiter(double indeholdtVæskeILiter) {
         this.indeholdtVæskeILiter = indeholdtVæskeILiter;
     }
@@ -40,5 +51,16 @@ public class Fad {
         return leverandør;
     }
 
+    public void setHylde(Hylde hylde){
+        if (hylde == null) {
+            throw new RuntimeException("Fadet skal være tilknyttet en hylde.");
+        }
 
+        if(this.hylde != hylde){
+            Hylde oldhylde = this.hylde;
+            oldhylde.removeFad(this);
+            this.hylde = hylde;
+            hylde.addFad(this);
+        }
+    }
 }
