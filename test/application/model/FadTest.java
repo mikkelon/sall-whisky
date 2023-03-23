@@ -1,15 +1,15 @@
 package application.model;
-
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
+
 
 class FadTest {
     private Fad fad;
     private Lager l1;
     private Hylde h1;
 
-    @org.junit.jupiter.api.BeforeEach
+    @BeforeEach
     void setUp() {
        l1 = new Lager("Baldersgade 39", "Sall Whisky Lager", 100.0);
        h1 = new Hylde(l1);
@@ -31,41 +31,42 @@ class FadTest {
         assertTrue(h1.getFade().contains(fad));
     }
 
-    @org.junit.jupiter.api.Test
+
+    @Test
     void getSetFadTypeTC2() {
         fad.setFadType(FadType.SHERRY);
         assertEquals(FadType.SHERRY, fad.getFadType());
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void getStørrelseILiter() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void getFadNr() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void getIndeholdtVæskeILiter() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void setFadType() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void getHylde() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void setIndeholdtVæskeILiter() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void getFadLeverandør() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void setHylde() {
     }
 }

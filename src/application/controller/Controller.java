@@ -125,6 +125,25 @@ public class Controller {
         return fad;
     }
 
+
+    /**
+     * Fjerner det specifikke fad fra en hylde
+     * @param fad
+     */
+    public void removeFad(Fad fad) {
+        fad.getHylde().removeFad(fad);
+    }
+
+    /**
+     * Fjerne den specifikke hylde fra et lager
+     * @param hylde
+     */
+    public void removeHylde(Hylde hylde) {
+        hylde.getLager().removeHylde(hylde);
+
+    }
+
+
     /**
      * Tilføjer mockdata til Storage
      */
