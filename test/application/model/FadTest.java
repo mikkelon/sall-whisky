@@ -1,46 +1,47 @@
 package application.model;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 class FadTest {
 
-    @org.junit.jupiter.api.BeforeEach
+    @BeforeEach
     void setUp() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void getFadType() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void getStørrelseILiter() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void getFadNr() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void getIndeholdtVæskeILiter() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void setFadType() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void getHylde() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void setIndeholdtVæskeILiter() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void getFadLeverandør() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void setHylde() {
     }
 }
