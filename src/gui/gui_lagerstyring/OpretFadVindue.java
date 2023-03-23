@@ -2,7 +2,7 @@ package gui.gui_lagerstyring;
 
 import application.model.Hylde;
 import application.model.Lager;
-import application.model.FadLeverandør;
+import application.model.Leverandør;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -35,7 +35,7 @@ public class OpretFadVindue extends Stage {
         this.setScene(scene);
     }
 
-    private ComboBox<FadLeverandør> cbxLeverandører;
+    private ComboBox<Leverandør> cbxLeverandører;
     private ComboBox<Lager> cbxLagre;
     private ComboBox<Hylde> cbxHylder;
     private TextField txfStørrelse;
@@ -100,10 +100,10 @@ public class OpretFadVindue extends Stage {
         }
 
         // Tilføj leverandører til drop-down
-        // TODO
+
     }
 
     private void opretFadAction() {
-        // TODO
+
     }
 }
