@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -15,9 +16,6 @@ public class BekræftSletVindue extends Stage {
         this.initStyle(StageStyle.DECORATED);
         this.initModality(Modality.APPLICATION_MODAL);
         this.setResizable(false);
-
-        this.setHeight(300);
-        this.setWidth(300);
 
         this.setTitle("Opret fad");
 
@@ -50,13 +48,18 @@ public class BekræftSletVindue extends Stage {
         Label lblBekræftelse4 = new Label("Tryk på 'Nej' for at annullere");
         pane.add(lblBekræftelse4, 0, 3, 2,1);
 
+        HBox hBoxKnapper = new HBox();
+        hBoxKnapper.setSpacing(10);
+        hBoxKnapper.setAlignment(Pos.CENTER);
+        pane.add(hBoxKnapper, 0, 4, 2,1);
+
         Button btnJa = new Button("Ja");
         btnJa.setOnAction(event -> jaAction());
-        pane.add(btnJa, 0, 4, 1,1);
+        hBoxKnapper.getChildren().add(btnJa);
 
         Button btnNej = new Button("Nej");
         btnNej.setOnAction(event -> nejAction());
-        pane.add(btnNej, 1, 4, 1,1);
+        hBoxKnapper.getChildren().add(btnNej);
     }
 
     public boolean getValg() {
