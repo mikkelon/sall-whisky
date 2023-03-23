@@ -33,6 +33,7 @@ public class Hylde {
             this.lager = lager;
             lager.addHylde(this);
         }
+    }
 
     public ArrayList<Fad> getFade(){
         return new ArrayList<>(fade);
