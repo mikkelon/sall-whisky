@@ -10,15 +10,15 @@ public class Fad {
     private static int antalFade;
     private double indeholdtVæskeILiter;
     private Hylde hylde;
-    private Leverandør leverandør;
+    private FadLeverandør fadLeverandør;
     
-    public Fad(FadType fadType, double størrelseILiter, double indeholdtVæskeILiter, Leverandør leverandør, Hylde hylde) {
+    public Fad(FadType fadType, double størrelseILiter, double indeholdtVæskeILiter, FadLeverandør fadLeverandør, Hylde hylde) {
         antalFade++;
         this.fadNr = antalFade;
         this.fadType = fadType;
         this.størrelseILiter = størrelseILiter;
         this.indeholdtVæskeILiter = indeholdtVæskeILiter;
-        this.leverandør = leverandør;
+        this.fadLeverandør = fadLeverandør;
         this.hylde = hylde;
     }
 
@@ -82,8 +82,8 @@ public class Fad {
      * Returnerer leverandøren for fadet.
      * @return leverandøren for fadet
      */
-    public Leverandør getLeverandør() {
-        return leverandør;
+    public FadLeverandør getFadLeverandør() {
+        return fadLeverandør;
     }
 
     /**

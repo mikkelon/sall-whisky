@@ -11,10 +11,10 @@ public class Controller {
         return lager;
     }
 
-    public static Leverandør createLeverandør(String navn, String land) {
-        Leverandør leverandør = new Leverandør(navn, land);
-        Storage.addLeverandør(leverandør);
-        return leverandør;
+    public static FadLeverandør createFadLeverandør(String navn, String land) {
+        FadLeverandør fadLeverandør = new FadLeverandør(navn, land);
+        Storage.addFadLeverandør(fadLeverandør);
+        return fadLeverandør;
     }
 
     public static Hylde createHyldeForLager(Lager lager) {
@@ -22,8 +22,8 @@ public class Controller {
         return hylde;
     }
 
-    public static Fad createFadForHylde(FadType fadType, double størrelseILiter, double indeholdtVæskeILiter, Leverandør leverandør, Hylde hylde) {
-        Fad fad = new Fad(fadType, størrelseILiter, indeholdtVæskeILiter, leverandør, hylde);
+    public static Fad createFadForHylde(FadType fadType, double størrelseILiter, double indeholdtVæskeILiter, FadLeverandør fadLeverandør, Hylde hylde) {
+        Fad fad = new Fad(fadType, størrelseILiter, indeholdtVæskeILiter, fadLeverandør, hylde);
         return fad;
     }
 
@@ -32,12 +32,12 @@ public class Controller {
      */
     public static void initMockData() {
         // Tilføjer leverandører
-        Leverandør l1 = Controller.createLeverandør("Garrison Brothers", "USA");
-        Leverandør l2 = Controller.createLeverandør("Basque Moonshiners", "Spanien");
-        Leverandør l3 = Controller.createLeverandør("Mallorca Distillery", "Spanien");
-        Storage.addLeverandør(l1);
-        Storage.addLeverandør(l2);
-        Storage.addLeverandør(l3);
+        FadLeverandør l1 = Controller.createFadLeverandør("Garrison Brothers", "USA");
+        FadLeverandør l2 = Controller.createFadLeverandør("Basque Moonshiners", "Spanien");
+        FadLeverandør l3 = Controller.createFadLeverandør("Mallorca Distillery", "Spanien");
+        Storage.addFadLeverandør(l1);
+        Storage.addFadLeverandør(l2);
+        Storage.addFadLeverandør(l3);
 
         // Tilføjer et lager
         Lager lager1 = Controller.createLager("Baldersgade 39", "Sall Whisky Lager", 100);
