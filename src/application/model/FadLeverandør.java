@@ -1,8 +1,6 @@
 package application.model;
 
-import java.util.ArrayList;
-
-public class Leverandør {
+public class FadLeverandør {
     private String navn;
     private String land;
 
@@ -12,7 +10,7 @@ public class Leverandør {
      * @param navn leverandørens navn
      * @param land leverandørens land
      */
-    public Leverandør(String navn, String land) {
+    public FadLeverandør(String navn, String land) {
         this.navn = navn;
         this.land = land;
     }

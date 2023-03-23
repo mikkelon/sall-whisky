@@ -1,28 +1,25 @@
 package storage;
 
-import application.model.Fad;
 import application.model.Lager;
-import application.model.Leverandør;
+import application.model.FadLeverandør;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.LinkedList;
 
 public class Storage {
 
-    // #--- Leverandører ---#
-    private static HashSet<Leverandør> leverandører = new HashSet<>();
+    // #--- Fadleverandører ---#
+    private static HashSet<FadLeverandør> fadLeverandører = new HashSet<>();
 
-    public static void addLeverandør(Leverandør leverandør) {
-        leverandører.add(leverandør);
+    public static void addFadLeverandør(FadLeverandør fadLeverandør) {
+        fadLeverandører.add(fadLeverandør);
     }
 
-    public static void removeLeverandør(Leverandør leverandør) {
-        leverandører.remove(leverandør);
+    public static void removeFadLeverandør(FadLeverandør fadLeverandør) {
+        fadLeverandører.remove(fadLeverandør);
     }
 
-    public static HashSet<Leverandør> getLeverandører() {
-        return new HashSet<>(leverandører);
+    public static HashSet<FadLeverandør> getFadLeverandører() {
+        return new HashSet<>(fadLeverandører);
     }
 
     // #--- Lager ---#
