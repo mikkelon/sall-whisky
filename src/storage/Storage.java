@@ -40,14 +40,14 @@ public class Storage {
     private HashSet <Lager> lagre = new HashSet<>();
 
     public void addLager(Lager lager){
-        storage.lagre.add(lager);
+        lagre.add(lager);
     }
 
     public void removeLager(Lager lager){
-        storage.lagre.remove(lager);
+        lagre.remove(lager);
     }
 
     public HashSet<Lager> getLagre() {
-        return new HashSet<>(storage.lagre);
+        return new HashSet<>(lagre);
     }
 }

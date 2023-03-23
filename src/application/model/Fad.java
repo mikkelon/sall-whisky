@@ -12,7 +12,7 @@ public class Fad {
     private Hylde hylde;
     private FadLeverandør fadLeverandør;
     
-    public Fad(FadType fadType, double størrelseILiter, double indeholdtVæskeILiter, FadLeverandør fadLeverandør, Hylde hylde) {
+    public Fad(FadType fadType, double størrelseILiter, FadLeverandør fadLeverandør, Hylde hylde) {
         antalFade++;
         this.fadNr = antalFade;
         this.fadType = fadType;
