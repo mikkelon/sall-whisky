@@ -28,10 +28,10 @@ public class Controller {
         return lager;
     }
 
-    public Leverandør createLeverandør(String navn, String land) {
-        Leverandør leverandør = new Leverandør(navn, land);
-        storage.addLeverandør(leverandør);
-        return leverandør;
+    public FadLeverandør createFadLeverandør(String navn, String land) {
+        FadLeverandør fadLeverandør = new FadLeverandør(navn, land);
+        storage.addFadLeverandør(fadLeverandør);
+        return fadLeverandør;
     }
 
     public Hylde createHyldeForLager(Lager lager) {
@@ -39,8 +39,8 @@ public class Controller {
         return hylde;
     }
 
-    public Fad createFadForHylde(FadType fadType, double størrelseILiter, double indeholdtVæskeILiter, Leverandør leverandør, Hylde hylde) {
-        Fad fad = new Fad(fadType, størrelseILiter, indeholdtVæskeILiter, leverandør, hylde);
+    public Fad createFadForHylde(FadType fadType, double størrelseILiter, double indeholdtVæskeILiter, FadLeverandør fadLeverandør, Hylde hylde) {
+        Fad fad = new Fad(fadType, størrelseILiter, indeholdtVæskeILiter, fadLeverandør, hylde);
         return fad;
     }
 
@@ -49,9 +49,10 @@ public class Controller {
      */
     public void initMockData() {
         // Tilføjer leverandører
-        Leverandør l1 = controller.createLeverandør("Garrison Brothers", "USA");
-        Leverandør l2 = controller.createLeverandør("Basque Moonshiners", "Spanien");
-        Leverandør l3 = controller.createLeverandør("Mallorca Distillery", "Spanien");
+
+        FadLeverandør l1 = controller.createFadLeverandør("Garrison Brothers", "USA");
+        FadLeverandør l2 = controller.createFadLeverandør("Basque Moonshiners", "Spanien");
+        FadLeverandør l3 = controller.createFadLeverandør("Mallorca Distillery", "Spanien");
         storage.addLeverandør(l1);
         storage.addLeverandør(l2);
         storage.addLeverandør(l3);

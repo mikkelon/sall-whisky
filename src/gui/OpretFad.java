@@ -1,6 +1,6 @@
 package gui;
 
-import application.model.Leverandør;
+import application.model.FadLeverandør;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -28,7 +28,7 @@ public class OpretFad extends Stage {
         this.setScene(scene);
     }
 
-    private ComboBox<Leverandør> cbxLeverandører;
+    private ComboBox<FadLeverandør> cbxFadLeverandører;
 
     private void initContent(GridPane pane) {
         // Formateringsjusteringer
@@ -39,11 +39,11 @@ public class OpretFad extends Stage {
         pane.setHgap(10);
 
         // Indhold
-        Label lblLeverandører = new Label("Leverandører");
-        pane.add(lblLeverandører, 0, 0);
+        Label lblFadLeverandører = new Label("Fadleverandører");
+        pane.add(lblFadLeverandører, 0, 0);
 
-        cbxLeverandører = new ComboBox<>();
-        pane.add(cbxLeverandører,0,1);
+        cbxFadLeverandører = new ComboBox<>();
+        pane.add(cbxFadLeverandører,0,1);
 
         // Opret og Annullér knapper
 
@@ -61,7 +61,7 @@ public class OpretFad extends Stage {
         hBox.getChildren().add(btnOpret);
         btnOpret.setOnAction(event -> opretFadAction());
 
-        // Tilføj leverandører til drop-down
+        // Tilføj fadleverandører til drop-down
 
     }
 

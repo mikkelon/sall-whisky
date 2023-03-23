@@ -1,13 +1,9 @@
 package storage;
 
-import application.model.Fad;
 import application.model.Lager;
-import application.model.Leverandør;
-import com.sun.source.tree.InstanceOfTree;
+import application.model.FadLeverandør;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.LinkedList;
 
 public class Storage {
 
@@ -24,21 +20,19 @@ public class Storage {
         return storage;
     }
 
+    // #--- Fadleverandører ---#
+    private HashSet<FadLeverandør> fadLeverandører = new HashSet<>();
 
-
-    // #--- Leverandører ---#
-    private HashSet<Leverandør> leverandører = new HashSet<>();
-
-    public void addLeverandør(Leverandør leverandør) {
-        storage.leverandører.add(leverandør);
+    public void addFadLeverandør(FadLeverandør fadLeverandør) {
+        fadLeverandører.add(fadLeverandør);
     }
 
-    public void removeLeverandør(Leverandør leverandør) {
-        storage.leverandører.remove(leverandør);
+    public void removeFadLeverandør(FadLeverandør fadLeverandør) {
+        fadLeverandører.remove(fadLeverandør);
     }
 
-    public HashSet<Leverandør> getLeverandører() {
-        return new HashSet<>(storage.leverandører);
+    public HashSet<FadLeverandør> getFadLeverandører() {
+        return new HashSet<>(fadLeverandører);
     }
 
     // #--- Lager ---#
