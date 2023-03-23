@@ -1,12 +1,14 @@
 package application.model;
 
+import java.io.CharArrayWriter;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Lager {
     private String adresse;
     private String navn;
     private double kvm;
-    private ArrayList<Hylde> hylder = new ArrayList<>();
+    private HashSet<Hylde> hylder = new HashSet<>();
 
     /**
      * Initialiserer et nyt lager med adresse, navn, og kvm.
@@ -72,8 +74,8 @@ public class Lager {
      * Returnerer en ny liste med hylder fra lageret.
      * @return en ny liste med hylder fra lageret
      */
-    public ArrayList<Hylde> getHylder() {
-        return new ArrayList<>(hylder);
+    public HashSet<Hylde> getHylder() {
+        return new HashSet<>(hylder);
     }
 
     /**
