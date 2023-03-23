@@ -29,6 +29,7 @@ public class Fad {
         this.indeholdtVæskeILiter = 0;
         this.fadLeverandør = fadLeverandør;
         this.hylde = hylde;
+        hylde.addFad(this);
     }
 
     /**

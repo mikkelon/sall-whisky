@@ -3,43 +3,124 @@ package application.controller;
 import application.model.*;
 import storage.Storage;
 
+import java.util.HashSet;
+
 public class Controller {
-
     private Storage storage;
-
     private static Controller controller;
-
 
     private Controller() {
         storage = Storage.getStorage();
     }
 
-
-    public static Controller getController() {
-        if (controller == null) {
+    /**
+     * Opretter ny instans af controlleren eller returnerer den eksisterende
+     * @return controlleren
+     */
+    public static Controller getController(){
+        if (controller == null){
             controller = new Controller();
         }
         return controller;
     }
 
+    /**
+     * Opretter et nyt lager
+     * @param adresse lagerets adresse
+     * @param navn lagerets navn
+     * @param kvm lagerets kvm
+     * @return det oprettede lager
+     */
     public Lager createLager(String adresse, String navn, double kvm) {
         Lager lager = new Lager(adresse, navn, kvm);
         storage.addLager(lager);
         return lager;
     }
 
+    /**
+     * Fjerner et lager fra systemet
+     * @param lager lageret
+     */
+    public void removeLager(Lager lager) {
+        storage.removeLager(lager);
+    }
+
+    /**
+     * Returnerer alle lagre
+     * @return alle lagre
+     */
+   public HashSet<Lager> getLagre() {
+        return storage.getLagre();
+    }
+
+    /**
+     * Opretter en ny fadleverandør
+     * @param navn navnet på fadleverandøren
+     * @param land landet fadleverandøren kommer fra
+     * @return den oprettede fadleverandør
+     */
     public FadLeverandør createFadLeverandør(String navn, String land) {
         FadLeverandør fadLeverandør = new FadLeverandør(navn, land);
         storage.addFadLeverandør(fadLeverandør);
         return fadLeverandør;
     }
 
-    public Hylde createHyldeForLager(Lager lager) {
+    /**
+     * Fjerner en fadleverandør fra systemet
+     * @param fadLeverandør fadleverandøren
+     */
+    public void removeFadLeverandør(FadLeverandør fadLeverandør) {
+        storage.removeFadLeverandør(fadLeverandør);
+    }
+
+    /**
+     * Returnerer alle fadleverandører
+     * @return alle fadleverandører
+     */
+    public HashSet<FadLeverandør> getFadLeverandører() {
+        return storage.getFadLeverandører();
+    }
+
+    /**
+     * Opretter en ny hylde i et givent lager
+     * @param lager lageret
+     * @return den oprettede hylde
+     */
+    public Hylde createHylde(Lager lager) {
         Hylde hylde = lager.createHylde();
         return hylde;
     }
 
-    public Fad createFadForHylde(FadType fadType, double størrelseILiter, FadLeverandør fadLeverandør, Hylde hylde) {
+    /**
+     * Returnerer alle hylder i alle lagre
+     * @return alle hylder i alle lagre
+     */
+    public HashSet<Hylde> getHylder() {
+        HashSet<Hylde> hylder = new HashSet<>();
+        for (Lager lager : storage.getLagre()) {
+            hylder.addAll(lager.getHylder());
+        }
+        return hylder;
+    }
+
+    /**
+     * Returnerer alle hylder i et givent lager
+     * @param lager lageret
+     * @return alle hylder i et givent lager
+     */
+    public HashSet<Hylde> getHylder(Lager lager) {
+        return lager.getHylder();
+    }
+
+    /**
+     * Opretter et nyt fad
+     * @param fadType fadets tidligere indhold, f.eks. sherry, bourbon, osv.
+     * @param størrelseILiter fadets volumen i liter
+     * @param fadLeverandør fadleverandøren
+     * @param hylde hylde hvor fadet skal placeres
+     * @return det oprettede fad
+     */
+    public Fad createFad(FadType fadType, double størrelseILiter, FadLeverandør fadLeverandør, Hylde hylde) {
         Fad fad = new Fad(fadType, størrelseILiter, fadLeverandør, hylde);
         return fad;
     }
@@ -81,23 +162,23 @@ public class Controller {
         storage.addLager(lager1);
 
         //Tilføjer hylder til et lager
-        Hylde h1 = controller.createHyldeForLager(lager1);
-        Hylde h2 = controller.createHyldeForLager(lager1);
-        Hylde h3 = controller.createHyldeForLager(lager1);
-        Hylde h4 = controller.createHyldeForLager(lager1);
+        Hylde h1 = controller.createHylde(lager1);
+        Hylde h2 = controller.createHylde(lager1);
+        Hylde h3 = controller.createHylde(lager1);
+        Hylde h4 = controller.createHylde(lager1);
 
         //Tilføjer fade til hylderne
-        Fad fad1 = controller.createFadForHylde(FadType.BOURBON, 80, l1, h1);
-        Fad fad2 = controller.createFadForHylde(FadType.BOURBON, 90, l1, h1);
-        Fad fad3 = controller.createFadForHylde(FadType.BOURBON, 90, l1, h1);
-        Fad fad4 = controller.createFadForHylde(FadType.RØDVIN, 60, l1, h2);
-        Fad fad5 = controller.createFadForHylde(FadType.RØDVIN, 70, l1, h2);
-        Fad fad6 = controller.createFadForHylde(FadType.RØDVIN, 80, l1, h2);
-        Fad fad7 = controller.createFadForHylde(FadType.SHERRY, 110, l1, h3);
-        Fad fad8 = controller.createFadForHylde(FadType.SHERRY, 120, l1, h3);
-        Fad fad9 = controller.createFadForHylde(FadType.SHERRY, 105, l1, h3);
-        Fad fad10 = controller.createFadForHylde(FadType.UBRUGT, 90, l1, h4);
-        Fad fad11 = controller.createFadForHylde(FadType.UBRUGT, 70, l1, h4);
-        Fad fad12 = controller.createFadForHylde(FadType.UBRUGT, 60, l1, h4);
+        Fad fad1 = controller.createFad(FadType.BOURBON, 80, l1, h1);
+        Fad fad2 = controller.createFad(FadType.BOURBON, 90, l1, h1);
+        Fad fad4 = controller.createFad(FadType.RØDVIN, 60, l1, h2);
+        Fad fad3 = controller.createFad(FadType.BOURBON, 90, l1, h1);
+        Fad fad5 = controller.createFad(FadType.RØDVIN, 70, l1, h2);
+        Fad fad6 = controller.createFad(FadType.RØDVIN, 80, l1, h2);
+        Fad fad7 = controller.createFad(FadType.SHERRY, 110, l1, h3);
+        Fad fad8 = controller.createFad(FadType.SHERRY, 120, l1, h3);
+        Fad fad9 = controller.createFad(FadType.SHERRY, 105, l1, h3);
+        Fad fad10 = controller.createFad(FadType.UBRUGT, 90, l1, h4);
+        Fad fad11 = controller.createFad(FadType.UBRUGT, 70, l1, h4);
+        Fad fad12 = controller.createFad(FadType.UBRUGT, 60, l1, h4);
     }
 }
