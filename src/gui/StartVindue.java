@@ -1,5 +1,6 @@
 package gui;
 
+import application.controller.Controller;
 import gui.gui_lagerstyring.LagerstyringPane;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -8,10 +9,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class StartVindue extends Application {
+    private Controller controller = Controller.getController();
 
     @Override
     public void init() {
-        // TODO: Evt. init mockdata
+        controller.initMockData();
     }
 
     @Override
