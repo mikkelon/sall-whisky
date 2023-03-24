@@ -47,7 +47,7 @@ public class Controller {
      * Fjerner et lager fra systemet
      * @param lager lageret
      */
-    public void removeLager(Lager lager) {
+    public void removeLager(Lager lager){
         storage.removeLager(lager);
     }
 

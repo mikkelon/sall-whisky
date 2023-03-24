@@ -56,4 +56,13 @@ class LagerTest {
         lager.removeHylde(hylde);
         assertFalse(lager.getHylder().contains(hylde));
     }
+
+    @Test
+    void removeHyldeTC8(){
+        Hylde hylde = lager.createHylde();
+        FadLeverandør fadLeverandør = new FadLeverandør("Anders","Danmark");
+        Fad fad = new Fad(FadType.BOURBON,100,fadLeverandør,hylde);
+        assertThrows(RuntimeException.class,()-> lager.removeHylde(hylde));
+
+    }
 }
