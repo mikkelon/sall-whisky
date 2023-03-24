@@ -25,9 +25,10 @@ class HyldeTest {
 
 
     @Test
-    void constructerTC1() {
-        assertEquals(hylde.getLager(), lager);
-        assertTrue(hylde.getHyldeNr() > 0);
+    void constructorTC1() {
+        assertEquals(hylde.getLager(), lager); // Tester om lageret er tilføjet til hylden
+        assertTrue(lager.getHylder().contains(hylde)); // Tester om hylde er tilføjet til lageret
+        assertTrue(hylde.getHyldeNr() > 0); // Tester om hyldeNr er større end 0
     }
 
     @Test
