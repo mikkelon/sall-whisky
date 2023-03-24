@@ -21,13 +21,15 @@ class FadTest {
     void constructorTC1() {
         assertEquals(FadType.BOURBON, fad.getFadType());
         assertEquals(80, fad.getStørrelseILiter());
-        assertTrue(fad.getFadNr() > 0);
         assertEquals(0, fad.getIndeholdtVæskeILiter());
         assertEquals(hylde, fad.getHylde());
         assertEquals(fadLeverandør, fad.getFadLeverandør());
         assertTrue(hylde.getFade().contains(fad));
-    }
 
+        // Test at antalFade tæller 1 op for hver gang der oprettes et nyt fad
+        Fad fad2 = new Fad(FadType.BOURBON, 80, fadLeverandør, hylde);
+        assertEquals(fad.getFadNr() + 1, fad2.getFadNr());
+    }
 
     @Test
     void getSetFadTypeTC2() {
