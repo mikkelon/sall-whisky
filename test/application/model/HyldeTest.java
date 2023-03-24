@@ -27,6 +27,7 @@ class HyldeTest {
     @Test
     void constructerTC1() {
         assertEquals(hylde.getLager(), lager);
+        assertTrue(lager.getHylder().contains(hylde));
         assertTrue(hylde.getHyldeNr() > 0);
     }
 
