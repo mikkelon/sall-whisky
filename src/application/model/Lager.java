@@ -1,5 +1,6 @@
 package application.model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
 /**
@@ -10,7 +11,7 @@ public class Lager {
     private String navn;
     private double kvm;
     private int antalHylder;
-    private HashSet<Hylde> hylder = new HashSet<>();
+    private ArrayList<Hylde> hylder = new ArrayList<>();
 
     /**
      * Initialiserer et nyt lager med adresse, navn, og kvm.
