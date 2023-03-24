@@ -41,6 +41,7 @@ public class Controller {
      * @param kvm lagerets kvm
      * @param antalHylder antal hylder der skal oprettes
      * @return det oprettede lager
+     * Pre: adresse != null, navn != null, kvm > 0, antalHylder >= 0
      */
     public Lager createLagerWithAntalHylder(String adresse, String navn, double kvm, int antalHylder) {
         Lager lager = new Lager(adresse, navn, kvm);
@@ -56,6 +57,7 @@ public class Controller {
     /**
      * Fjerner et lager fra systemet
      * @param lager lageret
+     * Pre: lager != null
      */
     public void removeLager(Lager lager) {
         if (!lager.getHylder().isEmpty()) {
@@ -77,6 +79,7 @@ public class Controller {
      * @param navn navnet på fadleverandøren
      * @param land landet fadleverandøren kommer fra
      * @return den oprettede fadleverandør
+     * Pre: navn != null, land != null
      */
     public FadLeverandør createFadLeverandør(String navn, String land) {
         FadLeverandør fadLeverandør = new FadLeverandør(navn, land);
@@ -87,6 +90,7 @@ public class Controller {
     /**
      * Fjerner en fadleverandør fra systemet
      * @param fadLeverandør fadleverandøren
+     * Pre: fadLeverandør != null
      */
     public void removeFadLeverandør(FadLeverandør fadLeverandør) {
         if (fadLeverandør.getAntalFade() != 0) {
@@ -107,6 +111,7 @@ public class Controller {
      * Opretter en ny hylde i et givent lager
      * @param lager lageret
      * @return den oprettede hylde
+     * Pre: lager != null
      */
     public Hylde createHylde(Lager lager) {
         Hylde hylde = lager.createHylde();
@@ -116,6 +121,7 @@ public class Controller {
     /**
      * Fjerne den specifikke hylde fra et lager
      * @param hylde hylden der skal fjernes
+     * Pre: hylde != null
      */
     public void removeHylde(Hylde hylde) {
         if (!hylde.getFade().isEmpty()) {
@@ -141,6 +147,7 @@ public class Controller {
      * Returnerer alle hylder i et givent lager
      * @param lager lageret
      * @return alle hylder i et givent lager
+     * Pre: lager != null
      */
     public HashSet<Hylde> getHylder(Lager lager) {
         return lager.getHylder();
@@ -153,6 +160,7 @@ public class Controller {
      * @param fadLeverandør fadleverandøren
      * @param hylde hylde hvor fadet skal placeres
      * @return det oprettede fad
+     * Pre: fadType != null, størrelseILiter > 0, fadLeverandør != null, hylde != null
      */
     public Fad createFad(FadType fadType, double størrelseILiter, FadLeverandør fadLeverandør, Hylde hylde) {
         Fad fad = new Fad(fadType, størrelseILiter, fadLeverandør, hylde);
@@ -163,6 +171,7 @@ public class Controller {
     /**
      * Fjerner det specifikke fad fra en hylde
      * @param fad fadet der skal fjernes
+     * Pre: fad != null
      */
     public void removeFad(Fad fad) {
         fad.getHylde().removeFad(fad);
