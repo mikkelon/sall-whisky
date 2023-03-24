@@ -76,7 +76,7 @@ public class Controller {
      * @param fadLeverandør fadleverandøren
      */
     public void removeFadLeverandør(FadLeverandør fadLeverandør) {
-        storage.removeFadLeverandør(fadLeverandør);
+        storage.removeFadLeverandør(fadLeverandør); //TODO: efterlader fade der peger på fadleverandøren der ikke længere eksisterer
     }
 
     /**
@@ -146,7 +146,7 @@ public class Controller {
      */
     public void removeHylde(Hylde hylde) {
         hylde.getLager().removeHylde(hylde);
-
+        // TODO: må kun fjernes hvis den er tom
     }
 
     /**
