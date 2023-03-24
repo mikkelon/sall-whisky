@@ -9,6 +9,7 @@ public class Lager {
     private String adresse;
     private String navn;
     private double kvm;
+    private int antalHylder;
     private HashSet<Hylde> hylder = new HashSet<>();
 
     /**
@@ -21,6 +22,7 @@ public class Lager {
         this.adresse = adresse;
         this.navn = navn;
         this.kvm = kvm;
+        this.antalHylder = 0;
     }
 
     /**
@@ -84,6 +86,7 @@ public class Lager {
      * @return en ny hylde til lageret
      */
     public Hylde createHylde() {
+        antalHylder++;
         Hylde hylde = new Hylde(this);
         hylder.add(hylde);
         return hylde;
@@ -94,9 +97,18 @@ public class Lager {
      * @param hylde lagerets hylde
      */
     public void removeHylde(Hylde hylde) {
+        antalHylder--;
         if (hylder.contains(hylde)) {
             hylder.remove(hylde);
         }
+    }
+
+    /**
+     * Returnerer antal hylder på lageret.
+     * @return antal hylder på lageret
+     */
+    public int getAntalHylder() {
+        return antalHylder;
     }
 
 

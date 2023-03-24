@@ -7,13 +7,16 @@ import java.util.ArrayList;
  */
 public class Hylde {
     private int hyldeNr;
-    private static int antalHylder = 0;
     private Lager lager;
     private final ArrayList<Fad> fade = new ArrayList<>();
 
+    /**
+     * Opretter en hylde på et specifikt lager.
+     * Hylden får et unikt hyldenummer for det specifikke lager.
+     * @param lager lageret hvor hylden skal oprettes
+     */
     Hylde(Lager lager) {
-        antalHylder++;
-        this.hyldeNr = antalHylder;
+        this.hyldeNr = lager.getAntalHylder();
         this.lager = lager;
     }
 
