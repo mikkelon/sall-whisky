@@ -25,6 +25,14 @@ public class Controller {
     }
 
     /**
+     * Opretter en ny instans af controlleren med formål at teste denne
+     * @return en ny instans af controlleren
+     */
+    public static Controller getTestController() {
+        return new Controller();
+    }
+
+    /**
      * Opretter et nyt lager med en angivet antal hylder
      * @param adresse lagerets adresse
      * @param navn lagerets navn
@@ -48,6 +56,9 @@ public class Controller {
      * @param lager lageret
      */
     public void removeLager(Lager lager) {
+        if (!lager.getHylder().isEmpty()) {
+            throw new RuntimeException("Lageret kan ikke slettes, når der er hylder tilknyttet.");
+        }
         storage.removeLager(lager);
     }
 
@@ -98,6 +109,23 @@ public class Controller {
     }
 
     /**
+     * Fjerner det specifikke fad fra en hylde
+     * @param fad
+     */
+    public void removeFad(Fad fad) {
+        fad.getHylde().removeFad(fad);
+    }
+
+    /**
+     * Fjerne den specifikke hylde fra et lager
+     * @param hylde
+     */
+    public void removeHylde(Hylde hylde) {
+        hylde.getLager().removeHylde(hylde);
+        // TODO: må kun fjernes hvis den er tom
+    }
+
+    /**
      * Returnerer alle hylder i alle lagre
      * @return alle hylder i alle lagre
      */
@@ -129,24 +157,6 @@ public class Controller {
     public Fad createFad(FadType fadType, double størrelseILiter, FadLeverandør fadLeverandør, Hylde hylde) {
         Fad fad = new Fad(fadType, størrelseILiter, fadLeverandør, hylde);
         return fad;
-    }
-
-
-    /**
-     * Fjerner det specifikke fad fra en hylde
-     * @param fad
-     */
-    public void removeFad(Fad fad) {
-        fad.getHylde().removeFad(fad);
-    }
-
-    /**
-     * Fjerne den specifikke hylde fra et lager
-     * @param hylde
-     */
-    public void removeHylde(Hylde hylde) {
-        hylde.getLager().removeHylde(hylde);
-        // TODO: må kun fjernes hvis den er tom
     }
 
     /**
