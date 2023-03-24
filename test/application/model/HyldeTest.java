@@ -41,22 +41,22 @@ class HyldeTest {
     }
 
     @Test
-    void getLagerTC3() {
+    void getLagerTC2() {
         assertTrue(hylde.getLager().equals(lager));
     }
 
-
     @Test
-    void getFadeTC4() {
+    void getFadeTC3() {
         assertTrue(hylde.getFade().contains(fad));
     }
 
     @Test
-    void addFadTC5() {
-        Hylde hylde2 = lager.createHylde();
-        hylde2.addFad(fad);
-        assertTrue(hylde2.getFade().contains(fad));
-        assertFalse(hylde.getFade().contains(fad));
+    void addFadTC4() {
+        Hylde nyHylde = lager.createHylde();
+        Fad nytFad = new Fad(FadType.SHERRY, 50, fadLeverandør, hylde);
+        assertFalse(nyHylde.getFade().contains(nytFad)); // Tester at den nye hylde ikke indeholder fadet
+        nyHylde.addFad(nytFad);
+        assertTrue(nyHylde.getFade().contains(nytFad)); // Tester at den nye hylde indeholder fadet
     }
 
     @Test
