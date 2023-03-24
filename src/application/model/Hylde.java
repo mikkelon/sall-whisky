@@ -61,4 +61,9 @@ public class Hylde {
             fade.remove(fad);
         }
     }
+
+    @Override
+    public String toString() {
+        return "Nr: " + hyldeNr;
+    }
 }

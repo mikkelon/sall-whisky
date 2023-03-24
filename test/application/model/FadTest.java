@@ -35,40 +35,40 @@ class FadTest {
         assertEquals(FadType.SHERRY, fad.getFadType());
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void getStørrelseILiterTC3() {
         assertEquals(80, fad.getStørrelseILiter());
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void getFadNrTC4() {
         assertTrue(fad.getFadNr() > 0);
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void getSetIndeholdtVæskeILiterTC5() {
         fad.setIndeholdtVæskeILiter(50);
         assertEquals(50, fad.getIndeholdtVæskeILiter());
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void getHyldeTC6() {
         assertEquals(hylde, fad.getHylde());
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void getFadLeverandørTC7() {
         assertEquals(fadLeverandør, fad.getFadLeverandør());
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void setHyldeNormalTC8() {
         Hylde h2 = lager.createHylde();
         fad.setHylde(h2);
         assertEquals(h2, fad.getHylde());
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void setHyldeFejlTC9() {
         assertThrows(RuntimeException.class, () -> fad.setHylde(null));
     }

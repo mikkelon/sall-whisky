@@ -56,5 +56,10 @@ public class FadLeverandør {
     public void fjernFad() {
         antalFade--;
     }
+
+    @Override
+    public String toString() {
+        return navn + ", " + land;
+    }
 }
 
