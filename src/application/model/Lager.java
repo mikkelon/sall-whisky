@@ -101,4 +101,10 @@ public class Lager {
             hylder.remove(hylde);
         }
     }
+
+
+    @Override
+    public String toString() {
+        return navn + ", " + adresse + ", Kvm: " + kvm;
+    }
 }

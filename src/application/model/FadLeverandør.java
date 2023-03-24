@@ -31,5 +31,10 @@ public class FadLeverandør {
         return land;
     }
 
+    @Override
+    public String toString() {
+        return navn + ", " + land;
+    }
+
 }
 

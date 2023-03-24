@@ -16,10 +16,11 @@ public class Fad {
      * Opretter et fad med en given størrelse, fadtype, fadleverandør og hylde.
      * indeholdtVæskeILiter sættes til 0.
      * fadNr sættes til et unikt nummer.
-     * @param fadType fadets tidligere indhold, f.eks. "bourbon", "shery", osv.
+     *
+     * @param fadType         fadets tidligere indhold, f.eks. "bourbon", "shery", osv.
      * @param størrelseILiter størrelsen på fadet i liter
-     * @param fadLeverandør fadleverandøren, der har leveret fadet
-     * @param hylde hylden hvor fadet er opbevaret
+     * @param fadLeverandør   fadleverandøren, der har leveret fadet
+     * @param hylde           hylden hvor fadet er opbevaret
      */
     public Fad(FadType fadType, double størrelseILiter, FadLeverandør fadLeverandør, Hylde hylde) {
         antalFade++;
@@ -33,7 +34,8 @@ public class Fad {
     }
 
     /**
-     *Returnerer typen på fadet.
+     * Returnerer typen på fadet.
+     *
      * @return typen på fadet
      */
     public FadType getFadType() {
@@ -42,6 +44,7 @@ public class Fad {
 
     /**
      * Returnerer størrelsen på fadet i liter.
+     *
      * @return størrelsen på fadet i liter
      */
     public double getStørrelseILiter() {
@@ -50,6 +53,7 @@ public class Fad {
 
     /**
      * Returnerer det unikke nummer for fadet.
+     *
      * @return unikt nummer for fadet
      */
     public int getFadNr() {
@@ -58,6 +62,7 @@ public class Fad {
 
     /**
      * Returnerer indeholdt væske i liter.
+     *
      * @return indeholdt væske i liter
      */
     public double getIndeholdtVæskeILiter() {
@@ -66,6 +71,7 @@ public class Fad {
 
     /**
      * Registrerer typen på fadet.
+     *
      * @param fadType er fadets nye type.
      */
     public void setFadType(FadType fadType) {
@@ -74,6 +80,7 @@ public class Fad {
 
     /**
      * Returnerer hylden hvor fadet er opbevaret.
+     *
      * @return hylden hvor fadet er opbevaret
      */
     public Hylde getHylde() {
@@ -82,6 +89,7 @@ public class Fad {
 
     /**
      * Registrerer indeholdt væske i liter.
+     *
      * @param indeholdtVæskeILiter er fadets nye indeholdt væske i liter.
      */
     public void setIndeholdtVæskeILiter(double indeholdtVæskeILiter) {
@@ -90,26 +98,34 @@ public class Fad {
 
     /**
      * Returnerer leverandøren for fadet.
+     *
      * @return leverandøren for fadet
      */
     public FadLeverandør getFadLeverandør() {
         return fadLeverandør;
     }
 
+
     /**
      * Registrerer hylden hvor fadet er opbevaret.
+     *
      * @param hylde er fadets nye hylde.
      */
-    public void setHylde(Hylde hylde){
+    public void setHylde(Hylde hylde) {
         if (hylde == null) {
             throw new RuntimeException("Fadet skal være tilknyttet en hylde.");
         }
 
-        if(this.hylde != hylde){
+        if (this.hylde != hylde) {
             Hylde oldhylde = this.hylde;
             oldhylde.removeFad(this);
             this.hylde = hylde;
             hylde.addFad(this);
         }
+    }
+
+    @Override
+    public String toString() {
+        return fadType + ", Nr: " + fadNr + ", Størrelse: " + størrelseILiter + "L, Indeholder: " + indeholdtVæskeILiter + "L";
     }
 }
