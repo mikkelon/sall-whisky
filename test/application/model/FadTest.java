@@ -12,7 +12,7 @@ class FadTest {
     @BeforeEach
     void setUp() {
        lager = new Lager("Baldersgade 39", "Sall Whisky Lager", 100.0);
-       hylde = new Hylde(lager);
+       hylde = lager.createHylde();
        fadLeverandør = new FadLeverandør("Garrison Brothers", "USA");
        fad = new Fad(FadType.BOURBON, 80, fadLeverandør, hylde);
     }
@@ -63,7 +63,7 @@ class FadTest {
 
     @org.junit.jupiter.api.Test
     void setHyldeNormalTC8() {
-        Hylde h2 = new Hylde(lager);
+        Hylde h2 = lager.createHylde();
         fad.setHylde(h2);
         assertEquals(h2, fad.getHylde());
     }

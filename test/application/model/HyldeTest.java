@@ -18,11 +18,9 @@ class HyldeTest {
     @BeforeEach
     void setUp() {
         lager = new Lager("Baldersgade 39", "Sall Whisky Lager", 100);
-        hylde = new Hylde(lager);
-        FadLeverandør fadleverandør = new FadLeverandør("Garrison Brothers", "USA");
-        Fad fad = new Fad(FadType.BOURBON, 80, fadLeverandør, hylde);
-
-
+        hylde = lager.createHylde();
+        fadLeverandør = new FadLeverandør("Garrison Brothers", "USA");
+        fad = new Fad(FadType.BOURBON, 80, fadLeverandør, hylde);
     }
 
 
@@ -30,21 +28,16 @@ class HyldeTest {
     void constructerTC1() {
         assertEquals(hylde.getLager(), lager);
         assertTrue(hylde.getHyldeNr() > 0);
-
-
     }
 
     @Test
     void getHyldeNrTC2() {
         assertTrue(hylde.getHyldeNr() > 0);
-
     }
 
     @Test
-    void getOgSetLagerTC3() {
-        hylde.setLager(lager);
+    void getLagerTC3() {
         assertTrue(hylde.getLager().equals(lager));
-
     }
 
 
@@ -56,15 +49,15 @@ class HyldeTest {
 
     @Test
     void addFadTC5() {
-
         hylde.addFad(fad);
         assertTrue(hylde.getFade().contains(fad));
     }
 
     @Test
     void removeFadTC6() {
-        hylde.addFad(fad);
-        hylde.removeFad(fad);
-        assertTrue(hylde.getFade().isEmpty());
+        Fad nytFad = new Fad(FadType.SHERRY, 50, fadLeverandør, hylde);
+        hylde.addFad(nytFad);
+        hylde.removeFad(nytFad);
+        assertFalse(hylde.getFade().contains(nytFad));
     }
 }
