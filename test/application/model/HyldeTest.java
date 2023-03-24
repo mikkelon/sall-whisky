@@ -43,14 +43,15 @@ class HyldeTest {
 
     @Test
     void getFadeTC4() {
-        hylde.addFad(fad);
         assertTrue(hylde.getFade().contains(fad));
     }
 
     @Test
     void addFadTC5() {
-        hylde.addFad(fad);
-        assertTrue(hylde.getFade().contains(fad));
+        Hylde hylde2 = lager.createHylde();
+        hylde2.addFad(fad);
+        assertTrue(hylde2.getFade().contains(fad));
+        assertFalse(hylde.getFade().contains(fad));
     }
 
     @Test

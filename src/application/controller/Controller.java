@@ -114,21 +114,15 @@ public class Controller {
     }
 
     /**
-     * Fjerner det specifikke fad fra en hylde
-     * @param fad fadet der skal fjernes
-     */
-    public void removeFad(Fad fad) {
-        fad.getHylde().removeFad(fad);
-        fad.getFadLeverandør().fjernFad();
-    }
-
-    /**
      * Fjerne den specifikke hylde fra et lager
      * @param hylde hylden der skal fjernes
      */
     public void removeHylde(Hylde hylde) {
+        if (!hylde.getFade().isEmpty()) {
+            throw new RuntimeException("Hylden kan ikke slettes, når der er fade liggende på hylden.");
+        }
+
         hylde.getLager().removeHylde(hylde);
-        // TODO: må kun fjernes hvis den er tom
     }
 
     /**
@@ -164,6 +158,15 @@ public class Controller {
         Fad fad = new Fad(fadType, størrelseILiter, fadLeverandør, hylde);
         fad.getFadLeverandør().tilføjFad();
         return fad;
+    }
+
+    /**
+     * Fjerner det specifikke fad fra en hylde
+     * @param fad fadet der skal fjernes
+     */
+    public void removeFad(Fad fad) {
+        fad.getHylde().removeFad(fad);
+        fad.getFadLeverandør().fjernFad();
     }
 
     /**

@@ -48,6 +48,7 @@ public class Hylde {
     public void addFad(Fad fad){
         if(!fade.contains(fad)){
             fade.add(fad);
+            fad.setHylde(this);
         }
     }
 
