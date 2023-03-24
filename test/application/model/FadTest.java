@@ -43,35 +43,32 @@ class FadTest {
     }
 
     @Test
-    void getFadNrTC4() {
-        assertTrue(fad.getFadNr() > 0);
-    }
-
-    @Test
-    void getSetIndeholdtVæskeILiterTC5() {
+    void getSetIndeholdtVæskeILiterTC4() {
         fad.setIndeholdtVæskeILiter(50);
         assertEquals(50, fad.getIndeholdtVæskeILiter());
     }
 
     @Test
-    void getHyldeTC6() {
+    void getHyldeTC5() {
         assertEquals(hylde, fad.getHylde());
     }
 
     @Test
-    void getFadLeverandørTC7() {
+    void getFadLeverandørTC6() {
         assertEquals(fadLeverandør, fad.getFadLeverandør());
     }
 
     @Test
-    void setHyldeNormalTC8() {
+    void setHyldeNormalTC7() {
         Hylde h2 = lager.createHylde();
         fad.setHylde(h2);
         assertEquals(h2, fad.getHylde());
+        assertTrue(h2.getFade().contains(fad));
+        assertFalse(hylde.getFade().contains(fad));
     }
 
     @Test
-    void setHyldeFejlTC9() {
+    void setHyldeFejlTC8() {
         assertThrows(RuntimeException.class, () -> fad.setHylde(null));
     }
 }
