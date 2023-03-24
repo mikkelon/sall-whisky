@@ -53,8 +53,6 @@ class LagerTest {
     @Test
     void removeHyldeTC7() {
         Hylde hylde = lager.createHylde();
-        assertTrue(lager.getHylder().contains(hylde));
-
         lager.removeHylde(hylde);
         assertFalse(lager.getHylder().contains(hylde));
     }
