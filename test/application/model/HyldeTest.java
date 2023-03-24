@@ -28,12 +28,16 @@ class HyldeTest {
     void constructorTC1() {
         assertEquals(hylde.getLager(), lager); // Tester om lageret er tilføjet til hylden
         assertTrue(lager.getHylder().contains(hylde)); // Tester om hylde er tilføjet til lageret
-        assertTrue(hylde.getHyldeNr() > 0); // Tester om hyldeNr er større end 0
-    }
 
-    @Test
-    void getHyldeNrTC2() {
-        assertTrue(hylde.getHyldeNr() > 0);
+        // Tester om hylde nummeret tæller op korrekt
+        // Her får vi også testet getHyldeNr()
+        Lager lager2 = new Lager("Testvej 2", "Test Lager 2", 200);
+        Hylde hylde1 = lager2.createHylde();
+        assertEquals(1,hylde1.getHyldeNr());
+        Hylde hylde2 = lager2.createHylde();
+        assertEquals(2,hylde2.getHyldeNr());
+        Hylde hylde3 = lager2.createHylde();
+        assertEquals(3,hylde3.getHyldeNr());
     }
 
     @Test
