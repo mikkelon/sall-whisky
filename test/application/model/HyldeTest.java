@@ -60,9 +60,8 @@ class HyldeTest {
     }
 
     @Test
-    void removeFadTC6() {
+    void removeFadTC5() {
         Fad nytFad = new Fad(FadType.SHERRY, 50, fadLeverandør, hylde);
-        hylde.addFad(nytFad);
         hylde.removeFad(nytFad);
         assertFalse(hylde.getFade().contains(nytFad));
     }
