@@ -12,12 +12,12 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class BekræftSletVindue extends Stage {
-    public BekræftSletVindue() {
+    public BekræftSletVindue(String titel) {
         this.initStyle(StageStyle.DECORATED);
         this.initModality(Modality.APPLICATION_MODAL);
         this.setResizable(false);
 
-        this.setTitle("Opret fad");
+        this.setTitle(titel);
 
         GridPane pane = new GridPane();
         this.initContent(pane);
