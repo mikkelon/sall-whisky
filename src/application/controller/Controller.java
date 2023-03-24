@@ -2,9 +2,11 @@ package application.controller;
 
 import application.model.*;
 import storage.Storage;
-
 import java.util.HashSet;
 
+/**
+ * Controller-klassen håndterer forretningslogik og binder GUI sammen med modellen og storage-laget.
+ */
 public class Controller {
     private Storage storage;
     private static Controller controller;
@@ -25,12 +27,21 @@ public class Controller {
     }
 
     /**
+     * Opretter en ny instans af controlleren med formål at teste denne
+     * @return en ny instans af controlleren
+     */
+    public static Controller getTestController() {
+        return new Controller();
+    }
+
+    /**
      * Opretter et nyt lager med en angivet antal hylder
      * @param adresse lagerets adresse
      * @param navn lagerets navn
      * @param kvm lagerets kvm
      * @param antalHylder antal hylder der skal oprettes
      * @return det oprettede lager
+     * Pre: adresse != null, navn != null, kvm > 0, antalHylder >= 0
      */
     public Lager createLagerWithAntalHylder(String adresse, String navn, double kvm, int antalHylder) {
         Lager lager = new Lager(adresse, navn, kvm);
@@ -46,8 +57,12 @@ public class Controller {
     /**
      * Fjerner et lager fra systemet
      * @param lager lageret
+     * Pre: lager != null
      */
     public void removeLager(Lager lager) {
+        if (!lager.getHylder().isEmpty()) {
+            throw new RuntimeException("Lageret kan ikke slettes, når der er hylder tilknyttet.");
+        }
         storage.removeLager(lager);
     }
 
@@ -64,6 +79,7 @@ public class Controller {
      * @param navn navnet på fadleverandøren
      * @param land landet fadleverandøren kommer fra
      * @return den oprettede fadleverandør
+     * Pre: navn != null, land != null
      */
     public FadLeverandør createFadLeverandør(String navn, String land) {
         FadLeverandør fadLeverandør = new FadLeverandør(navn, land);
@@ -74,9 +90,13 @@ public class Controller {
     /**
      * Fjerner en fadleverandør fra systemet
      * @param fadLeverandør fadleverandøren
+     * Pre: fadLeverandør != null
      */
     public void removeFadLeverandør(FadLeverandør fadLeverandør) {
-        storage.removeFadLeverandør(fadLeverandør); //TODO: efterlader fade der peger på fadleverandøren der ikke længere eksisterer
+        if (fadLeverandør.getAntalFade() != 0) {
+            throw new RuntimeException("Fadleverandøren kan ikke slettes, når der er fade tilknyttet.");
+        }
+        storage.removeFadLeverandør(fadLeverandør);
     }
 
     /**
@@ -91,10 +111,24 @@ public class Controller {
      * Opretter en ny hylde i et givent lager
      * @param lager lageret
      * @return den oprettede hylde
+     * Pre: lager != null
      */
     public Hylde createHylde(Lager lager) {
         Hylde hylde = lager.createHylde();
         return hylde;
+    }
+
+    /**
+     * Fjerne den specifikke hylde fra et lager
+     * @param hylde hylden der skal fjernes
+     * Pre: hylde != null
+     */
+    public void removeHylde(Hylde hylde) {
+        if (!hylde.getFade().isEmpty()) {
+            throw new RuntimeException("Hylden kan ikke slettes, når der er fade liggende på hylden.");
+        }
+
+        hylde.getLager().removeHylde(hylde);
     }
 
     /**
@@ -113,6 +147,7 @@ public class Controller {
      * Returnerer alle hylder i et givent lager
      * @param lager lageret
      * @return alle hylder i et givent lager
+     * Pre: lager != null
      */
     public HashSet<Hylde> getHylder(Lager lager) {
         return lager.getHylder();
@@ -125,28 +160,22 @@ public class Controller {
      * @param fadLeverandør fadleverandøren
      * @param hylde hylde hvor fadet skal placeres
      * @return det oprettede fad
+     * Pre: fadType != null, størrelseILiter > 0, fadLeverandør != null, hylde != null
      */
     public Fad createFad(FadType fadType, double størrelseILiter, FadLeverandør fadLeverandør, Hylde hylde) {
         Fad fad = new Fad(fadType, størrelseILiter, fadLeverandør, hylde);
+        fad.getFadLeverandør().tilføjFad();
         return fad;
     }
 
-
     /**
      * Fjerner det specifikke fad fra en hylde
-     * @param fad
+     * @param fad fadet der skal fjernes
+     * Pre: fad != null
      */
     public void removeFad(Fad fad) {
         fad.getHylde().removeFad(fad);
-    }
-
-    /**
-     * Fjerne den specifikke hylde fra et lager
-     * @param hylde
-     */
-    public void removeHylde(Hylde hylde) {
-        hylde.getLager().removeHylde(hylde);
-        // TODO: må kun fjernes hvis den er tom
+        fad.getFadLeverandør().fjernFad();
     }
 
     /**
