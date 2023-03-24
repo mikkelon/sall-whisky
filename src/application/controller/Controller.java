@@ -2,9 +2,11 @@ package application.controller;
 
 import application.model.*;
 import storage.Storage;
-
 import java.util.HashSet;
 
+/**
+ * Controller-klassen håndterer forretningslogik og binder GUI sammen med modellen og storage-laget.
+ */
 public class Controller {
     private Storage storage;
     private static Controller controller;
@@ -87,7 +89,10 @@ public class Controller {
      * @param fadLeverandør fadleverandøren
      */
     public void removeFadLeverandør(FadLeverandør fadLeverandør) {
-        storage.removeFadLeverandør(fadLeverandør); //TODO: efterlader fade der peger på fadleverandøren der ikke længere eksisterer
+        if (fadLeverandør.getAntalFade() != 0) {
+            throw new RuntimeException("Fadleverandøren kan ikke slettes, når der er fade tilknyttet.");
+        }
+        storage.removeFadLeverandør(fadLeverandør);
     }
 
     /**
@@ -110,15 +115,16 @@ public class Controller {
 
     /**
      * Fjerner det specifikke fad fra en hylde
-     * @param fad
+     * @param fad fadet der skal fjernes
      */
     public void removeFad(Fad fad) {
         fad.getHylde().removeFad(fad);
+        fad.getFadLeverandør().fjernFad();
     }
 
     /**
      * Fjerne den specifikke hylde fra et lager
-     * @param hylde
+     * @param hylde hylden der skal fjernes
      */
     public void removeHylde(Hylde hylde) {
         hylde.getLager().removeHylde(hylde);
@@ -156,6 +162,7 @@ public class Controller {
      */
     public Fad createFad(FadType fadType, double størrelseILiter, FadLeverandør fadLeverandør, Hylde hylde) {
         Fad fad = new Fad(fadType, størrelseILiter, fadLeverandør, hylde);
+        fad.getFadLeverandør().tilføjFad();
         return fad;
     }
 
