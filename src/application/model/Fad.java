@@ -96,6 +96,8 @@ public class Fad {
         return fadLeverandør;
     }
 
+
+
     /**
      * Registrerer hylden hvor fadet er opbevaret.
      * @param hylde er fadets nye hylde.
@@ -111,5 +113,12 @@ public class Fad {
             this.hylde = hylde;
             hylde.addFad(this);
         }
+
+
+    }
+
+    @Override
+    public String toString() {
+        return fadType + ", Nr: " + fadNr + ", Størrelse: " + størrelseILiter + ", Indeholder: " + indeholdtVæskeILiter;
     }
 }
