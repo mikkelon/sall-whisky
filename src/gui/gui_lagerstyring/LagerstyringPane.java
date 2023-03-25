@@ -102,18 +102,20 @@ public class LagerstyringPane extends GridPane {
     }
 
     private void opretLager() {
+        clearError();
         OpretLagerVindue window = new OpretLagerVindue();
         window.showAndWait();
         updateControls();
     }
 
     private void sletLager() {
-        BekræftSletVindue window = new BekræftSletVindue();
-        window.showAndWait();
-        boolean valg = window.getValg();
-        if (valg) {
-            Lager valgtLager = lvwLagre.getSelectionModel().getSelectedItem();
-            if (valgtLager != null) {
+        clearError();
+        Lager valgtLager = lvwLagre.getSelectionModel().getSelectedItem();
+        if (valgtLager != null) {
+            BekræftSletVindue window = new BekræftSletVindue("Slet lager");
+            window.showAndWait();
+            boolean valg = window.getValg();
+            if (valg) {
                 try {
                     controller.removeLager(valgtLager);
                 }
@@ -122,10 +124,13 @@ public class LagerstyringPane extends GridPane {
                 }
                 updateControls();
             }
+        } else {
+            lblError.setText("Vælg et lager");
         }
     }
 
     private void opretHylde() {
+        clearError();
         Lager valgtLager = lvwLagre.getSelectionModel().getSelectedItem();
         if (valgtLager != null) {
             controller.createHylde(valgtLager);
@@ -137,27 +142,33 @@ public class LagerstyringPane extends GridPane {
     }
 
     private void sletHylde() {
+        clearError();
         Hylde valgtHylde = lvwHylder.getSelectionModel().getSelectedItem();
         if (valgtHylde != null) {
-            try {
-//            controller.removeHylde(valgtHylde); //TODO: Fjern kommentar når metoden er lavet
+            BekræftSletVindue window = new BekræftSletVindue("Slet hylde");
+            window.showAndWait();
+            boolean valg = window.getValg();
+            if (valg) {
+                try {
+                    controller.removeHylde(valgtHylde);
+                }
+                catch (RuntimeException e) {
+                    lblError.setText(e.getMessage());
+                }
+                updateHylder();
             }
-            catch (RuntimeException e) {
-                lblError.setText(e.getMessage());
-            }
-            updateHylder();
-            clearError();
         } else {
             lblError.setText("Vælg en hylde");
         }
     }
 
     private void opretFad() {
+        clearError();
         Hylde valgtHylde = lvwHylder.getSelectionModel().getSelectedItem();
         if (valgtHylde != null) {
             OpretFadVindue window = new OpretFadVindue(valgtHylde);
             window.showAndWait();
-            updateControls();
+            updateFade();
             clearError();
         } else {
             lblError.setText("Vælg en hylde");
@@ -165,15 +176,23 @@ public class LagerstyringPane extends GridPane {
     }
 
     private void sletFad() {
-        BekræftSletVindue window = new BekræftSletVindue();
-        window.showAndWait();
-        boolean valg = window.getValg();
-        if (valg) {
-            Fad valgtFad = lvwFade.getSelectionModel().getSelectedItem();
-            if (valgtFad != null) {
-//                controller.removeFad(valgtFad); //TODO: Fjern kommentar når metoden er lavet
+        clearError();
+        Fad valgtFad = lvwFade.getSelectionModel().getSelectedItem();
+        if (valgtFad != null) {
+            BekræftSletVindue window = new BekræftSletVindue("Slet fad");
+            window.showAndWait();
+            boolean valg = window.getValg();
+            if (valg) {
+                try {
+                    controller.removeFad(valgtFad);
+                }
+                catch (RuntimeException e) {
+                    lblError.setText(e.getMessage());
+                }
                 updateFade();
             }
+        } else {
+            lblError.setText("Vælg et fad");
         }
     }
 
@@ -206,6 +225,6 @@ public class LagerstyringPane extends GridPane {
     }
 
     private void clearError() {
-        lblError.setText(" ");
+        lblError.setText("");
     }
 }

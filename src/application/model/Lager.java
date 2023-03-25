@@ -1,7 +1,6 @@
 package application.model;
 
-import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.*;
 
 /**
  * Modellerer et lager med hylder, hvorpå der opbevares whiskyfade.
@@ -11,7 +10,7 @@ public class Lager {
     private String navn;
     private double kvm;
     private int antalHylder;
-    private ArrayList<Hylde> hylder = new ArrayList<>();
+    private Set<Hylde> hylder = new TreeSet<>(Comparator.comparingInt(Hylde::getHyldeNr));
 
     /**
      * Initialiserer et nyt lager med adresse, navn, og kvm.
