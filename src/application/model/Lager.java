@@ -95,12 +95,11 @@ public class Lager {
     /**
      * Fjerner en hylde fra lageret.
      * @param hylde lagerets hylde
+     * Pre: hylde er tom
      */
     public void removeHylde(Hylde hylde) {
         antalHylder--;
-        if (hylder.contains(hylde)) {
-            hylder.remove(hylde);
-        }
+        hylder.remove(hylde);
     }
 
     /**

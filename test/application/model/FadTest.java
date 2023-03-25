@@ -21,13 +21,15 @@ class FadTest {
     void constructorTC1() {
         assertEquals(FadType.BOURBON, fad.getFadType());
         assertEquals(80, fad.getStørrelseILiter());
-        assertTrue(fad.getFadNr() > 0);
         assertEquals(0, fad.getIndeholdtVæskeILiter());
         assertEquals(hylde, fad.getHylde());
         assertEquals(fadLeverandør, fad.getFadLeverandør());
         assertTrue(hylde.getFade().contains(fad));
-    }
 
+        // Test at antalFade tæller 1 op for hver gang der oprettes et nyt fad
+        Fad fad2 = new Fad(FadType.BOURBON, 80, fadLeverandør, hylde);
+        assertEquals(fad.getFadNr() + 1, fad2.getFadNr());
+    }
 
     @Test
     void getSetFadTypeTC2() {
@@ -41,35 +43,32 @@ class FadTest {
     }
 
     @Test
-    void getFadNrTC4() {
-        assertTrue(fad.getFadNr() > 0);
-    }
-
-    @Test
-    void getSetIndeholdtVæskeILiterTC5() {
+    void getSetIndeholdtVæskeILiterTC4() {
         fad.setIndeholdtVæskeILiter(50);
         assertEquals(50, fad.getIndeholdtVæskeILiter());
     }
 
     @Test
-    void getHyldeTC6() {
+    void getHyldeTC5() {
         assertEquals(hylde, fad.getHylde());
     }
 
     @Test
-    void getFadLeverandørTC7() {
+    void getFadLeverandørTC6() {
         assertEquals(fadLeverandør, fad.getFadLeverandør());
     }
 
     @Test
-    void setHyldeNormalTC8() {
+    void setHyldeNormalTC7() {
         Hylde h2 = lager.createHylde();
         fad.setHylde(h2);
         assertEquals(h2, fad.getHylde());
+        assertTrue(h2.getFade().contains(fad));
+        assertFalse(hylde.getFade().contains(fad));
     }
 
     @Test
-    void setHyldeFejlTC9() {
+    void setHyldeFejlTC8() {
         assertThrows(RuntimeException.class, () -> fad.setHylde(null));
     }
 }
