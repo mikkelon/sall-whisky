@@ -10,7 +10,7 @@ public class Lager {
     private String navn;
     private double kvm;
     private int antalHylder;
-    private Set<Hylde> hylder = new TreeSet<>(Comparator.comparingInt(Hylde::getHyldeNr));
+    private ArrayList<Hylde> hylder = new ArrayList<>();
 
     /**
      * Initialiserer et nyt lager med adresse, navn, og kvm.
@@ -77,8 +77,8 @@ public class Lager {
      * Returnerer en ny liste med hylder fra lageret.
      * @return en ny liste med hylder fra lageret
      */
-    public HashSet<Hylde> getHylder() {
-        return new HashSet<>(hylder);
+    public ArrayList<Hylde> getHylder() {
+        return new ArrayList<>(hylder);
     }
 
     /**
@@ -88,9 +88,22 @@ public class Lager {
     public Hylde createHylde() {
         antalHylder++;
         Hylde hylde = new Hylde(this);
-        hylder.add(hylde);
+        insertSorted(hylde);
         return hylde;
     }
+
+    /**
+     * Indsætter en hylde i sorteret rækkefølge.
+     * @param hylde hylde der skal indsættes
+     */
+    private void insertSorted(Hylde hylde) {
+        int i = 0;
+        while (i < hylder.size() && hylde.getHyldeNr() > hylder.get(i).getHyldeNr()) {
+            i++;
+        }
+        hylder.add(i, hylde);
+    }
+
 
     /**
      * Fjerner en hylde fra lageret.
