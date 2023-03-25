@@ -112,7 +112,9 @@ class ControllerTest {
 
     @Test
     void removeFadTC16() {
+        int fadLeverandørAntalFade = fad.getFadLeverandør().getAntalFade();
         controller.removeFad(fad);
         assertFalse(hylde.getFade().contains(fad));
+       assertEquals(fadLeverandørAntalFade - 1, fad.getFadLeverandør().getAntalFade());
     }
 }
