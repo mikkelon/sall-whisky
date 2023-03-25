@@ -1,8 +1,10 @@
 package application.controller;
 
 import application.model.*;
+import com.sun.source.tree.Tree;
 import storage.Storage;
-import java.util.HashSet;
+
+import java.util.*;
 
 /**
  * Controller-klassen håndterer forretningslogik og binder GUI sammen med modellen og storage-laget.
@@ -60,8 +62,10 @@ public class Controller {
      * Pre: lager != null
      */
     public void removeLager(Lager lager) {
-        if (!lager.getHylder().isEmpty()) {
-            throw new RuntimeException("Lageret kan ikke slettes, når der er hylder tilknyttet.");
+        for (Hylde hylde : lager.getHylder()) {
+            if (!hylde.getFade().isEmpty()) {
+                throw new RuntimeException("Lageret kan ikke slettes, når der er fade tilknyttet til en eller flere hylder.");
+            }
         }
         storage.removeLager(lager);
     }
@@ -135,8 +139,8 @@ public class Controller {
      * Returnerer alle hylder i alle lagre
      * @return alle hylder i alle lagre
      */
-    public HashSet<Hylde> getHylder() {
-        HashSet<Hylde> hylder = new HashSet<>();
+    public ArrayList<Hylde> getHylder() {
+        ArrayList<Hylde> hylder = new ArrayList<>();
         for (Lager lager : storage.getLagre()) {
             hylder.addAll(lager.getHylder());
         }
@@ -149,7 +153,7 @@ public class Controller {
      * @return alle hylder i et givent lager
      * Pre: lager != null
      */
-    public HashSet<Hylde> getHylder(Lager lager) {
+    public ArrayList<Hylde> getHylder(Lager lager) {
         return lager.getHylder();
     }
 
