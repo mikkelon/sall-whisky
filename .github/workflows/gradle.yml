@@ -17,5 +17,5 @@ jobs:
         with:
           java-version: 17
           distribution: 'corretto'
-      - name: Build with Gradle
+      - name: Build and test with Gradle
         run: ./gradlew build
