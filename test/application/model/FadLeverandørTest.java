@@ -19,7 +19,7 @@ class FadLeverandørTest {
      */
     @Test
     void contructorTC1(){
-        assertEquals("Garrison Brother",fadLeverandør.getNavn());
+        assertEquals("Garrison Brothers",fadLeverandør.getNavn());
         assertEquals("USA",fadLeverandør.getLand());
     }
 }
