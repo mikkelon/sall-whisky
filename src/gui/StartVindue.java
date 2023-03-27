@@ -46,6 +46,4 @@ public class StartVindue extends Application {
         lagerstyringTab.setOnSelectionChanged(event -> lagerstyringPane.updateControls());
 
     }
-
-
 }

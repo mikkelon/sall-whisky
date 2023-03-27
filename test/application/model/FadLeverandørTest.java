@@ -22,20 +22,4 @@ class FadLeverandørTest {
         assertEquals("Garrison Brothers",fadLeverandør.getNavn());
         assertEquals("USA",fadLeverandør.getLand());
     }
-
-    /**
-     * TC2 - get navn test.
-     */
-    @Test
-    void getNavnTC2() {
-        assertEquals("Garrison Brothers", fadLeverandør.getNavn());
-    }
-
-    /**
-     * TC3 - get land test.
-     */
-    @Test
-    void getLandTC3() {
-        assertEquals("USA", fadLeverandør.getLand());
-    }
 }

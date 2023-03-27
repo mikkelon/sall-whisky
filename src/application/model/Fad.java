@@ -115,7 +115,6 @@ public class Fad {
         if (hylde == null) {
             throw new RuntimeException("Fadet skal være tilknyttet en hylde.");
         }
-
         if (this.hylde != hylde) {
             Hylde oldhylde = this.hylde;
             oldhylde.removeFad(this);

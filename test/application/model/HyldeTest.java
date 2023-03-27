@@ -25,39 +25,43 @@ class HyldeTest {
 
 
     @Test
-    void constructerTC1() {
-        assertEquals(hylde.getLager(), lager);
-        assertTrue(lager.getHylder().contains(hylde));
-        assertTrue(hylde.getHyldeNr() > 0);
+    void constructorTC1() {
+        assertEquals(hylde.getLager(), lager); // Tester om lageret er tilføjet til hylden
+        assertTrue(lager.getHylder().contains(hylde)); // Tester om hylde er tilføjet til lageret
+
+        // Tester om hylde nummeret tæller op korrekt
+        // Her får vi også testet getHyldeNr()
+        Lager lager2 = new Lager("Testvej 2", "Test Lager 2", 200);
+        Hylde hylde1 = lager2.createHylde();
+        assertEquals(1,hylde1.getHyldeNr());
+        Hylde hylde2 = lager2.createHylde();
+        assertEquals(2,hylde2.getHyldeNr());
+        Hylde hylde3 = lager2.createHylde();
+        assertEquals(3,hylde3.getHyldeNr());
     }
 
     @Test
-    void getHyldeNrTC2() {
-        assertTrue(hylde.getHyldeNr() > 0);
-    }
-
-    @Test
-    void getLagerTC3() {
+    void getLagerTC2() {
         assertTrue(hylde.getLager().equals(lager));
     }
 
-
     @Test
-    void getFadeTC4() {
-        hylde.addFad(fad);
+    void getFadeTC3() {
         assertTrue(hylde.getFade().contains(fad));
     }
 
     @Test
-    void addFadTC5() {
-        hylde.addFad(fad);
-        assertTrue(hylde.getFade().contains(fad));
-    }
-
-    @Test
-    void removeFadTC6() {
+    void addFadTC4() {
+        Hylde nyHylde = lager.createHylde();
         Fad nytFad = new Fad(FadType.SHERRY, 50, fadLeverandør, hylde);
-        hylde.addFad(nytFad);
+        assertFalse(nyHylde.getFade().contains(nytFad)); // Tester at den nye hylde ikke indeholder fadet
+        nyHylde.addFad(nytFad);
+        assertTrue(nyHylde.getFade().contains(nytFad)); // Tester at den nye hylde indeholder fadet
+    }
+
+    @Test
+    void removeFadTC5() {
+        Fad nytFad = new Fad(FadType.SHERRY, 50, fadLeverandør, hylde);
         hylde.removeFad(nytFad);
         assertFalse(hylde.getFade().contains(nytFad));
     }

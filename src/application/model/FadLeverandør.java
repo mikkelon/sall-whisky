@@ -1,9 +1,12 @@
 package application.model;
 
+/**
+ * Modellerer en leverandør, som leverer fade til Sall Whisky.
+ */
 public class FadLeverandør {
     private String navn;
     private String land;
-
+    private int antalFade;
 
     /**
      * Initialiserer en ny leverandørs navn og land.
@@ -13,6 +16,7 @@ public class FadLeverandør {
     public FadLeverandør(String navn, String land) {
         this.navn = navn;
         this.land = land;
+        antalFade = 0;
     }
 
     /**
@@ -31,10 +35,31 @@ public class FadLeverandør {
         return land;
     }
 
+    /**
+     * Returnerer antal fade leverandøren har leveret.
+     * @return antal fade leverandøren har leveret.
+     */
+    public int getAntalFade() {
+        return antalFade;
+    }
+
+    /**
+     * Tilføjer et fad til det totale leveringsantal.
+     */
+    public void tilføjFad() {
+        antalFade++;
+    }
+
+    /**
+     * Fjerner et fad fra det totale leveringsantal.
+     */
+    public void fjernFad() {
+        antalFade--;
+    }
+
     @Override
     public String toString() {
         return navn + ", " + land;
     }
-
 }
 

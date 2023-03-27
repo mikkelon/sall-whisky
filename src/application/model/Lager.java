@@ -1,14 +1,16 @@
 package application.model;
 
-import java.io.CharArrayWriter;
-import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.*;
 
+/**
+ * Modellerer et lager med hylder, hvorpå der opbevares whiskyfade.
+ */
 public class Lager {
     private String adresse;
     private String navn;
     private double kvm;
-    private HashSet<Hylde> hylder = new HashSet<>();
+    private int antalHylder;
+    private ArrayList<Hylde> hylder = new ArrayList<>();
 
     /**
      * Initialiserer et nyt lager med adresse, navn, og kvm.
@@ -20,6 +22,7 @@ public class Lager {
         this.adresse = adresse;
         this.navn = navn;
         this.kvm = kvm;
+        this.antalHylder = 0;
     }
 
     /**
@@ -74,8 +77,8 @@ public class Lager {
      * Returnerer en ny liste med hylder fra lageret.
      * @return en ny liste med hylder fra lageret
      */
-    public HashSet<Hylde> getHylder() {
-        return new HashSet<>(hylder);
+    public ArrayList<Hylde> getHylder() {
+        return new ArrayList<>(hylder);
     }
 
     /**
@@ -83,23 +86,47 @@ public class Lager {
      * @return en ny hylde til lageret
      */
     public Hylde createHylde() {
+        antalHylder++;
         Hylde hylde = new Hylde(this);
-        hylder.add(hylde);
+        insertSorted(hylde);
         return hylde;
     }
 
     /**
+     * Indsætter en hylde i sorteret rækkefølge.
+     * @param hylde hylde der skal indsættes
+     */
+    private void insertSorted(Hylde hylde) {
+        int i = 0;
+        while (i < hylder.size() && hylde.getHyldeNr() > hylder.get(i).getHyldeNr()) {
+            i++;
+        }
+        hylder.add(i, hylde);
+    }
+
+
+    /**
      * Fjerner en hylde fra lageret.
      * @param hylde lagerets hylde
+     * Pre: hylde er tom
      */
     public void removeHylde(Hylde hylde) {
-        if (!hylde.getFade().isEmpty()) {
-            throw new RuntimeException("Hylden kan ikke slettes, når der er fade liggende på hylden.");
-        }
+        antalHylder--;
+        hylder.remove(hylde);
+    }
 
-        if (hylder.contains(hylde)) {
-            hylder.remove(hylde);
-        }
+    /**
+     * Returnerer antal hylder på lageret.
+     * @return antal hylder på lageret
+     */
+    public int getAntalHylder() {
+        return antalHylder;
+    }
+
+
+    @Override
+    public String toString() {
+        return navn + ", " + adresse + ", Kvm: " + kvm;
     }
 
 

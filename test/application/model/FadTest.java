@@ -21,13 +21,15 @@ class FadTest {
     void constructorTC1() {
         assertEquals(FadType.BOURBON, fad.getFadType());
         assertEquals(80, fad.getStørrelseILiter());
-        assertTrue(fad.getFadNr() > 0);
         assertEquals(0, fad.getIndeholdtVæskeILiter());
         assertEquals(hylde, fad.getHylde());
         assertEquals(fadLeverandør, fad.getFadLeverandør());
         assertTrue(hylde.getFade().contains(fad));
-    }
 
+        // Test at antalFade tæller 1 op for hver gang der oprettes et nyt fad
+        Fad fad2 = new Fad(FadType.BOURBON, 80, fadLeverandør, hylde);
+        assertEquals(fad.getFadNr() + 1, fad2.getFadNr());
+    }
 
     @Test
     void getSetFadTypeTC2() {
@@ -35,41 +37,38 @@ class FadTest {
         assertEquals(FadType.SHERRY, fad.getFadType());
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void getStørrelseILiterTC3() {
         assertEquals(80, fad.getStørrelseILiter());
     }
 
-    @org.junit.jupiter.api.Test
-    void getFadNrTC4() {
-        assertTrue(fad.getFadNr() > 0);
-    }
-
-    @org.junit.jupiter.api.Test
-    void getSetIndeholdtVæskeILiterTC5() {
+    @Test
+    void getSetIndeholdtVæskeILiterTC4() {
         fad.setIndeholdtVæskeILiter(50);
         assertEquals(50, fad.getIndeholdtVæskeILiter());
     }
 
-    @org.junit.jupiter.api.Test
-    void getHyldeTC6() {
+    @Test
+    void getHyldeTC5() {
         assertEquals(hylde, fad.getHylde());
     }
 
-    @org.junit.jupiter.api.Test
-    void getFadLeverandørTC7() {
+    @Test
+    void getFadLeverandørTC6() {
         assertEquals(fadLeverandør, fad.getFadLeverandør());
     }
 
-    @org.junit.jupiter.api.Test
-    void setHyldeNormalTC8() {
+    @Test
+    void setHyldeNormalTC7() {
         Hylde h2 = lager.createHylde();
         fad.setHylde(h2);
         assertEquals(h2, fad.getHylde());
+        assertTrue(h2.getFade().contains(fad));
+        assertFalse(hylde.getFade().contains(fad));
     }
 
-    @org.junit.jupiter.api.Test
-    void setHyldeFejlTC9() {
+    @Test
+    void setHyldeFejlTC8() {
         assertThrows(RuntimeException.class, () -> fad.setHylde(null));
     }
 }
