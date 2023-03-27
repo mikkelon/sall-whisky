@@ -105,7 +105,7 @@ public class LagerstyringPane extends GridPane {
 
         // #--- Error label ---#
         lblError = new Label(" ");
-        this.add(lblError, 0, 3, 3, 1);
+        this.add(lblError, 0, 3, 4, 1);
         GridPane.setHalignment(lblError, HPos.CENTER);
         lblError.setStyle("-fx-text-fill: red");
 
@@ -212,6 +212,7 @@ public class LagerstyringPane extends GridPane {
         updateLagre();
         updateHylder();
         updateFade();
+        updateDestillater();
     }
 
     private void updateLagre() {
@@ -234,6 +235,10 @@ public class LagerstyringPane extends GridPane {
         } else {
             lvwFade.getItems().clear();
         }
+    }
+
+    private void updateDestillater() {
+        lvwDestillater.getItems().setAll(controller.getDestillater());
     }
 
     private void clearError() {

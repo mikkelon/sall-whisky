@@ -34,6 +34,8 @@ public class Fad {
         this.hylde = hylde;
         this.påfyldninger = new HashSet<>();
         hylde.addFad(this);
+        this.påfyldninger = new HashSet<>();
+        this.senestPåfyldt = null;
     }
 
     /**
@@ -176,6 +178,10 @@ public class Fad {
 
     @Override
     public String toString() {
-        return fadType + ", Nr: " + fadNr + ", Størrelse: " + størrelseILiter + "L, Indeholder: " + indeholdtVæskeILiter() + "L";
+        return "Fad #" + fadNr + " (" + fadType + ")"
+                + "\nLeverandør: " + fadLeverandør
+                + "\nStørrelse: " + String.format("%.2f", størrelseILiter) + "L"
+                + "\nIndeholder: " + String.format("%.2f", indeholdtVæskeILiter()) + "L"
+                + "\nAlkohol: " + String.format("%.2f", getAlkoholProcent()) + "%";
     }
 }

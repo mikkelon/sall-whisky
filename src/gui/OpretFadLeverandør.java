@@ -6,6 +6,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -16,21 +17,17 @@ import javafx.scene.control.Button;
 public class OpretFadLeverandør extends Stage {
     private FadLeverandør fadLeverandør;
     private Controller controller = Controller.getController();
-    private Label lblNavn;
-    private Label lblLand;
     private TextField txfNavn;
     private TextField txfLand;
     private Label lblError;
 
-    public OpretFadLeverandør(FadLeverandør fadLeverandør){
+    public OpretFadLeverandør(){
         this.initStyle(StageStyle.DECORATED);
         this.initModality(Modality.APPLICATION_MODAL);
         this.setResizable(false);
 
-        this.fadLeverandør = fadLeverandør;
-
-        this.setHeight(300);
-        this.setWidth(300);
+        this.setHeight(225);
+        this.setWidth(200);
 
         this.setTitle("Opret fadleverandør");
 
@@ -47,40 +44,45 @@ public class OpretFadLeverandør extends Stage {
         pane.setVgap(10);
         pane.setHgap(10);
 
-        lblNavn = new Label("Navn");
+        Label lblNavn = new Label("Navn");
         pane.add(lblNavn, 0,0);
 
         txfNavn = new TextField();
         pane.add(txfNavn, 0, 1);
 
-        lblLand = new Label("Land");
+        Label lblLand = new Label("Land");
         pane.add(lblLand, 0, 2);
 
         txfLand = new TextField();
         pane.add(txfLand, 0, 3);
 
-        Button btnGem = new Button("Gem");
-        pane.add(btnGem, 0, 5);
-        btnGem.setOnAction(event -> opretGemAction());
+        HBox hBoxBtns = new HBox();
+        hBoxBtns.setSpacing(10);
+        hBoxBtns.setAlignment(Pos.CENTER);
+        pane.add(hBoxBtns, 0, 4);
 
-        Button btnAnnuller = new Button("Annuller");
-        pane.add(btnAnnuller, 0, 6);
+        Button btnOpret = new Button("Opret");
+        hBoxBtns.getChildren().add(btnOpret);
+        btnOpret.setOnAction(event -> opretAction());
+
+        Button btnAnnuller = new Button("Annullér");
+        hBoxBtns.getChildren().add(btnAnnuller);
         btnAnnuller.setOnAction(event -> this.close());
 
         lblError = new Label(" ");
         pane.add(lblError,0, 4);
     }
 
-    private void opretGemAction(){
-        String navn = txfNavn.getText();
-        String land = txfLand.getText();
-        if(txfNavn == null){
+    private void opretAction(){
+        String navn = txfNavn.getText().trim();
+        String land = txfLand.getText().trim();
+        if (txfNavn.getText().isEmpty()){
             lblError.setText("Navn er ikke udfyldt");
-        } else if(txfLand == null){
+        } else if (txfLand.getText().isEmpty()){
             lblError.setText("Land er ikke udfyldt");
         } else{
             controller.createFadLeverandør(navn, land);
+            this.close();
         }
-
     }
 }

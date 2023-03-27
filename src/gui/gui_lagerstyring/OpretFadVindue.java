@@ -5,6 +5,7 @@ import application.model.FadType;
 import application.model.Hylde;
 import application.model.Lager;
 import application.model.FadLeverandør;
+import gui.OpretFadLeverandør;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -44,8 +45,6 @@ public class OpretFadVindue extends Stage {
     }
 
     private ComboBox<FadLeverandør> cbxFadLeverandører;
-    private ComboBox<Lager> cbxLagre;
-    private ComboBox<Hylde> cbxHylder;
     private ComboBox<FadType> cbxFadType;
     private TextField txfStørrelse;
     private Label lblError;
@@ -68,30 +67,34 @@ public class OpretFadVindue extends Stage {
         cbxFadLeverandører.setMaxWidth(150);
         pane.add(cbxFadLeverandører, 0, 1,2,1);
 
+        Button btnOpretFadLeverandør = new Button("Opret fadleverandør");
+        pane.add(btnOpretFadLeverandør, 0, 2,2,1);
+        btnOpretFadLeverandør.setOnAction(event -> this.opretFadLeverandørAction());
+
         Label lblStørrelse = new Label("Størrelse i liter");
-        pane.add(lblStørrelse, 0, 2);
+        pane.add(lblStørrelse, 0, 3);
 
         txfStørrelse = new TextField();
         txfStørrelse.setMinWidth(30);
         txfStørrelse.setPrefWidth(50);
         txfStørrelse.setMaxWidth(70);
-        pane.add(txfStørrelse, 0, 3,2,1);
+        pane.add(txfStørrelse, 0, 4,2,1);
 
         Label lblFadType = new Label("Fadtype");
-        pane.add(lblFadType, 1, 2,2,1);
+        pane.add(lblFadType, 1, 3,2,1);
 
         cbxFadType = new ComboBox<>();
         cbxFadType.setMinWidth(100);
         cbxFadType.setMaxWidth(100);
-        pane.add(cbxFadType, 1, 3,2,1);
+        pane.add(cbxFadType, 1, 4,2,1);
 
         lblError = new Label(" ");
-        pane.add(lblError, 0, 4, 2, 1);
+        pane.add(lblError, 0, 5, 2, 1);
         lblError.setStyle("-fx-text-fill: red");
 
         // Opret og Annullér knapper
         HBox hBox = new HBox();
-        pane.add(hBox, 0, 5, 2, 1);
+        pane.add(hBox, 0, 6, 2, 1);
         hBox.setPadding(new Insets(10, 0, 0, 0));
         hBox.setSpacing(10);
         hBox.setAlignment(Pos.BASELINE_CENTER);
@@ -142,6 +145,12 @@ public class OpretFadVindue extends Stage {
 
     private void updateFadTyper() {
         cbxFadType.getItems().setAll(Arrays.asList(FadType.values()));
+    }
+
+    private void opretFadLeverandørAction(){
+        OpretFadLeverandør window = new OpretFadLeverandør();
+        window.showAndWait();
+        updateFadLeverandører();
     }
 
 }

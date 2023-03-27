@@ -138,6 +138,8 @@ public class Lager {
 
     @Override
     public String toString() {
-        return navn + ", " + adresse + ", Kvm: " + kvm;
+        return navn
+                + "\n" + adresse
+                + "\n" + kvm + " kvm";
     }
 }

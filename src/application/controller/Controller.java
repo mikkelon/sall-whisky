@@ -189,6 +189,25 @@ public class Controller {
         fad.getFadLeverandør().fjernFad();
     }
 
+    public ArrayList<Fad> getFadeFraLagerSorteret(Lager lager) {
+        ArrayList<Fad> fade = new ArrayList<>();
+        for (Hylde hylde : lager.getHylder()) {
+            fade.addAll(hylde.getFade());
+        }
+        fade.sort((a,b) -> a.getFadNr() - b.getFadNr());
+        return fade;
+    }
+
+    public TreeSet<Fad> getAlleFade() {
+        TreeSet<Fad> alleFade = new TreeSet<>((a,b) -> a.getFadNr() - b.getFadNr());
+        for (Lager lager : getLagre()) {
+            for (Hylde hylde : lager.getHylder()) {
+                alleFade.addAll(hylde.getFade());
+            }
+        }
+        return alleFade;
+    }
+
     /**
      * Returnerer alle destillater
      * @return alle destillater
@@ -251,8 +270,8 @@ public class Controller {
      }
      
      /**
-     * Returnerer alle fade
-     * Pre: destillat != null, fad != null, påfyldtAf != null, mængdeILiter > 0, påfyldningsDato != null
+     * Opretter en ny påfyldning
+     * Pre: destillat != null, fad != null, påfyldtAf != null, mængdeILiter > 0, påfyldningsDato != null, fad.getStørrelseILiter() >= mængdeILiter
      * @param destillat destillatet der skal fyldes på fadet
      * @param fad fadet hvorpå påfyldningen skal foregå
      * @param påfyldtAf navnet på den person der har påfyldt fadet
@@ -272,7 +291,6 @@ public class Controller {
             destillat.addPåfyldning(påfyldning);
             fad.addPåfyldning(påfyldning);
         }
-
         return påfyldning;
     }
 
