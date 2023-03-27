@@ -37,6 +37,13 @@ public class Controller {
     }
 
     /**
+     * Opretter storage på ny med formål at teste denne.
+     */
+    public void clearStorage() {
+        storage.clearStorage();
+    }
+
+    /**
      * Opretter et nyt lager med en angivet antal hylder
      * @param adresse lagerets adresse
      * @param navn lagerets navn
@@ -265,9 +272,15 @@ public class Controller {
     public Påfyldning createPåfyldning(Destillat destillat, Fad fad, String påfyldtAf,
                                        double mængdeILiter, LocalDate påfyldningsDato) {
         Påfyldning påfyldning = new Påfyldning(destillat, fad, påfyldtAf, mængdeILiter, påfyldningsDato);
+
+        if (påfyldning.getMængdeILiter() > destillat.resterendeMængdeILiter()) {
+            throw new RuntimeException("Påfyldningen er større end destillatets resterende mængde.");
+        } else if (påfyldning.getMængdeILiter() > fad.resterendePladsILiter()) {
+            throw new RuntimeException("Påfyldningen er større end fadets resterende mængde.");
+        } else {
             destillat.addPåfyldning(påfyldning);
             fad.addPåfyldning(påfyldning);
-
+        }
         return påfyldning;
     }
 

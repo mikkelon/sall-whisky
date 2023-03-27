@@ -32,6 +32,7 @@ public class Fad {
         this.størrelseILiter = størrelseILiter;
         this.fadLeverandør = fadLeverandør;
         this.hylde = hylde;
+        this.påfyldninger = new HashSet<>();
         hylde.addFad(this);
         this.påfyldninger = new HashSet<>();
         this.senestPåfyldt = null;
@@ -111,11 +112,16 @@ public class Fad {
 
     /**
      * Tilføjer en påfyldning til fadet.
-     * Pre: påfyldning != null
+     * Pre: påfyldning != null, påfyldning.getMængdeILiter() <= resterendePladsILiter()
      * @param påfyldning påfyldningen der skal tilføjes
      */
     public void addPåfyldning(Påfyldning påfyldning) {
         påfyldninger.add(påfyldning);
+
+        // Opdatér senestPåfyldt
+        if (senestPåfyldt == null || påfyldning.getPåfyldningsDato().isAfter(senestPåfyldt)) {
+            senestPåfyldt = påfyldning.getPåfyldningsDato();
+        }
     }
 
     /**
@@ -160,14 +166,14 @@ public class Fad {
      */
     public double getAlkoholProcent() {
         // Udregn alkoholprocent baseret på alle påfyldninger
-        double alkohol = 0;
-        double væske = 0;
+        double alkohol = 0.0;
+        double væske = 0.0;
         for (Påfyldning påfyldning : påfyldninger) {
-            double alkoholProcent = påfyldning.getDestillat().getAlkoholProcent() / 100;
+            double alkoholProcent = påfyldning.getDestillat().getAlkoholProcent() / 100.0;
             alkohol += alkoholProcent * påfyldning.getMængdeILiter();
             væske += påfyldning.getMængdeILiter();
         }
-        return alkohol / væske * 100;
+        return væske > 0 ? alkohol / væske * 100 : 0.0;
     }
 
     @Override
