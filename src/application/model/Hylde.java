@@ -67,6 +67,6 @@ public class Hylde {
 
     @Override
     public String toString() {
-        return "Nr: " + hyldeNr;
+        return "Hylde #" + hyldeNr;
     }
 }

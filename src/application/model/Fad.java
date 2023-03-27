@@ -176,6 +176,10 @@ public class Fad {
 
     @Override
     public String toString() {
-        return fadType + ", Nr: " + fadNr + ", Størrelse: " + størrelseILiter + "L, Indeholder: " + indeholdtVæskeILiter() + "L";
+        return "Fad #" + fadNr + " (" + fadType + ")"
+                + "\nLeverandør: " + fadLeverandør
+                + "\nStørrelse: " + størrelseILiter + "L"
+                + "\nIndeholder: " + indeholdtVæskeILiter() + "L"
+                + "\nAlkohol: " + getAlkoholProcent() + "%";
     }
 }
