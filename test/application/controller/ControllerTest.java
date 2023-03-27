@@ -20,17 +20,18 @@ class ControllerTest {
     @BeforeEach
     void setUp() {
         controller = Controller.getTestController();
+        controller.clearStorage();
         lager = controller.createLagerWithAntalHylder("Baldersgade 39", "Sall Whisky Lager", 100, 4);
         fadLeverandør = controller.createFadLeverandør("Garrison Brothers", "USA");
         hylde = controller.createHylde(lager);
         fad = controller.createFad(FadType.BOURBON, 80, fadLeverandør, hylde);
+        System.out.println(controller.getDestillater());
         destillat = controller.createDestillat("77p", "Mikkel", 53.0,
                 2, LocalDate.of(2023, 3, 27),
                 LocalDate.of(2023, 3, 30), 80.0,
                 "Destillat for bourbon whisky",  RygeMateriale.INTET);
         påfyldning = controller.createPåfyldning(destillat, fad, "Mikkel", 80.0,
                 LocalDate.of(2023, 4, 1));
-
     }
     @Test
     void SingletonTC1() {

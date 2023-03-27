@@ -10,15 +10,17 @@ public class Storage {
 
     private static Storage storage;
 
-    private Storage(){
-
-    }
+    private Storage(){}
 
     public static Storage getStorage(){
         if (storage == null){
             storage = new Storage();
         }
         return storage;
+    }
+
+    public void clearStorage(){
+        storage = new Storage();
     }
 
     // #--- Fadleverandører ---#
