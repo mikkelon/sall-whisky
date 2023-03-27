@@ -147,10 +147,10 @@ public class Destillat {
 
     @Override
     public String toString() {
-        return "New make nr: " + newMakeNr + "Alkohol procent: " + alkoholProcent
-                + "Antal destilleringer: " + antalDestilleringer + "Start dato: " + startDato
-                + "Slut dato: " + slutDato + "Mængde i liter: " + mængdeILiter
-                + "Kommentar: " + kommentar + "Ryge materiale: " + rygeMateriale
-                + "Medarbejder: " + medarbejder;
+        return "New make nr: " + newMakeNr + ", Alkohol procent: " + alkoholProcent
+                + ", Antal destilleringer: " + antalDestilleringer + ", Start dato: " + startDato
+                + ", Slut dato: " + slutDato + ", Mængde i liter: " + mængdeILiter
+                + ", Kommentar: " + kommentar + ", Ryge materiale: " + rygeMateriale
+                + ", Medarbejder: " + medarbejder;
     }
 }

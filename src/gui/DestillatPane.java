@@ -8,11 +8,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class DestillatPane extends GridPane {
     private Controller controller = Controller.getController();
@@ -35,7 +32,7 @@ public class DestillatPane extends GridPane {
         this.setGridLinesVisible(false);
 
         // #--- Destillater ---#
-        Label lblNewMakeNummer = new Label("New make Nummer");
+        Label lblNewMakeNummer = new Label("New make nummer");
         this.add(lblNewMakeNummer, 0, 0);
         this.add(txfnewMakeNummer, 0, 1);
 
