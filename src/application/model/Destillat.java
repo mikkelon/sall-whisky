@@ -168,10 +168,14 @@ public class Destillat {
 
     @Override
     public String toString() {
-        return "New make nr: " + newMakeNr + ", Alkohol procent: " + alkoholProcent
-                + ", Antal destilleringer: " + antalDestilleringer + ", Start dato: " + startDato
-                + ", Slut dato: " + slutDato + ", Mængde i liter: " + mængdeILiter
-                + ", Kommentar: " + kommentar + ", Ryge materiale: " + rygeMateriale
-                + ", Medarbejder: " + medarbejder;
+        String s = "New Make: " + newMakeNr + ", Ansat: " + medarbejder
+                + "\nAlkohol: " + alkoholProcent + "%, Destilleringer: " + antalDestilleringer
+                + "\nStart: " + startDato + ", Slut: " + slutDato
+                + "\nMængde: " + mængdeILiter + "L"
+                + "\nKommentar: " + kommentar;
+        if (rygeMateriale != RygeMateriale.INTET) {
+            s += "\nRyge materiale: " + rygeMateriale;
+        }
+        return s;
     }
 }
