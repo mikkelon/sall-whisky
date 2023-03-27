@@ -1,16 +1,12 @@
 package gui;
 
 import application.controller.Controller;
-import application.model.Fad;
-import application.model.Påfyldning;
-import javafx.geometry.Insets;
-import javafx.scene.control.TextField;
+import application.model.*;
+import javafx.geometry.*;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-import javafx.scene.control.ListView;
-import javafx.scene.control.Button;
-import javafx.scene.layout.VBox;
-import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
+
+import java.nio.channels.Pipe;
 
 public class FadePane extends GridPane {
     private Controller controller = Controller.getController();
@@ -23,37 +19,80 @@ public class FadePane extends GridPane {
         this.setVgap(10);
         this.setGridLinesVisible(false);
 
-        VBox vBoxFørsteRække = new VBox(10);
-        this.add(vBoxFørsteRække, 1, 1, 1, 1);
-
         Label lblFadLeverandør = new Label("Fadleverandør");
-        vBoxFørsteRække.getChildren().add(lblFadLeverandør);
+        this.add(lblFadLeverandør, 0, 0);
 
-        TextField txfFadLeverandør = new TextField();
-        vBoxFørsteRække.getChildren().add(txfFadLeverandør);
+        ComboBox<FadLeverandør> cbxFadLeverandør = new ComboBox<>();
+        cbxFadLeverandør.setMinWidth(150);
+        cbxFadLeverandør.setMaxWidth(150);
+        this.add(cbxFadLeverandør, 0, 1);
 
         Button btnNyLeverandør = new Button("Ny Leverandør");
-        vBoxFørsteRække.getChildren().add(btnNyLeverandør);
+        this.add(btnNyLeverandør, 0, 2, 1, 2);
+        GridPane.setValignment(btnNyLeverandør, VPos.CENTER);
 
         Label lblLager = new Label("Lager");
-        vBoxFørsteRække.getChildren().add(lblLager);
+        this.add(lblLager, 0, 4);
 
-        TextField txfLager = new TextField();
-        vBoxFørsteRække.getChildren().add(txfLager);
-
-        VBox vBoxAndenRække = new VBox(10);
-        this.add(vBoxAndenRække, 2, 2, 2, 2);
+        ComboBox<Lager> cbxLager = new ComboBox<>();
+        cbxLager.setMinWidth(150);
+        cbxLager.setMaxWidth(150);
+        this.add(cbxLager, 0, 5);
 
         Label lblStørrelse = new Label("Størrelse (Liter)");
-        vBoxAndenRække.getChildren().add(lblStørrelse);
+        this.add(lblStørrelse, 1,0);
 
         TextField txfStørrelse = new TextField();
-        vBoxAndenRække.getChildren().add(txfStørrelse);
+        this.add(txfStørrelse, 1, 1);
 
         Label lblFadType = new Label("Fadtype");
-        vBoxAndenRække.getChildren().add(lblFadType);
+        this.add(lblFadType, 1, 2);
 
         TextField txfFadType = new TextField();
-        vBoxAndenRække.getChildren().add(txfFadType);
+        this.add(txfFadType, 1, 3);
+
+        Label lblHylde = new Label("Hylde");
+        this.add(lblHylde, 1, 4);
+
+        ComboBox<Hylde> cbxHylde = new ComboBox<>();
+        cbxHylde.setMinWidth(150);
+        cbxHylde.setMaxWidth(150);
+        this.add(cbxHylde, 1, 5);
+
+        Separator sep1 = new Separator(Orientation.VERTICAL);
+        this.add(sep1, 2, 0,1,7);
+
+        Label lblPåfyldninger = new Label("Påfyldninger");
+        this.add(lblPåfyldninger, 3, 0);
+
+        lvwPåfyldninger = new ListView<>();
+        lvwPåfyldninger.getSelectionModel().selectAll();
+        lvwPåfyldninger.setMaxHeight(300);
+        this.add(lvwPåfyldninger, 3, 1,1,6);
+
+        Separator sep2 = new Separator(Orientation.VERTICAL);
+        this.add(sep2, 4, 0, 1, 8);
+
+        Label lblAlleFade = new Label("Alle fade");
+        this.add(lblAlleFade, 5, 0);
+
+        lvwFade = new ListView<>();
+        lvwFade.getSelectionModel().selectAll();
+        this.add(lvwFade, 5, 1,1,7);
+
+        Separator sep3 = new Separator(Orientation.HORIZONTAL);
+        this.add(sep3, 0, 7,4, 1);
+
+        Button btnOpret = new Button("Opret");
+        this.add(btnOpret, 0, 8, 2, 1);
+        GridPane.setHalignment(btnOpret, HPos.CENTER);
+
+        Button btnSlet = new Button("Slet");
+        this.add(btnSlet, 5, 8);
+        GridPane.setHalignment(btnSlet, HPos.CENTER);
+    }
+
+    private void opretFadLeverandør(){
+       OpretFadLeverandør window = new OpretFadLeverandør();
     }
 }
