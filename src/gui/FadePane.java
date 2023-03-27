@@ -9,6 +9,7 @@ import javafx.scene.layout.GridPane;
 import java.nio.channels.Pipe;
 
 public class FadePane extends GridPane {
+    private final ComboBox<FadLeverandør> cbxFadLeverandør;
     private Controller controller = Controller.getController();
     private ListView<Påfyldning> lvwPåfyldninger;
     private ListView<Fad> lvwFade;
@@ -22,12 +23,13 @@ public class FadePane extends GridPane {
         Label lblFadLeverandør = new Label("Fadleverandør");
         this.add(lblFadLeverandør, 0, 0);
 
-        ComboBox<FadLeverandør> cbxFadLeverandør = new ComboBox<>();
+        cbxFadLeverandør = new ComboBox<>();
         cbxFadLeverandør.setMinWidth(150);
         cbxFadLeverandør.setMaxWidth(150);
         this.add(cbxFadLeverandør, 0, 1);
 
         Button btnNyLeverandør = new Button("Ny Leverandør");
+        btnNyLeverandør.setOnAction(event -> opretFadLeverandørAction());
         this.add(btnNyLeverandør, 0, 2, 1, 2);
         GridPane.setValignment(btnNyLeverandør, VPos.CENTER);
 
@@ -90,9 +92,22 @@ public class FadePane extends GridPane {
         Button btnSlet = new Button("Slet");
         this.add(btnSlet, 5, 8);
         GridPane.setHalignment(btnSlet, HPos.CENTER);
+
+        // #--- Update controls ---#
+        updateControls();
     }
 
-    private void opretFadLeverandør(){
-       //OpretFadLeverandør window = new OpretFadLeverandør();
+    private void opretFadLeverandørAction(){
+        OpretFadLeverandør window = new OpretFadLeverandør();
+        window.showAndWait();
+        updateFadleverandører();
+    }
+
+    private void updateFadleverandører() {
+        cbxFadLeverandør.getItems().setAll(controller.getFadLeverandører());
+    }
+
+    public void updateControls() {
+        updateFadleverandører();
     }
 }
