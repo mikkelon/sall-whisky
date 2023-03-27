@@ -9,7 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 
 public class PåfyldningPane extends GridPane {
-    public <Polygon> PåfyldningPane() {
+    public PåfyldningPane() {
         this.setPadding(new javafx.geometry.Insets(10));
         this.setHgap(10);
         this.setVgap(10);
