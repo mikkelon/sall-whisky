@@ -10,6 +10,7 @@ import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
@@ -22,7 +23,7 @@ public class PåfyldningPane extends GridPane {
     private final ListView<Destillat> lvwDestillater;
     private final ListView<Fad> lvwFade;
     private final Controller controller = Controller.getController();
-    private final ComboBox<Lager> cbxLagre;
+    private final ComboBox<Lager> cbxLager;
     private final TextField txtPåfyldtAf;
     private final TextField txtMængde;
     private final DatePicker datePicker;
@@ -39,30 +40,39 @@ public class PåfyldningPane extends GridPane {
         this.add(lblPåfyldning, 0, 0);
 
         lvwDestillater = new ListView<>();
-        lvwDestillater.setMinWidth(200);
-        lvwDestillater.setMaxWidth(200);
+        lvwDestillater.setMinWidth(250);
+        lvwDestillater.setMaxWidth(250);
         lvwDestillater.setMinHeight(300);
         this.add(lvwDestillater, 0, 1, 1, 6);
 
-        Label lblLager = new Label("Lagre");
+        Label lblLager = new Label("Lager");
         this.add(lblLager, 1, 0, 2, 1);
         GridPane.setHalignment(lblLager, HPos.CENTER);
 
-        cbxLagre = new ComboBox<>();
-        cbxLagre.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> updateFade());
-        this.add(cbxLagre, 1, 1, 2, 1);
-        GridPane.setHalignment(cbxLagre, HPos.CENTER);
-        cbxLagre.setMaxWidth(150);
-        cbxLagre.setPrefWidth(150);
+        cbxLager = new ComboBox<>();
+        cbxLager.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> updateFade());
+        this.add(cbxLager, 1, 1, 2, 1);
+        GridPane.setHalignment(cbxLager, HPos.CENTER);
+        cbxLager.setMaxWidth(150);
+        cbxLager.setPrefWidth(150);
 
         Label lblMængde = new Label("Mængde (Liter)");
         this.add(lblMængde, 1, 2, 2, 1);
         GridPane.setHalignment(lblMængde, HPos.CENTER);
 
+        HBox hBoxMængde = new HBox();
+        hBoxMængde.setSpacing(10);
+        hBoxMængde.setAlignment(Pos.CENTER);
+        this.add(hBoxMængde, 1, 3, 2, 1);
+
         txtMængde = new TextField();
-        this.add(txtMængde, 1, 3, 2, 1);
+        hBoxMængde.getChildren().add(txtMængde);
         GridPane.setHalignment(txtMængde, HPos.CENTER);
         txtMængde.setMaxSize(80, 20);
+
+        Button btnMax = new Button("MAX");
+        btnMax.setOnAction(event -> maxAction());
+        hBoxMængde.getChildren().add(btnMax);
 
         Path arrow = createArrow();
         this.add(arrow, 1, 4, 2, 1);
@@ -72,6 +82,7 @@ public class PåfyldningPane extends GridPane {
         this.add(lblPåfyldningsDato, 1, 5, 1, 1);
 
         datePicker = new DatePicker();
+        datePicker.setValue(LocalDate.now());
         GridPane.setValignment(datePicker, VPos.TOP);
         this.add(datePicker, 1, 6, 1, 1);
 
@@ -97,13 +108,16 @@ public class PåfyldningPane extends GridPane {
         GridPane.setHalignment(btnPåfyld, HPos.CENTER);
 
         lvwFade = new ListView<>();
-        lvwFade.setMinWidth(200);
-        lvwFade.setMaxWidth(200);
+        lvwFade.setMinWidth(250);
+        lvwFade.setMaxWidth(250);
         lvwFade.setMinHeight(300);
         this.add(lvwFade, 3, 1, 1, 6);
 
         updateDestillater();
         updateLagre();
+        if (controller.getLagre().size() > 0) {
+            cbxLager.getSelectionModel().select(0);
+        }
     }
 
     private void påfyldAction() {
@@ -129,13 +143,17 @@ public class PåfyldningPane extends GridPane {
             lblError.setText("Vælg en påfyldningsdato");
         } else if (mængde <= 0) {
             lblError.setText("Mængde skal være større end 0");
-        } else if (mængde > valgtFad.resterendePladsILiter()) {
-            lblError.setText("Mængde er større end fadets resterende plads");
-        } else {
-            controller.createPåfyldning(valgtDestillat, valgtFad, påfyldtAf, mængde, påfyldningsDato);
-            updateDestillater();
-            updateFade();
-            txtMængde.clear();
+        }  else {
+            try {
+                controller.createPåfyldning(valgtDestillat, valgtFad, påfyldtAf, mængde, påfyldningsDato);
+                updateDestillater();
+                updateFade();
+                txtMængde.clear();
+            }
+            catch (RuntimeException e) {
+                lblError.setText(e.getMessage());
+            }
+
         }
     }
 
@@ -152,7 +170,7 @@ public class PåfyldningPane extends GridPane {
 
     private void updateFade() {
         Fad valgtFad = lvwFade.getSelectionModel().getSelectedItem();
-        Lager valgtLager = cbxLagre.getSelectionModel().getSelectedItem();
+        Lager valgtLager = cbxLager.getSelectionModel().getSelectedItem();
         if (valgtLager != null)
             lvwFade.getItems().setAll(controller.getFadeFraLagerSorteret(valgtLager));
         if (valgtFad != null & lvwFade.getItems().contains(valgtFad))
@@ -160,13 +178,26 @@ public class PåfyldningPane extends GridPane {
     }
 
     private void updateLagre() {
-        cbxLagre.getItems().setAll(controller.getLagre());
+        cbxLager.getItems().setAll(controller.getLagre());
     }
 
     public void updateControls() {
         updateDestillater();
         updateLagre();
         updateFade();
+    }
+
+    private void maxAction() {
+        Fad valgtFad = lvwFade.getSelectionModel().getSelectedItem();
+        Destillat valgtDestillat = lvwDestillater.getSelectionModel().getSelectedItem();
+
+        if (valgtFad != null && valgtDestillat != null) {
+            if (valgtFad.resterendePladsILiter() < valgtDestillat.resterendeMængdeILiter()) {
+                txtMængde.setText(String.valueOf(String.format("%.2f", Math.floor(valgtFad.resterendePladsILiter() * 100) / 100)));
+            } else {
+                txtMængde.setText(String.valueOf(String.format("%.2f", Math.floor(valgtDestillat.resterendeMængdeILiter() * 100) / 100)));
+            }
+        }
     }
 
     private Path createArrow() {
