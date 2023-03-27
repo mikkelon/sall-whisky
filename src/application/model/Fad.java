@@ -34,6 +34,8 @@ public class Fad {
         this.hylde = hylde;
         this.påfyldninger = new HashSet<>();
         hylde.addFad(this);
+        this.påfyldninger = new HashSet<>();
+        this.senestPåfyldt = null;
     }
 
     /**
