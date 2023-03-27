@@ -208,9 +208,27 @@ public class Controller {
     public Destillat createDestillat(String newMakeNr, String medarbejder, double alkoholProcent,
                                      int antalDestilleringer, LocalDate startDato, LocalDate slutDato,
                                      double mængdeILiter, String kommentar, RygeMateriale rygeMateriale) {
+        if (getDestillat(newMakeNr) != null) {
+            throw new RuntimeException("Destillatet findes allerede.");
+        }
         Destillat destillat = new Destillat(newMakeNr, medarbejder, alkoholProcent, antalDestilleringer, startDato, slutDato, mængdeILiter, kommentar, rygeMateriale);
         storage.addDestillat(destillat);
         return destillat;
+    }
+
+    /**
+     * Returnerer det specifikke destillat, hvis det findes
+     * @param newMakeNr destillatets unikke nummer
+     * @return det specifikke destillat ellers null
+     * Pre: newMakeNr != null
+     */
+    private Object getDestillat(String newMakeNr) {
+        for (Destillat destillat : storage.getDestillater()) {
+            if (destillat.getNewMakeNr().equals(newMakeNr)) {
+                return destillat;
+            }
+        }
+        return null;
     }
 
     /**
@@ -219,6 +237,9 @@ public class Controller {
      * Pre: destillat != null
      */
     public void removeDestillat(Destillat destillat) {
+        if (!destillat.getPåfyldninger().isEmpty()) {
+            throw new RuntimeException("Destillatet er påført fad og kan derfor ikke fjernes.");
+        }
         storage.removeDestillat(destillat);
      }
      
