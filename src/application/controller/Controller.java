@@ -1,7 +1,6 @@
 package application.controller;
 
 import application.model.*;
-import com.sun.source.tree.Tree;
 import storage.Storage;
 
 import java.time.LocalDate;
@@ -203,6 +202,8 @@ public class Controller {
      * @param kommentar kommentar til destillatet
      * @param rygeMateriale evt rygemateriale der er brugt
      * @return det oprettede destillat
+     * Pre: newMakeNr != null, medarbejder != null, alkoholProcent > 0, antalDestilleringer > 0,
+     *      startDato != null, slutDato != null, mængdeILiter > 0, kommentar != null, rygeMateriale != null
      */
     public Destillat createDestillat(String newMakeNr, String medarbejder, double alkoholProcent,
                                      int antalDestilleringer, LocalDate startDato, LocalDate slutDato,
@@ -220,8 +221,6 @@ public class Controller {
     public void removeDestillat(Destillat destillat) {
         storage.removeDestillat(destillat);
     }
-
-
 
     /**
      * Tilføjer mockdata til Storage
