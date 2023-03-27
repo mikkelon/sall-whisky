@@ -222,6 +222,7 @@ public class Controller {
         storage.removeDestillat(destillat);
      }
      
+     /**
      * Returnerer alle fade
      * Pre: destillat != null, fad != null, påfyldtAf != null, mængdeILiter > 0, påfyldningsDato != null
      * @param destillat destillatet der skal fyldes på fadet
