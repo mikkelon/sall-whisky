@@ -128,6 +128,10 @@ public class Fad {
         }
     }
 
+    /**
+     * Tilføjer en påfyldning til fadet.
+     * @param påfyldning påfyldningen der skal tilføjes
+     */
     public void addPåfyldning(Påfyldning påfyldning) {
     	påfyldninger.add(påfyldning);
         // Opdatér senestPåfyldt
@@ -137,10 +141,18 @@ public class Fad {
         }
     }
 
+    /**
+     * Returnerer en kopi af påfyldningerne.
+     * @return en kopi af påfyldningerne
+     */
     public HashSet<Påfyldning> getPåfyldninger() {
     	return new HashSet<>(påfyldninger);
     }
 
+    /**
+     * Udregner den samlede mængde af væske i fadet i liter.
+     * @return den samlede mængde af væske i fadet i liter
+     */
     public double indeholdtVæskeILiter() {
     	double væske = 0;
     	for (Påfyldning påfyldning : påfyldninger) {
@@ -149,17 +161,36 @@ public class Fad {
     	return væske;
     }
 
+    /**
+     * Udregner resterende plads i fadet i liter.
+     * @return resterende plads i fadet i liter
+     */
     public double resterendePladsILiter() {
     	return størrelseILiter - indeholdtVæskeILiter();
     }
 
+    /**
+     * Udregner forventet færdigproduceret dato.
+     * @return forventet færdigproduceret dato
+     */
     public LocalDate forventetFærdigproduceret() {
         return senestPåfyldt.plusYears(3);
     }
 
+    /**
+     * Udregner alkoholprocenten i fadet.
+     * @return alkoholprocenten i fadet
+     */
     public double getAlkoholProcent() {
-        //TODO: Implementér metoden
-        return 0;
+        // Udregn alkoholprocent baseret på alle påfyldninger
+        double alkohol = 0;
+        double væske = 0;
+        for (Påfyldning påfyldning : påfyldninger) {
+            double alkoholProcent = påfyldning.getDestillat().getAlkoholProcent() / 100;
+            alkohol += alkoholProcent * påfyldning.getMængdeILiter();
+            væske += påfyldning.getMængdeILiter();
+        }
+        return alkohol / væske * 100;
     }
 
     @Override
