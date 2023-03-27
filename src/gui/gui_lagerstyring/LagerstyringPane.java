@@ -105,7 +105,7 @@ public class LagerstyringPane extends GridPane {
 
         // #--- Error label ---#
         lblError = new Label(" ");
-        this.add(lblError, 0, 3, 3, 1);
+        this.add(lblError, 0, 3, 4, 1);
         GridPane.setHalignment(lblError, HPos.CENTER);
         lblError.setStyle("-fx-text-fill: red");
 
