@@ -1,6 +1,7 @@
 package gui.gui_lagerstyring;
 
 import application.controller.Controller;
+import application.model.Destillat;
 import application.model.Fad;
 import application.model.Hylde;
 import application.model.Lager;
@@ -19,6 +20,7 @@ public class LagerstyringPane extends GridPane {
     private ListView<Lager> lvwLagre;
     private ListView<Hylde> lvwHylder;
     private ListView<Fad> lvwFade;
+    private ListView<Destillat> lvwDestillater;
 
     public LagerstyringPane() {
         this.setPadding(new Insets(10));
@@ -90,6 +92,16 @@ public class LagerstyringPane extends GridPane {
         Button btnSletFad = new Button("Slet Fad");
         btnSletFad.setOnAction(event -> sletFad());
         hBoxFade.getChildren().add(btnSletFad);
+
+        // #--- Destillater ---#
+        Label lblDestillater = new Label("Destillater");
+        this.add(lblDestillater, 3, 0);
+
+        lvwDestillater = new ListView<>();
+        lvwDestillater.setMinWidth(200);
+        lvwDestillater.setMaxWidth(200);
+        lvwDestillater.setMinHeight(400);
+        this.add(lvwDestillater, 3, 1);
 
         // #--- Error label ---#
         lblError = new Label(" ");

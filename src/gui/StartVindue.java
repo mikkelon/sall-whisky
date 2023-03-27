@@ -45,5 +45,24 @@ public class StartVindue extends Application {
         lagerstyringTab.setContent(lagerstyringPane);
         lagerstyringTab.setOnSelectionChanged(event -> lagerstyringPane.updateControls());
 
+        Tab fadeTab = new Tab("Fade");
+        tabPane.getTabs().add(fadeTab);
+        FadePane fadePane = new FadePane();
+        fadeTab.setContent(fadePane);
+        //fadeTab.setOnSelectionChanged(event -> fadePane.updateControls());
+
+        Tab destillatTab = new Tab("Destillat");
+        tabPane.getTabs().add(destillatTab);
+        DestillatPane destillatPane = new DestillatPane();
+        destillatTab.setContent(destillatPane);
+        //destillatTab.setOnSelectionChanged(event -> destillatPane.updateControls());
+
+        Tab påfyldningTab = new Tab("Påfyldning");
+        tabPane.getTabs().add(påfyldningTab);
+        PåfyldningPane påfyldningPane = new PåfyldningPane();
+        påfyldningTab.setContent(påfyldningPane);
+       // påfyldningTab.setOnSelectionChanged(event -> påfyldningPane.updateControls());
+
+
     }
 }
