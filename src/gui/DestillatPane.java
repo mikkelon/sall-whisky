@@ -115,6 +115,12 @@ public class DestillatPane extends GridPane {
             alert.setHeaderText(null);
             alert.setContentText("Du skal udfylde alle felter korrekt");
             alert.showAndWait();
+        } catch (RuntimeException e) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Noget gik galt");
+            alert.setHeaderText(null);
+            alert.setContentText(e.getMessage() + " Venligst ret fejlen og prøv igen.");
+            alert.showAndWait();
         }
     }
 
