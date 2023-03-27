@@ -40,7 +40,7 @@ class DestillatTest {
         Hylde hylde = lager.createHylde();
         FadLeverandør fadLeverandør = new FadLeverandør("Garrison Brothers","USA");
         Fad fad = new Fad(FadType.BOURBON,90.0,fadLeverandør,hylde);
-        Påfyldning påfyldning = new Påfyldning(destillat,fad,"Mikkel",80,LocalDate.of(2023,4,1));
+        Påfyldning påfyldning = new Påfyldning(destillat,fad,"Mikkel",80.0,LocalDate.of(2023,4,1));
         destillat.addPåfyldning(påfyldning);
         assertTrue(destillat.getPåfyldninger().contains(påfyldning));
     }
