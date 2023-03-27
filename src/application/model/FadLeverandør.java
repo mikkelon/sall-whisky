@@ -59,8 +59,7 @@ public class FadLeverandør {
 
     @Override
     public String toString() {
-        return navn
-                + "\n" + land;
+        return navn + " (" + land + ")";
     }
 }
 
