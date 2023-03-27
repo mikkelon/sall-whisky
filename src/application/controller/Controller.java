@@ -198,6 +198,16 @@ public class Controller {
         return fade;
     }
 
+    public TreeSet<Fad> getAlleFade() {
+        TreeSet<Fad> alleFade = new TreeSet<>((a,b) -> a.getFadNr() - b.getFadNr());
+        for (Lager lager : getLagre()) {
+            for (Hylde hylde : lager.getHylder()) {
+                alleFade.addAll(hylde.getFade());
+            }
+        }
+        return alleFade;
+    }
+
     /**
      * Returnerer alle destillater
      * @return alle destillater
