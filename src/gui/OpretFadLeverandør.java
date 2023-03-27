@@ -16,6 +16,11 @@ import javafx.scene.control.Button;
 public class OpretFadLeverandør extends Stage {
     private FadLeverandør fadLeverandør;
     private Controller controller = Controller.getController();
+    private Label lblNavn;
+    private Label lblLand;
+    private TextField txfNavn;
+    private TextField txfLand;
+    private Label lblError;
 
     public OpretFadLeverandør(FadLeverandør fadLeverandør){
         this.initStyle(StageStyle.DECORATED);
@@ -42,24 +47,40 @@ public class OpretFadLeverandør extends Stage {
         pane.setVgap(10);
         pane.setHgap(10);
 
-        Label lblNavn = new Label("Navn");
+        lblNavn = new Label("Navn");
         pane.add(lblNavn, 0,0);
 
-        TextField txfNavn = new TextField();
+        txfNavn = new TextField();
         pane.add(txfNavn, 0, 1);
 
-        Label lblLand = new Label("Land");
+        lblLand = new Label("Land");
         pane.add(lblLand, 0, 2);
 
-        TextField txfLand = new TextField();
+        txfLand = new TextField();
         pane.add(txfLand, 0, 3);
 
         Button btnGem = new Button("Gem");
-        pane.add(btnGem, 0, 4);
+        pane.add(btnGem, 0, 5);
+        btnGem.setOnAction(event -> opretGemAction());
 
         Button btnAnnuller = new Button("Annuller");
-        pane.add(btnAnnuller, 0, 5);
+        pane.add(btnAnnuller, 0, 6);
+        btnAnnuller.setOnAction(event -> this.close());
 
+        lblError = new Label(" ");
+        pane.add(lblError,0, 4);
+    }
+
+    private void opretGemAction(){
+        String navn = txfNavn.getText();
+        String land = txfLand.getText();
+        if(txfNavn == null){
+            lblError.setText("Navn er ikke udfyldt");
+        } else if(txfLand == null){
+            lblError.setText("Land er ikke udfyldt");
+        } else{
+            controller.createFadLeverandør(navn, land);
+        }
 
     }
 }

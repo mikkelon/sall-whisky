@@ -93,6 +93,6 @@ public class FadePane extends GridPane {
     }
 
     private void opretFadLeverandør(){
-       OpretFadLeverandør window = new OpretFadLeverandør();
+       //OpretFadLeverandør window = new OpretFadLeverandør();
     }
 }
