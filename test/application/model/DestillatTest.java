@@ -1,5 +1,6 @@
 package application.model;
 
+import application.controller.Controller;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +12,6 @@ class DestillatTest {
     private Destillat destillat;
     private RygeMateriale rygeMateriale;
 
-
     @BeforeEach
     void setUp() {
         rygeMateriale = RygeMateriale.TØRV;
@@ -21,7 +21,7 @@ class DestillatTest {
     }
 
     @Test
-    void contruscterTC1(){
+    void constructorTC1(){
         assertEquals("77p",destillat.getNewMakeNr());
         assertEquals("Mikkel",destillat.getMedarbejder());
         assertEquals(53.0,destillat.getAlkoholProcent());
@@ -33,61 +33,28 @@ class DestillatTest {
         assertEquals(rygeMateriale,destillat.getRygeMateriale());
     }
 
+
     @Test
-    void getNewMakeNr() {
-        assertEquals("77p",destillat.getNewMakeNr());
+    void addPåfyldningerTC2() {
+        Lager lager = new Lager("Baldersgade 39","Sall Whisky Lager",100);
+        Hylde hylde = lager.createHylde();
+        FadLeverandør fadLeverandør = new FadLeverandør("Garrison Brothers","USA");
+        Fad fad = new Fad(FadType.BOURBON,90.0,fadLeverandør,hylde);
+        Påfyldning påfyldning = new Påfyldning(destillat,fad,"Mikkel",80,LocalDate.of(2023,4,1));
+        destillat.addPåfyldning(påfyldning);
+        assertTrue(destillat.getPåfyldninger().contains(påfyldning));
     }
 
-    @Test
-    void getMedarbejder() {
-        assertEquals("Mikkel",destillat.getMedarbejder());
-    }
 
     @Test
-    void getAlkoholProcent() {
-        assertEquals(53.0,destillat.getAlkoholProcent());
-    }
-
-    @Test
-    void getAntalDestilleringer() {
-        assertEquals(2,destillat.getAntalDestilleringer());
-    }
-
-    @Test
-    void getStartDato() {
-        assertEquals(LocalDate.of(2023,3,27),destillat.getStartDato());
-    }
-
-    @Test
-    void getSlutDato() {
-        assertEquals(LocalDate.of(2023,3,30),destillat.getSlutDato());
-    }
-
-    @Test
-    void getMængdeILiter() {
-        assertEquals(80.0,destillat.getMængdeILiter());
-    }
-
-    @Test
-    void getKommentar() {
-        assertEquals("Destillat for bourbon whisky",destillat.getKommentar());
-    }
-
-    @Test
-    void getRygeMateriale() {
-        assertEquals(rygeMateriale,destillat.getRygeMateriale());
-    }
-
-    @Test
-    void getOgAddPåfyldninger() {
-
-    }
-
-    @Test
-    void addPåfyldning() {
-    }
-
-    @Test
-    void removePåfyldning() {
+    void removePåfyldningTC3() {
+        Lager lager = new Lager("Baldersgade 39","Sall Whisky Lager",100);
+        Hylde hylde = lager.createHylde();
+        FadLeverandør fadLeverandør = new FadLeverandør("Garrison Brothers","USA");
+        Fad fad = new Fad(FadType.BOURBON,90.0,fadLeverandør,hylde);
+        Påfyldning påfyldning = new Påfyldning(destillat,fad,"Mikkel",80,LocalDate.of(2023,4,1));
+        destillat.addPåfyldning(påfyldning);
+        destillat.removePåfyldning(påfyldning);
+        assertFalse(destillat.getPåfyldninger().contains(påfyldning));
     }
 }

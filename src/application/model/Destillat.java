@@ -142,7 +142,15 @@ public class Destillat {
      * @param påfyldning påfyldningen der skal tilføjes
      */
     public void addPåfyldning(Påfyldning påfyldning) {
-        påfyldninger.add(påfyldning);
+        if (!påfyldninger.contains(påfyldning)){
+            påfyldninger.add(påfyldning);
+        }
+    }
+
+    public void removePåfyldning(Påfyldning påfyldning) {
+        if (påfyldninger.contains(påfyldning)){
+            påfyldninger.remove(påfyldning);
+        }
     }
 
     @Override
