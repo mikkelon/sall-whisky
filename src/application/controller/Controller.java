@@ -264,8 +264,10 @@ public class Controller {
                                        double mængdeILiter, LocalDate påfyldningsDato) {
         Påfyldning påfyldning = new Påfyldning(destillat, fad, påfyldtAf, mængdeILiter, påfyldningsDato);
 
-        if (påfyldning.getMængdeILiter() > fad.resterendePladsILiter()) {
-            throw new RuntimeException("Påfyldningen er større end fadets størrelse.");
+        if (påfyldning.getMængdeILiter() > destillat.resterendeMængdeILiter()) {
+            throw new RuntimeException("Påfyldningen er større end destillatets resterende mængde.");
+        } else if (påfyldning.getMængdeILiter() > fad.resterendePladsILiter()) {
+            throw new RuntimeException("Påfyldningen er større end fadets resterende mængde.");
         } else {
             destillat.addPåfyldning(påfyldning);
             fad.addPåfyldning(påfyldning);

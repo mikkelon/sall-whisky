@@ -25,7 +25,6 @@ class ControllerTest {
         fadLeverandør = controller.createFadLeverandør("Garrison Brothers", "USA");
         hylde = controller.createHylde(lager);
         fad = controller.createFad(FadType.BOURBON, 80, fadLeverandør, hylde);
-        System.out.println(controller.getDestillater());
         destillat = controller.createDestillat("77p", "Mikkel", 53.0,
                 2, LocalDate.of(2023, 3, 27),
                 LocalDate.of(2023, 3, 30), 80.0,
@@ -178,6 +177,12 @@ class ControllerTest {
                 "Destillat for bourbon whisky",  RygeMateriale.INTET);
 
         assertThrows(RuntimeException.class, () -> controller.createPåfyldning(destillat1, fad, "Mikkel", 80.0,
+                LocalDate.of(2023, 4, 1)));
+    }
+
+    @Test
+    void createPåfyldningTC24() {
+        assertThrows(RuntimeException.class, () -> controller.createPåfyldning(destillat, fad, "Mikkel", 90.0,
                 LocalDate.of(2023, 4, 1)));
     }
 }
