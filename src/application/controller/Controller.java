@@ -244,7 +244,7 @@ public class Controller {
      }
      
      /**
-     * Returnerer alle fade
+     * Opretter en ny påfyldning
      * Pre: destillat != null, fad != null, påfyldtAf != null, mængdeILiter > 0, påfyldningsDato != null
      * @param destillat destillatet der skal fyldes på fadet
      * @param fad fadet hvorpå påfyldningen skal foregå
