@@ -1,6 +1,7 @@
 package application.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 /**
  * Modellerer et destillat.
@@ -15,6 +16,8 @@ public class Destillat {
     private double mængdeILiter;
     private String kommentar;
     private RygeMateriale rygeMateriale;
+
+    private ArrayList <Påfyldning> påfyldninger = new ArrayList<>();
 
     /**
      * Opretter et nyt destillat med angivet parametre.
@@ -123,6 +126,37 @@ public class Destillat {
     public RygeMateriale getRygeMateriale() {
         return rygeMateriale;
     }
+
+    /**
+     * Returnerer en liste over påfyldninger.
+     *
+     * @return en liste over påfyldninger
+     */
+    public ArrayList<Påfyldning> getPåfyldninger() {
+        return påfyldninger;
+    }
+
+    /**
+     * Tilføjer en påfyldning til destillatet.
+     * @param påfyldning påfyldningen der skal tilføjes
+     */
+    public void addPåfyldning(Påfyldning påfyldning) {
+        if (!påfyldninger.contains(påfyldning)) {
+            påfyldninger.add(påfyldning);
+        }
+    }
+
+    /**
+     * Fjerner en påfyldning fra destillatet.
+     * @param påfyldning påfyldningen der skal fjernes
+     */
+    public void removePåfyldning(Påfyldning påfyldning) {
+        if (påfyldninger.contains(påfyldning)) {
+            påfyldninger.remove(påfyldning);
+        }
+    }
+
+
 
     @Override
     public String toString() {
