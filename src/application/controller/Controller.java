@@ -3,6 +3,7 @@ package application.controller;
 import application.model.*;
 import storage.Storage;
 
+import java.time.LocalDate;
 import java.util.*;
 
 /**
@@ -182,6 +183,70 @@ public class Controller {
     }
 
     /**
+     * Returnerer alle destillater
+     * @return alle destillater
+     */
+    public HashSet<Destillat> getDestillater() {
+        return storage.getDestillater();
+    }
+
+    /**
+     * Opretter et nyt destillat.
+     * @param newMakeNr destillatets unikke nummer
+     * @param medarbejder navnet på medarbejderen der har destilleret
+     * @param alkoholProcent alkoholprocenten i destillatet
+     * @param antalDestilleringer antallet af destilleringer
+     * @param startDato startdatoen for destilleringen
+     * @param slutDato slutdatoen for destilleringen
+     * @param mængdeILiter mængden af destillat i liter
+     * @param kommentar kommentar til destillatet
+     * @param rygeMateriale evt rygemateriale der er brugt
+     * @return det oprettede destillat
+     * Pre: newMakeNr != null, medarbejder != null, alkoholProcent > 0, antalDestilleringer > 0,
+     *      startDato != null, slutDato != null, mængdeILiter > 0, kommentar != null, rygeMateriale != null
+     */
+    public Destillat createDestillat(String newMakeNr, String medarbejder, double alkoholProcent,
+                                     int antalDestilleringer, LocalDate startDato, LocalDate slutDato,
+                                     double mængdeILiter, String kommentar, RygeMateriale rygeMateriale) {
+        Destillat destillat = new Destillat(newMakeNr, medarbejder, alkoholProcent, antalDestilleringer, startDato, slutDato, mængdeILiter, kommentar, rygeMateriale);
+        storage.addDestillat(destillat);
+        return destillat;
+    }
+
+    /**
+     * Fjerner det specifikke destillat fra lageret
+     * @param destillat destillatet der skal fjernes
+     * Pre: destillat != null
+     */
+    public void removeDestillat(Destillat destillat) {
+        storage.removeDestillat(destillat);
+     }
+     
+     /**
+     * Returnerer alle fade
+     * Pre: destillat != null, fad != null, påfyldtAf != null, mængdeILiter > 0, påfyldningsDato != null
+     * @param destillat destillatet der skal fyldes på fadet
+     * @param fad fadet hvorpå påfyldningen skal foregå
+     * @param påfyldtAf navnet på den person der har påfyldt fadet
+     * @param mængdeILiter mængden af destillat i fadet i liter
+     * @param påfyldningsDato dato for påfyldning
+     * @return den oprettede påfyldning
+     */
+    public Påfyldning createPåfyldning(Destillat destillat, Fad fad, String påfyldtAf,
+                                       double mængdeILiter, LocalDate påfyldningsDato) {
+        Påfyldning påfyldning = new Påfyldning(destillat, fad, påfyldtAf, mængdeILiter, påfyldningsDato);
+
+        if (påfyldning.getMængdeILiter() > fad.getStørrelseILiter()) {
+            throw new RuntimeException("Påfyldningen er større end fadets størrelse.");
+        } else {
+            destillat.addPåfyldning(påfyldning);
+            fad.addPåfyldning(påfyldning);
+        }
+
+        return påfyldning;
+    }
+
+    /**
      * Tilføjer mockdata til Storage
      */
     public void initMockData() {
@@ -217,5 +282,12 @@ public class Controller {
         Fad fad10 = controller.createFad(FadType.UBRUGT, 90, l1, h4);
         Fad fad11 = controller.createFad(FadType.UBRUGT, 70, l1, h4);
         Fad fad12 = controller.createFad(FadType.UBRUGT, 60, l1, h4);
+
+        //Tilføjer destillater
+        Destillat d1 = controller.createDestillat("77p", "Mikkel", 53, 2, LocalDate.of(2023, 3, 27), LocalDate.of(2023, 3, 30), 80, "Kommentar", RygeMateriale.INTET);
+        Destillat d2 = controller.createDestillat("78p", "Frederikke", 60, 2, LocalDate.of(2023, 4, 1), LocalDate.of(2023, 4, 2), 90.1, "Kommentar", RygeMateriale.INTET);
+        Destillat d3 = controller.createDestillat("79p", "Anders", 61, 2, LocalDate.of(2023, 4, 1), LocalDate.of(2023, 4, 5), 80.5, "Kommentar", RygeMateriale.TØRV);
+        Destillat d4 = controller.createDestillat("80p", "Mads", 59, 2, LocalDate.of(2023, 4, 3), LocalDate.of(2023, 4, 6), 87.4, "Kommentar", RygeMateriale.TØRV);
+        Destillat d5 = controller.createDestillat("81p", "Mikkel", 62, 2, LocalDate.of(2023, 4, 10), LocalDate.of(2023, 4, 20), 72.43, "Kommentar", RygeMateriale.INTET);
     }
 }

@@ -20,7 +20,6 @@ public class Påfyldning {
     public Påfyldning(Destillat destillat, Fad fad, String påfyldtAf, double mængdeILiter, LocalDate påfyldningsDato) {
         this.destillat = destillat;
         this.fad = fad;
-        fad.addPåfyldning(this);
         this.påfyldtAf = påfyldtAf;
         this.mængdeILiter = mængdeILiter;
         this.påfyldningsDato = påfyldningsDato;
