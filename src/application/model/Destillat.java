@@ -22,7 +22,7 @@ public class Destillat {
 
     /**
      * Opretter et nyt destillat med angivet parametre.
-     * pre: newMakeNr > 0, alkoholProcent > 0, antalDestilleringer > 0, startDato < slutDato, mængdeILiter > 0, rygeMateriale != null
+     * pre: alkoholProcent > 0, antalDestilleringer > 0, startDato < slutDato, mængdeILiter > 0, rygeMateriale != null
      * @param newMakeNr           destillates newMakeNr
      * @param medarbejder         hvilket medarbejder der har destilleret dette destillat
      * @param alkoholProcent      destillatets alkoholProcent
@@ -142,15 +142,23 @@ public class Destillat {
      * @param påfyldning påfyldningen der skal tilføjes
      */
     public void addPåfyldning(Påfyldning påfyldning) {
-        påfyldninger.add(påfyldning);
+        if (!påfyldninger.contains(påfyldning)){
+            påfyldninger.add(påfyldning);
+        }
+    }
+
+    public void removePåfyldning(Påfyldning påfyldning) {
+        if (påfyldninger.contains(påfyldning)){
+            påfyldninger.remove(påfyldning);
+        }
     }
 
     @Override
     public String toString() {
-        return "New make nr: " + newMakeNr + "Alkohol procent: " + alkoholProcent
-                + "Antal destilleringer: " + antalDestilleringer + "Start dato: " + startDato
-                + "Slut dato: " + slutDato + "Mængde i liter: " + mængdeILiter
-                + "Kommentar: " + kommentar + "Ryge materiale: " + rygeMateriale
-                + "Medarbejder: " + medarbejder;
+        return "New make nr: " + newMakeNr + ", Alkohol procent: " + alkoholProcent
+                + ", Antal destilleringer: " + antalDestilleringer + ", Start dato: " + startDato
+                + ", Slut dato: " + slutDato + ", Mængde i liter: " + mængdeILiter
+                + ", Kommentar: " + kommentar + ", Ryge materiale: " + rygeMateriale
+                + ", Medarbejder: " + medarbejder;
     }
 }
