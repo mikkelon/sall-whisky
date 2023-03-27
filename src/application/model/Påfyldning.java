@@ -71,7 +71,7 @@ public class Påfyldning {
     @Override
     public String toString() {
         return "New make: " + destillat.getNewMakeNr()
-                + "\nMængde: " + mængdeILiter + "L"
+                + "\nMængde: " + String.format("%.2f", mængdeILiter) + "L"
                 + "\nAnsat: " + påfyldtAf
                 + "\nDato: " + påfyldningsDato;
     }

@@ -180,8 +180,8 @@ public class Fad {
     public String toString() {
         return "Fad #" + fadNr + " (" + fadType + ")"
                 + "\nLeverandør: " + fadLeverandør
-                + "\nStørrelse: " + størrelseILiter + "L"
-                + "\nIndeholder: " + indeholdtVæskeILiter() + "L"
-                + "\nAlkohol: " + getAlkoholProcent() + "%";
+                + "\nStørrelse: " + String.format("%.2f", størrelseILiter) + "L"
+                + "\nIndeholder: " + String.format("%.2f", indeholdtVæskeILiter()) + "L"
+                + "\nAlkohol: " + String.format("%.2f", getAlkoholProcent()) + "%";
     }
 }

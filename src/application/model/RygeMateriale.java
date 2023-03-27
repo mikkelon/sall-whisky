@@ -2,7 +2,7 @@ package application.model;
 
 public enum RygeMateriale {
     TØRV("Tørv"),
-    INTET("Tørv");
+    INTET("Intet");
 
     private final String navn;
 
