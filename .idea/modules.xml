@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/sall-whisky.iml" filepath="$PROJECT_DIR$/sall-whisky.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sall-whisky.iml" filepath="$PROJECT_DIR$/.idea/modules/sall-whisky.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sall-whisky.main.iml" filepath="$PROJECT_DIR$/.idea/modules/sall-whisky.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sall-whisky.test.iml" filepath="$PROJECT_DIR$/.idea/modules/sall-whisky.test.iml" />
     </modules>
   </component>
 </project>

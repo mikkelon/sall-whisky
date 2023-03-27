@@ -1,1 +1,9 @@
 /out/
+
+# gradle
+.gradle
+*.jar
+*.aar
+*.war
+!gradle-wrapper.jar
+/build
