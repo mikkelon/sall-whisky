@@ -11,7 +11,6 @@ public class Fad {
     private double størrelseILiter;
     private int fadNr;
     private static int antalFade;
-    private double indeholdtVæskeILiter;
     private Hylde hylde;
     private FadLeverandør fadLeverandør;
     private HashSet<Påfyldning> påfyldninger;
@@ -19,7 +18,6 @@ public class Fad {
 
     /**
      * Opretter et fad med en given størrelse, fadtype, fadleverandør og hylde.
-     * indeholdtVæskeILiter sættes til 0.
      * fadNr sættes til et unikt nummer.
      *
      * @param fadType         fadets tidligere indhold, f.eks. "bourbon", "shery", osv.
@@ -32,9 +30,9 @@ public class Fad {
         this.fadNr = antalFade;
         this.fadType = fadType;
         this.størrelseILiter = størrelseILiter;
-        this.indeholdtVæskeILiter = 0;
         this.fadLeverandør = fadLeverandør;
         this.hylde = hylde;
+        this.påfyldninger = new HashSet<>();
         hylde.addFad(this);
     }
 
@@ -66,15 +64,6 @@ public class Fad {
     }
 
     /**
-     * Returnerer indeholdt væske i liter.
-     *
-     * @return indeholdt væske i liter
-     */
-    public double getIndeholdtVæskeILiter() {
-        return indeholdtVæskeILiter;
-    }
-
-    /**
      * Registrerer typen på fadet.
      *
      * @param fadType er fadets nye type.
@@ -90,15 +79,6 @@ public class Fad {
      */
     public Hylde getHylde() {
         return hylde;
-    }
-
-    /**
-     * Registrerer indeholdt væske i liter.
-     *
-     * @param indeholdtVæskeILiter er fadets nye indeholdt væske i liter.
-     */
-    public void setIndeholdtVæskeILiter(double indeholdtVæskeILiter) {
-        this.indeholdtVæskeILiter = indeholdtVæskeILiter;
     }
 
     /**
@@ -130,11 +110,16 @@ public class Fad {
 
     /**
      * Tilføjer en påfyldning til fadet.
-     * Pre: påfyldning != null
+     * Pre: påfyldning != null, påfyldning.getMængdeILiter() <= resterendePladsILiter()
      * @param påfyldning påfyldningen der skal tilføjes
      */
     public void addPåfyldning(Påfyldning påfyldning) {
         påfyldninger.add(påfyldning);
+
+        // Opdatér senestPåfyldt
+        if (senestPåfyldt == null || påfyldning.getPåfyldningsDato().isAfter(senestPåfyldt)) {
+            senestPåfyldt = påfyldning.getPåfyldningsDato();
+        }
     }
 
     /**
@@ -179,18 +164,18 @@ public class Fad {
      */
     public double getAlkoholProcent() {
         // Udregn alkoholprocent baseret på alle påfyldninger
-        double alkohol = 0;
-        double væske = 0;
+        double alkohol = 0.0;
+        double væske = 0.0;
         for (Påfyldning påfyldning : påfyldninger) {
-            double alkoholProcent = påfyldning.getDestillat().getAlkoholProcent() / 100;
+            double alkoholProcent = påfyldning.getDestillat().getAlkoholProcent() / 100.0;
             alkohol += alkoholProcent * påfyldning.getMængdeILiter();
             væske += påfyldning.getMængdeILiter();
         }
-        return alkohol / væske * 100;
+        return væske > 0 ? alkohol / væske * 100 : 0.0;
     }
 
     @Override
     public String toString() {
-        return fadType + ", Nr: " + fadNr + ", Størrelse: " + størrelseILiter + "L, Indeholder: " + indeholdtVæskeILiter + "L";
+        return fadType + ", Nr: " + fadNr + ", Størrelse: " + størrelseILiter + "L, Indeholder: " + indeholdtVæskeILiter() + "L";
     }
 }
