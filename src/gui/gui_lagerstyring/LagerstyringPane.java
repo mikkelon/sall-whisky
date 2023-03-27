@@ -212,6 +212,7 @@ public class LagerstyringPane extends GridPane {
         updateLagre();
         updateHylder();
         updateFade();
+        updateDestillater();
     }
 
     private void updateLagre() {
@@ -234,6 +235,10 @@ public class LagerstyringPane extends GridPane {
         } else {
             lvwFade.getItems().clear();
         }
+    }
+
+    private void updateDestillater() {
+        lvwDestillater.getItems().setAll(controller.getDestillater());
     }
 
     private void clearError() {
