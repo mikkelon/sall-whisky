@@ -21,7 +21,7 @@ public class Destillat {
 
     /**
      * Opretter et nyt destillat med angivet parametre.
-     * pre: newMakeNr > 0, alkoholProcent > 0, antalDestilleringer > 0, startDato < slutDato, mængdeILiter > 0, rygeMateriale != null
+     * pre: alkoholProcent > 0, antalDestilleringer > 0, startDato < slutDato, mængdeILiter > 0, rygeMateriale != null
      * @param newMakeNr           destillates newMakeNr
      * @param medarbejder         hvilket medarbejder der har destilleret dette destillat
      * @param alkoholProcent      destillatets alkoholProcent
