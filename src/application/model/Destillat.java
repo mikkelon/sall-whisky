@@ -2,6 +2,7 @@ package application.model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * Modellerer et destillat.
@@ -17,7 +18,7 @@ public class Destillat {
     private String kommentar;
     private RygeMateriale rygeMateriale;
 
-    private ArrayList <Påfyldning> påfyldninger = new ArrayList<>();
+    private HashSet <Påfyldning> påfyldninger = new HashSet<>();
 
     /**
      * Opretter et nyt destillat med angivet parametre.
@@ -133,7 +134,7 @@ public class Destillat {
      * @return en liste over påfyldninger
      */
     public ArrayList<Påfyldning> getPåfyldninger() {
-        return påfyldninger;
+        return new ArrayList<>(påfyldninger);
     }
 
     /**
@@ -141,22 +142,8 @@ public class Destillat {
      * @param påfyldning påfyldningen der skal tilføjes
      */
     public void addPåfyldning(Påfyldning påfyldning) {
-        if (!påfyldninger.contains(påfyldning)) {
-            påfyldninger.add(påfyldning);
-        }
+        påfyldninger.add(påfyldning);
     }
-
-    /**
-     * Fjerner en påfyldning fra destillatet.
-     * @param påfyldning påfyldningen der skal fjernes
-     */
-    public void removePåfyldning(Påfyldning påfyldning) {
-        if (påfyldninger.contains(påfyldning)) {
-            påfyldninger.remove(påfyldning);
-        }
-    }
-
-
 
     @Override
     public String toString() {
