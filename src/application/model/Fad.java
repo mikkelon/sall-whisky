@@ -1,5 +1,8 @@
 package application.model;
 
+import java.time.LocalDate;
+import java.util.HashSet;
+
 /**
  * Modellerer et fad, som bruges til at modne destillat til whisky.
  */
@@ -11,6 +14,8 @@ public class Fad {
     private double indeholdtVæskeILiter;
     private Hylde hylde;
     private FadLeverandør fadLeverandør;
+    private HashSet<Påfyldning> påfyldninger;
+    private LocalDate senestPåfyldt;
 
     /**
      * Opretter et fad med en given størrelse, fadtype, fadleverandør og hylde.
@@ -121,6 +126,40 @@ public class Fad {
             this.hylde = hylde;
             hylde.addFad(this);
         }
+    }
+
+    public void addPåfyldning(Påfyldning påfyldning) {
+    	påfyldninger.add(påfyldning);
+        // Opdatér senestPåfyldt
+        if (senestPåfyldt == null) senestPåfyldt = påfyldning.getPåfyldningsDato();
+        else if (senestPåfyldt.isBefore(påfyldning.getPåfyldningsDato())) {
+            senestPåfyldt = påfyldning.getPåfyldningsDato();
+        }
+    }
+
+    public HashSet<Påfyldning> getPåfyldninger() {
+    	return new HashSet<>(påfyldninger);
+    }
+
+    public double indeholdtVæskeILiter() {
+    	double væske = 0;
+    	for (Påfyldning påfyldning : påfyldninger) {
+    		væske += påfyldning.getMængdeILiter();
+    	}
+    	return væske;
+    }
+
+    public double resterendePladsILiter() {
+    	return størrelseILiter - indeholdtVæskeILiter();
+    }
+
+    public LocalDate forventetFærdigproduceret() {
+        return senestPåfyldt.plusYears(3);
+    }
+
+    public double getAlkoholProcent() {
+        //TODO: Implementér metoden
+        return 0;
     }
 
     @Override
