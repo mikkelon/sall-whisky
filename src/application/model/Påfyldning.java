@@ -2,6 +2,9 @@ package application.model;
 
 import java.time.LocalDate;
 
+/**
+ * Modellerer en påfyldning af et fad med et bestemt destillat.
+ */
 public class Påfyldning {
     private String påfyldtAf;
     private double mængdeILiter;
@@ -25,26 +28,47 @@ public class Påfyldning {
         this.påfyldningsDato = påfyldningsDato;
     }
 
+    /**
+     * Returnerer navnet på den person der har påfyldt fadet.
+     * @return navnet på den person der har påfyldt fadet
+     */
     public String getPåfyldtAf() {
         return påfyldtAf;
     }
 
+    /**
+     * Returnerer mængden der er påfyldt i liter.
+     * @return mængden der er påfyldt i liter
+     */
     public double getMængdeILiter() {
         return mængdeILiter;
     }
 
+    /**
+     * Returnerer datoen for påfyldningen.
+     * @return datoen for påfyldningen
+     */
     public LocalDate getPåfyldningsDato() {
         return påfyldningsDato;
     }
 
+    /**
+     * Returnerer fadet der er påfyldt.
+     * @return fadet der er påfyldt
+     */
     public Fad getFad() {
         return fad;
     }
 
+    /**
+     * Returnerer destillatet der er fyldt på fadet.
+     * @return destillatet der er fyldt på fadet
+     */
     public Destillat getDestillat() {
         return destillat;
     }
 
+    @Override
     public String toString() {
         return destillat.getNewMakeNr() + ", " + mængdeILiter + "L, " + påfyldtAf + ", " + påfyldningsDato;
     }

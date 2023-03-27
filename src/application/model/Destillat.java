@@ -153,6 +153,19 @@ public class Destillat {
         }
     }
 
+    /**
+     * Returnerer resterende mængde i liter.
+     *
+     * @return resterende mængde i liter
+     */
+    public double resterendeMængdeILiter() {
+        double resterendeMængde = mængdeILiter;
+        for (Påfyldning påfyldning : påfyldninger) {
+            resterendeMængde -= påfyldning.getMængdeILiter();
+        }
+        return resterendeMængde;
+    }
+
     @Override
     public String toString() {
         return "New make nr: " + newMakeNr + ", Alkohol procent: " + alkoholProcent

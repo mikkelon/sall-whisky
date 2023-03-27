@@ -4,6 +4,8 @@ import application.model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ControllerTest {
@@ -12,14 +14,23 @@ class ControllerTest {
     private FadLeverandør fadLeverandør;
     private Hylde hylde;
     private Fad fad;
+    private Destillat destillat;
+    private Påfyldning påfyldning;
 
     @BeforeEach
     void setUp() {
         controller = Controller.getTestController();
+        controller.clearStorage();
         lager = controller.createLagerWithAntalHylder("Baldersgade 39", "Sall Whisky Lager", 100, 4);
         fadLeverandør = controller.createFadLeverandør("Garrison Brothers", "USA");
         hylde = controller.createHylde(lager);
         fad = controller.createFad(FadType.BOURBON, 80, fadLeverandør, hylde);
+        destillat = controller.createDestillat("77p", "Mikkel", 53.0,
+                2, LocalDate.of(2023, 3, 27),
+                LocalDate.of(2023, 3, 30), 80.0,
+                "Destillat for bourbon whisky",  RygeMateriale.INTET);
+        påfyldning = controller.createPåfyldning(destillat, fad, "Mikkel", 80.0,
+                LocalDate.of(2023, 4, 1));
     }
     @Test
     void SingletonTC1() {
@@ -116,5 +127,62 @@ class ControllerTest {
         controller.removeFad(fad);
         assertFalse(hylde.getFade().contains(fad));
        assertEquals(fadLeverandørAntalFade - 1, fad.getFadLeverandør().getAntalFade());
+    }
+
+    @Test
+    void getDestillaterTC17() {
+        assertTrue(controller.getDestillater().contains(destillat));
+    }
+
+    @Test
+    void createDestillatTC18() {
+        assertTrue(controller.getDestillater().contains(destillat));
+    }
+
+    @Test
+    void createDestillatTC19() {
+        assertThrows(RuntimeException.class, () -> controller.createDestillat("77p", "Mikkel", 53.0,
+                2, LocalDate.of(2023, 3, 27),
+                LocalDate.of(2023, 3, 30), 80.0,
+                "Destillat for bourbon whisky",  RygeMateriale.INTET));
+    }
+
+    @Test
+    void removeDestillatTC20() {
+        Destillat destillat1 = controller.createDestillat("78p", "Mikkel", 53.0,
+                2, LocalDate.of(2023, 3, 27),
+                LocalDate.of(2023, 3, 30), 80.0,
+                "Destillat for bourbon whisky",  RygeMateriale.INTET);
+
+        controller.removeDestillat(destillat1);
+        assertFalse(controller.getDestillater().contains(destillat1));
+    }
+
+    @Test
+    void removeDestillatTC21() {
+        assertThrows(RuntimeException.class, () -> controller.removeDestillat(destillat));
+    }
+
+    @Test
+    void createPåfyldningTC22() {
+        assertTrue(fad.getPåfyldninger().contains(påfyldning));
+        assertTrue(destillat.getPåfyldninger().contains(påfyldning));
+    }
+
+    @Test
+    void createPåfyldningTC23() {
+        Destillat destillat1 = controller.createDestillat("78p", "Mikkel", 53.0,
+                2, LocalDate.of(2023, 3, 27),
+                LocalDate.of(2023, 3, 30), 80.0,
+                "Destillat for bourbon whisky",  RygeMateriale.INTET);
+
+        assertThrows(RuntimeException.class, () -> controller.createPåfyldning(destillat1, fad, "Mikkel", 80.0,
+                LocalDate.of(2023, 4, 1)));
+    }
+
+    @Test
+    void createPåfyldningTC24() {
+        assertThrows(RuntimeException.class, () -> controller.createPåfyldning(destillat, fad, "Mikkel", 90.0,
+                LocalDate.of(2023, 4, 1)));
     }
 }
