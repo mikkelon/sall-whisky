@@ -14,9 +14,10 @@ public class Lager {
 
     /**
      * Initialiserer et nyt lager med adresse, navn, og kvm.
+     *
      * @param adresse lagerets adresse
-     * @param navn lagerets navn
-     * @param kvm lagerets kvm
+     * @param navn    lagerets navn
+     * @param kvm     lagerets kvm
      */
     public Lager(String adresse, String navn, double kvm) {
         this.adresse = adresse;
@@ -27,6 +28,7 @@ public class Lager {
 
     /**
      * Returnerer lagerets adresse.
+     *
      * @return lagerets adresse
      */
     public String getAdresse() {
@@ -35,6 +37,7 @@ public class Lager {
 
     /**
      * Registrerer lagerets adresse.
+     *
      * @param adresse lagerets adresse
      */
     public void setAdresse(String adresse) {
@@ -43,6 +46,7 @@ public class Lager {
 
     /**
      * Returnerer lagerets navn.
+     *
      * @return lagerets navn
      */
     public String getNavn() {
@@ -51,6 +55,7 @@ public class Lager {
 
     /**
      * Registrerer lagerets navn.
+     *
      * @param navn lagerets navn
      */
     public void setNavn(String navn) {
@@ -59,6 +64,7 @@ public class Lager {
 
     /**
      * Returnerer lagerets kvm.
+     *
      * @return lagerets kvm
      */
     public double getKvm() {
@@ -67,6 +73,7 @@ public class Lager {
 
     /**
      * Registrerer lagerets kvm.
+     *
      * @param kvm lagerets kvm
      */
     public void setKvm(double kvm) {
@@ -75,6 +82,7 @@ public class Lager {
 
     /**
      * Returnerer en ny liste med hylder fra lageret.
+     *
      * @return en ny liste med hylder fra lageret
      */
     public ArrayList<Hylde> getHylder() {
@@ -83,6 +91,7 @@ public class Lager {
 
     /**
      * Opretter en ny hylde til lageret.
+     *
      * @return en ny hylde til lageret
      */
     public Hylde createHylde() {
@@ -94,6 +103,7 @@ public class Lager {
 
     /**
      * Indsætter en hylde i sorteret rækkefølge.
+     *
      * @param hylde hylde der skal indsættes
      */
     private void insertSorted(Hylde hylde) {
@@ -107,8 +117,9 @@ public class Lager {
 
     /**
      * Fjerner en hylde fra lageret.
+     *
      * @param hylde lagerets hylde
-     * Pre: hylde er tom
+     *              Pre: hylde er tom
      */
     public void removeHylde(Hylde hylde) {
         antalHylder--;
@@ -117,16 +128,11 @@ public class Lager {
 
     /**
      * Returnerer antal hylder på lageret.
+     *
      * @return antal hylder på lageret
      */
     public int getAntalHylder() {
         return antalHylder;
-    }
-
-
-    @Override
-    public String toString() {
-        return navn + ", " + adresse + ", Kvm: " + kvm;
     }
 
 
