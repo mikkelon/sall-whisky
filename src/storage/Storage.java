@@ -1,5 +1,6 @@
 package storage;
 
+import application.model.Destillat;
 import application.model.Lager;
 import application.model.FadLeverandør;
 
@@ -49,5 +50,21 @@ public class Storage {
 
     public HashSet<Lager> getLagre() {
         return new HashSet<>(lagre);
+    }
+
+    // #--- Destillation ---#
+
+    private HashSet<Destillat> destillater = new HashSet<>();
+
+    public void addDestillat(Destillat destillat){
+        destillater.add(destillat);
+    }
+
+    public void removeDestillat(Destillat destillat){
+        destillater.remove(destillat);
+    }
+
+    public HashSet<Destillat> getDestillater() {
+        return new HashSet<>(destillater);
     }
 }
