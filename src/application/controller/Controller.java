@@ -182,6 +182,15 @@ public class Controller {
         fad.getFadLeverandør().fjernFad();
     }
 
+    public ArrayList<Fad> getFadeFraLagerSorteret(Lager lager) {
+        ArrayList<Fad> fade = new ArrayList<>();
+        for (Hylde hylde : lager.getHylder()) {
+            fade.addAll(hylde.getFade());
+        }
+        fade.sort((a,b) -> a.getFadNr() - b.getFadNr());
+        return fade;
+    }
+
     /**
      * Returnerer alle destillater
      * @return alle destillater
@@ -245,7 +254,7 @@ public class Controller {
      
      /**
      * Opretter en ny påfyldning
-     * Pre: destillat != null, fad != null, påfyldtAf != null, mængdeILiter > 0, påfyldningsDato != null
+     * Pre: destillat != null, fad != null, påfyldtAf != null, mængdeILiter > 0, påfyldningsDato != null, fad.getStørrelseILiter() >= mængdeILiter
      * @param destillat destillatet der skal fyldes på fadet
      * @param fad fadet hvorpå påfyldningen skal foregå
      * @param påfyldtAf navnet på den person der har påfyldt fadet
@@ -256,13 +265,8 @@ public class Controller {
     public Påfyldning createPåfyldning(Destillat destillat, Fad fad, String påfyldtAf,
                                        double mængdeILiter, LocalDate påfyldningsDato) {
         Påfyldning påfyldning = new Påfyldning(destillat, fad, påfyldtAf, mængdeILiter, påfyldningsDato);
-
-        if (påfyldning.getMængdeILiter() > fad.getStørrelseILiter()) {
-            throw new RuntimeException("Påfyldningen er større end fadets størrelse.");
-        } else {
             destillat.addPåfyldning(påfyldning);
             fad.addPåfyldning(påfyldning);
-        }
 
         return påfyldning;
     }
