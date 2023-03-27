@@ -140,6 +140,6 @@ public class Lager {
     public String toString() {
         return navn
                 + "\n" + adresse
-                + "\nKvm: " + kvm;
+                + "\n" + kvm + " kvm";
     }
 }
