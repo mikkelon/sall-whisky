@@ -83,6 +83,7 @@ public class FadePane extends GridPane {
         this.add(lblAlleFade, 5, 0);
 
         lvwFade = new ListView<>();
+        lvwFade.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> updatePåfyldninger());
         this.add(lvwFade, 5, 1,1,9);
 
         Separator sep3 = new Separator(Orientation.HORIZONTAL);
@@ -124,7 +125,21 @@ public class FadePane extends GridPane {
         cbxFadLeverandør.getItems().setAll(controller.getFadLeverandører());
     }
 
+    private void updateFade() {
+        lvwFade.getItems().setAll(controller.getAlleFade());
+    }
+
+    private void updatePåfyldninger() {
+        Fad valgtFade = lvwFade.getSelectionModel().getSelectedItem();
+        if (valgtFade != null) {
+            lvwPåfyldninger.getItems().setAll(valgtFade.getPåfyldninger());
+        } else {
+            lvwPåfyldninger.getItems().clear();
+        }
+    }
+
     public void updateControls() {
         updateFadleverandører();
+        updateFade();
     }
 }
