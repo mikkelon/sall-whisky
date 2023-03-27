@@ -130,15 +130,11 @@ public class Fad {
 
     /**
      * Tilføjer en påfyldning til fadet.
+     * Pre: påfyldning != null
      * @param påfyldning påfyldningen der skal tilføjes
      */
     public void addPåfyldning(Påfyldning påfyldning) {
-    	påfyldninger.add(påfyldning);
-        // Opdatér senestPåfyldt
-        if (senestPåfyldt == null) senestPåfyldt = påfyldning.getPåfyldningsDato();
-        else if (senestPåfyldt.isBefore(påfyldning.getPåfyldningsDato())) {
-            senestPåfyldt = påfyldning.getPåfyldningsDato();
-        }
+        påfyldninger.add(påfyldning);
     }
 
     /**

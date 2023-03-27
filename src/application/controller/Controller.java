@@ -3,6 +3,7 @@ package application.controller;
 import application.model.*;
 import storage.Storage;
 
+import java.time.LocalDate;
 import java.util.*;
 
 /**
@@ -179,6 +180,30 @@ public class Controller {
     public void removeFad(Fad fad) {
         fad.getHylde().removeFad(fad);
         fad.getFadLeverandør().fjernFad();
+    }
+
+    /**
+     * Returnerer alle fade
+     * Pre: destillat != null, fad != null, påfyldtAf != null, mængdeILiter > 0, påfyldningsDato != null
+     * @param destillat destillatet der skal fyldes på fadet
+     * @param fad fadet hvorpå påfyldningen skal foregå
+     * @param påfyldtAf navnet på den person der har påfyldt fadet
+     * @param mængdeILiter mængden af destillat i fadet i liter
+     * @param påfyldningsDato dato for påfyldning
+     * @return den oprettede påfyldning
+     */
+    public Påfyldning createPåfyldning(Destillat destillat, Fad fad, String påfyldtAf,
+                                       double mængdeILiter, LocalDate påfyldningsDato) {
+        Påfyldning påfyldning = new Påfyldning(destillat, fad, påfyldtAf, mængdeILiter, påfyldningsDato);
+
+        if (påfyldning.getMængdeILiter() > fad.getStørrelseILiter()) {
+            throw new RuntimeException("Påfyldningen er større end fadets størrelse.");
+        } else {
+            destillat.addPåfyldning(påfyldning);
+            fad.addPåfyldning(påfyldning);
+        }
+
+        return påfyldning;
     }
 
     /**
