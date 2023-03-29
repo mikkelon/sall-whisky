@@ -124,11 +124,13 @@ public class DestillatPane extends GridPane {
                 lblError.setText("Venligst indtast et navn på medarbejderen");
             } else if (alkoholProcent < 0) {
                 lblError.setText("Venligst indtast en positiv alkoholprocent");
-            } else if (antalDestilleringer < 0) {
+            } else if (alkoholProcent > 100) {
+                lblError.setText("Venligst indtast en alkoholprocent under 100%");
+            }else if (antalDestilleringer <= 0) {
                 lblError.setText("Venligst indtast et positivt antal destilleringer");
             } else if (startDato.isAfter(slutDato)) {
                 lblError.setText("Venligst indtast en startdato før slutdatoen");
-            } else if (mængdeILiter < 0) {
+            } else if (mængdeILiter <= 0) {
                 lblError.setText("Venligst indtast en positiv mængde i liter");
             } else if (rygeMateriale == null) {
                 lblError.setText("Venligst vælg et rygemateriale");

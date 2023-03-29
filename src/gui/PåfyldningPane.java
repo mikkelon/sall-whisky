@@ -127,6 +127,10 @@ public class PåfyldningPane extends GridPane {
         LocalDate påfyldningsDato = datePicker.getValue();
         double mængde = 0;
         try {
+            if (txtMængde.getText().trim().contains(","))
+            {
+                txtMængde.setText(txtMængde.getText().trim().replace(",", "."));
+            }
             mængde = Double.parseDouble(txtMængde.getText().trim());
         } catch (NumberFormatException e) {
             lblError.setText("Mængde skal være et tal");
