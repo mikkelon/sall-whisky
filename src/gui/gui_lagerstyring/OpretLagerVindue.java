@@ -129,8 +129,4 @@ public class OpretLagerVindue extends Stage {
 
 
     }
-
-    private void updateControls() {
-        //TODO
-    }
 }
