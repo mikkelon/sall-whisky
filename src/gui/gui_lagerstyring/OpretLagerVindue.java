@@ -92,9 +92,6 @@ public class OpretLagerVindue extends Stage {
         Button btnOpret = new Button("Opret");
         hBox.getChildren().add(btnOpret);
         btnOpret.setOnAction(event -> opretLagerAction());
-
-        // Opdatering af controls
-        updateControls();
     }
 
     private void opretLagerAction() {
