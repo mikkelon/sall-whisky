@@ -179,7 +179,8 @@ public class Fad {
     @Override
     public String toString() {
         String s = "#" + fadNr;
-        if (!påfyldninger.isEmpty()) s += " (" + getAlkoholProcent() + "%)";
+        if (!påfyldninger.isEmpty()) s += String.format(" (%.1f%%)", getAlkoholProcent());
+
         return s;
     }
 }
