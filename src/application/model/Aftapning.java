@@ -7,7 +7,7 @@ public class Aftapning {
     private double mængdeILiter;
     private LocalDate aftapningsDato;
     private Fad fad;
-    private Whisky whisky:
+    private Whisky whisky;
 
     public Aftapning(String aftappetAf, double mængdeILiter, LocalDate aftapningsDato, Fad fad, Whisky whisky) {
         this.aftappetAf = aftappetAf;
