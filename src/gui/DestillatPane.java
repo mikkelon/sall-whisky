@@ -94,7 +94,7 @@ public class DestillatPane extends GridPane {
         btnSletDestillat.setOnAction(event -> sletDestillatAction());
 
         //#--- Error label ---#
-        lblError = new Label("TEST");
+        lblError = new Label(" ");
         this.add(lblError,0,7,3,1);
         GridPane.setHalignment(lblError, HPos.CENTER);
         GridPane.setValignment(lblError, VPos.BOTTOM);
