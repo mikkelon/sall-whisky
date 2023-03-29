@@ -1,6 +1,7 @@
 package application.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
 
 /**
@@ -15,6 +16,7 @@ public class Fad {
     private FadLeverandør fadLeverandør;
     private HashSet<Påfyldning> påfyldninger;
     private LocalDate senestPåfyldt;
+    private ArrayList<Aftapning> aftapninger = new ArrayList<>();
 
     /**
      * Opretter et fad med en given størrelse, fadtype, fadleverandør og hylde.
@@ -182,5 +184,33 @@ public class Fad {
         if (!påfyldninger.isEmpty()) s += String.format(" (%.1f%%)", getAlkoholProcent());
 
         return s;
+    }
+
+    /**
+     * Returnerer en liste over aftapninger.
+     * @return en liste over aftapninger
+     */
+    public ArrayList<Aftapning> getAftapninger(){
+        return new ArrayList<>(aftapninger);
+    }
+
+    /**
+     * Tilføjer en aftapning til fadet.
+     * @param aftapning tilføjes til fadet
+     */
+    public void addAftapning(Aftapning aftapning){
+        if(aftapninger.contains(aftapning)){
+            aftapninger.add(aftapning);
+        }
+    }
+
+    /**
+     * Fjerner en aftapning fra fadet.
+     * @param aftapning fjernes fra fadet
+     */
+    public void removeAftapning(Aftapning aftapning){
+        if(aftapninger.contains(aftapning)){
+            aftapninger.remove(aftapning);
+        }
     }
 }
