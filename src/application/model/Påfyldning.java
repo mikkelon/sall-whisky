@@ -70,9 +70,6 @@ public class Påfyldning {
 
     @Override
     public String toString() {
-        return "New make: " + destillat.getNewMakeNr()
-                + "\nMængde: " + String.format("%.2f", mængdeILiter) + "L"
-                + "\nAnsat: " + påfyldtAf
-                + "\nDato: " + påfyldningsDato;
+        return "Påfyldning for fad " + fad.getFadNr() + " med destillat " + destillat.getNewMakeNr();
     }
 }

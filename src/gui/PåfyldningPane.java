@@ -67,7 +67,6 @@ public class PåfyldningPane extends GridPane {
 
         txtMængde = new TextField();
         hBoxMængde.getChildren().add(txtMængde);
-        GridPane.setHalignment(txtMængde, HPos.CENTER);
         txtMængde.setMaxSize(80, 20);
 
         Button btnMax = new Button("MAX");
