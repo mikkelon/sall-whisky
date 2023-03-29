@@ -81,6 +81,20 @@ public class FadePane extends GridPane {
         lvwPåfyldninger = new ListView<>();
         this.add(lvwPåfyldninger, 3, 1,1,6);
         lvwPåfyldninger.setMaxHeight(200);
+        lvwPåfyldninger.setCellFactory(param -> new ListCell<>() {
+            @Override
+            protected void updateItem(Påfyldning påfyldning, boolean empty) {
+                super.updateItem(påfyldning, empty);
+                if (empty || påfyldning == null) {
+                    setText(null);
+                } else {
+                    setText(String.format("New Make: %s\nMængde: %.2f\nAlkohol: %.2f%%\nDato: %s\nMedarbejder: %s",
+                            påfyldning.getDestillat().getNewMakeNr(), påfyldning.getMængdeILiter(),
+                            påfyldning.getDestillat().getAlkoholProcent(), påfyldning.getPåfyldningsDato(),
+                            påfyldning.getPåfyldtAf()));
+                }
+            }
+        });
 
         Separator sep2 = new Separator(Orientation.VERTICAL);
         this.add(sep2, 4, 0, 1, 11);
