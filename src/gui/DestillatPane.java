@@ -4,6 +4,7 @@ import application.controller.Controller;
 import application.model.Destillat;
 import application.model.RygeMateriale;
 import javafx.geometry.Orientation;
+import javafx.geometry.VPos;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.geometry.HPos;
@@ -12,6 +13,7 @@ import javafx.geometry.Insets;
 import java.time.LocalDate;
 
 public class DestillatPane extends GridPane {
+    private final Label lblError;
     private Controller controller = Controller.getController();
     private TextField txfnewMakeNummer = new TextField();
     private TextField txfMedarbejder = new TextField();
@@ -22,7 +24,7 @@ public class DestillatPane extends GridPane {
     private TextField txfMængdeILiter = new TextField();
     private ComboBox<RygeMateriale> cbxRygeMateriale = new ComboBox<>();
     private TextArea txaKommentarer = new TextArea();
-    private Button btnOpretDestillat = new Button("Opret");
+    private Button btnOpretFravælg = new Button("Opret");
     private ListView<Destillat> lvwDestillater = new ListView<>();
     private Button btnSletDestillat = new Button("Slet");
     public DestillatPane() {
@@ -80,18 +82,31 @@ public class DestillatPane extends GridPane {
         Label lblDestillater = new Label("Destillater");
         this.add(lblDestillater, 4, 0);
         this.add(lvwDestillater, 4, 1, 1, 7);
+        lvwDestillater.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> selectionChanged());
         lvwDestillater.getItems().setAll(controller.getDestillater());
 
-        this.add(btnOpretDestillat, 0, 9, 3, 1);
-        GridPane.setHalignment(btnOpretDestillat, HPos.CENTER);
-        btnOpretDestillat.setOnAction(event -> opretDestillatAction());
+        this.add(btnOpretFravælg, 0, 9, 3, 1);
+        GridPane.setHalignment(btnOpretFravælg, HPos.CENTER);
+        btnOpretFravælg.setOnAction(event -> opretFravælgAction());
 
         this.add(btnSletDestillat, 4, 9);
         GridPane.setHalignment(btnSletDestillat, HPos.CENTER);
         btnSletDestillat.setOnAction(event -> sletDestillatAction());
+
+        //#--- Error label ---#
+        lblError = new Label("TEST");
+        this.add(lblError,0,7,3,1);
+        GridPane.setHalignment(lblError, HPos.CENTER);
+        GridPane.setValignment(lblError, VPos.BOTTOM);
+        lblError.setStyle("-fx-text-fill: red");
     }
 
-    private void opretDestillatAction() {
+    private void clearError() {
+        lblError.setText(" ");
+    }
+
+    private void opretDestillat() {
+        clearError();
         try {
             String newMakeNummer = txfnewMakeNummer.getText().trim();
             String medarbejder = txfMedarbejder.getText().trim();
@@ -103,21 +118,29 @@ public class DestillatPane extends GridPane {
             RygeMateriale rygeMateriale = cbxRygeMateriale.getSelectionModel().getSelectedItem();
             String kommentarer = txaKommentarer.getText().trim();
 
-            controller.createDestillat(newMakeNummer, medarbejder, alkoholProcent, antalDestilleringer, startDato, slutDato, mængdeILiter, kommentarer, rygeMateriale);
-            updateControls();
-            clearFields();
+            if (newMakeNummer.isEmpty()) {
+                lblError.setText("Venligst indtast et New Make Nummer");
+            } else if (medarbejder.isEmpty()) {
+                lblError.setText("Venligst indtast et navn på medarbejderen");
+            } else if (alkoholProcent < 0) {
+                lblError.setText("Venligst indtast en positiv alkoholprocent");
+            } else if (antalDestilleringer < 0) {
+                lblError.setText("Venligst indtast et positivt antal destilleringer");
+            } else if (startDato.isAfter(slutDato)) {
+                lblError.setText("Venligst indtast en startdato før slutdatoen");
+            } else if (mængdeILiter < 0) {
+                lblError.setText("Venligst indtast en positiv mængde i liter");
+            } else if (rygeMateriale == null) {
+                lblError.setText("Venligst vælg et rygemateriale");
+            } else {
+                controller.createDestillat(newMakeNummer, medarbejder, alkoholProcent, antalDestilleringer, startDato, slutDato, mængdeILiter, kommentarer, rygeMateriale);
+                updateControls();
+                clearFields();
+            }
         } catch (NumberFormatException e) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Noget gik galt");
-            alert.setHeaderText(null);
-            alert.setContentText("Du skal udfylde alle felter korrekt");
-            alert.showAndWait();
+            lblError.setText("Venligst indtast tal i de relevante felter");
         } catch (RuntimeException e) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Noget gik galt");
-            alert.setHeaderText(null);
-            alert.setContentText(e.getMessage() + " Venligst ret fejlen og prøv igen.");
-            alert.showAndWait();
+            lblError.setText(e.getMessage());
         }
     }
 
@@ -165,5 +188,57 @@ public class DestillatPane extends GridPane {
         txfMængdeILiter.clear();
         cbxRygeMateriale.getSelectionModel().select(RygeMateriale.INTET);
         txaKommentarer.clear();
+    }
+
+    private void fillFields() {
+        Destillat destillat = lvwDestillater.getSelectionModel().getSelectedItem();
+        if (destillat != null) {
+            txfnewMakeNummer.setText(destillat.getNewMakeNr());
+            txfMedarbejder.setText(destillat.getMedarbejder());
+            txfAlkoholProcent.setText(String.valueOf(destillat.getAlkoholProcent()));
+            txfAntalDestilleringer.setText(String.valueOf(destillat.getAntalDestilleringer()));
+            datePickerStartDato.setValue(destillat.getStartDato());
+            datePickerSlutDato.setValue(destillat.getSlutDato());
+            txfMængdeILiter.setText(String.valueOf(destillat.getMængdeILiter()));
+            cbxRygeMateriale.getSelectionModel().select(destillat.getRygeMateriale());
+            txaKommentarer.setText(destillat.getKommentar());
+        }
+    }
+
+    private void selectionChanged() {
+        if (lvwDestillater.getSelectionModel().getSelectedItem() != null) {
+            btnSletDestillat.setDisable(false);
+            btnOpretFravælg.setText("Fravælg");
+            setControlsDisable(true);
+        } else {
+            btnSletDestillat.setDisable(true);
+            btnOpretFravælg.setText("Opret");
+            setControlsDisable(false);
+        }
+        fillFields();
+    }
+
+    private void opretFravælgAction() {
+        if (btnOpretFravælg.getText().equalsIgnoreCase("opret")) {
+            opretDestillat();
+        } else {
+            lvwDestillater.getSelectionModel().clearSelection();
+            clearFields();
+        }
+    }
+
+    private void setControlsDisable(boolean disable) {
+        txfnewMakeNummer.setEditable(!disable);
+        txfMedarbejder.setEditable(!disable);
+        txfAlkoholProcent.setEditable(!disable);
+        txfAntalDestilleringer.setEditable(!disable);
+        datePickerStartDato.setMouseTransparent(disable);
+        datePickerStartDato.setFocusTraversable(!disable);
+        datePickerSlutDato.setMouseTransparent(disable);
+        datePickerSlutDato.setFocusTraversable(!disable);
+        txfMængdeILiter.setEditable(!disable);
+        cbxRygeMateriale.setMouseTransparent(disable);
+        cbxRygeMateriale.setFocusTraversable(!disable);
+        txaKommentarer.setEditable(!disable);
     }
 }

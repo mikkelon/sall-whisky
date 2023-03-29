@@ -8,10 +8,16 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 
-import java.nio.channels.Pipe;
-
 public class FadePane extends GridPane {
     private final ComboBox<FadLeverandør> cbxFadLeverandør;
+    private final TextField txfStørrelse;
+    private final ComboBox<Lager> cbxLager;
+    private final ComboBox<FadType> cbxFadType;
+    private final ComboBox<Hylde> cbxHylde;
+    private final Button btnOpretFravælg;
+    private final Button btnOpretLeverandør;
+    private final Label lblError;
+    private final Button btnSlet;
     private Controller controller = Controller.getController();
     private ListView<Påfyldning> lvwPåfyldninger;
     private ListView<Fad> lvwFade;
@@ -30,15 +36,16 @@ public class FadePane extends GridPane {
         cbxFadLeverandør.setMaxWidth(150);
         this.add(cbxFadLeverandør, 0, 1);
 
-        Button btnNyLeverandør = new Button("Opret fadleverandør");
-        btnNyLeverandør.setOnAction(event -> opretFadLeverandørAction());
-        this.add(btnNyLeverandør, 0, 2, 1, 2);
-        GridPane.setValignment(btnNyLeverandør, VPos.TOP);
+        btnOpretLeverandør = new Button("Opret fadleverandør");
+        btnOpretLeverandør.setOnAction(event -> opretFadLeverandørAction());
+        this.add(btnOpretLeverandør, 0, 2, 1, 2);
+        GridPane.setValignment(btnOpretLeverandør, VPos.TOP);
 
         Label lblLager = new Label("Lager");
         this.add(lblLager, 0, 4);
 
-        ComboBox<Lager> cbxLager = new ComboBox<>();
+        cbxLager = new ComboBox<>();
+        cbxLager.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.updateHylde());
         GridPane.setValignment(cbxLager, VPos.TOP);
         cbxLager.setMinWidth(150);
         cbxLager.setMaxWidth(150);
@@ -47,19 +54,19 @@ public class FadePane extends GridPane {
         Label lblStørrelse = new Label("Størrelse (Liter)");
         this.add(lblStørrelse, 1,0);
 
-        TextField txfStørrelse = new TextField();
+        txfStørrelse = new TextField();
         this.add(txfStørrelse, 1, 1);
 
         Label lblFadType = new Label("Fadtype");
         this.add(lblFadType, 1, 2);
 
-        TextField txfFadType = new TextField();
-        this.add(txfFadType, 1, 3);
+        cbxFadType = new ComboBox<>();
+        this.add(cbxFadType, 1, 3);
 
         Label lblHylde = new Label("Hylde");
         this.add(lblHylde, 1, 4);
 
-        ComboBox<Hylde> cbxHylde = new ComboBox<>();
+        cbxHylde = new ComboBox<>();
         GridPane.setValignment(cbxHylde, VPos.TOP);
         cbxHylde.setMinWidth(150);
         cbxHylde.setMaxWidth(150);
@@ -67,7 +74,6 @@ public class FadePane extends GridPane {
 
         Separator sep1 = new Separator(Orientation.VERTICAL);
         this.add(sep1, 2, 0,1,7);
-
 
         Label lblPåfyldninger = new Label("Påfyldninger");
         this.add(lblPåfyldninger, 3, 0);
@@ -83,20 +89,27 @@ public class FadePane extends GridPane {
         this.add(lblAlleFade, 5, 0);
 
         lvwFade = new ListView<>();
-        lvwFade.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> updatePåfyldninger());
+        lvwFade.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> selectionChanged());
         this.add(lvwFade, 5, 1,1,9);
 
         Separator sep3 = new Separator(Orientation.HORIZONTAL);
         this.add(sep3, 0, 7,4, 1);
 
-        Button btnOpret = new Button("Opret");
-        this.add(btnOpret, 0, 8, 2, 1);
-        GridPane.setHalignment(btnOpret, HPos.CENTER);
+        btnOpretFravælg = new Button("Opret");
+        btnOpretFravælg.setOnAction(event -> opretFravælgAction());
+        this.add(btnOpretFravælg, 0, 8, 2, 1);
+        GridPane.setHalignment(btnOpretFravælg, HPos.CENTER);
 
-        Button btnSlet = new Button("Slet");
+        btnSlet = new Button("Slet");
+        btnSlet.setOnAction(event -> sletAction());
         this.add(btnSlet, 5, 10);
         GridPane.setHalignment(btnSlet, HPos.CENTER);
 
+        // #--- ErrorLabel ---#
+        lblError = new Label(" ");
+        this.add(lblError, 0,6,2,1);
+        GridPane.setHalignment(lblError, HPos.CENTER);
+        lblError.setStyle("-fx-text-fill: red");
 
         // #--- Add row constraints ---#
         for (int i = 0; i < this.getRowCount(); i++) {
@@ -104,15 +117,46 @@ public class FadePane extends GridPane {
             this.getRowConstraints().add(row);
         }
 
+        // Set row constraints
+
         RowConstraints row5 = this.getRowConstraints().get(5);
         row5.setVgrow(Priority.ALWAYS);
 
-        // Set row constraint for row 6
         RowConstraints row6 = this.getRowConstraints().get(6);
         row6.setVgrow(Priority.NEVER);
 
         // #--- Update controls ---#
         updateControls();
+    }
+
+    private void selectionChanged() {
+        clearError();
+        if (lvwFade.getSelectionModel().getSelectedItem() != null) {
+            btnOpretFravælg.setText("Fravælg");
+            updatePåfyldninger();
+            setControlsDisabled(true);
+            getInfo();
+            btnSlet.setDisable(false);
+        } else {
+            btnOpretFravælg.setText("Opret");
+            updatePåfyldninger();
+            setControlsDisabled(false);
+            clearInfo();
+            btnSlet.setDisable(true);
+        }
+    }
+
+    private void setControlsDisabled(Boolean b) {
+        cbxFadLeverandør.setMouseTransparent(b);
+        cbxFadLeverandør.setFocusTraversable(!b);
+        txfStørrelse.setEditable(!b);
+        cbxFadType.setMouseTransparent(b);
+        cbxFadType.setFocusTraversable(!b);
+        cbxLager.setMouseTransparent(b);
+        cbxLager.setFocusTraversable(!b);
+        cbxHylde.setMouseTransparent(b);
+        cbxHylde.setFocusTraversable(!b);
+        btnOpretLeverandør.setDisable(b);
     }
 
     private void opretFadLeverandørAction(){
@@ -129,6 +173,21 @@ public class FadePane extends GridPane {
         lvwFade.getItems().setAll(controller.getAlleFade());
     }
 
+    private void updateInfo() {
+        cbxFadLeverandør.getItems().setAll(controller.getFadLeverandører());
+        cbxFadType.getItems().setAll(FadType.values());
+        cbxLager.getItems().setAll(controller.getLagre());
+    }
+
+    private void updateHylde() {
+        Lager valgtLager = cbxLager.getSelectionModel().getSelectedItem();
+        if (valgtLager != null) {
+            cbxHylde.getItems().setAll(valgtLager.getHylder());
+        } else {
+            cbxHylde.getItems().clear();
+        }
+    }
+
     private void updatePåfyldninger() {
         Fad valgtFade = lvwFade.getSelectionModel().getSelectedItem();
         if (valgtFade != null) {
@@ -138,8 +197,88 @@ public class FadePane extends GridPane {
         }
     }
 
+    private void getInfo() {
+        Fad valgtFad = lvwFade.getSelectionModel().getSelectedItem();
+        if (valgtFad != null) {
+            cbxFadLeverandør.getSelectionModel().select(valgtFad.getFadLeverandør());
+            txfStørrelse.setText(String.valueOf(valgtFad.getStørrelseILiter()));
+            cbxFadType.getSelectionModel().select(valgtFad.getFadType());
+            cbxHylde.getSelectionModel().select(valgtFad.getHylde());
+            cbxLager.getSelectionModel().select(valgtFad.getHylde().getLager());
+        }
+    }
+
+    private void clearInfo() {
+        cbxFadLeverandør.getSelectionModel().clearSelection();
+        txfStørrelse.clear();
+        cbxFadType.getSelectionModel().clearSelection();
+        cbxHylde.getItems().clear();
+        cbxHylde.setValue(null);
+        cbxLager.getSelectionModel().clearSelection();
+    }
+
     public void updateControls() {
         updateFadleverandører();
         updateFade();
+        updatePåfyldninger();
+        updateInfo();
+    }
+
+    private void opretFravælgAction() {
+        clearError();
+        if (btnOpretFravælg.getText().equalsIgnoreCase("opret")) {
+            FadLeverandør fadLeverandør = cbxFadLeverandør.getSelectionModel().getSelectedItem();
+            FadType fadType = cbxFadType.getSelectionModel().getSelectedItem();
+            Hylde hylde = cbxHylde.getSelectionModel().getSelectedItem();
+            double størrelse = 0;
+            try {
+                størrelse = Double.parseDouble(txfStørrelse.getText());
+            } catch (NumberFormatException e) {
+                lblError.setText("Størrelse skal være et tal");
+                return;
+            }
+
+            if (fadLeverandør == null) {
+                lblError.setText("Vælg en leverandør");
+            } else if (fadType == null) {
+                lblError.setText("Vælg en fadtype");
+            } else if (størrelse == 0) {
+                lblError.setText("Vælg en størrelse");
+            } else if (størrelse < 0) {
+                lblError.setText("Størrelse skal være større end 0");
+            } else if (hylde == null) {
+                lblError.setText("Vælg en hylde");
+            }
+            else {
+                controller.createFad(fadType, størrelse, fadLeverandør, hylde);
+                clearInfo();
+                updateFade();
+            }
+        } else {
+            lvwFade.getSelectionModel().clearSelection();
+            clearInfo();
+        }
+    }
+
+    private void sletAction() {
+        Fad valgtFad = lvwFade.getSelectionModel().getSelectedItem();
+        BekræftSletVindue vindue = new BekræftSletVindue("Slet fad");
+        vindue.showAndWait();
+        if (vindue.getValg()) {
+            controller.removeFad(valgtFad);
+            updateFade();
+            clearInfo();
+        }
+        clearError();
+    }
+
+    private void clearError() {
+        lblError.setText(" ");
+    }
+
+    public void setFad(Fad fad) {
+        if (fad != null && lvwFade.getItems().contains(fad)) {
+            lvwFade.getSelectionModel().select(fad);
+        }
     }
 }

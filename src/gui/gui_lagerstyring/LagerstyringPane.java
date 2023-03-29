@@ -6,13 +6,17 @@ import application.model.Fad;
 import application.model.Hylde;
 import application.model.Lager;
 import gui.BekræftSletVindue;
+import gui.StartVindue;
+import gui.FadePane;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 
 public class LagerstyringPane extends GridPane {
     private Label lblError;
@@ -20,13 +24,18 @@ public class LagerstyringPane extends GridPane {
     private ListView<Lager> lvwLagre;
     private ListView<Hylde> lvwHylder;
     private ListView<Fad> lvwFade;
-    private ListView<Destillat> lvwDestillater;
+    private StartVindue startVindue;
 
-    public LagerstyringPane() {
+    public LagerstyringPane(StartVindue startVindue) {
         this.setPadding(new Insets(10));
         this.setHgap(10);
         this.setVgap(10);
         this.setGridLinesVisible(false);
+
+        this.startVindue = startVindue;
+
+        // #--- Faste variabler ---#
+        final double LVW_WIDTH = 250;
 
         // #--- Lagre ---#
         Label lblLagre = new Label("Lagre");
@@ -34,12 +43,14 @@ public class LagerstyringPane extends GridPane {
 
         lvwLagre = new ListView<>();
         lvwLagre.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> updateHylder());
-        lvwLagre.setMinWidth(200);
-        lvwLagre.setMaxWidth(200);
+        lvwLagre.setMinWidth(LVW_WIDTH);
+        lvwLagre.setMaxWidth(LVW_WIDTH);
         lvwLagre.setMinHeight(400);
         this.add(lvwLagre, 0, 1);
 
         HBox hBoxLagre = new HBox(10);
+        hBoxLagre.setAlignment(Pos.CENTER);
+        GridPane.setHalignment(hBoxLagre, HPos.CENTER);
         this.add(hBoxLagre, 0, 2);
 
         Button btnOpretLager = new Button("Opret Lager");
@@ -55,13 +66,15 @@ public class LagerstyringPane extends GridPane {
         this.add(lblHylder, 1, 0);
 
         lvwHylder = new ListView<>();
-        lvwHylder.setMinWidth(200);
-        lvwHylder.setMaxWidth(200);
+        lvwHylder.setMinWidth(LVW_WIDTH);
+        lvwHylder.setMaxWidth(LVW_WIDTH);
         lvwHylder.setMinHeight(400);
         lvwHylder.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> updateFade());
         this.add(lvwHylder, 1, 1);
 
         HBox hBoxHylder = new HBox(10);
+        hBoxHylder.setAlignment(Pos.CENTER);
+        GridPane.setHalignment(hBoxHylder, HPos.CENTER);
         this.add(hBoxHylder, 1, 2);
 
         Button btnOpretHylde = new Button("Opret Hylde");
@@ -77,37 +90,21 @@ public class LagerstyringPane extends GridPane {
         this.add(lblFade, 2, 0);
 
         lvwFade = new ListView<>();
-        lvwFade.setMinWidth(200);
-        lvwFade.setMaxWidth(200);
+        lvwFade.setMinWidth(LVW_WIDTH);
+        lvwFade.setMaxWidth(LVW_WIDTH);
         lvwFade.setMinHeight(400);
         this.add(lvwFade, 2, 1);
 
-        HBox hBoxFade = new HBox(10);
-        this.add(hBoxFade, 2, 2);
-
-        Button btnOpretFad = new Button("Opret Fad");
-        btnOpretFad.setOnAction(event -> opretFad());
-        hBoxFade.getChildren().add(btnOpretFad);
-
-        Button btnSletFad = new Button("Slet Fad");
-        btnSletFad.setOnAction(event -> sletFad());
-        hBoxFade.getChildren().add(btnSletFad);
-
-        // #--- Destillater ---#
-        Label lblDestillater = new Label("Destillater");
-        this.add(lblDestillater, 3, 0);
-
-        lvwDestillater = new ListView<>();
-        lvwDestillater.setMinWidth(200);
-        lvwDestillater.setMaxWidth(200);
-        lvwDestillater.setMinHeight(400);
-        this.add(lvwDestillater, 3, 1);
+        Button btnVisFad = new Button("Vis");
+        btnVisFad.setOnAction(event -> visFad());
+        this.add(btnVisFad, 2, 2);
+        GridPane.setHalignment(btnVisFad, HPos.CENTER);
 
         // #--- Error label ---#
-        lblError = new Label(" ");
-        this.add(lblError, 0, 3, 4, 1);
-        GridPane.setHalignment(lblError, HPos.CENTER);
+        lblError = new Label();
         lblError.setStyle("-fx-text-fill: red");
+        this.add(lblError, 0, 3, 3, 1);
+        GridPane.setHalignment(lblError, HPos.CENTER);
 
         // #--- Opdatér listviews ---#
         updateControls();
@@ -174,45 +171,10 @@ public class LagerstyringPane extends GridPane {
         }
     }
 
-    private void opretFad() {
-        clearError();
-        Hylde valgtHylde = lvwHylder.getSelectionModel().getSelectedItem();
-        if (valgtHylde != null) {
-            OpretFadVindue window = new OpretFadVindue(valgtHylde);
-            window.showAndWait();
-            updateFade();
-            clearError();
-        } else {
-            lblError.setText("Vælg en hylde");
-        }
-    }
-
-    private void sletFad() {
-        clearError();
-        Fad valgtFad = lvwFade.getSelectionModel().getSelectedItem();
-        if (valgtFad != null) {
-            BekræftSletVindue window = new BekræftSletVindue("Slet fad");
-            window.showAndWait();
-            boolean valg = window.getValg();
-            if (valg) {
-                try {
-                    controller.removeFad(valgtFad);
-                }
-                catch (RuntimeException e) {
-                    lblError.setText(e.getMessage());
-                }
-                updateFade();
-            }
-        } else {
-            lblError.setText("Vælg et fad");
-        }
-    }
-
     public void updateControls() {
         updateLagre();
         updateHylder();
         updateFade();
-        updateDestillater();
     }
 
     private void updateLagre() {
@@ -228,6 +190,20 @@ public class LagerstyringPane extends GridPane {
         }
     }
 
+    private void visFad() {
+        clearError();
+        Fad valgtFad = lvwFade.getSelectionModel().getSelectedItem();
+        if (valgtFad != null) {
+            Pane pane = startVindue.skiftTab(1);
+            if (pane != null) {
+                FadePane fadPane = (FadePane) pane;
+                fadPane.setFad(valgtFad);
+            }
+        } else {
+            lblError.setText("Vælg et fad");
+        }
+    }
+
     private void updateFade() {
         Hylde valgtHylde = lvwHylder.getSelectionModel().getSelectedItem();
         if (valgtHylde != null) {
@@ -237,11 +213,7 @@ public class LagerstyringPane extends GridPane {
         }
     }
 
-    private void updateDestillater() {
-        lvwDestillater.getItems().setAll(controller.getDestillater());
-    }
-
-    private void clearError() {
+   private void clearError() {
         lblError.setText("");
     }
 }
