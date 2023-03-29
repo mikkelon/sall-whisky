@@ -1,4 +1,4 @@
 package application.model;
 
-public enum Betegnelse {SINGLEMALT, SINGLECASK, BLENDED
+public enum Betegnelse {SINGLE_MALT, SINGLE_CASK, BLENDED
 }
