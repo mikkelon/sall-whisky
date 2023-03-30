@@ -203,14 +203,4 @@ public class Fad {
             aftapninger.add(aftapning);
         }
     }
-
-    /**
-     * Fjerner en aftapning fra fadet.
-     * @param aftapning fjernes fra fadet
-     */
-    public void removeAftapning(Aftapning aftapning){
-        if(aftapninger.contains(aftapning)){
-            aftapninger.remove(aftapning);
-        }
-    }
 }
