@@ -34,7 +34,7 @@ class WhiskyTest {
 
 
     @Test
-    void addAftapning() {
+    void addAftapningTC2() {
         //Her tester vi om at vi kan tilføje en aftapning til en whisky
         Lager lager = new Lager("Baldersgade 39", "Sall Whisky Lager", 100);
         Hylde hylde = new Hylde(lager);
