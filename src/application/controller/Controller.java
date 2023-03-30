@@ -189,6 +189,12 @@ public class Controller {
         fad.getFadLeverandør().fjernFad();
     }
 
+    /**
+     * Returnerer alle fade sorteret for et givent lager
+     * @param lager lageret
+     * @return alle fade sorteret i et givent lager
+     * Pre: lager != null
+     */
     public ArrayList<Fad> getFadeFraLagerSorteret(Lager lager) {
         ArrayList<Fad> fade = new ArrayList<>();
         for (Hylde hylde : lager.getHylder()) {
@@ -198,6 +204,10 @@ public class Controller {
         return fade;
     }
 
+    /**
+     * Returnerer alle fade fra alle lagre.
+     * @return alle fade fra alle lagre
+     */
     public TreeSet<Fad> getAlleFade() {
         TreeSet<Fad> alleFade = new TreeSet<>((a,b) -> a.getFadNr() - b.getFadNr());
         for (Lager lager : getLagre()) {

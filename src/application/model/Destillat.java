@@ -166,11 +166,6 @@ public class Destillat {
         return resterendeMængde;
     }
 
-    @Override
-    public String toString() {
-        return newMakeNr;
-    }
-
     /**
      * Returnerer en liste over maltbatches.
      * @return en liste over maltbatches
@@ -197,5 +192,10 @@ public class Destillat {
         if(maltbatches.contains(maltbatch)){
             maltbatches.remove(maltbatch);
         }
+    }
+
+    @Override
+    public String toString() {
+        return newMakeNr;
     }
 }
