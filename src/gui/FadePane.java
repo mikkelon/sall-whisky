@@ -15,6 +15,7 @@ public class FadePane extends GridPane {
     private final ComboBox<Lager> cbxLager;
     private final ComboBox<FadType> cbxFadType;
     private final ComboBox<Hylde> cbxHylde;
+    private final Button btnRegistrerAlkoholprocent = new Button("Registrer alkoholprocent...");
     private final Button btnOpretFravælg;
     private final Button btnOpretLeverandør;
     private final Label lblError;
@@ -120,6 +121,9 @@ public class FadePane extends GridPane {
         this.add(btnSlet, 5, 10);
         GridPane.setHalignment(btnSlet, HPos.CENTER);
 
+        this.add(btnRegistrerAlkoholprocent, 0, 6);
+        btnRegistrerAlkoholprocent.setOnAction(event -> registrerAlkoholprocentAction());
+
         // #--- ErrorLabel ---#
         lblError = new Label(" ");
         this.add(lblError, 0,6,2,1);
@@ -142,6 +146,11 @@ public class FadePane extends GridPane {
 
         // #--- Update controls ---#
         updateControls();
+    }
+
+    private void registrerAlkoholprocentAction() {
+        RegistrerAlkoholProcentVindue registrerAlkoholProcentVindue = new RegistrerAlkoholProcentVindue();
+        registrerAlkoholProcentVindue.showAndWait();
     }
 
     private void selectionChanged() {
