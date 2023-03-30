@@ -1,7 +1,6 @@
 package gui.gui_lagerstyring;
 
 import application.controller.ControllerForLager;
-import application.controller.ControllerForProduktion;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -15,7 +14,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class OpretLagerVindue extends Stage {
-    private ControllerForProduktion controllerForProduktion = ControllerForProduktion.getController();
     private ControllerForLager controllerForLager = ControllerForLager.getController();
 
     public OpretLagerVindue() {
