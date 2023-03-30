@@ -15,6 +15,7 @@ public class StartVindue extends Application {
     private TabPane tabPane;
     @Override
     public void init() {
+        controllerForLager.initMockData();
         controllerForProduktion.initMockData();
     }
 
