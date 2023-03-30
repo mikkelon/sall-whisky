@@ -29,6 +29,7 @@ public class Aftapning {
         this.whisky = whisky;
     }
 
+
     /**
      * Returnerer navnet på den person der har aftappet fadet.
      * @return navnet på den person der har aftappet fadet

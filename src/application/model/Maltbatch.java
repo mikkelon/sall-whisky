@@ -66,4 +66,5 @@ public class Maltbatch {
     public boolean isØkologisk() {
         return økologisk;
     }
+
 }

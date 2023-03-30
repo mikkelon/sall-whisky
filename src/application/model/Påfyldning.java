@@ -73,3 +73,5 @@ public class Påfyldning {
         return "Påfyldning for fad " + fad.getFadNr() + " med destillat " + destillat.getNewMakeNr();
     }
 }
+
+

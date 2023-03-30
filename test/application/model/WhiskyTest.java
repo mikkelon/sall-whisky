@@ -19,21 +19,17 @@ class WhiskyTest {
 
     @Test
     void constructorTC1() {
-        //Tester om hylde nummeret tæller op korrekt
+        //Her tester vi om at vi kan lave et nyt objekt af Whisky
         //Her får vi også testet alle get() metoderne undtagen for list.
         assertEquals(43.0, whisky.getAlkoholProcent());
         assertEquals(Betegnelse.SINGLECASK, whisky.getBetegnelse());
         assertEquals(0.7, whisky.getMængdeVandILiter());
         assertEquals("Kilde vand", whisky.getVandAfstamning());
         assertEquals("En god whisky", whisky.getTekstBeskrivelse());
-        // Der mangler at blive testet getWhiskyNr()
-    }
 
-    @Test
-    void getWhiskyNr() {
-        //Her tester vi igen om at den tæller op på whisky nummeret når vi laver et nyt objekt
+        //Test at whiskynr tæller 1 op for hver gang der oprettes en ny whisky
         Whisky whisky1 = new Whisky(40.0, Betegnelse.SINGLECASK, 0.7, "Kilde vand", "En god whisky");
-        assertEquals(2, whisky1.getWhiskyNr());
+        assertEquals(whisky.getWhiskyNr() +1, whisky1.getWhiskyNr());
     }
 
 
