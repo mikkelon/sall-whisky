@@ -1,6 +1,6 @@
 package gui;
 
-import application.controller.Controller;
+import application.controller.ControllerForProduktion;
 import gui.gui_lagerstyring.LagerstyringPane;
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -11,11 +11,11 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class StartVindue extends Application {
-    private Controller controller = Controller.getController();
+    private ControllerForProduktion controllerForProduktion = ControllerForProduktion.getController();
     private TabPane tabPane;
     @Override
     public void init() {
-        controller.initMockData();
+        controllerForProduktion.initMockData();
     }
 
     @Override

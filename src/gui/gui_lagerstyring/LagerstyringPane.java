@@ -1,7 +1,7 @@
 package gui.gui_lagerstyring;
 
-import application.controller.Controller;
-import application.model.Destillat;
+import application.controller.ControllerForLager;
+import application.controller.ControllerForProduktion;
 import application.model.Fad;
 import application.model.Hylde;
 import application.model.Lager;
@@ -20,7 +20,8 @@ import javafx.scene.layout.Pane;
 
 public class LagerstyringPane extends GridPane {
     private Label lblError;
-    private Controller controller = Controller.getController();
+    private ControllerForProduktion controllerForProduktion = ControllerForProduktion.getController();
+    private ControllerForLager controllerForLager = ControllerForLager.getController();
     private ListView<Lager> lvwLagre;
     private ListView<Hylde> lvwHylder;
     private ListView<Fad> lvwFade;
@@ -126,7 +127,7 @@ public class LagerstyringPane extends GridPane {
             boolean valg = window.getValg();
             if (valg) {
                 try {
-                    controller.removeLager(valgtLager);
+                    controllerForLager.removeLager(valgtLager);
                 }
                 catch (RuntimeException e) {
                     lblError.setText(e.getMessage());
@@ -142,7 +143,7 @@ public class LagerstyringPane extends GridPane {
         clearError();
         Lager valgtLager = lvwLagre.getSelectionModel().getSelectedItem();
         if (valgtLager != null) {
-            controller.createHylde(valgtLager);
+            controllerForLager.createHylde(valgtLager);
             updateHylder();
             clearError();
         } else {
@@ -159,7 +160,7 @@ public class LagerstyringPane extends GridPane {
             boolean valg = window.getValg();
             if (valg) {
                 try {
-                    controller.removeHylde(valgtHylde);
+                    controllerForLager.removeHylde(valgtHylde);
                 }
                 catch (RuntimeException e) {
                     lblError.setText(e.getMessage());
@@ -178,13 +179,13 @@ public class LagerstyringPane extends GridPane {
     }
 
     private void updateLagre() {
-        lvwLagre.getItems().setAll(controller.getLagre());
+        lvwLagre.getItems().setAll(controllerForLager.getLagre());
     }
 
     private void updateHylder() {
         Lager valgtLager = lvwLagre.getSelectionModel().getSelectedItem();
         if (valgtLager != null) {
-            lvwHylder.getItems().setAll(controller.getHylder(valgtLager));
+            lvwHylder.getItems().setAll(controllerForLager.getHylder(valgtLager));
         } else {
             lvwHylder.getItems().clear();
         }

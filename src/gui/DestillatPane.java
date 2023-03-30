@@ -1,6 +1,6 @@
 package gui;
 
-import application.controller.Controller;
+import application.controller.ControllerForProduktion;
 import application.model.Destillat;
 import application.model.RygeMateriale;
 import javafx.geometry.Orientation;
@@ -14,7 +14,7 @@ import java.time.LocalDate;
 
 public class DestillatPane extends GridPane {
     private final Label lblError;
-    private Controller controller = Controller.getController();
+    private ControllerForProduktion controllerForProduktion = ControllerForProduktion.getController();
     private TextField txfnewMakeNummer = new TextField();
     private TextField txfMedarbejder = new TextField();
     private TextField txfAlkoholProcent = new TextField();
@@ -83,7 +83,7 @@ public class DestillatPane extends GridPane {
         this.add(lblDestillater, 4, 0);
         this.add(lvwDestillater, 4, 1, 1, 7);
         lvwDestillater.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> selectionChanged());
-        lvwDestillater.getItems().setAll(controller.getDestillater());
+        lvwDestillater.getItems().setAll(controllerForProduktion.getDestillater());
 
         this.add(btnOpretFravælg, 0, 9, 3, 1);
         GridPane.setHalignment(btnOpretFravælg, HPos.CENTER);
@@ -135,7 +135,7 @@ public class DestillatPane extends GridPane {
             } else if (rygeMateriale == null) {
                 lblError.setText("Venligst vælg et rygemateriale");
             } else {
-                controller.createDestillat(newMakeNummer, medarbejder, alkoholProcent, antalDestilleringer, startDato, slutDato, mængdeILiter, kommentarer, rygeMateriale);
+                controllerForProduktion.createDestillat(newMakeNummer, medarbejder, alkoholProcent, antalDestilleringer, startDato, slutDato, mængdeILiter, kommentarer, rygeMateriale);
                 updateControls();
                 clearFields();
             }
@@ -154,7 +154,7 @@ public class DestillatPane extends GridPane {
             boolean valg = window.getValg();
             if (valg) {
                 try {
-                    controller.removeDestillat(valgtDestillat);
+                    controllerForProduktion.removeDestillat(valgtDestillat);
                 }
                 catch (RuntimeException e) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -165,7 +165,7 @@ public class DestillatPane extends GridPane {
                 }
                 updateControls();
             }
-            controller.removeDestillat(valgtDestillat);
+            controllerForProduktion.removeDestillat(valgtDestillat);
             updateControls();
         } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -177,7 +177,7 @@ public class DestillatPane extends GridPane {
     }
 
     private void updateControls() {
-        lvwDestillater.getItems().setAll(controller.getDestillater());
+        lvwDestillater.getItems().setAll(controllerForProduktion.getDestillater());
     }
 
     private void clearFields() {
