@@ -178,14 +178,6 @@ public class Fad {
         return væske > 0 ? alkohol / væske * 100 : 0.0;
     }
 
-    @Override
-    public String toString() {
-        String s = "#" + fadNr;
-        if (!påfyldninger.isEmpty()) s += String.format(" (%.1f%%)", getAlkoholProcent());
-
-        return s;
-    }
-
     /**
      * Returnerer en liste over aftapninger.
      * @return en liste over aftapninger
@@ -202,5 +194,13 @@ public class Fad {
         if(aftapninger.contains(aftapning)){
             aftapninger.add(aftapning);
         }
+    }
+
+    @Override
+    public String toString() {
+        String s = "#" + fadNr;
+        if (!påfyldninger.isEmpty()) s += String.format(" (%.1f%%)", getAlkoholProcent());
+
+        return s;
     }
 }
