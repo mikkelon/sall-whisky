@@ -17,8 +17,8 @@ public class Destillat {
     private double mængdeILiter;
     private String kommentar;
     private RygeMateriale rygeMateriale;
-
     private HashSet <Påfyldning> påfyldninger = new HashSet<>();
+    private ArrayList<Maltbatch> maltbatches = new ArrayList<>();
 
     /**
      * Opretter et nyt destillat med angivet parametre.
@@ -164,6 +164,34 @@ public class Destillat {
             resterendeMængde -= påfyldning.getMængdeILiter();
         }
         return resterendeMængde;
+    }
+
+    /**
+     * Returnerer en liste over maltbatches.
+     * @return en liste over maltbatches
+     */
+    public ArrayList<Maltbatch> getMaltbatches(){
+        return new ArrayList<>(maltbatches);
+    }
+
+    /**
+     * Tilføjer et maltbatch til destillatet.
+     * @param maltbatch tilføjes til destillatet
+     */
+    public void addMaltbatch(Maltbatch maltbatch){
+        if(!maltbatches.contains(maltbatch)){
+            maltbatches.add(maltbatch);
+        }
+    }
+
+    /**
+     * Fjerner et maltbatch fra destillatet.
+     * @param maltbatch fjernes fra destillatet
+     */
+    public void removeMaltbatch(Maltbatch maltbatch){
+        if(maltbatches.contains(maltbatch)){
+            maltbatches.remove(maltbatch);
+        }
     }
 
     @Override

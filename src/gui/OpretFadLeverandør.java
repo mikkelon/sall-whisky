@@ -2,6 +2,7 @@ package gui;
 
 import application.controller.Controller;
 import application.model.FadLeverandør;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -59,7 +60,7 @@ public class OpretFadLeverandør extends Stage {
         HBox hBoxBtns = new HBox();
         hBoxBtns.setSpacing(10);
         hBoxBtns.setAlignment(Pos.CENTER);
-        pane.add(hBoxBtns, 0, 4);
+        pane.add(hBoxBtns, 0, 5);
 
         Button btnOpret = new Button("Opret");
         hBoxBtns.getChildren().add(btnOpret);
@@ -71,6 +72,8 @@ public class OpretFadLeverandør extends Stage {
 
         lblError = new Label(" ");
         pane.add(lblError,0, 4);
+        lblError.setStyle("-fx-text-fill: red");
+        GridPane.setHalignment(lblError, HPos.CENTER);
     }
 
     private void opretAction(){
