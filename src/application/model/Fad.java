@@ -159,6 +159,8 @@ public class Fad {
      * @return forventet færdigproduceret dato
      */
     public LocalDate forventetFærdigproduceret() {
+        if (senestPåfyldt == null)
+            return null;
         return senestPåfyldt.plusYears(3);
     }
 
