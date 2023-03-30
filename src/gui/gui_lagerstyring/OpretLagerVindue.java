@@ -17,6 +17,7 @@ import javafx.stage.StageStyle;
 public class OpretLagerVindue extends Stage {
     private ControllerForProduktion controllerForProduktion = ControllerForProduktion.getController();
     private ControllerForLager controllerForLager = ControllerForLager.getController();
+
     public OpretLagerVindue() {
         this.initStyle(StageStyle.DECORATED);
         this.initModality(Modality.APPLICATION_MODAL);
@@ -33,6 +34,7 @@ public class OpretLagerVindue extends Stage {
         Scene scene = new Scene(pane);
         this.setScene(scene);
     }
+
     private TextField txfAdresse, txfNavn, txfKvm, txfAntalHylder;
     private Label lblError;
 
@@ -119,7 +121,6 @@ public class OpretLagerVindue extends Stage {
                 this.close();
             }
         }
-
 
     }
 }
