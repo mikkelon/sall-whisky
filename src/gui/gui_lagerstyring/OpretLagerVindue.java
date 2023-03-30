@@ -92,9 +92,6 @@ public class OpretLagerVindue extends Stage {
         Button btnOpret = new Button("Opret");
         hBox.getChildren().add(btnOpret);
         btnOpret.setOnAction(event -> opretLagerAction());
-
-        // Opdatering af controls
-        updateControls();
     }
 
     private void opretLagerAction() {
@@ -119,8 +116,8 @@ public class OpretLagerVindue extends Stage {
                 lblError.setText("Antal hylder skal være et tal");
                 return;
             }
-            if (kvm < 0) lblError.setText("Kvm skal være større end 0");
-            else if (antalHylder < 0) lblError.setText("Antal hylder skal være større end 0");
+            if (kvm <= 0) lblError.setText("Kvm skal være større end 0");
+            else if (antalHylder < 0) lblError.setText("Antal hylder skal være 0 eller et positivt tal");
             else {
                 controller.createLagerWithAntalHylder(adresse, navn, kvm, antalHylder);
                 this.close();
@@ -128,9 +125,5 @@ public class OpretLagerVindue extends Stage {
         }
 
 
-    }
-
-    private void updateControls() {
-        //TODO
     }
 }
