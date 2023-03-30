@@ -20,7 +20,6 @@ import javafx.scene.layout.Pane;
 
 public class LagerstyringPane extends GridPane {
     private Label lblError;
-    private ControllerForProduktion controllerForProduktion = ControllerForProduktion.getController();
     private ControllerForLager controllerForLager = ControllerForLager.getController();
     private ListView<Lager> lvwLagre;
     private ListView<Hylde> lvwHylder;
