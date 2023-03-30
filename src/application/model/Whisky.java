@@ -62,14 +62,4 @@ public class Whisky {
         }
     }
 
-    /**
-     * Fjerner en aftapning til en whisky.
-     * @param aftapning fjernes fra en whisky
-     */
-    public void removeAftapning(Aftapning aftapning){
-        if(aftapninger.contains(aftapning)){
-            aftapninger.remove(aftapning);
-        }
-    }
-
 }
