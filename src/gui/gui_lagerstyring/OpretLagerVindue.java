@@ -1,10 +1,6 @@
 package gui.gui_lagerstyring;
 
-import application.controller.Controller;
-import application.model.FadLeverandør;
-import application.model.FadType;
-import application.model.Hylde;
-import application.model.Lager;
+import application.controller.ControllerForLager;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -17,10 +13,9 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import java.util.Arrays;
-
 public class OpretLagerVindue extends Stage {
-    private Controller controller = Controller.getController();
+    private ControllerForLager controllerForLager = ControllerForLager.getController();
+
     public OpretLagerVindue() {
         this.initStyle(StageStyle.DECORATED);
         this.initModality(Modality.APPLICATION_MODAL);
@@ -37,6 +32,7 @@ public class OpretLagerVindue extends Stage {
         Scene scene = new Scene(pane);
         this.setScene(scene);
     }
+
     private TextField txfAdresse, txfNavn, txfKvm, txfAntalHylder;
     private Label lblError;
 
@@ -119,11 +115,10 @@ public class OpretLagerVindue extends Stage {
             if (kvm <= 0) lblError.setText("Kvm skal være større end 0");
             else if (antalHylder < 0) lblError.setText("Antal hylder skal være 0 eller et positivt tal");
             else {
-                controller.createLagerWithAntalHylder(adresse, navn, kvm, antalHylder);
+                controllerForLager.createLagerWithAntalHylder(adresse, navn, kvm, antalHylder);
                 this.close();
             }
         }
-
 
     }
 }

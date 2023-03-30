@@ -1,6 +1,7 @@
 package gui;
 
-import application.controller.Controller;
+import application.controller.ControllerForLager;
+import application.controller.ControllerForProduktion;
 import application.model.Destillat;
 import application.model.Fad;
 import application.model.Lager;
@@ -22,7 +23,8 @@ public class PåfyldningPane extends GridPane {
 
     private final ListView<Destillat> lvwDestillater;
     private final ListView<Fad> lvwFade;
-    private final Controller controller = Controller.getController();
+    private final ControllerForProduktion controllerForProduktion = ControllerForProduktion.getController();
+    private final ControllerForLager controllerForLager = ControllerForLager.getController();
     private final ComboBox<Lager> cbxLager;
     private final TextField txtPåfyldtAf;
     private final TextField txtMængde;
@@ -114,7 +116,7 @@ public class PåfyldningPane extends GridPane {
 
         updateDestillater();
         updateLagre();
-        if (controller.getLagre().size() > 0) {
+        if (controllerForLager.getLagre().size() > 0) {
             cbxLager.getSelectionModel().select(0);
         }
     }
@@ -148,7 +150,7 @@ public class PåfyldningPane extends GridPane {
             lblError.setText("Mængde skal være større end 0");
         }  else {
             try {
-                controller.createPåfyldning(valgtDestillat, valgtFad, påfyldtAf, mængde, påfyldningsDato);
+                controllerForProduktion.createPåfyldning(valgtDestillat, valgtFad, påfyldtAf, mængde, påfyldningsDato);
                 updateDestillater();
                 updateFade();
                 txtMængde.clear();
@@ -166,7 +168,7 @@ public class PåfyldningPane extends GridPane {
 
     private void updateDestillater() {
         Destillat valgtDestillat = lvwDestillater.getSelectionModel().getSelectedItem();
-        lvwDestillater.getItems().setAll(controller.getDestillater());
+        lvwDestillater.getItems().setAll(controllerForProduktion.getDestillater());
         if (valgtDestillat != null)
             lvwDestillater.getSelectionModel().select(valgtDestillat);
     }
@@ -175,13 +177,13 @@ public class PåfyldningPane extends GridPane {
         Fad valgtFad = lvwFade.getSelectionModel().getSelectedItem();
         Lager valgtLager = cbxLager.getSelectionModel().getSelectedItem();
         if (valgtLager != null)
-            lvwFade.getItems().setAll(controller.getFadeFraLagerSorteret(valgtLager));
+            lvwFade.getItems().setAll(controllerForLager.getFadeFraLagerSorteret(valgtLager));
         if (valgtFad != null & lvwFade.getItems().contains(valgtFad))
             lvwFade.getSelectionModel().select(valgtFad);
     }
 
     private void updateLagre() {
-        cbxLager.getItems().setAll(controller.getLagre());
+        cbxLager.getItems().setAll(controllerForLager.getLagre());
     }
 
     public void updateControls() {

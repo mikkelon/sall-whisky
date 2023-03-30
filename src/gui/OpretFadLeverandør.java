@@ -1,6 +1,7 @@
 package gui;
 
-import application.controller.Controller;
+import application.controller.ControllerForLager;
+import application.controller.ControllerForProduktion;
 import application.model.FadLeverandør;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -17,7 +18,7 @@ import javafx.scene.control.Button;
 
 public class OpretFadLeverandør extends Stage {
     private FadLeverandør fadLeverandør;
-    private Controller controller = Controller.getController();
+    private ControllerForLager controllerForLager = ControllerForLager.getController();
     private TextField txfNavn;
     private TextField txfLand;
     private Label lblError;
@@ -84,7 +85,7 @@ public class OpretFadLeverandør extends Stage {
         } else if (txfLand.getText().isEmpty()){
             lblError.setText("Land er ikke udfyldt");
         } else{
-            controller.createFadLeverandør(navn, land);
+            controllerForLager.createFadLeverandør(navn, land);
             this.close();
         }
     }

@@ -1,6 +1,7 @@
 package gui;
 
-import application.controller.Controller;
+import application.controller.ControllerForLager;
+import application.controller.ControllerForProduktion;
 import application.model.*;
 import javafx.geometry.*;
 import javafx.scene.control.*;
@@ -18,7 +19,7 @@ public class FadePane extends GridPane {
     private final Button btnOpretLeverandør;
     private final Label lblError;
     private final Button btnSlet;
-    private Controller controller = Controller.getController();
+    private ControllerForLager controllerForLager = ControllerForLager.getController();
     private ListView<Påfyldning> lvwPåfyldninger;
     private ListView<Fad> lvwFade;
 
@@ -180,17 +181,17 @@ public class FadePane extends GridPane {
     }
 
     private void updateFadleverandører() {
-        cbxFadLeverandør.getItems().setAll(controller.getFadLeverandører());
+        cbxFadLeverandør.getItems().setAll(controllerForLager.getFadLeverandører());
     }
 
     private void updateFade() {
-        lvwFade.getItems().setAll(controller.getAlleFade());
+        lvwFade.getItems().setAll(controllerForLager.getAlleFade());
     }
 
     private void updateInfo() {
-        cbxFadLeverandør.getItems().setAll(controller.getFadLeverandører());
+        cbxFadLeverandør.getItems().setAll(controllerForLager.getFadLeverandører());
         cbxFadType.getItems().setAll(FadType.values());
-        cbxLager.getItems().setAll(controller.getLagre());
+        cbxLager.getItems().setAll(controllerForLager.getLagre());
     }
 
     private void updateHylde() {
@@ -264,7 +265,7 @@ public class FadePane extends GridPane {
                 lblError.setText("Vælg en hylde");
             }
             else {
-                controller.createFad(fadType, størrelse, fadLeverandør, hylde);
+                controllerForLager.createFad(fadType, størrelse, fadLeverandør, hylde);
                 clearInfo();
                 updateFade();
             }
@@ -279,7 +280,7 @@ public class FadePane extends GridPane {
         BekræftSletVindue vindue = new BekræftSletVindue("Slet fad");
         vindue.showAndWait();
         if (vindue.getValg()) {
-            controller.removeFad(valgtFad);
+            controllerForLager.removeFad(valgtFad);
             updateFade();
             clearInfo();
         }

@@ -1,6 +1,5 @@
 package application.model;
 
-import application.controller.Controller;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
