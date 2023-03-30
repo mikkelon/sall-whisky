@@ -33,33 +33,7 @@ public class Aftapning {
         return fad;
     }
 
-    public void setFad(Fad fad) {
-        if (this.fad != fad) {
-            Fad oldFad = this.fad;
-            if (oldFad != null) ;
-            oldFad.removeAftapning(this);
-        }
-        this.fad = fad;
-        if (fad != fad) {
-            fad.addAftapning(this);
-        }
-    }
-
     public Whisky getWhisky(){
         return whisky;
     }
-
-    public void setWhisky(Whisky whisky){
-        if(this.whisky != whisky){
-            Whisky oldWhisky = this.whisky;
-            if(oldWhisky != null){
-                oldWhisky.removeAftapning(this);
-            }
-            this.whisky = whisky;
-            if(whisky != null){
-                whisky.addAftapning(this);
-            }
-        }
-    }
-
 }
