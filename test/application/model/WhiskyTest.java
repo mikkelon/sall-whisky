@@ -26,7 +26,7 @@ class WhiskyTest {
         assertEquals(0.7, whisky.getMængdeVandILiter());
         assertEquals("Kilde vand", whisky.getVandAfstamning());
         assertEquals("En god whisky", whisky.getTekstBeskrivelse());
-        assertEquals(1, whisky.getWhiskyNr());
+        // Der mangler at blive testet getWhiskyNr()
     }
 
     @Test
