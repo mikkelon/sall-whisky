@@ -42,6 +42,7 @@ public class ControllerForLager {
         storage.clearStorage();
     }
 
+
     /**
      * Opretter et nyt lager med en angivet antal hylder
      * @param adresse lagerets adresse
