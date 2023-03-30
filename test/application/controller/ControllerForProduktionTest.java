@@ -46,17 +46,17 @@ class ControllerForProduktionTest {
     }
 
     @Test
-    void getDestillaterTC17() {
+    void getDestillaterTC2() {
         assertTrue(controllerForProduktion.getDestillater().contains(destillat));
     }
 
     @Test
-    void createDestillatTC18() {
+    void createDestillatTC3() {
         assertTrue(controllerForProduktion.getDestillater().contains(destillat));
     }
 
     @Test
-    void createDestillatTC19() {
+    void createDestillatTC4() {
         assertThrows(RuntimeException.class, () -> controllerForProduktion.createDestillat("77p", "Mikkel", 53.0,
                 2, LocalDate.of(2023, 3, 27),
                 LocalDate.of(2023, 3, 30), 80.0,
@@ -64,7 +64,7 @@ class ControllerForProduktionTest {
     }
 
     @Test
-    void removeDestillatTC20() {
+    void removeDestillatTC5() {
         Destillat destillat1 = controllerForProduktion.createDestillat("78p", "Mikkel", 53.0,
                 2, LocalDate.of(2023, 3, 27),
                 LocalDate.of(2023, 3, 30), 80.0,
@@ -75,18 +75,18 @@ class ControllerForProduktionTest {
     }
 
     @Test
-    void removeDestillatTC21() {
+    void removeDestillatTC6() {
         assertThrows(RuntimeException.class, () -> controllerForProduktion.removeDestillat(destillat));
     }
 
     @Test
-    void createPåfyldningTC22() {
+    void createPåfyldningTC7() {
         assertTrue(fad.getPåfyldninger().contains(påfyldning));
         assertTrue(destillat.getPåfyldninger().contains(påfyldning));
     }
 
     @Test
-    void createPåfyldningTC23() {
+    void createPåfyldningTC8() {
         Destillat destillat1 = controllerForProduktion.createDestillat("78p", "Mikkel", 53.0,
                 2, LocalDate.of(2023, 3, 27),
                 LocalDate.of(2023, 3, 30), 80.0,
@@ -97,7 +97,7 @@ class ControllerForProduktionTest {
     }
 
     @Test
-    void createPåfyldningTC24() {
+    void createPåfyldningTC9() {
         assertThrows(RuntimeException.class, () -> controllerForProduktion.createPåfyldning(destillat, fad, "Mikkel", 90.0,
                 LocalDate.of(2023, 4, 1)));
     }
