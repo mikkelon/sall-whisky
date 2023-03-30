@@ -72,6 +72,12 @@ public class StartVindue extends Application {
         påfyldningPane.setAlignment(Pos.TOP_CENTER);
         påfyldningTab.setContent(påfyldningPane);
         påfyldningTab.setOnSelectionChanged(event -> påfyldningPane.updateControls());
+
+        Tab aftapningTab = new Tab("Aftapning");
+        tabPane.getTabs().add(aftapningTab);
+        AftapningPane aftapningPane = new AftapningPane();
+        aftapningPane.setAlignment(Pos.TOP_CENTER);
+        aftapningTab.setContent(aftapningPane);
     }
 
     public Pane skiftTab(int index) {
