@@ -2,9 +2,9 @@ package gui;
 
 import application.controller.ControllerForLager;
 import application.controller.ControllerForProduktion;
-import application.model.Aftapning;
+import application.model.produktion.Aftapning;
 import application.model.Betegnelse;
-import application.model.Fad;
+import application.model.lager.Fad;
 import javafx.geometry.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;

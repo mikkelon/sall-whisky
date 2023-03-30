@@ -2,7 +2,7 @@ package gui;
 
 import application.controller.ControllerForProduktion;
 import application.model.Betegnelse;
-import application.model.Whisky;
+import application.model.produktion.Whisky;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.VPos;

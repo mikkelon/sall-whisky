@@ -1,9 +1,9 @@
 package gui.gui_lagerstyring;
 
 import application.controller.ControllerForLager;
-import application.model.Fad;
-import application.model.Hylde;
-import application.model.Lager;
+import application.model.lager.Fad;
+import application.model.lager.Hylde;
+import application.model.lager.Lager;
 import gui.BekræftSletVindue;
 import gui.StartVindue;
 import gui.gui_fade.FadePane;

@@ -1,4 +1,6 @@
-package application.model;
+package application.model.produktion;
+
+import application.model.lager.Fad;
 
 import java.time.LocalDate;
 import java.util.HashSet;

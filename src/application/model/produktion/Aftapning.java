@@ -1,4 +1,4 @@
-package application.model;
+package application.model.produktion;
 
 import java.time.LocalDate;
 

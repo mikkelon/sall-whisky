@@ -1,4 +1,10 @@
-package application.model;
+package application.model.lager;
+
+import application.model.*;
+import application.model.produktion.Aftapning;
+import application.model.produktion.Destillat;
+import application.model.produktion.FadIndhold;
+import application.model.produktion.Påfyldning;
 
 import java.time.LocalDate;
 import java.util.HashSet;

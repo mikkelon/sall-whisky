@@ -1,4 +1,6 @@
-package application.model;
+package application.model.produktion;
+
+import application.model.produktion.FadIndhold;
 
 import java.time.LocalDate;
 

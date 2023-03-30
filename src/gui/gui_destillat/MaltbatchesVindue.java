@@ -1,8 +1,7 @@
 package gui.gui_destillat;
 
-import application.controller.ControllerForLager;
 import application.controller.ControllerForProduktion;
-import application.model.Maltbatch;
+import application.model.produktion.Maltbatch;
 import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;

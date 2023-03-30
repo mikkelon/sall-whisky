@@ -1,4 +1,4 @@
-package application.model;
+package application.model.lager;
 
 import java.util.ArrayList;
 

@@ -3,6 +3,14 @@ package application;
 import application.controller.ControllerForLager;
 import application.controller.ControllerForProduktion;
 import application.model.*;
+import application.model.lager.Fad;
+import application.model.lager.FadLeverandør;
+import application.model.lager.Hylde;
+import application.model.lager.Lager;
+import application.model.produktion.Aftapning;
+import application.model.produktion.Destillat;
+import application.model.produktion.Maltbatch;
+import application.model.RygeMateriale;
 import storage.Storage;
 
 import java.time.LocalDate;

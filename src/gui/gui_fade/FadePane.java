@@ -2,16 +2,17 @@ package gui.gui_fade;
 
 import application.controller.ControllerForLager;
 import application.model.*;
-import gui.AftapningPane;
+import application.model.lager.Fad;
+import application.model.lager.FadLeverandør;
+import application.model.lager.Hylde;
+import application.model.lager.Lager;
+import application.model.produktion.Aftapning;
+import application.model.produktion.Påfyldning;
 import gui.BekræftSletVindue;
 import gui.RegistrerAlkoholProcentVindue;
 import javafx.geometry.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.RowConstraints;
-
-import java.security.SecurityPermission;
 
 public class FadePane extends GridPane {
     private final ComboBox<FadLeverandør> cbxFadLeverandør;

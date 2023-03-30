@@ -2,9 +2,9 @@ package gui;
 
 import application.controller.ControllerForLager;
 import application.controller.ControllerForProduktion;
-import application.model.Destillat;
-import application.model.Fad;
-import application.model.Lager;
+import application.model.produktion.Destillat;
+import application.model.lager.Fad;
+import application.model.lager.Lager;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

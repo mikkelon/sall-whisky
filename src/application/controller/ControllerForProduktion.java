@@ -1,6 +1,8 @@
 package application.controller;
 
 import application.model.*;
+import application.model.lager.Fad;
+import application.model.produktion.*;
 import storage.Storage;
 
 import java.time.LocalDate;
