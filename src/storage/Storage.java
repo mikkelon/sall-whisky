@@ -3,6 +3,7 @@ package storage;
 import application.model.Destillat;
 import application.model.Lager;
 import application.model.FadLeverandør;
+import application.model.Maltbatch;
 
 import java.util.HashSet;
 
@@ -69,4 +70,20 @@ public class Storage {
     public HashSet<Destillat> getDestillater() {
         return new HashSet<>(destillater);
     }
+
+    // #--- Maltbatch ---#
+    private HashSet<Maltbatch> maltbatches = new HashSet<>();
+
+    public void addMaltbatch(Maltbatch maltbatch){
+        maltbatches.add(maltbatch);
+    }
+
+    public void removeMaltbatch(Maltbatch maltbatch){
+        maltbatches.remove(maltbatch);
+    }
+
+    public HashSet<Maltbatch> getMaltbatches() {
+        return maltbatches;
+    }
 }
+
