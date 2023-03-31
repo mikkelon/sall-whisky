@@ -65,11 +65,6 @@ public class FadIndhold {
         return fad;
     }
 
-    public void setFad(Fad fad) {
-        this.fad = fad;
-        fad.setFadInhold(this);
-    }
-
     /**
      * Udregner alkoholprocenten i fadet.
      * @return alkoholprocenten i fadet

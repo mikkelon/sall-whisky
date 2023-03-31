@@ -116,16 +116,12 @@ public class ControllerForProduktion {
      */
     public Påfyldning createPåfyldning(Destillat destillat, Fad fad, String påfyldtAf,
                                        double mængdeILiter, LocalDate påfyldningsDato) {
-        Påfyldning påfyldning = new Påfyldning(destillat, fad, påfyldtAf, mængdeILiter, påfyldningsDato);
-
-        if (påfyldning.getMængdeILiter() > destillat.resterendeMængdeILiter()) {
+        if (mængdeILiter > destillat.resterendeMængdeILiter()) {
             throw new RuntimeException("Påfyldningen er større end destillatets resterende mængde.");
-        } else if (påfyldning.getMængdeILiter() > fad.resterendePladsILiter()) {
+        } else if (mængdeILiter > fad.resterendePladsILiter()) {
             throw new RuntimeException("Påfyldningen er større end fadets resterende mængde.");
-        } else {
-            destillat.addPåfyldning(påfyldning);
-            fad.addPåfyldning(påfyldning);
         }
+        Påfyldning påfyldning = fad.påfyld(destillat, mængdeILiter, påfyldtAf, påfyldningsDato);
         return påfyldning;
     }
 

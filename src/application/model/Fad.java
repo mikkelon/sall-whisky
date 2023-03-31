@@ -138,9 +138,9 @@ public class Fad {
         Påfyldning påfyldning;
         if (fadIndhold == null) {
             fadIndhold = new FadIndhold(0.0, this);
-            påfyldning = new Påfyldning(destillat, this, påfyldtAf, mængde, påfyldningsDato);
+            påfyldning = new Påfyldning(destillat, fadIndhold, påfyldtAf, mængde, påfyldningsDato);
         } else {
-            påfyldning = new Påfyldning(destillat, this, påfyldtAf, mængde, påfyldningsDato);
+            påfyldning = new Påfyldning(destillat, fadIndhold, påfyldtAf, mængde, påfyldningsDato);
         }
         return påfyldning;
     }
