@@ -1,9 +1,6 @@
 package storage;
 
-import application.model.Destillat;
-import application.model.Lager;
-import application.model.FadLeverandør;
-import application.model.Maltbatch;
+import application.model.*;
 
 import java.util.HashSet;
 
@@ -84,6 +81,22 @@ public class Storage {
 
     public HashSet<Maltbatch> getMaltbatches() {
         return maltbatches;
+    }
+
+    // #--- Whisky ---#
+
+    private HashSet<Whisky> whiskyer = new HashSet<>();
+
+    public void addWhisky(Whisky whisky){
+        whiskyer.add(whisky);
+    }
+
+    public void removeWhisky(Whisky whisky){
+        whiskyer.remove(whisky);
+    }
+
+    public HashSet<Whisky> getWhiskyer(){
+        return whiskyer;
     }
 }
 

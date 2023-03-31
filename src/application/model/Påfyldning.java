@@ -13,7 +13,9 @@ public class Påfyldning {
     private Destillat destillat;
 
     /** Opretter en påfyldning af et fad med et bestemt destillat.
+     * <pre>
      * Pre: fad != null, destillat != null, mængdeILiter > 0, påfyldtAf != null, påfyldningsDato != null
+     * </pre>
      * @param destillat destillatet der påfyldes
      * @param fad fadet der påfyldes
      * @param påfyldtAf navnet på den person der påfylder
@@ -21,7 +23,7 @@ public class Påfyldning {
      * @param påfyldningsDato dato for påfyldningen
      */
     public Påfyldning(Destillat destillat, Fad fad, String påfyldtAf, double mængdeILiter, LocalDate påfyldningsDato) {
-        this.destillat = destillat;
+        this.destillat = destillat;;
         this.fad = fad;
         this.påfyldtAf = påfyldtAf;
         this.mængdeILiter = mængdeILiter;
