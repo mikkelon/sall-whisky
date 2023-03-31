@@ -9,23 +9,25 @@ public class Påfyldning {
     private String påfyldtAf;
     private double mængdeILiter;
     private LocalDate påfyldningsDato;
-    private Fad fad;
+    private FadIndhold fadIndhold;
     private Destillat destillat;
 
-    /** Opretter en påfyldning af et fad med et bestemt destillat.
-     * Pre: fad != null, destillat != null, mængdeILiter > 0, påfyldtAf != null, påfyldningsDato != null
+    /** Opretter en påfyldning til et fad indhold med et bestemt destillat.
+     * Pre: fadIndhold != null, destillat != null, mængdeILiter > 0, påfyldtAf != null, påfyldningsDato != null
      * @param destillat destillatet der påfyldes
-     * @param fad fadet der påfyldes
+     * @param fadIndhold fad indholdet der påfyldes
      * @param påfyldtAf navnet på den person der påfylder
      * @param mængdeILiter mængden der påfyldes i liter
      * @param påfyldningsDato dato for påfyldningen
      */
-    public Påfyldning(Destillat destillat, Fad fad, String påfyldtAf, double mængdeILiter, LocalDate påfyldningsDato) {
+    public Påfyldning(Destillat destillat, FadIndhold fadIndhold, String påfyldtAf, double mængdeILiter, LocalDate påfyldningsDato) {
         this.destillat = destillat;
-        this.fad = fad;
+        this.fadIndhold = fadIndhold;
         this.påfyldtAf = påfyldtAf;
         this.mængdeILiter = mængdeILiter;
         this.påfyldningsDato = påfyldningsDato;
+        fadIndhold.addPåfyldning(this);
+        destillat.addPåfyldning(this);
     }
 
     /**
@@ -53,11 +55,11 @@ public class Påfyldning {
     }
 
     /**
-     * Returnerer fadet der er påfyldt.
-     * @return fadet der er påfyldt
+     * Returnerer fad indholdet der er fyldt på.
+     * @return fad indholdet der er fyldt på
      */
-    public Fad getFad() {
-        return fad;
+    public FadIndhold getFadIndhold() {
+        return fadIndhold;
     }
 
     /**
@@ -70,7 +72,7 @@ public class Påfyldning {
 
     @Override
     public String toString() {
-        return "Påfyldning for fad " + fad.getFadNr() + " med destillat " + destillat.getNewMakeNr();
+        return destillat.getNewMakeNr() + ", " + mængdeILiter + " liter";
     }
 }
 
