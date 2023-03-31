@@ -214,8 +214,8 @@ public class FadePane extends GridPane {
 
     private void updatePåfyldninger() {
         Fad valgtFade = lvwFade.getSelectionModel().getSelectedItem();
-        if (valgtFade != null) {
-            lvwPåfyldninger.getItems().setAll(valgtFade.getPåfyldninger());
+        if (valgtFade != null && !valgtFade.isEmpty()) {
+            lvwPåfyldninger.getItems().setAll(valgtFade.getFadInhold().getPåfyldninger());
         } else {
             lvwPåfyldninger.getItems().clear();
         }
