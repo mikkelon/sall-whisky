@@ -24,7 +24,7 @@ class FadTest {
         hylde = lager.createHylde();
         fadLeverandør = new FadLeverandør("Garrison Brothers", "USA");
         fad = new Fad(FadType.BOURBON, 80, fadLeverandør, hylde);
-        fadIndhold = new FadIndhold(40.0, fad);
+        fadIndhold = new FadIndhold(fad);
         startDato = LocalDate.of(2023, 1, 1);
         slutDato = LocalDate.of(2023, 1, 2);
         destillat = new Destillat("77p", "Jens", 61, 2, startDato, slutDato,
@@ -56,20 +56,19 @@ class FadTest {
         assertEquals(80, fad.getStørrelseILiter());
     }
 
-    // TC4 er udgået, da getIndeholdtVæskeILiter() er erstattet med indeholdtVæskeILiter()
 
     @Test
-    void getHyldeTC5() {
+    void getHyldeTC4() {
         assertEquals(hylde, fad.getHylde());
     }
 
     @Test
-    void getFadLeverandørTC6() {
+    void getFadLeverandørTC5() {
         assertEquals(fadLeverandør, fad.getFadLeverandør());
     }
 
     @Test
-    void setHyldeNormalTC7() {
+    void setHyldeNormalTC6() {
         Hylde h2 = lager.createHylde();
         fad.setHylde(h2);
         assertEquals(h2, fad.getHylde());
@@ -78,13 +77,13 @@ class FadTest {
     }
 
     @Test
-    void setHyldeFejlTC8() {
+    void setHyldeFejlTC7() {
         assertThrows(RuntimeException.class, () -> fad.setHylde(null));
     }
 
 
     @Test
-    void resterendePladsILiterTC11() {
+    void resterendePladsILiterTC8() {
         fad.påfyld(destillat,
                 60, "Mads", LocalDate.of(2023, 2, 2));
         assertEquals(20, fad.resterendePladsILiter());

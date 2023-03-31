@@ -21,7 +21,7 @@ class DestillatTest {
         lager = new Lager("Baldersgade 39", "Sall Whisky Lager", 100);
         hylde = new Hylde(lager);
         fad = new Fad(FadType.BOURBON, 90.0, new FadLeverandør("Garrison Brothers", "USA"), hylde);
-        fadIndhold = new FadIndhold(40.0, fad);
+        fadIndhold = new FadIndhold(fad);
         rygeMateriale = RygeMateriale.TØRV;
         destillat = new Destillat("77p", "Mikkel", 53.0,
                 2, LocalDate.of(2023, 3, 27), LocalDate.of(2023, 3, 30),

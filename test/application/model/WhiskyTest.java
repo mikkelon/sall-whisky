@@ -24,7 +24,7 @@ class WhiskyTest {
         fadLeverandør = new FadLeverandør("Garrison Brothers", "USA");
         fad = new Fad(FadType.BOURBON, 80, fadLeverandør, hylde);
         whisky = new Whisky(43.0, "God vand","Meget god whisky");
-        fadIndhold = new FadIndhold(40.0, fad);
+        fadIndhold = new FadIndhold(fad);
     }
 
     @Test

@@ -24,7 +24,7 @@ class PåfyldningTest {
                 2, LocalDate.of(2023, 3, 27),
                 LocalDate.of(2023, 3, 30), 80.0,
                 "Destillat for bourbon whisky", RygeMateriale.INTET);
-        fadIndhold = new FadIndhold(40.0, fad);
+        fadIndhold = new FadIndhold(fad);
         påfyldning = new Påfyldning(destillat, fadIndhold, "Mikkel", 80.0,
                 LocalDate.of(2023, 4, 1));
     }

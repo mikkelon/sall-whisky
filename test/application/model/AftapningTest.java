@@ -19,7 +19,7 @@ class AftapningTest {
 
     @BeforeEach
     void setUp() {
-        fadIndhold = new FadIndhold(40.0, fad);
+        fadIndhold = new FadIndhold(fad);
         lager = new Lager("Baldersgade 39", "Sall Whisky Lager", 100);
         hylde = new Hylde(lager);
         fadLeverandør = new FadLeverandør("Garrison Brothers", "USA");

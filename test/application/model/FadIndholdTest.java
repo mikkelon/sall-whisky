@@ -31,7 +31,7 @@ class FadIndholdTest {
         lager = new Lager("Baldersgade 39", "Sall Whisky Lager", 100);
         hylde = new Hylde(lager);
         fad = new Fad(FadType.BOURBON, 90.0, fadLeverandør, hylde);
-        fadIndhold = new FadIndhold(40.0, fad);
+        fadIndhold = new FadIndhold(fad);
         påfyldningsDato = LocalDate.of(2023, 1, 2);
         startDato = LocalDate.of(2023, 1, 1);
         slutDato = LocalDate.of(2023, 1, 2);
@@ -40,8 +40,6 @@ class FadIndholdTest {
 
     @Test
     void constructerTC1() {
-        assertEquals(40.0, fadIndhold.getAlkoholProcentEfterModning());
-        assertNull(fadIndhold.getSenestPåfyldt());
         assertEquals(fad, fadIndhold.getFad());
     }
 
@@ -60,7 +58,7 @@ class FadIndholdTest {
 
 
     @Test
-    void getPåfyldningerOgAdd() {
+    void getPåfyldningerOgAddTC3() {
         Påfyldning påfyldning1 = new Påfyldning(destillat, fadIndhold, "Mikkel", 80, påfyldningsDato);
         fadIndhold.addPåfyldning(påfyldning1);
         assertTrue(fadIndhold.getPåfyldninger().contains(påfyldning1));
@@ -68,7 +66,7 @@ class FadIndholdTest {
     }
 
     @Test
-    void getAftapningerOgAdd() {
+    void getAftapningerOgAddTC4() {
         Aftapning aftapning = new Aftapning("Mikkel", 60, LocalDate.of(2023, 1, 3), fadIndhold);
         fadIndhold.addAftapning(aftapning);
         assertTrue(fadIndhold.getAftapninger().contains(aftapning));
@@ -76,7 +74,7 @@ class FadIndholdTest {
 
 
     @Test
-    void getAlkoholProcent2() {
+    void getAlkoholProcentTC5() {
         Destillat destillat1 = new Destillat("77p", "Jens", 50, 2, startDato, slutDato, 100, "Kommentar", RygeMateriale.TØRV);
         Påfyldning påfyldning1 = new Påfyldning(destillat1, fadIndhold, "Mikkel", 80, påfyldningsDato);
         fadIndhold.addPåfyldning(påfyldning1);
@@ -85,7 +83,7 @@ class FadIndholdTest {
     }
 
     @Test
-    void getAlkoholProcent() {
+    void getAlkoholProcentTC6() {
         Destillat destillat1 = new Destillat("77p", "Jens", 40, 2,
                 startDato, slutDato, 100, "Kommentar", null);
         Påfyldning påfyldning = new Påfyldning(destillat1, fadIndhold, "Mikkel", 80, påfyldningsDato);
@@ -101,7 +99,7 @@ class FadIndholdTest {
 
 
     @Test
-    void getAlkoholProcentTC287378264() {
+    void getAlkoholProcentTC7() {
         Destillat destillat1 = new Destillat("77p", "Jens", 20, 2,
                 startDato, slutDato, 100, "Kommentar", null);
         Påfyldning påfyldning = new Påfyldning(destillat1, fadIndhold, "Mikkel", 80, påfyldningsDato);
@@ -118,7 +116,7 @@ class FadIndholdTest {
 
 
     @Test
-    void getMængde() {
+    void getMængdeTC8() {
         Påfyldning påfyldning1 = new Påfyldning(destillat, fadIndhold, "Mikkel", 25, påfyldningsDato);
         Påfyldning påfyldning2 = new Påfyldning(destillat, fadIndhold, "Mikkel", 50, påfyldningsDato);
         fadIndhold.addPåfyldning(påfyldning1);
