@@ -2,6 +2,8 @@ package gui;
 
 import application.controller.ControllerForLager;
 import application.controller.ControllerForProduktion;
+import gui.gui_destillat.DestillatPane;
+import gui.gui_fade.FadePane;
 import gui.gui_lagerstyring.LagerstyringPane;
 import javafx.application.Application;
 import javafx.geometry.Pos;
