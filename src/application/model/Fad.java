@@ -175,9 +175,8 @@ public class Fad {
 
     public String hentHistorik() {
         String historik = "Fadtype: " + fadType + "\n" + "Fadnr: " + fadNr + "\n"
-                + "Størrelse: " + størrelseILiter + "\n" + "Fadet er på hylden: "
-                + hylde.getHyldeNr() + "\n" + "Fadet er leveret af: " + fadLeverandør.getNavn()
-                + "\n" + "Fadets historik: " + "\n";
+                + "Størrelse: " + størrelseILiter + "\n" + "Fadet er på lager: "
+                + hylde.getLager() + ", hylde nr: " + hylde.getHyldeNr() + "\n" + "Fadet er leveret af: " + fadLeverandør + "\n";
         return historik;
     }
 }

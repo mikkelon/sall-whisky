@@ -203,7 +203,7 @@ public class Destillat {
 
     public String hentHistorik() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Destillat: " + newMakeNr + ":\n" + "Medarbejder: " + medarbejder
+        sb.append("New make: " + newMakeNr + "\n" + "Medarbejder: " + medarbejder
                 + "\n" + "Alkoholprocent: " + alkoholProcent + "\n" + "Antal destilleringer: "
                 + antalDestilleringer + "\n" + "Startdato: " + startDato + "\n" + "Slutdato: "
                 + slutDato + "\n" + "Mængde i liter: " + mængdeILiter + "\n" + "Kommentar: "
