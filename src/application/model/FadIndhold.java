@@ -11,9 +11,13 @@ public class FadIndhold {
     private Set<Aftapning> aftapninger = new HashSet<>();
     private Fad fad;
 
-    public FadIndhold(double alkoholProcentEfterModning, Fad fad) {
-        this.alkoholProcentEfterModning = alkoholProcentEfterModning;
+    public FadIndhold(Fad fad) {
+        this.alkoholProcentEfterModning = -1;
         this.fad = fad;
+    }
+
+    public void setAlkoholProcentEfterModning(double alkoholProcentEfterModning) {
+        this.alkoholProcentEfterModning = alkoholProcentEfterModning;
     }
 
     public double getAlkoholProcentEfterModning() {
@@ -27,7 +31,6 @@ public class FadIndhold {
     public LocalDate forventetFærdigProduceret() {
         return senestPåfyldt.plusYears(3);
     }
-
 
     public Set<Påfyldning> getPåfyldninger() {
         return new HashSet<>(påfyldninger);

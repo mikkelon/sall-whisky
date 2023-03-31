@@ -226,4 +226,12 @@ public class ControllerForProduktion {
     public HashSet<Whisky> getWhiskyer() {
         return storage.getWhiskyer();
     }
+
+    public void setAlkoholprocentEfterModning(FadIndhold fadIndhold, double alkoholprocent) {
+        if (fadIndhold.getAlkoholProcentEfterModning() == -1) {
+            fadIndhold.setAlkoholProcentEfterModning(alkoholprocent);
+        } else {
+            throw new RuntimeException("Alkoholprocenten er allerede sat.");
+        }
+    }
 }

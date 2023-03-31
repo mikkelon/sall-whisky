@@ -62,6 +62,10 @@ public class Setup {
         controllerForProduktion.createPåfyldning(d5, fad4, "Mikkel", 10, datoGammel);
         controllerForProduktion.createPåfyldning(d2, fad5, "Mikkel", 10, datoNy);
 
+        // Sæt alkoholprocent efter modning
+        controllerForProduktion.setAlkoholprocentEfterModning(fad2.getFadIndhold(), 52);
+        controllerForProduktion.setAlkoholprocentEfterModning(fad4.getFadIndhold(), 56);
+
         // Laver aftapninger
         HashSet<Aftapning> aftapningHashSet = new HashSet<>();
         Aftapning a1 = controllerForProduktion.createAftapning("Mikkel", 10, LocalDate.now(), fad4);
