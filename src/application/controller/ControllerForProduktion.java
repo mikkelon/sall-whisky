@@ -182,7 +182,7 @@ public class ControllerForProduktion {
      * @param økologisk om maltbatchen er økologisk
      * @return det oprettede maltbatch
      */
-   public Maltbatch createMaltbatches(String kornsort, String mark, String gård, String dyrketAf, boolean økologisk){
+   public Maltbatch createMaltbatch(String kornsort, String mark, String gård, String dyrketAf, boolean økologisk){
         Maltbatch maltbatch = new Maltbatch(kornsort, mark, gård, dyrketAf, økologisk);
         storage.addMaltbatch(maltbatch);
         return maltbatch;
