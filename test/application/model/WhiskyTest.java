@@ -10,11 +10,21 @@ import static org.junit.jupiter.api.Assertions.*;
 class WhiskyTest {
 
     private Whisky whisky;
+    private FadIndhold fadIndhold;
+    private Fad fad;
+    private FadLeverandør fadLeverandør;
+
+    private Lager lager;
+    private Hylde hylde;
 
     @BeforeEach
     void setUp() {
+        lager = new Lager("Baldersgade 39", "Sall Whisky Lager", 100);
+        hylde = lager.createHylde();
+        fadLeverandør = new FadLeverandør("Garrison Brothers", "USA");
+        fad = new Fad(FadType.BOURBON, 80, fadLeverandør, hylde);
         whisky = new Whisky(43.0, Betegnelse.SINGLECASK, 0.7, "Kilde vand", "En god whisky");
-
+        fadIndhold = new FadIndhold(40.0, fad);
     }
 
     @Test
@@ -41,7 +51,7 @@ class WhiskyTest {
         FadLeverandør fadLeverandør = new FadLeverandør("Garrison Brothers", "USA");
         Fad fad = new Fad(FadType.BOURBON, 80, fadLeverandør, hylde);
         Whisky whisky2 = new Whisky(40.0, Betegnelse.SINGLECASK, 0.7, "Kilde vand", "En god whisky");
-        Aftapning aftapning = new Aftapning("Frederikke",40,LocalDate.of(2023,2,2),fad,whisky2);
+        Aftapning aftapning = new Aftapning("Frederikke",40,LocalDate.of(2023,2,2),fadIndhold,whisky2);
 
         whisky2.addAftapning(aftapning);
         assertTrue(whisky2.getAftapninger().contains(aftapning));

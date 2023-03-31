@@ -29,6 +29,8 @@ public class FadIndhold {
         return senestPåfyldt.plusYears(3);
     }
 
+
+    //TODO
     public String hentHistorik() {
         return "";
     }
