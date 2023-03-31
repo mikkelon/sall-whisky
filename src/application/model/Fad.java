@@ -124,14 +124,8 @@ public class Fad {
         return new HashSet<>(fadIndholdHistorik);
     }
 
-    /**
-     * Tilføjer fadets indhold til fadets historik.
-     * @param FadIndhold er fadets indhold
-     */
-    public void addFadIndholdHistorik(FadIndhold FadIndhold) {
-        if (!fadIndholdHistorik.contains(FadIndhold)) {
-            fadIndholdHistorik.add(FadIndhold);
-        }
+    public boolean isEmpty() {
+        return fadIndhold == null;
     }
 
     public Påfyldning påfyld(Destillat destillat, double mængde, String påfyldtAf, LocalDate påfyldningsDato) {
@@ -143,6 +137,26 @@ public class Fad {
             påfyldning = new Påfyldning(destillat, fadIndhold, påfyldtAf, mængde, påfyldningsDato);
         }
         return påfyldning;
+    }
+
+    /**
+     * Aftapper et fad.
+     * @param aftappetAf er navnet på den person, der har aftappet fadet
+     * @param mængdeILiter er mængden i liter, der skal aftappes
+     * @param aftapningsDato er datoen for aftapningen
+     * @param whisky er den whisky, der skal aftappes
+     * @return aftapningen
+     * <pre>
+     *     Pre: aftappet != null, mængdeILiter > 0, aftapningsDato != null, whisky != null, mængdeILiter <= fadIndhold.indeholdtVæskeILiter()
+     * </pre>
+     */
+    public Aftapning aftap(String aftappetAf, double mængdeILiter, LocalDate aftapningsDato, Whisky whisky) {
+        Aftapning aftapning = new Aftapning(aftappetAf, mængdeILiter, aftapningsDato, fadIndhold, whisky);
+        if (fadIndhold.indeholdtVæskeILiter() <= 0) {
+            fadIndholdHistorik.add(fadIndhold);
+            fadIndhold = null;
+        }
+        return aftapning;
     }
 
     /**
