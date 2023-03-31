@@ -172,4 +172,12 @@ public class Fad {
     public String toString() {
         return "Fad nr. " + fadNr + " af typen " + fadType + " på hylden " + hylde.getHyldeNr() + " med en størrelse på " + størrelseILiter + " liter.";
     }
+
+    public String hentHistorik() {
+        String historik = "Fadtype: " + fadType + "\n" + "Fadnr: " + fadNr + "\n"
+                + "Størrelse: " + størrelseILiter + "\n" + "Fadet er på hylden: "
+                + hylde.getHyldeNr() + "\n" + "Fadet er leveret af: " + fadLeverandør.getNavn()
+                + "\n" + "Fadets historik: " + "\n";
+        return historik;
+    }
 }

@@ -77,4 +77,8 @@ public class Aftapning {
     public void setWhisky(Whisky whisky) {
         this.whisky = whisky;
     }
+
+    public String hentHistorik() {
+        return fadIndhold.hentHistorik();
+    }
 }

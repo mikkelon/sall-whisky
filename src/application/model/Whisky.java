@@ -125,4 +125,11 @@ public class Whisky {
         }
     }
 
+    public String hentHistorik() {
+        String historik = "";
+        for (Aftapning aftapning : aftapninger) {
+            historik += aftapning.hentHistorik();
+        }
+        return historik;
+    }
 }

@@ -98,4 +98,12 @@ public class FadIndhold {
     public boolean isModnet() {
         return senestPåfyldt != null && senestPåfyldt.plusYears(3).isBefore(LocalDate.now());
     }
+
+    public String hentHistorik() {
+        String historik = fad.hentHistorik() + "\n";
+        for (Påfyldning påfyldning : påfyldninger) {
+            historik += påfyldning.hentHistorik() + "\n";
+        }
+        return historik;
+    }
 }
