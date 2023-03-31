@@ -25,7 +25,7 @@ class FadIndholdTest {
 
     @BeforeEach
     void setUp() {
-        whisky = new Whisky(40, Betegnelse.SINGLECASK, 10, "Lars' vand", "God whisky");
+        whisky = new Whisky(40, "Lars' vand", "God whisky");
         destillat = new Destillat("77p", "Jens", 80, 2, LocalDate.of(2023, 1, 1), LocalDate.of(2023, 1, 2), 100, "Kommentar", RygeMateriale.TØRV);
         fadLeverandør = new FadLeverandør("Garrison Brothers", "USA");
         lager = new Lager("Baldersgade 39", "Sall Whisky Lager", 100);

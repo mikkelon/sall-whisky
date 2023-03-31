@@ -28,9 +28,6 @@ public class FadIndhold {
         return senestPåfyldt.plusYears(3);
     }
 
-    public String hentHistorik() {
-        return "";
-    }
 
     public Set<Påfyldning> getPåfyldninger() {
         return new HashSet<>(påfyldninger);

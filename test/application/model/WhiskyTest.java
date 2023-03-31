@@ -23,7 +23,7 @@ class WhiskyTest {
         hylde = lager.createHylde();
         fadLeverandør = new FadLeverandør("Garrison Brothers", "USA");
         fad = new Fad(FadType.BOURBON, 80, fadLeverandør, hylde);
-        whisky = new Whisky(43.0, Betegnelse.SINGLECASK, 0.7, "Kilde vand", "En god whisky");
+        whisky = new Whisky(43.0, "God vand","Meget god whisky");
         fadIndhold = new FadIndhold(40.0, fad);
     }
 
@@ -31,14 +31,12 @@ class WhiskyTest {
     void constructorTC1() {
         //Her tester vi om at vi kan lave et nyt objekt af Whisky
         //Her får vi også testet alle get() metoderne undtagen for list.
-        assertEquals(43.0, whisky.getAlkoholProcent());
-        assertEquals(Betegnelse.SINGLECASK, whisky.getBetegnelse());
-        assertEquals(0.7, whisky.getMængdeVandILiter());
-        assertEquals("Kilde vand", whisky.getVandAfstamning());
-        assertEquals("En god whisky", whisky.getTekstBeskrivelse());
+        assertEquals(43.0, whisky.getMængdeVandILiter() );
+        assertEquals("God vand", whisky.getVandAfstamning());
+        assertEquals("Meget god whisky", whisky.getTekstBeskrivelse());
 
         //Test at whiskynr tæller 1 op for hver gang der oprettes en ny whisky
-        Whisky whisky1 = new Whisky(40.0, Betegnelse.SINGLECASK, 0.7, "Kilde vand", "En god whisky");
+        Whisky whisky1 = new Whisky(43.0, "God vand","Meget god whisky");
         assertEquals(whisky.getWhiskyNr() + 1, whisky1.getWhiskyNr());
     }
 
@@ -50,7 +48,7 @@ class WhiskyTest {
         Hylde hylde = new Hylde(lager);
         FadLeverandør fadLeverandør = new FadLeverandør("Garrison Brothers", "USA");
         Fad fad = new Fad(FadType.BOURBON, 80, fadLeverandør, hylde);
-        Whisky whisky2 = new Whisky(40.0, Betegnelse.SINGLECASK, 0.7, "Kilde vand", "En god whisky");
+        Whisky whisky2 = new Whisky(40.0, "Kilde vand", "En god whisky");
         Aftapning aftapning = new Aftapning("Frederikke", 40, LocalDate.of(2023, 2, 2), fadIndhold);
 
         whisky2.addAftapning(aftapning);
