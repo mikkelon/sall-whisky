@@ -11,7 +11,7 @@ public class FadIndhold {
     private Set<Aftapning> aftapninger = new HashSet<>();
     private Fad fad;
 
-    public FadIndhold(double alkoholProcentEfterModning, LocalDate senestPåfyldt, Fad fad) {
+    public FadIndhold(double alkoholProcentEfterModning, Fad fad) {
         this.alkoholProcentEfterModning = alkoholProcentEfterModning;
         this.senestPåfyldt = senestPåfyldt;
         this.fad = fad;
@@ -96,5 +96,6 @@ public class FadIndhold {
             væske += påfyldning.getMængdeILiter();
         }
         return væske;
+        //TODO: aftapninger skal også medregnes
     }
 }

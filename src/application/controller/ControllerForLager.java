@@ -224,8 +224,8 @@ public class ControllerForLager {
         for (Lager lager : getLagre()) {
             for (Hylde hylde : lager.getHylder()) {
                 for (Fad fad : hylde.getFade()) {
-                    if (fad.forventetFærdigproduceret() != null) {
-                        if (fad.forventetFærdigproduceret().isBefore(LocalDate.now())) {
+                    if (fad.getFadInhold().forventetFærdigProduceret() != null) {
+                        if (fad.getFadInhold().forventetFærdigProduceret().isBefore(LocalDate.now())) {
                             modneFade.add(fad);
                         }
                     }

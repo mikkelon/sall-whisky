@@ -1,5 +1,6 @@
 package application.model;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,7 +14,7 @@ public class Fad {
     private static int antalFade;
     private Hylde hylde;
     private FadLeverandør fadLeverandør;
-    private FadIndhold FadIndhold;
+    private FadIndhold fadIndhold;
     private Set<FadIndhold> fadIndholdHistorik = new HashSet<>();
 
     /**
@@ -108,21 +109,11 @@ public class Fad {
     }
 
     /**
-     * Registrerer fadets indhold.
-     *
-     * @param FadIndhold er fadets nye indhold.
-     */
-    public void setFadInhold(FadIndhold FadIndhold) {
-        this.FadIndhold = FadIndhold;
-        FadIndhold.setFad(this);
-    }
-
-    /**
      * Returnerer fadets indhold.
      * @return fadets indhold
      */
     public FadIndhold getFadInhold() {
-        return FadIndhold;
+        return fadIndhold;
     }
 
     /**
@@ -137,10 +128,21 @@ public class Fad {
      * Tilføjer fadets indhold til fadets historik.
      * @param FadIndhold er fadets indhold
      */
-    public void addFadInholdHistorik(FadIndhold FadIndhold) {
+    public void addFadIndholdHistorik(FadIndhold FadIndhold) {
         if (!fadIndholdHistorik.contains(FadIndhold)) {
             fadIndholdHistorik.add(FadIndhold);
         }
+    }
+
+    public Påfyldning påfyld(Destillat destillat, double mængde, String påfyldtAf, LocalDate påfyldningsDato) {
+        Påfyldning påfyldning;
+        if (fadIndhold == null) {
+            fadIndhold = new FadIndhold(0.0, this);
+            påfyldning = new Påfyldning(destillat, this, påfyldtAf, mængde, påfyldningsDato);
+        } else {
+            påfyldning = new Påfyldning(destillat, this, påfyldtAf, mængde, påfyldningsDato);
+        }
+        return påfyldning;
     }
 
     /**
@@ -148,7 +150,7 @@ public class Fad {
      * @return resterende plads i fadet i liter
      */
     public double resterendePladsILiter() {
-    	return størrelseILiter - FadIndhold.indeholdtVæskeILiter();
+    	return størrelseILiter - fadIndhold.indeholdtVæskeILiter();
     }
 
     @Override
