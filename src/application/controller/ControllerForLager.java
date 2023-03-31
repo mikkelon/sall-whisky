@@ -3,6 +3,7 @@ package application.controller;
 import application.model.*;
 import storage.Storage;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.TreeSet;
@@ -216,6 +217,22 @@ public class ControllerForLager {
             }
         }
         return alleFade;
+    }
+
+    public ArrayList<Fad> getModneFade() {
+        ArrayList<Fad> modneFade = new ArrayList<>();
+        for (Lager lager : getLagre()) {
+            for (Hylde hylde : lager.getHylder()) {
+                for (Fad fad : hylde.getFade()) {
+                    if (fad.forventetFærdigproduceret() != null) {
+                        if (fad.forventetFærdigproduceret().isBefore(LocalDate.now())) {
+                            modneFade.add(fad);
+                        }
+                    }
+                }
+            }
+        }
+        return modneFade;
     }
 
 

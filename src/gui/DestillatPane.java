@@ -24,6 +24,8 @@ public class DestillatPane extends GridPane {
     private TextField txfMængdeILiter = new TextField();
     private ComboBox<RygeMateriale> cbxRygeMateriale = new ComboBox<>();
     private TextArea txaKommentarer = new TextArea();
+    private TextField txfMaltbatch = new TextField();
+    private Button btnVælgMaltbatch = new Button("Vælg maltbatch...");
     private Button btnOpretFravælg = new Button("Opret");
     private ListView<Destillat> lvwDestillater = new ListView<>();
     private Button btnSletDestillat = new Button("Slet");
@@ -76,6 +78,13 @@ public class DestillatPane extends GridPane {
         txaKommentarer.setMaxHeight(50);
         this.add(txaKommentarer, 2, 5, 1, 2);
 
+        Label lblMaltbatch = new Label("Maltbatch");
+        this.add(lblMaltbatch, 0, 6);
+        this.add(txfMaltbatch, 0, 7);
+
+        this.add(btnVælgMaltbatch, 1, 7);
+        btnVælgMaltbatch.setOnAction(event -> vælgMaltbatchAction());
+
         this.add(new Separator(), 0, 8, 3, 1);
         this.add(new Separator(Orientation.VERTICAL), 3, 0, 1, 10);
 
@@ -99,6 +108,11 @@ public class DestillatPane extends GridPane {
         GridPane.setHalignment(lblError, HPos.CENTER);
         GridPane.setValignment(lblError, VPos.BOTTOM);
         lblError.setStyle("-fx-text-fill: red");
+    }
+
+    private void vælgMaltbatchAction() {
+        MaltbatchesVindue maltbatchesVindue = new MaltbatchesVindue();
+        maltbatchesVindue.showAndWait();
     }
 
     private void clearError() {
