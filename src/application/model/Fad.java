@@ -111,7 +111,7 @@ public class Fad {
      * Returnerer fadets indhold.
      * @return fadets indhold
      */
-    public FadIndhold getFadInhold() {
+    public FadIndhold getFadIndhold() {
         return fadIndhold;
     }
 

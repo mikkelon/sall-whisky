@@ -125,28 +125,28 @@ public class ControllerForProduktion {
         return påfyldning;
     }
 
-    /**
-     * Opretter en aftapning.
-     * <pre>
-     * Pre: aftappetAf != null, mængdeILiter > 0, aftapningsDato != null, fad != null, whisky != null
-     * </pre>
-     * @param aftappetAf hvem det er aftappet af
-     * @param mængdeILiter hvor mange liter der er aftappet
-     * @param aftapningsDato hvilket dato det er aftappet
-     * @param fad hvilket fad der er aftappet fra
-     * @param whisky hvilken whisky aftapningen tilføjes til
-     * @return den oprettede aftapning
-     */
-    public Aftapning createAftapning(String aftappetAf, double mængdeILiter, LocalDate aftapningsDato, Fad fad, Whisky whisky) {
-        Aftapning aftapning = new Aftapning(aftappetAf, mængdeILiter, aftapningsDato, fad, whisky);
-        if (aftapning.getMængdeILiter() > fad.resterendePladsILiter()) {
-            throw new RuntimeException("Aftapningen er større end fadets resterende mængde.");
-        } else {
-            fad.addAftapning(aftapning);
-            whisky.addAftapning(aftapning);
-        }
-        return aftapning;
-    }
+//    /**
+//     * Opretter en aftapning.
+//     * <pre>
+//     * Pre: aftappetAf != null, mængdeILiter > 0, aftapningsDato != null, fad != null, whisky != null
+//     * </pre>
+//     * @param aftappetAf hvem det er aftappet af
+//     * @param mængdeILiter hvor mange liter der er aftappet
+//     * @param aftapningsDato hvilket dato det er aftappet
+//     * @param fad hvilket fad der er aftappet fra
+//     * @param whisky hvilken whisky aftapningen tilføjes til
+//     * @return den oprettede aftapning
+//     */
+//    public Aftapning createAftapning(String aftappetAf, double mængdeILiter, LocalDate aftapningsDato, Fad fad, Whisky whisky) {
+//        Aftapning aftapning = new Aftapning(aftappetAf, mængdeILiter, aftapningsDato, fad, whisky);
+//        if (aftapning.getMængdeILiter() > fad.resterendePladsILiter()) {
+//            throw new RuntimeException("Aftapningen er større end fadets resterende mængde.");
+//        } else {
+//            fad.addAftapning(aftapning);
+//            whisky.addAftapning(aftapning);
+//        }
+//        return aftapning;
+//    }
 
     /**
      * Returnerer alle maltbatches.

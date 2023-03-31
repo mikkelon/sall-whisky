@@ -1,13 +1,14 @@
 package gui;
 
 import application.controller.ControllerForLager;
-import application.controller.ControllerForProduktion;
 import application.model.*;
 import javafx.geometry.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
+
+import java.util.HashSet;
 
 public class FadePane extends GridPane {
     private final ComboBox<FadLeverandør> cbxFadLeverandør;
@@ -213,9 +214,13 @@ public class FadePane extends GridPane {
     }
 
     private void updatePåfyldninger() {
-        Fad valgtFade = lvwFade.getSelectionModel().getSelectedItem();
-        if (valgtFade != null && !valgtFade.isEmpty()) {
-            lvwPåfyldninger.getItems().setAll(valgtFade.getFadInhold().getPåfyldninger());
+        Fad valgtFad = lvwFade.getSelectionModel().getSelectedItem();
+        if (valgtFad != null && !valgtFad.isEmpty()) {
+            if (valgtFad.getFadIndhold() != null) {
+                lvwPåfyldninger.getItems().setAll(valgtFad.getFadIndhold().getPåfyldninger());
+            } else {
+                lvwPåfyldninger.getItems().clear();
+            }
         } else {
             lvwPåfyldninger.getItems().clear();
         }

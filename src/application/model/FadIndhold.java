@@ -33,7 +33,7 @@ public class FadIndhold {
         return "";
     }
 
-    public Set getPåfyldninger() {
+    public Set<Påfyldning> getPåfyldninger() {
         return new HashSet<>(påfyldninger);
     }
 
@@ -51,7 +51,7 @@ public class FadIndhold {
         }
     }
 
-    public Set getAftapninger() {
+    public Set<Aftapning> getAftapninger() {
         return new HashSet<>(aftapninger);
     }
 
