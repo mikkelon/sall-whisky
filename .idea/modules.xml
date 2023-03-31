@@ -5,9 +5,6 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/org.example.sall-whisky.iml" filepath="$PROJECT_DIR$/.idea/modules/org.example.sall-whisky.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/org.example.sall-whisky.main.iml" filepath="$PROJECT_DIR$/.idea/modules/org.example.sall-whisky.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/org.example.sall-whisky.test.iml" filepath="$PROJECT_DIR$/.idea/modules/org.example.sall-whisky.test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sall-whisky.iml" filepath="$PROJECT_DIR$/.idea/modules/sall-whisky.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sall-whisky.main.iml" filepath="$PROJECT_DIR$/.idea/modules/sall-whisky.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sall-whisky.test.iml" filepath="$PROJECT_DIR$/.idea/modules/sall-whisky.test.iml" />
     </modules>
   </component>
 </project>
