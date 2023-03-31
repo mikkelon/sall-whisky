@@ -130,7 +130,7 @@ public class Fad {
     public Påfyldning påfyld(Destillat destillat, double mængde, String påfyldtAf, LocalDate påfyldningsDato) {
         Påfyldning påfyldning;
         if (fadIndhold == null) {
-            fadIndhold = new FadIndhold(0.0, this);
+            fadIndhold = new FadIndhold(this);
             påfyldning = new Påfyldning(destillat, fadIndhold, påfyldtAf, mængde, påfyldningsDato);
         } else {
             påfyldning = new Påfyldning(destillat, fadIndhold, påfyldtAf, mængde, påfyldningsDato);
