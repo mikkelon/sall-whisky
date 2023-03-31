@@ -1,8 +1,9 @@
-package gui;
+package gui.gui_destillat;
 
 import application.controller.ControllerForProduktion;
 import application.model.Destillat;
 import application.model.RygeMateriale;
+import gui.BekræftSletVindue;
 import javafx.geometry.Orientation;
 import javafx.geometry.VPos;
 import javafx.scene.control.*;

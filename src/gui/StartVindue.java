@@ -1,7 +1,8 @@
 package gui;
 
-import application.controller.ControllerForLager;
-import application.controller.ControllerForProduktion;
+import application.Setup;
+import gui.gui_destillat.DestillatPane;
+import gui.gui_fade.FadePane;
 import gui.gui_lagerstyring.LagerstyringPane;
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -12,13 +13,10 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class StartVindue extends Application {
-    private ControllerForProduktion controllerForProduktion = ControllerForProduktion.getController();
-    private ControllerForLager controllerForLager = ControllerForLager.getController();
     private TabPane tabPane;
     @Override
     public void init() {
-        controllerForLager.initMockData();
-        controllerForProduktion.initMockData();
+        Setup.initMockData();
     }
 
     @Override

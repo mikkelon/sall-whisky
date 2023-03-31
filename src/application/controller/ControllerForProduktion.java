@@ -19,10 +19,11 @@ public class ControllerForProduktion {
 
     /**
      * Opretter ny instans af controlleren eller returnerer den eksisterende
+     *
      * @return controlleren
      */
-    public static ControllerForProduktion getController(){
-        if (controllerForProduktion == null){
+    public static ControllerForProduktion getController() {
+        if (controllerForProduktion == null) {
             controllerForProduktion = new ControllerForProduktion();
         }
         return controllerForProduktion;
@@ -30,6 +31,7 @@ public class ControllerForProduktion {
 
     /**
      * Opretter en ny instans af controlleren med formål at teste denne
+     *
      * @return en ny instans af controlleren
      */
     public static ControllerForProduktion getTestController() {
@@ -45,6 +47,7 @@ public class ControllerForProduktion {
 
     /**
      * Returnerer alle destillater
+     *
      * @return alle destillater
      */
     public HashSet<Destillat> getDestillater() {
@@ -53,18 +56,19 @@ public class ControllerForProduktion {
 
     /**
      * Opretter et nyt destillat.
-     * @param newMakeNr destillatets unikke nummer
-     * @param medarbejder navnet på medarbejderen der har destilleret
-     * @param alkoholProcent alkoholprocenten i destillatet
+     *
+     * @param newMakeNr           destillatets unikke nummer
+     * @param medarbejder         navnet på medarbejderen der har destilleret
+     * @param alkoholProcent      alkoholprocenten i destillatet
      * @param antalDestilleringer antallet af destilleringer
-     * @param startDato startdatoen for destilleringen
-     * @param slutDato slutdatoen for destilleringen
-     * @param mængdeILiter mængden af destillat i liter
-     * @param kommentar kommentar til destillatet
-     * @param rygeMateriale evt rygemateriale der er brugt
+     * @param startDato           startdatoen for destilleringen
+     * @param slutDato            slutdatoen for destilleringen
+     * @param mængdeILiter        mængden af destillat i liter
+     * @param kommentar           kommentar til destillatet
+     * @param rygeMateriale       evt rygemateriale der er brugt
      * @return det oprettede destillat
      * Pre: newMakeNr != null, medarbejder != null, alkoholProcent > 0, antalDestilleringer > 0,
-     *      startDato != null, slutDato != null, mængdeILiter > 0, kommentar != null, rygeMateriale != null
+     * startDato != null, slutDato != null, mængdeILiter > 0, kommentar != null, rygeMateriale != null
      */
     public Destillat createDestillat(String newMakeNr, String medarbejder, double alkoholProcent,
                                      int antalDestilleringer, LocalDate startDato, LocalDate slutDato,
@@ -79,6 +83,7 @@ public class ControllerForProduktion {
 
     /**
      * Returnerer det specifikke destillat, hvis det findes
+     *
      * @param newMakeNr destillatets unikke nummer
      * @return det specifikke destillat ellers null
      * Pre: newMakeNr != null
@@ -94,38 +99,36 @@ public class ControllerForProduktion {
 
     /**
      * Fjerner det specifikke destillat fra lageret
+     *
      * @param destillat destillatet der skal fjernes
-     * Pre: destillat != null
+     *                  Pre: destillat != null
      */
     public void removeDestillat(Destillat destillat) {
         if (!destillat.getPåfyldninger().isEmpty()) {
             throw new RuntimeException("Destillatet er påført fad og kan derfor ikke fjernes.");
         }
         storage.removeDestillat(destillat);
-     }
-     
-     /**
+    }
+
+    /**
      * Opretter en ny påfyldning
      * Pre: destillat != null, fad != null, påfyldtAf != null, mængdeILiter > 0, påfyldningsDato != null, fad.getStørrelseILiter() >= mængdeILiter
-     * @param destillat destillatet der skal fyldes på fadet
-     * @param fad fadet hvorpå påfyldningen skal foregå
-     * @param påfyldtAf navnet på den person der har påfyldt fadet
-     * @param mængdeILiter mængden af destillat i fadet i liter
+     *
+     * @param destillat       destillatet der skal fyldes på fadet
+     * @param fad             fadet hvorpå påfyldningen skal foregå
+     * @param påfyldtAf       navnet på den person der har påfyldt fadet
+     * @param mængdeILiter    mængden af destillat i fadet i liter
      * @param påfyldningsDato dato for påfyldning
      * @return den oprettede påfyldning
      */
     public Påfyldning createPåfyldning(Destillat destillat, Fad fad, String påfyldtAf,
                                        double mængdeILiter, LocalDate påfyldningsDato) {
-        Påfyldning påfyldning = new Påfyldning(destillat, fad, påfyldtAf, mængdeILiter, påfyldningsDato);
-
-        if (påfyldning.getMængdeILiter() > destillat.resterendeMængdeILiter()) {
+        if (mængdeILiter > destillat.resterendeMængdeILiter()) {
             throw new RuntimeException("Påfyldningen er større end destillatets resterende mængde.");
-        } else if (påfyldning.getMængdeILiter() > fad.resterendePladsILiter()) {
+        } else if (mængdeILiter > fad.resterendePladsILiter()) {
             throw new RuntimeException("Påfyldningen er større end fadets resterende mængde.");
-        } else {
-            destillat.addPåfyldning(påfyldning);
-            fad.addPåfyldning(påfyldning);
         }
+        Påfyldning påfyldning = fad.påfyld(destillat, mængdeILiter, påfyldtAf, påfyldningsDato);
         return påfyldning;
     }
 
@@ -134,21 +137,27 @@ public class ControllerForProduktion {
      * <pre>
      * Pre: aftappetAf != null, mængdeILiter > 0, aftapningsDato != null, fad != null, whisky != null
      * </pre>
-     * @param aftappetAf hvem det er aftappet af
-     * @param mængdeILiter hvor mange liter der er aftappet
+     *
+     * @param aftappetAf     hvem det er aftappet af
+     * @param mængdeILiter   hvor mange liter der er aftappet
      * @param aftapningsDato hvilket dato det er aftappet
-     * @param fad hvilket fad der er aftappet fra
-     * @param whisky hvilken whisky aftapningen tilføjes til
+     * @param fad            hvilket fad der er aftappet fra
      * @return den oprettede aftapning
      */
-    public Aftapning createAftapning(String aftappetAf, double mængdeILiter, LocalDate aftapningsDato, Fad fad, Whisky whisky) {
-        Aftapning aftapning = new Aftapning(aftappetAf, mængdeILiter, aftapningsDato, fad, whisky);
-        if (aftapning.getMængdeILiter() > fad.resterendePladsILiter()) {
-            throw new RuntimeException("Aftapningen er større end fadets resterende mængde.");
-        } else {
-            fad.addAftapning(aftapning);
-            whisky.addAftapning(aftapning);
+    public Aftapning createAftapning(String aftappetAf, double mængdeILiter, LocalDate aftapningsDato, Fad fad) {
+        if (fad.getFadIndhold() == null) {
+            throw new RuntimeException("Fadet er tomt.");
         }
+        if (fad.getFadIndhold().getAlkoholProcentEfterModning() == 0) {
+            throw new RuntimeException("Fadets indhold skal have en registreret alkoholprocent efter modning");
+        }
+        if (!fad.getFadIndhold().isModnet()) {
+            throw new RuntimeException("Fadets indhold er ikke modnet");
+        }
+        if (mængdeILiter > fad.getFadIndhold().getMængde()) {
+            throw new RuntimeException("Aftapningen er større end fadets resterende mængde");
+        }
+        Aftapning aftapning = fad.aftap(aftappetAf, mængdeILiter, aftapningsDato);
         return aftapning;
     }
 
@@ -161,22 +170,24 @@ public class ControllerForProduktion {
     }
 
     /**
+
      * Opretter et maltbatch
      * <pre>
      * Pre: kornsort != null, mark != null, gård != null, dyrketAf != null, økologisk != null
      * </pre>
-     * @param kornsort hvilken kornsort maltbatchen kommer fra
-     * @param mark hvilken mark maltbatchen kommer fra
-     * @param gård hvilken gård maltbatchen kommer fra
-     * @param dyrketAf hvem der har dyrket maltbatchen
+     *
+     * @param kornsort  hvilken kornsort maltbatchen kommer fra
+     * @param mark      hvilken mark maltbatchen kommer fra
+     * @param gård      hvilken gård maltbatchen kommer fra
+     * @param dyrketAf  hvem der har dyrket maltbatchen
      * @param økologisk om maltbatchen er økologisk
      * @return det oprettede maltbatch
      */
-   public Maltbatch createMaltbatches(String kornsort, String mark, String gård, String dyrketAf, boolean økologisk){
+    public Maltbatch createMaltbatch(String kornsort, String mark, String gård, String dyrketAf, boolean økologisk) {
         Maltbatch maltbatch = new Maltbatch(kornsort, mark, gård, dyrketAf, økologisk);
         storage.addMaltbatch(maltbatch);
         return maltbatch;
-   }
+    }
 
     /**
      * Fjerner et maltbatch
@@ -197,17 +208,18 @@ public class ControllerForProduktion {
      * <pre>
      * pre: aftapninger.size() > 0, alkoholprocent > 0, betegnelse != null, mængdeVandILiter > 0, vandAfstamning != null, tekstBeskrivelse != null
      * </pre>
-     * @param aftapninger hvilke aftapninger der er foretaget
-     * @param alkoholProcent alkoholprocenten på whiskyen
-     * @param betegnelse betegnelsen for whiskyen
+     *
+     * @param aftapninger      hvilke aftapninger der er foretaget
+     * @param alkoholProcent   alkoholprocenten på whiskyen
+     * @param betegnelse       betegnelsen for whiskyen
      * @param mængdeVandILiter mængden af vand i whiskyen
-     * @param vandAfstamning hvor vandet kommer fra
+     * @param vandAfstamning   hvor vandet kommer fra
      * @param tekstBeskrivelse tekstbeskrivelse om whiskyen
      * @return den oprettede whisky
      */
-   public Whisky createWhisky(Set<Aftapning> aftapninger, double alkoholProcent, Betegnelse betegnelse, double mængdeVandILiter, String vandAfstamning, String tekstBeskrivelse){
-        Whisky whisky = new Whisky(alkoholProcent, betegnelse, mængdeVandILiter,vandAfstamning, tekstBeskrivelse);
-        for(Aftapning a : aftapninger){
+    public Whisky createWhisky(Set<Aftapning> aftapninger, double mængdeVandILiter, String vandAfstamning, String tekstBeskrivelse) {
+        Whisky whisky = new Whisky(mængdeVandILiter, vandAfstamning, tekstBeskrivelse);
+        for (Aftapning a : aftapninger) {
             whisky.addAftapning(a);
         }
         storage.addWhisky(whisky);
@@ -222,15 +234,11 @@ public class ControllerForProduktion {
         return storage.getWhiskyer();
    }
 
-    /**
-     * Tilføjer mockdata til Storage
-     */
-    public void initMockData() {
-        //Tilføjer destillater
-        Destillat d1 = controllerForProduktion.createDestillat("77p", "Mikkel", 53, 2, LocalDate.of(2023, 3, 27), LocalDate.of(2023, 3, 30), 80, "Kommentar", RygeMateriale.INTET);
-        Destillat d2 = controllerForProduktion.createDestillat("78p", "Frederikke", 60, 2, LocalDate.of(2023, 4, 1), LocalDate.of(2023, 4, 2), 90.1, "Kommentar", RygeMateriale.INTET);
-        Destillat d3 = controllerForProduktion.createDestillat("79p", "Anders", 61, 2, LocalDate.of(2023, 4, 1), LocalDate.of(2023, 4, 5), 80.5, "Kommentar", RygeMateriale.TØRV);
-        Destillat d4 = controllerForProduktion.createDestillat("80p", "Mads", 59, 2, LocalDate.of(2023, 4, 3), LocalDate.of(2023, 4, 6), 87.4, "Kommentar", RygeMateriale.TØRV);
-        Destillat d5 = controllerForProduktion.createDestillat("81p", "Mikkel", 62, 2, LocalDate.of(2023, 4, 10), LocalDate.of(2023, 4, 20), 72.43, "Kommentar", RygeMateriale.INTET);
+    public void setAlkoholprocentEfterModning(FadIndhold fadIndhold, double alkoholprocent) {
+        if (fadIndhold.getAlkoholProcentEfterModning() == -1) {
+            fadIndhold.setAlkoholProcentEfterModning(alkoholprocent);
+        } else {
+            throw new RuntimeException("Alkoholprocenten er allerede sat.");
+        }
     }
 }

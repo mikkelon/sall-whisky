@@ -80,7 +80,7 @@ public class Storage {
     }
 
     public HashSet<Maltbatch> getMaltbatches() {
-        return maltbatches;
+        return new HashSet<>(maltbatches);
     }
 
     // #--- Whisky ---#
