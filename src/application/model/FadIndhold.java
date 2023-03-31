@@ -55,7 +55,7 @@ public class FadIndhold {
         return new HashSet<>(aftapninger);
     }
 
-    public void addAfTapning(Aftapning aftapning) {
+    public void addAftapning(Aftapning aftapning) {
         if (!aftapninger.contains(aftapning)) {
             aftapninger.add(aftapning);
         }
