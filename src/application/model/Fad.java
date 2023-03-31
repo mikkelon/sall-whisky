@@ -119,7 +119,7 @@ public class Fad {
      * Returnerer fadets historik over indhold.
      * @return fadets historik over indhold
      */
-    public Set<FadIndhold> getFadInholdHistorik() {
+    public Set<FadIndhold> setFadIndhold() {
         return new HashSet<>(fadIndholdHistorik);
     }
 
@@ -145,7 +145,7 @@ public class Fad {
      * @param aftapningsDato er datoen for aftapningen
      * @return aftapningen
      * <pre>
-     *     Pre: aftappet != null, mængdeILiter > 0, aftapningsDato != null, mængdeILiter <= fadIndhold.indeholdtVæskeILiter()
+     *     Pre: aftappet != null, mængdeILiter > 0, aftapningsDato != null, mængdeILiter <= fadIndhold.indeholdtVæskeILiter(), 0 < fadIndhold.getAlkoholProcent() <= 100
      * </pre>
      */
     public Aftapning aftap(String aftappetAf, double mængdeILiter, LocalDate aftapningsDato) {
