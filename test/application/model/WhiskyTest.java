@@ -39,7 +39,7 @@ class WhiskyTest {
 
         //Test at whiskynr tæller 1 op for hver gang der oprettes en ny whisky
         Whisky whisky1 = new Whisky(40.0, Betegnelse.SINGLECASK, 0.7, "Kilde vand", "En god whisky");
-        assertEquals(whisky.getWhiskyNr() +1, whisky1.getWhiskyNr());
+        assertEquals(whisky.getWhiskyNr() + 1, whisky1.getWhiskyNr());
     }
 
 
@@ -51,7 +51,7 @@ class WhiskyTest {
         FadLeverandør fadLeverandør = new FadLeverandør("Garrison Brothers", "USA");
         Fad fad = new Fad(FadType.BOURBON, 80, fadLeverandør, hylde);
         Whisky whisky2 = new Whisky(40.0, Betegnelse.SINGLECASK, 0.7, "Kilde vand", "En god whisky");
-        Aftapning aftapning = new Aftapning("Frederikke",40,LocalDate.of(2023,2,2),fadIndhold,whisky2);
+        Aftapning aftapning = new Aftapning("Frederikke", 40, LocalDate.of(2023, 2, 2), fadIndhold);
 
         whisky2.addAftapning(aftapning);
         assertTrue(whisky2.getAftapninger().contains(aftapning));

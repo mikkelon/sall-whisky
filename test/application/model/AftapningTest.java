@@ -11,7 +11,6 @@ class AftapningTest {
 
     private Aftapning aftapning;
     private Fad fad;
-    private Whisky whisky;
     private Lager lager;
     private FadLeverandør fadLeverandør;
     private Hylde hylde;
@@ -25,8 +24,7 @@ class AftapningTest {
         hylde = new Hylde(lager);
         fadLeverandør = new FadLeverandør("Garrison Brothers", "USA");
         fad = new Fad(FadType.BOURBON, 80, fadLeverandør, hylde);
-        whisky = new Whisky(40.0, Betegnelse.SINGLECASK, 0.7, "Kilde vand", "En god whisky");
-        aftapning = new Aftapning("Frederikke", 40, LocalDate.of(2023, 2, 2), fadIndhold, whisky);
+        aftapning = new Aftapning("Frederikke", 40, LocalDate.of(2023, 2, 2), fadIndhold);
     }
 
     @Test
@@ -37,6 +35,5 @@ class AftapningTest {
         assertEquals(40, aftapning.getMængdeILiter());
         assertEquals(LocalDate.of(2023, 2, 2), aftapning.getAftapningsDato());
         assertEquals(fadIndhold, aftapning.getFadIndhold());
-        assertEquals(whisky, aftapning.getWhisky());
     }
 }

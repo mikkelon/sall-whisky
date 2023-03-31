@@ -26,7 +26,6 @@ public class Aftapning {
         this.aftapningsDato = aftapningsDato;
         this.fadIndhold = fadIndhold;
         fadIndhold.addAftapning(this);
-        whisky.addAftapning(this);
     }
 
 

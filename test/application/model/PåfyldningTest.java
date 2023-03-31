@@ -23,7 +23,7 @@ class PåfyldningTest {
         destillat = new Destillat("77p", "Mikkel", 53.0,
                 2, LocalDate.of(2023, 3, 27),
                 LocalDate.of(2023, 3, 30), 80.0,
-                "Destillat for bourbon whisky",  RygeMateriale.INTET);
+                "Destillat for bourbon whisky", RygeMateriale.INTET);
         fadIndhold = new FadIndhold(40.0, fad);
         påfyldning = new Påfyldning(destillat, fadIndhold, "Mikkel", 80.0,
                 LocalDate.of(2023, 4, 1));
