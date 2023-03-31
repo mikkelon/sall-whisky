@@ -134,18 +134,32 @@ public class ControllerForProduktion {
      * @param mængdeILiter hvor mange liter der er aftappet
      * @param aftapningsDato hvilket dato det er aftappet
      * @param fad hvilket fad der er aftappet fra
-     * @param whisky hvilken whisky aftapningen tilføjes til
      * @return den oprettede aftapning
      */
-    public Aftapning createAftapning(String aftappetAf, double mængdeILiter, LocalDate aftapningsDato, Fad fad, Whisky whisky) {
-        Aftapning aftapning = new Aftapning(aftappetAf, mængdeILiter, aftapningsDato, fad, whisky);
-        if (aftapning.getMængdeILiter() > fad.resterendePladsILiter()) {
+    public Aftapning createAftapning(String aftappetAf, double mængdeILiter, LocalDate aftapningsDato, Fad fad) {
+        if (mængdeILiter > fad.getFadInhold().getMængde()) {
             throw new RuntimeException("Aftapningen er større end fadets resterende mængde.");
-        } else {
-            fad.addAftapning(aftapning);
-            whisky.addAftapning(aftapning);
         }
+        Aftapning aftapning = fad.aftap(aftappetAf, mængdeILiter, aftapningsDato);
         return aftapning;
+    }
+
+    /**
+     * Opretter en ny whisky
+     * @param alkoholProcent alkoholprocenten af whiskyen
+     * @param betegnelse betegnelsen af whiskyen
+     * @param mængdeVandILiter mængden af vand i liter
+     * @param vandAfstamning vandets afstamning
+     * @param tekstBeskrivelse en tekstbeskrivelse af whiskyen
+     * @return den oprettede whisky
+     * <pre>
+     *     Pre: 100 > alkoholProcent > 0, betegnelse != null, mængdeVandILiter >= 0, vandAfstamning != null, tekstBeskrivelse != null
+     * </pre>
+     */
+    public Whisky createWhisky(double alkoholProcent, Betegnelse betegnelse, double mængdeVandILiter, String vandAfstamning, String tekstBeskrivelse) {
+        Whisky whisky = new Whisky(alkoholProcent, betegnelse, mængdeVandILiter, vandAfstamning, tekstBeskrivelse);
+        storage.addWhisky(whisky);
+        return whisky;
     }
 
     /**

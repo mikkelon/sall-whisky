@@ -143,14 +143,13 @@ public class Fad {
      * @param aftappetAf er navnet på den person, der har aftappet fadet
      * @param mængdeILiter er mængden i liter, der skal aftappes
      * @param aftapningsDato er datoen for aftapningen
-     * @param whisky er den whisky, der skal aftappes
      * @return aftapningen
      * <pre>
-     *     Pre: aftappet != null, mængdeILiter > 0, aftapningsDato != null, whisky != null, mængdeILiter <= fadIndhold.indeholdtVæskeILiter()
+     *     Pre: aftappet != null, mængdeILiter > 0, aftapningsDato != null, mængdeILiter <= fadIndhold.indeholdtVæskeILiter()
      * </pre>
      */
-    public Aftapning aftap(String aftappetAf, double mængdeILiter, LocalDate aftapningsDato, Whisky whisky) {
-        Aftapning aftapning = new Aftapning(aftappetAf, mængdeILiter, aftapningsDato, fadIndhold, whisky);
+    public Aftapning aftap(String aftappetAf, double mængdeILiter, LocalDate aftapningsDato) {
+        Aftapning aftapning = new Aftapning(aftappetAf, mængdeILiter, aftapningsDato, fadIndhold);
         if (fadIndhold.getMængde() <= 0) {
             fadIndholdHistorik.add(fadIndhold);
             fadIndhold = null;
@@ -163,6 +162,9 @@ public class Fad {
      * @return resterende plads i fadet i liter
      */
     public double resterendePladsILiter() {
+        if (fadIndhold == null) {
+            return størrelseILiter;
+        }
     	return størrelseILiter - fadIndhold.getMængde();
     }
 
