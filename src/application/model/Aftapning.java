@@ -14,19 +14,17 @@ public class Aftapning {
 
     /**
      * Opretter en aftapning af et fad på et bestemt whisky produkt.
-     * Pre: fadIndhold != null, whisky != null, mængdeILiter > 0, aftappetAf != null, aftapningsDato != null
+     * Pre: fadIndhold != null, mængdeILiter > 0, aftappetAf != null, aftapningsDato != null
      * @param aftappetAf navnet på den person der aftapper
      * @param mængdeILiter mængden der aftappes i liter
      * @param aftapningsDato dato for aftapningen
      * @param fadIndhold fad indholdet der aftappes
-     * @param whisky whisky produktet som aftapningen er på
      */
-    public Aftapning(String aftappetAf, double mængdeILiter, LocalDate aftapningsDato, FadIndhold fadIndhold, Whisky whisky) {
+    public Aftapning(String aftappetAf, double mængdeILiter, LocalDate aftapningsDato, FadIndhold fadIndhold) {
         this.aftappetAf = aftappetAf;
         this.mængdeILiter = mængdeILiter;
         this.aftapningsDato = aftapningsDato;
         this.fadIndhold = fadIndhold;
-        this.whisky = whisky;
         fadIndhold.addAftapning(this);
         whisky.addAftapning(this);
     }
@@ -70,5 +68,17 @@ public class Aftapning {
      */
     public Whisky getWhisky(){
         return whisky;
+    }
+
+    /**
+     * Sætter whisky produktet som aftapningen er på.
+     * @param whisky er whisky produktet som aftapningen er på
+     */
+    public void setWhisky(Whisky whisky) {
+        this.whisky = whisky;
+    }
+
+    public String hentHistorik() {
+        return fadIndhold.hentHistorik();
     }
 }

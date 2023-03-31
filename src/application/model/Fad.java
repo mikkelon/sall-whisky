@@ -20,7 +20,6 @@ public class Fad {
     /**
      * Opretter et fad med en given størrelse, fadtype, fadleverandør og hylde.
      * fadNr sættes til et unikt nummer.
-     *
      * @param fadType         fadets tidligere indhold, f.eks. "bourbon", "shery", osv.
      * @param størrelseILiter størrelsen på fadet i liter
      * @param fadLeverandør   fadleverandøren, der har leveret fadet
@@ -112,7 +111,7 @@ public class Fad {
      * Returnerer fadets indhold.
      * @return fadets indhold
      */
-    public FadIndhold getFadInhold() {
+    public FadIndhold getFadIndhold() {
         return fadIndhold;
     }
 
@@ -144,14 +143,13 @@ public class Fad {
      * @param aftappetAf er navnet på den person, der har aftappet fadet
      * @param mængdeILiter er mængden i liter, der skal aftappes
      * @param aftapningsDato er datoen for aftapningen
-     * @param whisky er den whisky, der skal aftappes
      * @return aftapningen
      * <pre>
-     *     Pre: aftappet != null, mængdeILiter > 0, aftapningsDato != null, whisky != null, mængdeILiter <= fadIndhold.indeholdtVæskeILiter()
+     *     Pre: aftappet != null, mængdeILiter > 0, aftapningsDato != null, mængdeILiter <= fadIndhold.indeholdtVæskeILiter()
      * </pre>
      */
-    public Aftapning aftap(String aftappetAf, double mængdeILiter, LocalDate aftapningsDato, Whisky whisky) {
-        Aftapning aftapning = new Aftapning(aftappetAf, mængdeILiter, aftapningsDato, fadIndhold, whisky);
+    public Aftapning aftap(String aftappetAf, double mængdeILiter, LocalDate aftapningsDato) {
+        Aftapning aftapning = new Aftapning(aftappetAf, mængdeILiter, aftapningsDato, fadIndhold);
         if (fadIndhold.getMængde() <= 0) {
             fadIndholdHistorik.add(fadIndhold);
             fadIndhold = null;
@@ -164,11 +162,22 @@ public class Fad {
      * @return resterende plads i fadet i liter
      */
     public double resterendePladsILiter() {
+        if (fadIndhold == null) {
+            return størrelseILiter;
+        }
     	return størrelseILiter - fadIndhold.getMængde();
     }
 
     @Override
     public String toString() {
         return "Fad nr. " + fadNr + " af typen " + fadType + " på hylden " + hylde.getHyldeNr() + " med en størrelse på " + størrelseILiter + " liter.";
+    }
+
+    public String hentHistorik() {
+        String historik = "Fadtype: " + fadType + "\n" + "Fadnr: " + fadNr + "\n"
+                + "Størrelse: " + størrelseILiter + "\n" + "Fadet er på hylden: "
+                + hylde.getHyldeNr() + "\n" + "Fadet er leveret af: " + fadLeverandør.getNavn()
+                + "\n" + "Fadets historik: " + "\n";
+        return historik;
     }
 }

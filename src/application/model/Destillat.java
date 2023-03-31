@@ -181,6 +181,7 @@ public class Destillat {
     public void addMaltbatch(Maltbatch maltbatch){
         if(!maltbatches.contains(maltbatch)){
             maltbatches.add(maltbatch);
+            maltbatch.tilføjDestillat();
         }
     }
 
@@ -191,11 +192,22 @@ public class Destillat {
     public void removeMaltbatch(Maltbatch maltbatch){
         if(maltbatches.contains(maltbatch)){
             maltbatches.remove(maltbatch);
+            maltbatch.fjernDestillat();
         }
     }
 
     @Override
     public String toString() {
         return newMakeNr;
+    }
+
+    public String hentHistorik() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Destillat: " + newMakeNr + ":\n" + "Medarbejder: " + medarbejder
+                + "\n" + "Alkoholprocent: " + alkoholProcent + "\n" + "Antal destilleringer: "
+                + antalDestilleringer + "\n" + "Startdato: " + startDato + "\n" + "Slutdato: "
+                + slutDato + "\n" + "Mængde i liter: " + mængdeILiter + "\n" + "Kommentar: "
+                + kommentar + "\n" + "Rygemateriale: " + rygeMateriale + "\n");
+        return sb.toString();
     }
 }

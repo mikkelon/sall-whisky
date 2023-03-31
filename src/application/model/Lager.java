@@ -14,7 +14,6 @@ public class Lager {
 
     /**
      * Initialiserer et nyt lager med adresse, navn, og kvm.
-     *
      * @param adresse lagerets adresse
      * @param navn    lagerets navn
      * @param kvm     lagerets kvm

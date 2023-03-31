@@ -74,6 +74,10 @@ public class Påfyldning {
     public String toString() {
         return destillat.getNewMakeNr() + ", " + mængdeILiter + " liter";
     }
+
+    public String hentHistorik() {
+        return destillat.hentHistorik();
+    }
 }
 
 

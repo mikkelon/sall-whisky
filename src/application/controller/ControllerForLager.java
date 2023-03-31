@@ -101,8 +101,10 @@ public class ControllerForLager {
 
     /**
      * Fjerner en fadleverandør fra systemet
-     * @param fadLeverandør fadleverandøren
+     * <pre>
      * Pre: fadLeverandør != null
+     * </pre>
+     * @param fadLeverandør fadleverandøren
      */
     public void removeFadLeverandør(FadLeverandør fadLeverandør) {
         if (fadLeverandør.getAntalFade() != 0) {
@@ -224,8 +226,8 @@ public class ControllerForLager {
         for (Lager lager : getLagre()) {
             for (Hylde hylde : lager.getHylder()) {
                 for (Fad fad : hylde.getFade()) {
-                    if (fad.getFadInhold().forventetFærdigProduceret() != null) {
-                        if (fad.getFadInhold().forventetFærdigProduceret().isBefore(LocalDate.now())) {
+                    if (fad.getFadIndhold().forventetFærdigProduceret() != null) {
+                        if (fad.getFadIndhold().forventetFærdigProduceret().isBefore(LocalDate.now())) {
                             modneFade.add(fad);
                         }
                     }
