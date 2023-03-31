@@ -101,8 +101,10 @@ public class ControllerForLager {
 
     /**
      * Fjerner en fadleverandør fra systemet
-     * @param fadLeverandør fadleverandøren
+     * <pre>
      * Pre: fadLeverandør != null
+     * </pre>
+     * @param fadLeverandør fadleverandøren
      */
     public void removeFadLeverandør(FadLeverandør fadLeverandør) {
         if (fadLeverandør.getAntalFade() != 0) {

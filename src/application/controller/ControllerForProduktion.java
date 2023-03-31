@@ -126,6 +126,99 @@ public class ControllerForProduktion {
     }
 
     /**
+     * Opretter en aftapning.
+     * <pre>
+     * Pre: aftappetAf != null, mængdeILiter > 0, aftapningsDato != null, fad != null, whisky != null
+     * </pre>
+     * @param aftappetAf hvem det er aftappet af
+     * @param mængdeILiter hvor mange liter der er aftappet
+     * @param aftapningsDato hvilket dato det er aftappet
+     * @param fad hvilket fad der er aftappet fra
+     * @param whisky hvilken whisky aftapningen tilføjes til
+     * @return den oprettede aftapning
+     */
+    public Aftapning createAftapning(String aftappetAf, double mængdeILiter, LocalDate aftapningsDato, Fad fad, Whisky whisky) {
+        Aftapning aftapning = new Aftapning(aftappetAf, mængdeILiter, aftapningsDato, fad, whisky);
+        if (aftapning.getMængdeILiter() > fad.resterendePladsILiter()) {
+            throw new RuntimeException("Aftapningen er større end fadets resterende mængde.");
+        } else {
+            fad.addAftapning(aftapning);
+            whisky.addAftapning(aftapning);
+        }
+        return aftapning;
+    }
+
+    /**
+     * Returnerer alle maltbatches.
+     * @return alle maltbatches
+     */
+    public HashSet<Maltbatch> getMaltbatches(){
+        return storage.getMaltbatches();
+    }
+
+    /**
+     * Opretter et maltbatch
+     * <pre>
+     * Pre: kornsort != null, mark != null, gård != null, dyrketAf != null, økologisk != null
+     * </pre>
+     * @param kornsort hvilken kornsort maltbatchen kommer fra
+     * @param mark hvilken mark maltbatchen kommer fra
+     * @param gård hvilken gård maltbatchen kommer fra
+     * @param dyrketAf hvem der har dyrket maltbatchen
+     * @param økologisk om maltbatchen er økologisk
+     * @return det oprettede maltbatch
+     */
+   public Maltbatch createMaltbatches(String kornsort, String mark, String gård, String dyrketAf, boolean økologisk){
+        Maltbatch maltbatch = new Maltbatch(kornsort, mark, gård, dyrketAf, økologisk);
+        storage.addMaltbatch(maltbatch);
+        return maltbatch;
+   }
+
+    /**
+     * Fjerner et maltbatch
+     * <pre>
+     * pre: maltbatch != null
+     * </pre>
+     * @param maltbatch fjernes
+     */
+   public void removeMaltbatch(Maltbatch maltbatch){
+        if(maltbatch.getAntalDestillater() != 0){
+            throw new RuntimeException("Maltbatch kan ikke slettes, når der er destillater tilknyttet.");
+        }
+        storage.removeMaltbatch(maltbatch);
+   }
+
+    /**
+     * Opretter en whisky
+     * <pre>
+     * pre: aftapninger.size() > 0, alkoholprocent > 0, betegnelse != null, mængdeVandILiter > 0, vandAfstamning != null, tekstBeskrivelse != null
+     * </pre>
+     * @param aftapninger hvilke aftapninger der er foretaget
+     * @param alkoholProcent alkoholprocenten på whiskyen
+     * @param betegnelse betegnelsen for whiskyen
+     * @param mængdeVandILiter mængden af vand i whiskyen
+     * @param vandAfstamning hvor vandet kommer fra
+     * @param tekstBeskrivelse tekstbeskrivelse om whiskyen
+     * @return den oprettede whisky
+     */
+   public Whisky createWhisky(Set<Aftapning> aftapninger, double alkoholProcent, Betegnelse betegnelse, double mængdeVandILiter, String vandAfstamning, String tekstBeskrivelse){
+        Whisky whisky = new Whisky(alkoholProcent, betegnelse, mængdeVandILiter,vandAfstamning, tekstBeskrivelse);
+        for(Aftapning a : aftapninger){
+            whisky.addAftapning(a);
+        }
+        storage.addWhisky(whisky);
+        return whisky;
+   }
+
+    /**
+     * Returnerer alle whiskyerne
+     * @return alle whiskyerne
+     */
+   public HashSet<Whisky> getWhiskyer(){
+        return storage.getWhiskyer();
+   }
+
+    /**
      * Tilføjer mockdata til Storage
      */
     public void initMockData() {
