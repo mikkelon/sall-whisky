@@ -14,7 +14,9 @@ public class Aftapning {
 
     /**
      * Opretter en aftapning af et fad på et bestemt whisky produkt.
-     * Pre: fadIndhold != null, mængdeILiter > 0, aftappetAf != null, aftapningsDato != null
+     * <pre>
+     * Pre: fad != null, whisky != null, mængdeILiter > 0, aftappetAf != null, aftapningsDato != null
+     * </pre>
      * @param aftappetAf navnet på den person der aftapper
      * @param mængdeILiter mængden der aftappes i liter
      * @param aftapningsDato dato for aftapningen

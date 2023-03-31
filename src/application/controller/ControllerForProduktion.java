@@ -162,6 +162,15 @@ public class ControllerForProduktion {
     }
 
     /**
+     * Returnerer alle maltbatches.
+     * @return alle maltbatches
+     */
+    public HashSet<Maltbatch> getMaltbatches(){
+        return storage.getMaltbatches();
+    }
+
+    /**
+
      * Opretter et maltbatch
      * <pre>
      * Pre: kornsort != null, mark != null, gård != null, dyrketAf != null, økologisk != null
@@ -185,15 +194,14 @@ public class ControllerForProduktion {
      * <pre>
      * pre: maltbatch != null
      * </pre>
-     *
      * @param maltbatch fjernes
      */
-    public void removeMaltbatch(Maltbatch maltbatch) {
-        if (maltbatch.getAntalDestillater() != 0) {
+   public void removeMaltbatch(Maltbatch maltbatch){
+        if(maltbatch.getAntalDestillater() != 0){
             throw new RuntimeException("Maltbatch kan ikke slettes, når der er destillater tilknyttet.");
         }
         storage.removeMaltbatch(maltbatch);
-    }
+   }
 
     /**
      * Opretter en whisky
@@ -216,12 +224,18 @@ public class ControllerForProduktion {
         }
         storage.addWhisky(whisky);
         return whisky;
-    }
+   }
 
     /**
      * Returnerer alle whiskyerne
-     *
      * @return alle whiskyerne
+     */
+   public HashSet<Whisky> getWhiskyer(){
+        return storage.getWhiskyer();
+   }
+
+    /**
+     * Tilføjer mockdata til Storage
      */
     public HashSet<Whisky> getWhiskyer() {
         return storage.getWhiskyer();

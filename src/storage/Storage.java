@@ -98,5 +98,21 @@ public class Storage {
     public HashSet<Whisky> getWhiskyer(){
         return new HashSet<>(whiskyer);
     }
+
+    // #--- Whisky ---#
+
+    private HashSet<Whisky> whiskyer = new HashSet<>();
+
+    public void addWhisky(Whisky whisky){
+        whiskyer.add(whisky);
+    }
+
+    public void removeWhisky(Whisky whisky){
+        whiskyer.remove(whisky);
+    }
+
+    public HashSet<Whisky> getWhiskyer(){
+        return whiskyer;
+    }
 }
 

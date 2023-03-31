@@ -12,8 +12,10 @@ public class Påfyldning {
     private FadIndhold fadIndhold;
     private Destillat destillat;
 
-    /** Opretter en påfyldning til et fad indhold med et bestemt destillat.
-     * Pre: fadIndhold != null, destillat != null, mængdeILiter > 0, påfyldtAf != null, påfyldningsDato != null
+    /** Opretter en påfyldning af et fad med et bestemt destillat.
+     * <pre>
+     * Pre: fad != null, destillat != null, mængdeILiter > 0, påfyldtAf != null, påfyldningsDato != null
+     * </pre>
      * @param destillat destillatet der påfyldes
      * @param fadIndhold fad indholdet der påfyldes
      * @param påfyldtAf navnet på den person der påfylder
