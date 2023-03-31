@@ -85,12 +85,14 @@ public class FadIndhold {
      * Udregner den samlede mængde af væske i fadet i liter.
      * @return den samlede mængde af væske i fadet i liter
      */
-    public double indeholdtVæskeILiter() {
-        double væske = 0;
+    public double getMængde() {
+        double mængde = 0;
         for (Påfyldning påfyldning : påfyldninger) {
-            væske += påfyldning.getMængdeILiter();
+            mængde += påfyldning.getMængdeILiter();
         }
-        return væske;
-        //TODO: aftapninger skal også medregnes
+        for (Aftapning aftapning : aftapninger) {
+            mængde -= aftapning.getMængdeILiter();
+        }
+        return mængde;
     }
 }
