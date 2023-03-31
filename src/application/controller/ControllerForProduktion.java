@@ -234,13 +234,6 @@ public class ControllerForProduktion {
         return storage.getWhiskyer();
    }
 
-    /**
-     * Tilføjer mockdata til Storage
-     */
-    public HashSet<Whisky> getWhiskyer() {
-        return storage.getWhiskyer();
-    }
-
     public void setAlkoholprocentEfterModning(FadIndhold fadIndhold, double alkoholprocent) {
         if (fadIndhold.getAlkoholProcentEfterModning() == -1) {
             fadIndhold.setAlkoholProcentEfterModning(alkoholprocent);
