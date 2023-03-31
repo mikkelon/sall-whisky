@@ -226,8 +226,8 @@ public class ControllerForLager {
         for (Lager lager : getLagre()) {
             for (Hylde hylde : lager.getHylder()) {
                 for (Fad fad : hylde.getFade()) {
-                    if (fad.forventetFærdigproduceret() != null) {
-                        if (fad.forventetFærdigproduceret().isBefore(LocalDate.now())) {
+                    if (fad.getFadIndhold() != null && fad.getFadIndhold().forventetFærdigProduceret() != null) {
+                        if (fad.getFadIndhold().forventetFærdigProduceret().isBefore(LocalDate.now())) {
                             modneFade.add(fad);
                         }
                     }
@@ -235,39 +235,5 @@ public class ControllerForLager {
             }
         }
         return modneFade;
-    }
-
-
-    public void initMockData() {
-        FadLeverandør l1 = controller.createFadLeverandør("Garrison Brothers", "USA");
-        FadLeverandør l2 = controller.createFadLeverandør("Basque Moonshiners", "Spanien");
-        FadLeverandør l3 = controller.createFadLeverandør("Mallorca Distillery", "Spanien");
-        storage.addFadLeverandør(l1);
-        storage.addFadLeverandør(l2);
-        storage.addFadLeverandør(l3);
-
-        // Tilføjer et lager
-        Lager lager1 = controller.createLagerWithAntalHylder("Baldersgade 39", "Sall Whisky Lager", 100, 0);
-        storage.addLager(lager1);
-
-        //Tilføjer hylder til et lager
-        Hylde h1 = controller.createHylde(lager1);
-        Hylde h2 = controller.createHylde(lager1);
-        Hylde h3 = controller.createHylde(lager1);
-        Hylde h4 = controller.createHylde(lager1);
-
-        //Tilføjer fade til hylderne
-        Fad fad1 = controller.createFad(FadType.BOURBON, 80, l1, h1);
-        Fad fad2 = controller.createFad(FadType.BOURBON, 90, l1, h1);
-        Fad fad4 = controller.createFad(FadType.RØDVIN, 60, l1, h2);
-        Fad fad3 = controller.createFad(FadType.BOURBON, 90, l1, h1);
-        Fad fad5 = controller.createFad(FadType.RØDVIN, 70, l1, h2);
-        Fad fad6 = controller.createFad(FadType.RØDVIN, 80, l1, h2);
-        Fad fad7 = controller.createFad(FadType.SHERRY, 110, l1, h3);
-        Fad fad8 = controller.createFad(FadType.SHERRY, 120, l1, h3);
-        Fad fad9 = controller.createFad(FadType.SHERRY, 105, l1, h3);
-        Fad fad10 = controller.createFad(FadType.UBRUGT, 90, l1, h4);
-        Fad fad11 = controller.createFad(FadType.UBRUGT, 70, l1, h4);
-        Fad fad12 = controller.createFad(FadType.UBRUGT, 60, l1, h4);
     }
 }

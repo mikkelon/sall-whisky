@@ -81,7 +81,6 @@ class ControllerForProduktionTest {
 
     @Test
     void createPåfyldningTC7() {
-        assertTrue(fad.getPåfyldninger().contains(påfyldning));
         assertTrue(destillat.getPåfyldninger().contains(påfyldning));
     }
 

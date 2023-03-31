@@ -1,5 +1,5 @@
 package application.model;
 
 public enum Betegnelse {
-    SINGLEMALT, SINGLECASK, BLENDED
+    SINGLE_MALT, SINGLE_CASK, CASK_STRENGTH
 }

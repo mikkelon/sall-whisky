@@ -1,4 +1,4 @@
-package gui;
+package gui.gui_destillat;
 
 import application.model.Maltbatch;
 import javafx.geometry.Insets;

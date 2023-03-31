@@ -6,8 +6,6 @@ import java.util.ArrayList;
  * Modellerer et whiskyprodukt som kan bestå af flere forskellige aftapninger på fade.
  */
 public class Whisky {
-    private double alkoholProcent;
-    private Betegnelse betegnelse;
     private double mængdeVandILiter;
     private String vandAfstamning;
     private String tekstBeskrivelse;
@@ -26,30 +24,12 @@ public class Whisky {
      * @param vandAfstamning afstamningen af vandet der er brugt i whiskyproduktet
      * @param tekstBeskrivelse tekstbeskrivelsen af whiskyproduktet
      */
-    public Whisky(double alkoholProcent, Betegnelse betegnelse, double mængdeVandILiter, String vandAfstamning, String tekstBeskrivelse) {
+    public Whisky(double mængdeVandILiter, String vandAfstamning, String tekstBeskrivelse) {
         antalWhiskyProdukter++;
         this.whiskyNr = antalWhiskyProdukter;
-        this.alkoholProcent = alkoholProcent;
-        this.betegnelse = betegnelse;
         this.mængdeVandILiter = mængdeVandILiter;
         this.vandAfstamning = vandAfstamning;
         this.tekstBeskrivelse = tekstBeskrivelse;
-    }
-
-    /**
-     * Returnerer alkoholprocenten på whiskyproduktet.
-     * @return alkoholprocenten på whiskyproduktet
-     */
-    public double getAlkoholProcent() {
-        return alkoholProcent;
-    }
-
-    /**
-     * Returnerer betegnelsen på whiskyproduktet.
-     * @return betegnelsen på whiskyproduktet
-     */
-    public Betegnelse getBetegnelse() {
-        return betegnelse;
     }
 
     /**
@@ -102,4 +82,54 @@ public class Whisky {
         }
     }
 
+    /**
+     * Returnerer betegnelsen på whiskyproduktet.
+     * @return betegnelsen på whiskyproduktet
+     */
+    public Betegnelse getBetegnelse() {
+        if (aftapninger.size() == 0) {
+            return null;
+        } else {
+            boolean singleCask = true;
+            Fad fad = aftapninger.get(0).getFadIndhold().getFad();
+            int i = 1;
+            while (i < aftapninger.size() && singleCask) {
+                if (!aftapninger.get(i).getFadIndhold().getFad().equals(fad)) {
+                    singleCask = false;
+                }
+                i++;
+            }
+            if (singleCask) {
+                if (mængdeVandILiter == 0) return Betegnelse.CASK_STRENGTH;
+                else return Betegnelse.SINGLE_CASK;
+            }
+            return Betegnelse.SINGLE_MALT;
+        }
+    }
+
+    /**
+     * Returnerer alkoholprocenten på whiskyproduktet.
+     * @return alkoholprocenten på whiskyproduktet
+     */
+    public double getAlkoholProcent() {
+        if (aftapninger.size() == 0) {
+            return 0;
+        } else {
+            double væskeMængde = mængdeVandILiter;
+            double alkoholMængde = 0;
+            for (Aftapning aftapning : aftapninger) {
+                væskeMængde += aftapning.getFadIndhold().getMængde();
+                alkoholMængde += aftapning.getFadIndhold().getMængde() * aftapning.getFadIndhold().getAlkoholProcentEfterModning();
+            }
+            return alkoholMængde / væskeMængde;
+        }
+    }
+
+    public String hentHistorik() {
+        String historik = "";
+        for (Aftapning aftapning : aftapninger) {
+            historik += aftapning.hentHistorik();
+        }
+        return historik;
+    }
 }

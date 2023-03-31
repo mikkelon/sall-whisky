@@ -33,11 +33,11 @@ class HyldeTest {
         // Her får vi også testet getHyldeNr()
         Lager lager2 = new Lager("Testvej 2", "Test Lager 2", 200);
         Hylde hylde1 = lager2.createHylde();
-        assertEquals(1,hylde1.getHyldeNr());
+        assertEquals(1, hylde1.getHyldeNr());
         Hylde hylde2 = lager2.createHylde();
-        assertEquals(2,hylde2.getHyldeNr());
+        assertEquals(2, hylde2.getHyldeNr());
         Hylde hylde3 = lager2.createHylde();
-        assertEquals(3,hylde3.getHyldeNr());
+        assertEquals(3, hylde3.getHyldeNr());
     }
 
     @Test

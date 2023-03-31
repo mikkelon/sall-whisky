@@ -1,8 +1,8 @@
 package application.model;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Modellerer et fad, som bruges til at modne destillat til whisky.
@@ -14,9 +14,8 @@ public class Fad {
     private static int antalFade;
     private Hylde hylde;
     private FadLeverandør fadLeverandør;
-    private HashSet<Påfyldning> påfyldninger;
-    private LocalDate senestPåfyldt;
-    private ArrayList<Aftapning> aftapninger = new ArrayList<>();
+    private FadIndhold fadIndhold;
+    private Set<FadIndhold> fadIndholdHistorik = new HashSet<>();
 
     /**
      * Opretter et fad med en given størrelse, fadtype, fadleverandør og hylde.
@@ -33,10 +32,7 @@ public class Fad {
         this.størrelseILiter = størrelseILiter;
         this.fadLeverandør = fadLeverandør;
         this.hylde = hylde;
-        this.påfyldninger = new HashSet<>();
         hylde.addFad(this);
-        this.påfyldninger = new HashSet<>();
-        this.senestPåfyldt = null;
     }
 
     /**
@@ -112,37 +108,53 @@ public class Fad {
     }
 
     /**
-     * Tilføjer en påfyldning til fadet.
-     * Pre: påfyldning != null, påfyldning.getMængdeILiter() <= resterendePladsILiter()
-     * @param påfyldning påfyldningen der skal tilføjes
+     * Returnerer fadets indhold.
+     * @return fadets indhold
      */
-    public void addPåfyldning(Påfyldning påfyldning) {
-        påfyldninger.add(påfyldning);
+    public FadIndhold getFadIndhold() {
+        return fadIndhold;
+    }
 
-        // Opdatér senestPåfyldt
-        if (senestPåfyldt == null || påfyldning.getPåfyldningsDato().isAfter(senestPåfyldt)) {
-            senestPåfyldt = påfyldning.getPåfyldningsDato();
+    /**
+     * Returnerer fadets historik over indhold.
+     * @return fadets historik over indhold
+     */
+    public Set<FadIndhold> setFadIndhold() {
+        return new HashSet<>(fadIndholdHistorik);
+    }
+
+    public boolean isEmpty() {
+        return fadIndhold == null;
+    }
+
+    public Påfyldning påfyld(Destillat destillat, double mængde, String påfyldtAf, LocalDate påfyldningsDato) {
+        Påfyldning påfyldning;
+        if (fadIndhold == null) {
+            fadIndhold = new FadIndhold(this);
+            påfyldning = new Påfyldning(destillat, fadIndhold, påfyldtAf, mængde, påfyldningsDato);
+        } else {
+            påfyldning = new Påfyldning(destillat, fadIndhold, påfyldtAf, mængde, påfyldningsDato);
         }
+        return påfyldning;
     }
 
     /**
-     * Returnerer en kopi af påfyldningerne.
-     * @return en kopi af påfyldningerne
+     * Aftapper et fad.
+     * @param aftappetAf er navnet på den person, der har aftappet fadet
+     * @param mængdeILiter er mængden i liter, der skal aftappes
+     * @param aftapningsDato er datoen for aftapningen
+     * @return aftapningen
+     * <pre>
+     *     Pre: aftappet != null, mængdeILiter > 0, aftapningsDato != null, mængdeILiter <= fadIndhold.indeholdtVæskeILiter(), 0 < fadIndhold.getAlkoholProcent() <= 100
+     * </pre>
      */
-    public HashSet<Påfyldning> getPåfyldninger() {
-    	return new HashSet<>(påfyldninger);
-    }
-
-    /**
-     * Udregner den samlede mængde af væske i fadet i liter.
-     * @return den samlede mængde af væske i fadet i liter
-     */
-    public double indeholdtVæskeILiter() {
-    	double væske = 0;
-    	for (Påfyldning påfyldning : påfyldninger) {
-    		væske += påfyldning.getMængdeILiter();
-    	}
-    	return væske;
+    public Aftapning aftap(String aftappetAf, double mængdeILiter, LocalDate aftapningsDato) {
+        Aftapning aftapning = new Aftapning(aftappetAf, mængdeILiter, aftapningsDato, fadIndhold);
+        if (fadIndhold.getMængde() <= 0) {
+            fadIndholdHistorik.add(fadIndhold);
+            fadIndhold = null;
+        }
+        return aftapning;
     }
 
     /**
@@ -150,58 +162,21 @@ public class Fad {
      * @return resterende plads i fadet i liter
      */
     public double resterendePladsILiter() {
-    	return størrelseILiter - indeholdtVæskeILiter();
-    }
-
-    /**
-     * Udregner forventet færdigproduceret dato.
-     * @return forventet færdigproduceret dato
-     */
-    public LocalDate forventetFærdigproduceret() {
-        if (senestPåfyldt == null)
-            return null;
-        return senestPåfyldt.plusYears(3);
-    }
-
-    /**
-     * Udregner alkoholprocenten i fadet.
-     * @return alkoholprocenten i fadet
-     */
-    public double getAlkoholProcent() {
-        // Udregn alkoholprocent baseret på alle påfyldninger
-        double alkohol = 0.0;
-        double væske = 0.0;
-        for (Påfyldning påfyldning : påfyldninger) {
-            double alkoholProcent = påfyldning.getDestillat().getAlkoholProcent() / 100.0;
-            alkohol += alkoholProcent * påfyldning.getMængdeILiter();
-            væske += påfyldning.getMængdeILiter();
+        if (fadIndhold == null) {
+            return størrelseILiter;
         }
-        return væske > 0 ? alkohol / væske * 100 : 0.0;
-    }
-
-    /**
-     * Returnerer en liste over aftapninger.
-     * @return en liste over aftapninger
-     */
-    public ArrayList<Aftapning> getAftapninger(){
-        return new ArrayList<>(aftapninger);
-    }
-
-    /**
-     * Tilføjer en aftapning til fadet.
-     * @param aftapning tilføjes til fadet
-     */
-    public void addAftapning(Aftapning aftapning){
-        if(aftapninger.contains(aftapning)){
-            aftapninger.add(aftapning);
-        }
+    	return størrelseILiter - fadIndhold.getMængde();
     }
 
     @Override
     public String toString() {
-        String s = "#" + fadNr;
-        if (!påfyldninger.isEmpty()) s += String.format(" (%.1f%%)", getAlkoholProcent());
+        return "Fad nr. " + fadNr + " af typen " + fadType + " på hylden " + hylde.getHyldeNr() + " med en størrelse på " + størrelseILiter + " liter.";
+    }
 
-        return s;
+    public String hentHistorik() {
+        String historik = "Fadtype: " + fadType + "\n" + "Fadnr: " + fadNr + "\n"
+                + "Størrelse: " + størrelseILiter + "\n" + "Fadet er på lager: "
+                + hylde.getLager() + ", hylde nr: " + hylde.getHyldeNr() + "\n" + "Fadet er leveret af: " + fadLeverandør + "\n";
+        return historik;
     }
 }

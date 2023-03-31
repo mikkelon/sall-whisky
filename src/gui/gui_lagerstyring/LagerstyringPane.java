@@ -1,13 +1,12 @@
 package gui.gui_lagerstyring;
 
 import application.controller.ControllerForLager;
-import application.controller.ControllerForProduktion;
 import application.model.Fad;
 import application.model.Hylde;
 import application.model.Lager;
 import gui.BekræftSletVindue;
 import gui.StartVindue;
-import gui.FadePane;
+import gui.gui_fade.FadePane;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
