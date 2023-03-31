@@ -1,14 +1,14 @@
-package gui;
+package gui.gui_fade;
 
 import application.controller.ControllerForLager;
 import application.model.*;
+import gui.BekræftSletVindue;
+import gui.RegistrerAlkoholProcentVindue;
 import javafx.geometry.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
-
-import java.util.HashSet;
 
 public class FadePane extends GridPane {
     private final ComboBox<FadLeverandør> cbxFadLeverandør;
@@ -73,16 +73,17 @@ public class FadePane extends GridPane {
         GridPane.setValignment(cbxHylde, VPos.TOP);
         cbxHylde.setMinWidth(150);
         cbxHylde.setMaxWidth(150);
+        cbxHylde.setDisable(true);
         this.add(cbxHylde, 1, 5);
 
         Separator sep1 = new Separator(Orientation.VERTICAL);
-        this.add(sep1, 2, 0,1,7);
+        this.add(sep1, 2, 0,1,8);
 
         Label lblPåfyldninger = new Label("Påfyldninger");
         this.add(lblPåfyldninger, 3, 0);
 
         lvwPåfyldninger = new ListView<>();
-        this.add(lvwPåfyldninger, 3, 1,1,6);
+        this.add(lvwPåfyldninger, 3, 1,1,7);
         lvwPåfyldninger.setMaxHeight(200);
         lvwPåfyldninger.setCellFactory(param -> new ListCell<>() {
             @Override
@@ -100,26 +101,26 @@ public class FadePane extends GridPane {
         });
 
         Separator sep2 = new Separator(Orientation.VERTICAL);
-        this.add(sep2, 4, 0, 1, 11);
+        this.add(sep2, 4, 0, 1, 12);
 
         Label lblAlleFade = new Label("Alle fade");
         this.add(lblAlleFade, 5, 0);
 
         lvwFade = new ListView<>();
         lvwFade.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> selectionChanged());
-        this.add(lvwFade, 5, 1,1,9);
+        this.add(lvwFade, 5, 1,1,10);
 
         Separator sep3 = new Separator(Orientation.HORIZONTAL);
-        this.add(sep3, 0, 7,4, 1);
+        this.add(sep3, 0, 8,4, 1);
 
         btnOpretFravælg = new Button("Opret");
         btnOpretFravælg.setOnAction(event -> opretFravælgAction());
-        this.add(btnOpretFravælg, 0, 8, 2, 1);
+        this.add(btnOpretFravælg, 0, 9, 2, 1);
         GridPane.setHalignment(btnOpretFravælg, HPos.CENTER);
 
         btnSlet = new Button("Slet");
         btnSlet.setOnAction(event -> sletAction());
-        this.add(btnSlet, 5, 10);
+        this.add(btnSlet, 5, 11);
         GridPane.setHalignment(btnSlet, HPos.CENTER);
 
         this.add(btnRegistrerAlkoholprocent, 0, 6);
@@ -127,30 +128,19 @@ public class FadePane extends GridPane {
 
         // #--- ErrorLabel ---#
         lblError = new Label(" ");
-        this.add(lblError, 0,6,2,1);
+        this.add(lblError, 0,7,2,1);
         GridPane.setHalignment(lblError, HPos.CENTER);
         lblError.setStyle("-fx-text-fill: red");
-
-        // #--- Add row constraints ---#
-        for (int i = 0; i < this.getRowCount(); i++) {
-            RowConstraints row = new RowConstraints();
-            this.getRowConstraints().add(row);
-        }
-
-        // Set row constraints
-
-        RowConstraints row5 = this.getRowConstraints().get(5);
-        row5.setVgrow(Priority.ALWAYS);
-
-        RowConstraints row6 = this.getRowConstraints().get(6);
-        row6.setVgrow(Priority.NEVER);
 
         // #--- Update controls ---#
         updateControls();
     }
 
     private void registrerAlkoholprocentAction() {
+        clearError();
+        Fad valgtFad = lvwFade.getSelectionModel().getSelectedItem();
         RegistrerAlkoholProcentVindue registrerAlkoholProcentVindue = new RegistrerAlkoholProcentVindue();
+        registrerAlkoholProcentVindue.setFad(valgtFad);
         registrerAlkoholProcentVindue.showAndWait();
     }
 
@@ -208,7 +198,9 @@ public class FadePane extends GridPane {
         Lager valgtLager = cbxLager.getSelectionModel().getSelectedItem();
         if (valgtLager != null) {
             cbxHylde.getItems().setAll(valgtLager.getHylder());
+            cbxHylde.setDisable(false);
         } else {
+            cbxHylde.setDisable(true);
             cbxHylde.getItems().clear();
         }
     }
