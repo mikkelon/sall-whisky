@@ -9,10 +9,13 @@ public class Maltbatch {
     private String gård;
     private String dyrketAf;
     private boolean økologisk;
+    private int antalDestillater;
 
     /**
      * Opretter en maltbatch.
+     * <pre>
      * Pre: kornsort != null, mark != null, gård != null, dyrketAf != null
+     * </pre>
      * @param kornsort maltets kornsort
      * @param mark marken hvor maltet er dyrket
      * @param gård gården hvor maltet er dyrket
@@ -25,6 +28,7 @@ public class Maltbatch {
         this.gård = gård;
         this.dyrketAf = dyrketAf;
         this.økologisk = økologisk;
+        antalDestillater = 0;
     }
 
     /**
@@ -65,5 +69,27 @@ public class Maltbatch {
      */
     public boolean isØkologisk() {
         return økologisk;
+    }
+
+    /**
+     * Returnerer antal destillater der har det specifikke maltbatch.
+     * @return antal destillater der har det specifikke maltbatch
+     */
+    public int getAntalDestillater(){
+        return antalDestillater;
+    }
+
+    /**
+     * Tiljøjer et destillat til det totale antal.
+     */
+    public void tilføjDestillat(){
+        antalDestillater++;
+    }
+
+    /**
+     * Fjerner et destillat fra totale antal.
+     */
+    public void fjernDestillat(){
+        antalDestillater--;
     }
 }

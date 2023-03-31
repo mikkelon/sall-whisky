@@ -181,6 +181,7 @@ public class Destillat {
     public void addMaltbatch(Maltbatch maltbatch){
         if(!maltbatches.contains(maltbatch)){
             maltbatches.add(maltbatch);
+            maltbatch.tilføjDestillat();
         }
     }
 
@@ -191,6 +192,7 @@ public class Destillat {
     public void removeMaltbatch(Maltbatch maltbatch){
         if(maltbatches.contains(maltbatch)){
             maltbatches.remove(maltbatch);
+            maltbatch.fjernDestillat();
         }
     }
 

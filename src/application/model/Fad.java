@@ -21,7 +21,6 @@ public class Fad {
     /**
      * Opretter et fad med en given størrelse, fadtype, fadleverandør og hylde.
      * fadNr sættes til et unikt nummer.
-     *
      * @param fadType         fadets tidligere indhold, f.eks. "bourbon", "shery", osv.
      * @param størrelseILiter størrelsen på fadet i liter
      * @param fadLeverandør   fadleverandøren, der har leveret fadet
