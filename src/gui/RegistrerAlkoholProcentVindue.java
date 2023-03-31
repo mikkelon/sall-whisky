@@ -52,4 +52,10 @@ public class RegistrerAlkoholProcentVindue extends Stage {
         pane.add(btnRegistrer, 2, 2);
         pane.add(btnLuk, 1, 5);
     }
+
+    public void setFad(Fad fad) {
+        if (lvwFade.getItems().contains(fad)) {
+            lvwFade.getSelectionModel().select(fad);
+        }
+    }
 }

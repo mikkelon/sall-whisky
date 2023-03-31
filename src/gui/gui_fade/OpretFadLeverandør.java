@@ -1,4 +1,4 @@
-package gui;
+package gui.gui_fade;
 
 import application.controller.ControllerForLager;
 import application.controller.ControllerForProduktion;
