@@ -1,7 +1,5 @@
 package application.model;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,8 +13,8 @@ public class Fad {
     private static int antalFade;
     private Hylde hylde;
     private FadLeverandør fadLeverandør;
-    private FadInhold fadInhold;
-    private Set<FadInhold> fadInholdHistorik = new HashSet<>();
+    private FadIndhold FadIndhold;
+    private Set<FadIndhold> fadIndholdHistorik = new HashSet<>();
 
     /**
      * Opretter et fad med en given størrelse, fadtype, fadleverandør og hylde.
@@ -112,36 +110,36 @@ public class Fad {
     /**
      * Registrerer fadets indhold.
      *
-     * @param fadInhold er fadets nye indhold.
+     * @param FadIndhold er fadets nye indhold.
      */
-    public void setFadInhold(FadInhold fadInhold) {
-        this.fadInhold = fadInhold;
-        fadInhold.setFad(this);
+    public void setFadInhold(FadIndhold FadIndhold) {
+        this.FadIndhold = FadIndhold;
+        FadIndhold.setFad(this);
     }
 
     /**
      * Returnerer fadets indhold.
      * @return fadets indhold
      */
-    public FadInhold getFadInhold() {
-        return fadInhold;
+    public FadIndhold getFadInhold() {
+        return FadIndhold;
     }
 
     /**
      * Returnerer fadets historik over indhold.
      * @return fadets historik over indhold
      */
-    public Set<FadInhold> getFadInholdHistorik() {
-        return new HashSet<>(fadInholdHistorik);
+    public Set<FadIndhold> getFadInholdHistorik() {
+        return new HashSet<>(fadIndholdHistorik);
     }
 
     /**
      * Tilføjer fadets indhold til fadets historik.
-     * @param fadInhold er fadets indhold
+     * @param FadIndhold er fadets indhold
      */
-    public void addFadInholdHistorik(FadInhold fadInhold) {
-        if (!fadInholdHistorik.contains(fadInhold)) {
-            fadInholdHistorik.add(fadInhold);
+    public void addFadInholdHistorik(FadIndhold FadIndhold) {
+        if (!fadIndholdHistorik.contains(FadIndhold)) {
+            fadIndholdHistorik.add(FadIndhold);
         }
     }
 
@@ -150,7 +148,7 @@ public class Fad {
      * @return resterende plads i fadet i liter
      */
     public double resterendePladsILiter() {
-    	return størrelseILiter - fadInhold.indeholdtVæskeILiter();
+    	return størrelseILiter - FadIndhold.indeholdtVæskeILiter();
     }
 
     @Override

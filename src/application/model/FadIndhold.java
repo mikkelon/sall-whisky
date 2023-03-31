@@ -4,14 +4,14 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
-public class FadInhold {
+public class FadIndhold {
     private double alkoholProcentEfterModning;
     private LocalDate senestPåfyldt;
     private Set<Påfyldning> påfyldninger = new HashSet<>();
     private Set<Aftapning> aftapninger = new HashSet<>();
     private Fad fad;
 
-    public FadInhold(double alkoholProcentEfterModning, LocalDate senestPåfyldt, Fad fad) {
+    public FadIndhold(double alkoholProcentEfterModning, LocalDate senestPåfyldt, Fad fad) {
         this.alkoholProcentEfterModning = alkoholProcentEfterModning;
         this.senestPåfyldt = senestPåfyldt;
         this.fad = fad;
