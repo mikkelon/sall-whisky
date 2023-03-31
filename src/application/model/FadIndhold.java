@@ -29,10 +29,6 @@ public class FadIndhold {
         return senestPåfyldt.plusYears(3);
     }
 
-    public String hentHistorik() {
-        return "";
-    }
-
     public Set<Påfyldning> getPåfyldninger() {
         return new HashSet<>(påfyldninger);
     }
@@ -94,5 +90,13 @@ public class FadIndhold {
             mængde -= aftapning.getMængdeILiter();
         }
         return mængde;
+    }
+
+    public String hentHistorik() {
+        String historik = fad.hentHistorik() + "\n";
+        for (Påfyldning påfyldning : påfyldninger) {
+            historik += påfyldning.hentHistorik() + "\n";
+        }
+        return historik;
     }
 }
