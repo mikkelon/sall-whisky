@@ -13,7 +13,6 @@ public class FadIndhold {
 
     public FadIndhold(double alkoholProcentEfterModning, Fad fad) {
         this.alkoholProcentEfterModning = alkoholProcentEfterModning;
-        this.senestPåfyldt = senestPåfyldt;
         this.fad = fad;
     }
 
@@ -94,5 +93,9 @@ public class FadIndhold {
             mængde -= aftapning.getMængdeILiter();
         }
         return mængde;
+    }
+
+    public boolean isModnet() {
+        return senestPåfyldt != null && senestPåfyldt.plusYears(3).isBefore(LocalDate.now());
     }
 }
