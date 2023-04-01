@@ -62,7 +62,7 @@ public class StartVindue extends Application {
         DestillatPane destillatPane = new DestillatPane();
         destillatPane.setAlignment(Pos.TOP_CENTER);
         destillatTab.setContent(destillatPane);
-//        destillatTab.setOnSelectionChanged(event -> destillatPane.updateControls());
+        //destillatTab.setOnSelectionChanged(event -> destillatPane.updateControls());
 
         Tab påfyldningTab = new Tab("Påfyldning");
         tabPane.getTabs().add(påfyldningTab);
@@ -76,6 +76,12 @@ public class StartVindue extends Application {
         AftapningPane aftapningPane = new AftapningPane();
         aftapningPane.setAlignment(Pos.TOP_CENTER);
         aftapningTab.setContent(aftapningPane);
+
+        Tab whiskyTap = new Tab("Whisky");
+        tabPane.getTabs().add(whiskyTap);
+        WhiskyPane whiskyPane = new WhiskyPane();
+        //whiskyPane.setAlignment(Pos.TOP_CENTER);
+        whiskyTap.setContent(whiskyPane);
     }
 
     public Pane skiftTab(int index) {
