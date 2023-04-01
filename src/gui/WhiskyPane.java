@@ -37,8 +37,11 @@ public class WhiskyPane extends GridPane {
         Label lblVandkilde = new Label("Vandkilde");
         this.add(lblVandkilde, 1, 0);
 
-        TextField txfVandkilde = new TextField();
-        this.add(txfVandkilde, 1, 1);
+        ComboBox<String> cbxVandKilde = new ComboBox<>();
+        GridPane.setValignment(cbxVandKilde, VPos.TOP);
+        cbxVandKilde.setMinWidth(150);
+        cbxVandKilde.setMaxWidth(150);
+        this.add(cbxVandKilde, 1,1);
 
         Label lblBetegnelse = new Label("Betegnelse");
         this.add(lblBetegnelse, 1, 2);
