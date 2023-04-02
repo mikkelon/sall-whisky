@@ -25,9 +25,8 @@ public class DestillatPane extends GridPane {
     private DatePicker datePickerSlutDato = new DatePicker();
     private TextField txfMængdeILiter = new TextField();
     private ComboBox<RygeMateriale> cbxRygeMateriale = new ComboBox<>();
-    private ComboBox<Maltbatch> cbxMaltbatch = new ComboBox<>();
+    private ComboBox<Maltbatch> cbxMaltbatch;
     private TextArea txaKommentarer = new TextArea();
-    private TextField txfMaltbatch = new TextField();
     private Button btnVælgMaltbatch = new Button("Vælg maltbatch...");
     private Button btnOpretFravælg = new Button("Opret");
     private ListView<Destillat> lvwDestillater = new ListView<>();
@@ -83,16 +82,17 @@ public class DestillatPane extends GridPane {
 
         Label lblMaltbatch = new Label("Maltbatch");
         this.add(lblMaltbatch, 0, 6);
-       // this.add(txfMaltbatch, 0, 7);
 
         cbxMaltbatch = new ComboBox<>();
         GridPane.setValignment(cbxMaltbatch, VPos.TOP);
         cbxMaltbatch.setMinWidth(150);
         cbxMaltbatch.setMaxWidth(150);
+        cbxMaltbatch.getItems().setAll(controllerForProduktion.getMaltbatches());
         this.add(cbxMaltbatch, 0,7);
 
-        //this.add(btnVælgMaltbatch, 1, 7);
-       //btnVælgMaltbatch.setOnAction(event -> vælgMaltbatchAction());
+        GridPane.setValignment(btnVælgMaltbatch, VPos.TOP);
+        this.add(btnVælgMaltbatch, 1, 7);
+        btnVælgMaltbatch.setOnAction(event -> vælgMaltbatchAction());
 
         this.add(new Separator(), 0, 8, 3, 1);
         this.add(new Separator(Orientation.VERTICAL), 3, 0, 1, 10);
