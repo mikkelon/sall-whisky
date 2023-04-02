@@ -31,8 +31,6 @@ public class AftapningPane extends GridPane {
         this.setAlignment(Pos.CENTER);
 
 
-
-
         Label lblFade = new Label("Fade");
         this.add(lblFade, 0,0,2,1);
         GridPane.setHalignment(lblFade, HPos.CENTER);

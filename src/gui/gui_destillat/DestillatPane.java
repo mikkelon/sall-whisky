@@ -2,6 +2,7 @@ package gui.gui_destillat;
 
 import application.controller.ControllerForProduktion;
 import application.model.Destillat;
+import application.model.Maltbatch;
 import application.model.RygeMateriale;
 import gui.BekræftSletVindue;
 import javafx.geometry.Orientation;
@@ -24,6 +25,7 @@ public class DestillatPane extends GridPane {
     private DatePicker datePickerSlutDato = new DatePicker();
     private TextField txfMængdeILiter = new TextField();
     private ComboBox<RygeMateriale> cbxRygeMateriale = new ComboBox<>();
+    private ComboBox<Maltbatch> cbxMaltbatch = new ComboBox<>();
     private TextArea txaKommentarer = new TextArea();
     private TextField txfMaltbatch = new TextField();
     private Button btnVælgMaltbatch = new Button("Vælg maltbatch...");
@@ -81,10 +83,16 @@ public class DestillatPane extends GridPane {
 
         Label lblMaltbatch = new Label("Maltbatch");
         this.add(lblMaltbatch, 0, 6);
-        this.add(txfMaltbatch, 0, 7);
+       // this.add(txfMaltbatch, 0, 7);
 
-        this.add(btnVælgMaltbatch, 1, 7);
-        btnVælgMaltbatch.setOnAction(event -> vælgMaltbatchAction());
+        cbxMaltbatch = new ComboBox<>();
+        GridPane.setValignment(cbxMaltbatch, VPos.TOP);
+        cbxMaltbatch.setMinWidth(150);
+        cbxMaltbatch.setMaxWidth(150);
+        this.add(cbxMaltbatch, 0,7);
+
+        //this.add(btnVælgMaltbatch, 1, 7);
+       //btnVælgMaltbatch.setOnAction(event -> vælgMaltbatchAction());
 
         this.add(new Separator(), 0, 8, 3, 1);
         this.add(new Separator(Orientation.VERTICAL), 3, 0, 1, 10);
@@ -132,6 +140,7 @@ public class DestillatPane extends GridPane {
             double mængdeILiter = Double.parseDouble(txfMængdeILiter.getText().trim());
             RygeMateriale rygeMateriale = cbxRygeMateriale.getSelectionModel().getSelectedItem();
             String kommentarer = txaKommentarer.getText().trim();
+            Maltbatch maltbatch = cbxMaltbatch.getSelectionModel().getSelectedItem();
 
             if (newMakeNummer.isEmpty()) {
                 lblError.setText("Venligst indtast et New Make Nummer");
@@ -141,7 +150,7 @@ public class DestillatPane extends GridPane {
                 lblError.setText("Venligst indtast en positiv alkoholprocent");
             } else if (alkoholProcent > 100) {
                 lblError.setText("Venligst indtast en alkoholprocent under 100%");
-            }else if (antalDestilleringer <= 0) {
+            } else if (antalDestilleringer <= 0) {
                 lblError.setText("Venligst indtast et positivt antal destilleringer");
             } else if (startDato.isAfter(slutDato)) {
                 lblError.setText("Venligst indtast en startdato før slutdatoen");
@@ -149,6 +158,8 @@ public class DestillatPane extends GridPane {
                 lblError.setText("Venligst indtast en positiv mængde i liter");
             } else if (rygeMateriale == null) {
                 lblError.setText("Venligst vælg et rygemateriale");
+            } else if(maltbatch == null){
+                lblError.setText("Venligst vælg et maltbatch");
             } else {
                 controllerForProduktion.createDestillat(newMakeNummer, medarbejder, alkoholProcent, antalDestilleringer, startDato, slutDato, mængdeILiter, kommentarer, rygeMateriale);
                 updateControls();
