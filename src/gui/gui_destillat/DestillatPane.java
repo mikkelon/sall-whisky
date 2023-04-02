@@ -25,7 +25,7 @@ public class DestillatPane extends GridPane {
     private DatePicker datePickerSlutDato = new DatePicker();
     private TextField txfMængdeILiter = new TextField();
     private ComboBox<RygeMateriale> cbxRygeMateriale = new ComboBox<>();
-    private ComboBox<Maltbatch> cbxMaltbatch;
+    private static ComboBox<Maltbatch> cbxMaltbatch;
     private TextArea txaKommentarer = new TextArea();
     private Button btnVælgMaltbatch = new Button("Vælg maltbatch...");
     private Button btnOpretFravælg = new Button("Opret");
@@ -268,5 +268,9 @@ public class DestillatPane extends GridPane {
         cbxRygeMateriale.setMouseTransparent(disable);
         cbxRygeMateriale.setFocusTraversable(!disable);
         txaKommentarer.setEditable(!disable);
+    }
+
+    public static void setMaltbatch(Maltbatch maltbatch) {
+        cbxMaltbatch.getSelectionModel().select(maltbatch);
     }
 }
