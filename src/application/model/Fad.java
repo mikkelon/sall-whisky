@@ -170,7 +170,7 @@ public class Fad {
 
     @Override
     public String toString() {
-        return "Fad nr. " + fadNr + " af typen " + fadType + " på hylde nr " + hylde.getHyldeNr() + " med en størrelse på " + størrelseILiter + " liter.";
+        return "Fad: " + fadNr + ", type: " + fadType + " (" + størrelseILiter + "L)";
     }
 
     public String hentHistorik() {
