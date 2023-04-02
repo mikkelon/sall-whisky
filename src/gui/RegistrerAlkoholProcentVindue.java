@@ -3,6 +3,7 @@ package gui;
 import application.controller.ControllerForLager;
 import application.model.Fad;
 import application.model.Maltbatch;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -21,7 +22,7 @@ public class RegistrerAlkoholProcentVindue extends Stage {
     private TextField txfAlkoholProcent = new TextField();
     private Button btnRegistrer = new Button("Registrer");
     private Button btnLuk = new Button("Luk");
-
+    private Label lblError;
     public RegistrerAlkoholProcentVindue() {
         this.initStyle(StageStyle.DECORATED);
         this.initModality(Modality.APPLICATION_MODAL);
@@ -46,16 +47,62 @@ public class RegistrerAlkoholProcentVindue extends Stage {
 
         // Indhold
         pane.add(lvwFade, 0, 0, 1, 4);
-        lvwFade.getItems().setAll(controllerForLager.getModneFade());
+        lvwFade.getItems().setAll(controllerForLager.getModneFadeUdenRegistreretAlkoholProcent());
+
         pane.add(new Label("Alkoholprocent"), 2, 0);
         pane.add(txfAlkoholProcent, 2, 1);
+
         pane.add(btnRegistrer, 2, 2);
+        btnRegistrer.setOnAction(event -> registrerAlhokolProcentEfterModningAction());
+
         pane.add(btnLuk, 1, 5);
+        btnLuk.setOnAction(event -> this.hide());
+
+        // #--- ErrorLabel ---#
+        lblError = new Label(" ");
+        pane.add(lblError, 2, 3);
+        GridPane.setHalignment(lblError, HPos.CENTER);
+        lblError.setStyle("-fx-text-fill: red");
+    }
+
+    private void registrerAlhokolProcentEfterModningAction() {
+        clearError();
+        Fad fad = lvwFade.getSelectionModel().getSelectedItem();
+        if (fad == null) {
+            lblError.setText("Vælg et fad");
+            return;
+        }
+        if (txfAlkoholProcent.getText().isEmpty()) {
+            lblError.setText("Indtast alkoholprocent");
+            return;
+        }
+        double alkoholProcentEfterModning = 0;
+        try {
+            alkoholProcentEfterModning = Double.parseDouble(txfAlkoholProcent.getText());
+        } catch (NumberFormatException e) {
+            lblError.setText("Alkoholprocent skal \n være et tal");
+            return;
+        }
+        if (alkoholProcentEfterModning < 0 || alkoholProcentEfterModning > 100) {
+            lblError.setText("Alkoholprocent skal \n være mellem 0 og 100");
+            return;
+        }
+        controllerForLager.setAlkoholProcentEfterModning(fad, alkoholProcentEfterModning);
+        updateControls();
     }
 
     public void setFad(Fad fad) {
         if (lvwFade.getItems().contains(fad)) {
             lvwFade.getSelectionModel().select(fad);
         }
+    }
+
+    private void clearError() {
+        lblError.setText(" ");
+    }
+
+    private void updateControls() {
+        lvwFade.getItems().setAll(controllerForLager.getModneFadeUdenRegistreretAlkoholProcent());
+        txfAlkoholProcent.clear();
     }
 }
