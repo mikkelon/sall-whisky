@@ -124,6 +124,7 @@ public class FadePane extends GridPane {
         GridPane.setHalignment(btnSlet, HPos.CENTER);
 
         this.add(btnRegistrerAlkoholprocent, 0, 6);
+        btnRegistrerAlkoholprocent.setDisable(true);
         btnRegistrerAlkoholprocent.setOnAction(event -> registrerAlkoholprocentAction());
 
         // #--- ErrorLabel ---#
@@ -139,8 +140,7 @@ public class FadePane extends GridPane {
     private void registrerAlkoholprocentAction() {
         clearError();
         Fad valgtFad = lvwFade.getSelectionModel().getSelectedItem();
-        RegistrerAlkoholProcentVindue registrerAlkoholProcentVindue = new RegistrerAlkoholProcentVindue();
-        registrerAlkoholProcentVindue.setFad(valgtFad);
+        RegistrerAlkoholProcentVindue registrerAlkoholProcentVindue = new RegistrerAlkoholProcentVindue(valgtFad);
         registrerAlkoholProcentVindue.showAndWait();
     }
 
@@ -172,6 +172,12 @@ public class FadePane extends GridPane {
         cbxHylde.setMouseTransparent(b);
         cbxHylde.setFocusTraversable(!b);
         btnOpretLeverandør.setDisable(b);
+
+        Fad fad = lvwFade.getSelectionModel().getSelectedItem();
+        btnRegistrerAlkoholprocent.setDisable(fad == null
+                || fad.getFadIndhold() == null
+                || !fad.getFadIndhold().isModnet()
+                || fad.getFadIndhold().getAlkoholProcentEfterModning() != -1);
     }
 
     private void opretFadLeverandørAction(){

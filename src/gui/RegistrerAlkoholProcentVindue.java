@@ -23,7 +23,12 @@ public class RegistrerAlkoholProcentVindue extends Stage {
     private Button btnRegistrer = new Button("Registrer");
     private Button btnLuk = new Button("Luk");
     private Label lblError;
-    public RegistrerAlkoholProcentVindue() {
+    private Fad valgtFad;
+    public RegistrerAlkoholProcentVindue(Fad fad) {
+        if (fad != null && fad.getFadIndhold().getAlkoholProcentEfterModning() == -1) {
+            valgtFad = fad;
+        }
+
         this.initStyle(StageStyle.DECORATED);
         this.initModality(Modality.APPLICATION_MODAL);
         this.setResizable(false);
@@ -48,6 +53,7 @@ public class RegistrerAlkoholProcentVindue extends Stage {
         // Indhold
         pane.add(lvwFade, 0, 0, 1, 4);
         lvwFade.getItems().setAll(controllerForLager.getModneFadeUdenRegistreretAlkoholProcent());
+        lvwFade.getSelectionModel().select(valgtFad);
 
         pane.add(new Label("Alkoholprocent"), 2, 0);
         pane.add(txfAlkoholProcent, 2, 1);
