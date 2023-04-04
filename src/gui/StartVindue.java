@@ -76,6 +76,7 @@ public class StartVindue extends Application {
         AftapningPane aftapningPane = new AftapningPane();
         aftapningPane.setAlignment(Pos.TOP_CENTER);
         aftapningTab.setContent(aftapningPane);
+        aftapningTab.setOnSelectionChanged(event -> aftapningPane.updateControls());
 
         Tab whiskyTap = new Tab("Whisky");
         tabPane.getTabs().add(whiskyTap);
