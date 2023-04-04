@@ -103,6 +103,6 @@ public class Maltbatch {
 
     @Override
     public String toString() {
-        return "maltbatch nr: " + maltbatchNr + ", " + kornsort + " fra " + gård + (økologisk ? " (økologisk)" : "");
+        return "Maltbatch nr: " + maltbatchNr + ", " + kornsort + " fra " + gård + (økologisk ? " (økologisk)" : "");
     }
 }
