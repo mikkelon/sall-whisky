@@ -148,7 +148,7 @@ public class ControllerForProduktion {
         if (fad.getFadIndhold() == null) {
             throw new RuntimeException("Fadet er tomt.");
         }
-        if (fad.getFadIndhold().getAlkoholProcentEfterModning() == 0) {
+        if (fad.getFadIndhold().getAlkoholProcentEfterModning() == -1) {
             throw new RuntimeException("Fadets indhold skal have en registreret alkoholprocent efter modning");
         }
         if (!fad.getFadIndhold().isModnet()) {
@@ -159,6 +159,24 @@ public class ControllerForProduktion {
         }
         Aftapning aftapning = fad.aftap(aftappetAf, mængdeILiter, aftapningsDato);
         return aftapning;
+    }
+
+    /**
+     * Fjerner en aftapning fra dets fad.
+     * Anvendes når en aftapning fravælges i GUI'en.
+     * Aftapning må ikke være tilknyttet en whisky.
+     * <pre>
+     *     Pre: aftapning != null, aftapning.getWhisky == null
+     * </pre>
+     * @param aftapning
+     */
+    public void removeAftapning(Aftapning aftapning) {
+        Fad fad = aftapning.getFadIndhold().getFad();
+        if (fad.getFadIndhold() == null) {
+            fad.setFadIndhold(aftapning.getFadIndhold());
+            fad.removeFromFadIndholdHistorik(aftapning.getFadIndhold());
+        }
+        aftapning.getFadIndhold().removeAftapning(aftapning);
     }
 
     /**
@@ -234,6 +252,24 @@ public class ControllerForProduktion {
         }
         storage.addWhisky(whisky);
         return whisky;
+   }
+
+    /**
+     * Returnerer betegnelsen for en whisky, udregnet ud fra aftapninger og mængden af vand der bruges til at lave whiskyen
+     * Anvendes til at udregne betegnelsen inden der oprettes et egentligt objekt af en whisky.
+     * <pre>
+     *     Pre: aftapninger.size() > 0, mængdeVandILiter >= 0
+     * </pre>
+     * @param aftapninger
+     * @param mængdeVandILiter
+     * @return
+     */
+   public Betegnelse udregnBetegnelse(Set<Aftapning> aftapninger, double mængdeVandILiter) {
+       Whisky whisky = new Whisky(mængdeVandILiter, "", "");
+         for (Aftapning a : aftapninger) {
+              whisky.addAftapning(a);
+         }
+         return whisky.getBetegnelse();
    }
 
     /**
