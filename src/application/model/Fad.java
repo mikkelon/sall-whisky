@@ -183,7 +183,15 @@ public class Fad {
 
     @Override
     public String toString() {
-        return "Fad: " + fadNr + ", type: " + fadType + " (" + størrelseILiter + "L)";
+        String informationOmFadIndhold = "";
+        if (fadIndhold != null && fadIndhold.getAlkoholProcentEfterModning() != -1) {
+            informationOmFadIndhold = "(" + roundOfDecimals(fadIndhold.getAlkoholProcent())
+                    + "% / " + roundOfDecimals(fadIndhold.getAlkoholProcentEfterModning()) + "%)";
+        } else if (fadIndhold != null) {
+            informationOmFadIndhold = "(" + roundOfDecimals(fadIndhold.getAlkoholProcent()) + "%)";
+        }
+
+        return "Fad: " + fadNr + ", type: " + fadType + " (" + størrelseILiter + "L) " + informationOmFadIndhold;
     }
 
     public String hentHistorik() {
@@ -191,5 +199,9 @@ public class Fad {
                 + "Størrelse: " + størrelseILiter + "\n" + "Fadet er på lager: "
                 + hylde.getLager() + ", hylde nr: " + hylde.getHyldeNr() + "\n" + "Fadet er leveret af: " + fadLeverandør + "\n";
         return historik;
+    }
+
+    private double roundOfDecimals(double number) {
+        return Math.round(number * 100.0) / 100.0;
     }
 }

@@ -119,7 +119,7 @@ public class Whisky {
                 væskeMængde += aftapning.getFadIndhold().getMængde();
                 alkoholMængde += aftapning.getFadIndhold().getMængde() * aftapning.getFadIndhold().getAlkoholProcentEfterModning();
             }
-            return alkoholMængde / væskeMængde;
+            return alkoholMængde / væskeMængde * 100;
         }
     }
 
@@ -129,5 +129,10 @@ public class Whisky {
             historik += aftapning.hentHistorik();
         }
         return historik;
+    }
+
+    @Override
+    public String toString(){
+        return "Whisky nr:" + " " + Integer.toString(whiskyNr);
     }
 }
