@@ -201,6 +201,11 @@ public class Destillat {
         return newMakeNr;
     }
 
+    /**
+     * Returnerer en String med alle informationer om destillatet.
+     *
+     * @return en String med alle informationer om destillatet
+     */
     public String hentHistorik() {
         StringBuilder sb = new StringBuilder();
         sb.append("New make: " + newMakeNr + "\n" + "Medarbejder: " + medarbejder
