@@ -203,6 +203,18 @@ public class ControllerForProduktion {
         storage.removeMaltbatch(maltbatch);
    }
 
+   /**
+    * Tilføjer et maltbatch til et destillat
+    * <pre>
+    * pre: maltbatch != null, destillat != null
+    * </pre>
+    * @param maltbatch maltbatch der tilføjes
+    * @param destillat destillat det tilføjes til
+    */
+   public void addMaltbatchToDestillat(Destillat destillat, Maltbatch maltbatch) {
+       destillat.addMaltbatch(maltbatch);
+   }
+
     /**
      * Opretter en whisky
      * <pre>
@@ -210,8 +222,6 @@ public class ControllerForProduktion {
      * </pre>
      *
      * @param aftapninger      hvilke aftapninger der er foretaget
-     * @param alkoholProcent   alkoholprocenten på whiskyen
-     * @param betegnelse       betegnelsen for whiskyen
      * @param mængdeVandILiter mængden af vand i whiskyen
      * @param vandAfstamning   hvor vandet kommer fra
      * @param tekstBeskrivelse tekstbeskrivelse om whiskyen
