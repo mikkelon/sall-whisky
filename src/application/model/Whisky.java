@@ -121,7 +121,7 @@ public class Whisky {
                 væskeMængde += aftapning.getFadIndhold().getMængde();
                 alkoholMængde += aftapning.getFadIndhold().getMængde() * aftapning.getFadIndhold().getAlkoholProcentEfterModning();
             }
-            return alkoholMængde / væskeMængde;
+            return alkoholMængde / væskeMængde * 100;
         }
     }
 
