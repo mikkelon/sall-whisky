@@ -84,9 +84,9 @@ public class WhiskyPane extends GridPane {
         this.add(lblHistorik, 5, 0);
 
         txaHistorik = new TextArea();
-        txaHistorik.setMinWidth(200);
+        txaHistorik.setMinWidth(250);
         //txaHistorik.setMinHeight(300);
-        txaHistorik.setMaxWidth(200);
+        txaHistorik.setMaxWidth(250);
         //txaHistorik.setMaxHeight(300);
         txaHistorik.setDisable(true);
         this.add(txaHistorik, 5, 1, 1 , 6);
