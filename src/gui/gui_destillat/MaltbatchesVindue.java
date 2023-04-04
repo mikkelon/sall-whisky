@@ -3,17 +3,18 @@ package gui.gui_destillat;
 import application.controller.ControllerForLager;
 import application.controller.ControllerForProduktion;
 import application.model.Maltbatch;
+import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+
+import java.util.ArrayList;
 
 public class MaltbatchesVindue extends Stage {
     private ControllerForProduktion controllerForProduktion = ControllerForProduktion.getController();
@@ -48,6 +49,7 @@ public class MaltbatchesVindue extends Stage {
 
         // Indhold
         pane.add(lvwMaltbatches, 0, 0, 3,1);
+        lvwMaltbatches.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         lvwMaltbatches.getItems().setAll(ControllerForProduktion.getController().getMaltbatches());
 
         pane.add(btnVælg, 0, 1);
@@ -86,9 +88,13 @@ public class MaltbatchesVindue extends Stage {
 
     private void vælgAction() {
         clearError();
-        Maltbatch valgtMaltbatch = lvwMaltbatches.getSelectionModel().getSelectedItem();
-        if (valgtMaltbatch != null) {
-            DestillatPane.setMaltbatch(valgtMaltbatch);
+        ObservableList<Maltbatch> valgtMaltbatches = lvwMaltbatches.getSelectionModel().getSelectedItems();
+        if (valgtMaltbatches.size() > 0) {
+            ArrayList<Maltbatch> temp = new ArrayList<>();
+            for (Maltbatch m : valgtMaltbatches) {
+                temp.add(m);
+            }
+            DestillatPane.fillMaltbatches(temp);
             this.hide();
         } else {
             lblError.setText("Vælg et maltbatch");
@@ -98,6 +104,7 @@ public class MaltbatchesVindue extends Stage {
     private void nyAction() {
         OpretMaltbatchVindue window = new OpretMaltbatchVindue();
         window.showAndWait();
+        updateControls();
     }
 
     private void clearError() {

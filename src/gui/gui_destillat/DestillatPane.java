@@ -5,6 +5,7 @@ import application.model.Destillat;
 import application.model.Maltbatch;
 import application.model.RygeMateriale;
 import gui.BekræftSletVindue;
+import javafx.collections.ObservableList;
 import javafx.geometry.Orientation;
 import javafx.geometry.VPos;
 import javafx.scene.control.*;
@@ -13,6 +14,7 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class DestillatPane extends GridPane {
     private final Label lblError;
@@ -25,12 +27,13 @@ public class DestillatPane extends GridPane {
     private DatePicker datePickerSlutDato = new DatePicker();
     private TextField txfMængdeILiter = new TextField();
     private ComboBox<RygeMateriale> cbxRygeMateriale = new ComboBox<>();
-    private static ComboBox<Maltbatch> cbxMaltbatch;
+    private static TextArea txaMaltbatches = new TextArea();
     private TextArea txaKommentarer = new TextArea();
     private Button btnVælgMaltbatch = new Button("Vælg maltbatch...");
     private Button btnOpretFravælg = new Button("Opret");
     private ListView<Destillat> lvwDestillater = new ListView<>();
     private Button btnSletDestillat = new Button("Slet");
+    private static ArrayList<Maltbatch> valgteMaltbatches = new ArrayList<>();
     public DestillatPane() {
         this.setPadding(new Insets(10));
         this.setHgap(10);
@@ -83,12 +86,20 @@ public class DestillatPane extends GridPane {
         Label lblMaltbatch = new Label("Maltbatch");
         this.add(lblMaltbatch, 0, 6);
 
-        cbxMaltbatch = new ComboBox<>();
-        GridPane.setValignment(cbxMaltbatch, VPos.TOP);
-        cbxMaltbatch.setMinWidth(150);
-        cbxMaltbatch.setMaxWidth(150);
-        cbxMaltbatch.getItems().setAll(controllerForProduktion.getMaltbatches());
-        this.add(cbxMaltbatch, 0,7);
+//        cbxMaltbatch = new ComboBox<>();
+//        GridPane.setValignment(cbxMaltbatch, VPos.TOP);
+//        cbxMaltbatch.setMinWidth(150);
+//        cbxMaltbatch.setMaxWidth(150);
+//        cbxMaltbatch.getItems().setAll(controllerForProduktion.getMaltbatches());
+//        this.add(cbxMaltbatch, 0,7);
+
+        txaMaltbatches.setMinWidth(200);
+        txaMaltbatches.setMinHeight(50);
+        txaMaltbatches.setMaxWidth(200);
+        txaMaltbatches.setMaxHeight(50);
+        txaMaltbatches.setEditable(false);
+        GridPane.setValignment(txaMaltbatches, VPos.TOP);
+        this.add(txaMaltbatches, 0, 7);
 
         GridPane.setValignment(btnVælgMaltbatch, VPos.TOP);
         this.add(btnVælgMaltbatch, 1, 7);
@@ -122,6 +133,7 @@ public class DestillatPane extends GridPane {
     private void vælgMaltbatchAction() {
         MaltbatchesVindue maltbatchesVindue = new MaltbatchesVindue();
         maltbatchesVindue.showAndWait();
+        updateControls();
     }
 
     private void clearError() {
@@ -140,7 +152,6 @@ public class DestillatPane extends GridPane {
             double mængdeILiter = Double.parseDouble(txfMængdeILiter.getText().trim());
             RygeMateriale rygeMateriale = cbxRygeMateriale.getSelectionModel().getSelectedItem();
             String kommentarer = txaKommentarer.getText().trim();
-            Maltbatch maltbatch = cbxMaltbatch.getSelectionModel().getSelectedItem();
 
             if (newMakeNummer.isEmpty()) {
                 lblError.setText("Venligst indtast et New Make Nummer");
@@ -158,10 +169,13 @@ public class DestillatPane extends GridPane {
                 lblError.setText("Venligst indtast en positiv mængde i liter");
             } else if (rygeMateriale == null) {
                 lblError.setText("Venligst vælg et rygemateriale");
-            } else if(maltbatch == null){
+            } else if(valgteMaltbatches.size() == 0){
                 lblError.setText("Venligst vælg et maltbatch");
             } else {
-                controllerForProduktion.createDestillat(newMakeNummer, medarbejder, alkoholProcent, antalDestilleringer, startDato, slutDato, mængdeILiter, kommentarer, rygeMateriale);
+                Destillat destillat = controllerForProduktion.createDestillat(newMakeNummer, medarbejder, alkoholProcent, antalDestilleringer, startDato, slutDato, mængdeILiter, kommentarer, rygeMateriale);
+                for (Maltbatch maltbatch : valgteMaltbatches) {
+                    controllerForProduktion.addMaltbatchToDestillat(destillat, maltbatch);
+                }
                 updateControls();
                 clearFields();
             }
@@ -216,6 +230,7 @@ public class DestillatPane extends GridPane {
         txfMængdeILiter.clear();
         cbxRygeMateriale.getSelectionModel().select(RygeMateriale.INTET);
         txaKommentarer.clear();
+        txaMaltbatches.clear();
     }
 
     private void fillFields() {
@@ -230,6 +245,8 @@ public class DestillatPane extends GridPane {
             txfMængdeILiter.setText(String.valueOf(destillat.getMængdeILiter()));
             cbxRygeMateriale.getSelectionModel().select(destillat.getRygeMateriale());
             txaKommentarer.setText(destillat.getKommentar());
+
+            fillMaltbatches(destillat.getMaltbatches());
         }
     }
 
@@ -268,9 +285,16 @@ public class DestillatPane extends GridPane {
         cbxRygeMateriale.setMouseTransparent(disable);
         cbxRygeMateriale.setFocusTraversable(!disable);
         txaKommentarer.setEditable(!disable);
+        txaMaltbatches.setEditable(!disable);
+        btnVælgMaltbatch.setDisable(disable);
     }
 
-    public static void setMaltbatch(Maltbatch maltbatch) {
-        cbxMaltbatch.getSelectionModel().select(maltbatch);
+    public static void fillMaltbatches(ArrayList<Maltbatch> maltbatches) {
+        valgteMaltbatches = maltbatches;
+        String maltbatchesString = "";
+        for (Maltbatch maltbatch : maltbatches) {
+            maltbatchesString += maltbatch + "\n";
+        }
+        txaMaltbatches.setText(maltbatchesString);
     }
 }

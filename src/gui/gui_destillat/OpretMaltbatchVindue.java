@@ -1,5 +1,7 @@
 package gui.gui_destillat;
 
+import application.controller.ControllerForProduktion;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -17,6 +19,7 @@ public class OpretMaltbatchVindue extends Stage {
     private CheckBox chbØkologisk = new CheckBox("Økologisk");
     private Button btnOpret = new Button("Opret");
     private Button btnAnnuller = new Button("Annuller");
+    private Label lblError;
 
     public OpretMaltbatchVindue() {
         this.initStyle(StageStyle.DECORATED);
@@ -55,8 +58,38 @@ public class OpretMaltbatchVindue extends Stage {
         btnOpret.setOnAction(event -> this.opretAction());
         pane.add(btnAnnuller, 1, 5);
         btnAnnuller.setOnAction(event -> this.hide());
+
+        // #--- ErrorLabel ---#
+        lblError = new Label(" ");
+        pane.add(lblError, 0, 6, 2, 1);
+        GridPane.setHalignment(lblError, HPos.CENTER);
+        lblError.setStyle("-fx-text-fill: red");
     }
 
     private void opretAction() {
+        clearError();
+
+        String kornsort = txfKornsort.getText().trim();
+        String mark = txfMark.getText().trim();
+        String gård = txfGård.getText().trim();
+        String dyrketAf = txfDyrketAf.getText().trim();
+        boolean økologisk = chbØkologisk.isSelected();
+
+        if (kornsort.length() == 0) {
+            lblError.setText("Du skal angive en kornsort");
+        } else if (mark.length() == 0) {
+            lblError.setText("Du skal angive en mark");
+        } else if (gård.length() == 0) {
+            lblError.setText("Du skal angive en gård");
+        } else if (dyrketAf.length() == 0) {
+            lblError.setText("Du skal angive hvem der har dyrket kornet");
+        } else {
+            ControllerForProduktion.getController().createMaltbatch(kornsort, mark, gård, dyrketAf, økologisk);
+            this.hide();
+        }
+    }
+
+    private void clearError() {
+        lblError.setText(" ");
     }
 }
