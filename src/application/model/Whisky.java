@@ -23,11 +23,14 @@ public class Whisky {
      * @param tekstBeskrivelse tekstbeskrivelsen af whiskyproduktet
      */
     public Whisky(double mængdeVandILiter, String vandAfstamning, String tekstBeskrivelse) {
-        antalWhiskyProdukter++;
         this.whiskyNr = antalWhiskyProdukter;
         this.mængdeVandILiter = mængdeVandILiter;
         this.vandAfstamning = vandAfstamning;
         this.tekstBeskrivelse = tekstBeskrivelse;
+    }
+
+    public static void tælAntalWhiskyOp() {
+        antalWhiskyProdukter++;
     }
 
     /**

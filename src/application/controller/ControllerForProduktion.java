@@ -251,6 +251,7 @@ public class ControllerForProduktion {
             whisky.addAftapning(a);
         }
         storage.addWhisky(whisky);
+        Whisky.tælAntalWhiskyOp();
         return whisky;
    }
 
