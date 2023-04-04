@@ -45,12 +45,23 @@ public class Setup {
         Fad fad11 = controllerForLager.createFad(FadType.UBRUGT, 70, l1, h4);
         Fad fad12 = controllerForLager.createFad(FadType.UBRUGT, 60, l1, h4);
 
+
+        Maltbatch m1 = controllerForProduktion.createMaltbatch("Evergreen", "mark1", "Lars' bondegård", "Lars", true);
+        Maltbatch m2 = controllerForProduktion.createMaltbatch("Evergreen", "mark2", "Lars' bondegård", "Lars", true);
+        Maltbatch m3 = controllerForProduktion.createMaltbatch("Evergreen", "mark3", "Lars' bondegård", "Lars", true);
+
         //Tilføjer destillater
         Destillat d1 = controllerForProduktion.createDestillat("77p", "Mikkel", 53, 2, LocalDate.of(2023, 3, 27), LocalDate.of(2023, 3, 30), 80, "Kommentar", RygeMateriale.INTET);
         Destillat d2 = controllerForProduktion.createDestillat("78p", "Frederikke", 60, 2, LocalDate.of(2023, 4, 1), LocalDate.of(2023, 4, 2), 90.1, "Kommentar", RygeMateriale.INTET);
         Destillat d3 = controllerForProduktion.createDestillat("79p", "Anders", 61, 2, LocalDate.of(2023, 4, 1), LocalDate.of(2023, 4, 5), 80.5, "Kommentar", RygeMateriale.TØRV);
         Destillat d4 = controllerForProduktion.createDestillat("80p", "Mads", 59, 2, LocalDate.of(2023, 4, 3), LocalDate.of(2023, 4, 6), 87.4, "Kommentar", RygeMateriale.TØRV);
         Destillat d5 = controllerForProduktion.createDestillat("81p", "Mikkel", 62, 2, LocalDate.of(2023, 4, 10), LocalDate.of(2023, 4, 20), 72.43, "Kommentar", RygeMateriale.INTET);
+
+        controllerForProduktion.addMaltbatchToDestillat(d1, m1);
+        controllerForProduktion.addMaltbatchToDestillat(d2, m1);
+        controllerForProduktion.addMaltbatchToDestillat(d3, m2);
+        controllerForProduktion.addMaltbatchToDestillat(d4, m3);
+        controllerForProduktion.addMaltbatchToDestillat(d5, m3);
 
         // Tilføjer påfyldninger
         LocalDate datoGammel = LocalDate.of(2019, 1,1);
@@ -64,7 +75,7 @@ public class Setup {
 
         // Sæt alkoholprocent efter modning
         controllerForProduktion.setAlkoholprocentEfterModning(fad2.getFadIndhold(), 52);
-        controllerForProduktion.setAlkoholprocentEfterModning(fad4.getFadIndhold(), 56);
+        // controllerForProduktion.setAlkoholprocentEfterModning(fad4.getFadIndhold(), 56);
 
         // Laver aftapninger
         HashSet<Aftapning> aftapningHashSet = new HashSet<>();

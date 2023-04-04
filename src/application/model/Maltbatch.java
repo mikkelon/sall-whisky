@@ -10,6 +10,8 @@ public class Maltbatch {
     private String dyrketAf;
     private boolean økologisk;
     private int antalDestillater;
+    private static int antalMaltbatches = 0;
+    private int maltbatchNr;
 
     /**
      * Opretter en maltbatch.
@@ -23,6 +25,8 @@ public class Maltbatch {
      * @param økologisk om maltet er økologisk
      */
     public Maltbatch(String kornsort, String mark, String gård, String dyrketAf, boolean økologisk) {
+        antalMaltbatches++;
+        maltbatchNr = antalMaltbatches;
         this.kornsort = kornsort;
         this.mark = mark;
         this.gård = gård;
@@ -91,5 +95,10 @@ public class Maltbatch {
      */
     public void fjernDestillat(){
         antalDestillater--;
+    }
+
+    @Override
+    public String toString() {
+        return "maltbatch nr: " + maltbatchNr + ", " + kornsort + " fra " + gård + (økologisk ? " (økologisk)" : "");
     }
 }

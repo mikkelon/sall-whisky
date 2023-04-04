@@ -1,7 +1,6 @@
 package gui;
 
 import application.model.Aftapning;
-import application.model.Destillat;
 import application.model.Fad;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -13,7 +12,7 @@ import javafx.scene.layout.GridPane;
 
 public class AftapningPane extends GridPane {
 
-    private final ListView<Fad> lvwDestillater;
+    private final ListView<Fad> lvwFad;
     private final DatePicker datePicker;
     private final TextField txfAftappetAf;
     private final TextField txfMængde;
@@ -35,10 +34,10 @@ public class AftapningPane extends GridPane {
         this.add(lblFade, 0,0,2,1);
         GridPane.setHalignment(lblFade, HPos.CENTER);
 
-        lvwDestillater = new ListView<>();
-        lvwDestillater.setMinWidth(200);
-        lvwDestillater.setMinHeight(300);
-        this.add(lvwDestillater, 0, 1, 2, 12);
+        lvwFad = new ListView<>();
+        lvwFad.setMinWidth(200);
+        lvwFad.setMinHeight(300);
+        this.add(lvwFad, 0, 1, 2, 12);
 
 
         Button btnRegistrer = new Button("Registrer alkoholprocent");
@@ -187,10 +186,6 @@ public class AftapningPane extends GridPane {
         Button btnBekræft = new Button("Bekræft aftapning");
         this.add(btnBekræft, 7,12,3,3);
         GridPane.setHalignment(btnBekræft, HPos.CENTER);
-
-
-
-
 
     }
 }
