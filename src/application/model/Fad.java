@@ -173,6 +173,10 @@ public class Fad {
         return "Fad: " + fadNr + ", type: " + fadType + " (" + størrelseILiter + "L)";
     }
 
+    /**
+     * Returnerer fadets historik.
+     * @return fadets historik
+     */
     public String hentHistorik() {
         String historik = "Fadtype: " + fadType + "\n" + "Fadnr: " + fadNr + "\n"
                 + "Størrelse: " + størrelseILiter + "\n" + "Fadet er på lager: "

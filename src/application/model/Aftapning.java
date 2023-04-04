@@ -79,6 +79,10 @@ public class Aftapning {
         this.whisky = whisky;
     }
 
+    /**
+     * Returnerer en tekststreng med information om aftapningen.
+     * @return en tekststreng med information om aftapningen
+     */
     public String hentHistorik() {
         return fadIndhold.hentHistorik();
     }
