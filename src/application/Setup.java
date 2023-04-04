@@ -64,7 +64,7 @@ public class Setup {
 
         // Sæt alkoholprocent efter modning
         controllerForProduktion.setAlkoholprocentEfterModning(fad2.getFadIndhold(), 52);
-        controllerForProduktion.setAlkoholprocentEfterModning(fad4.getFadIndhold(), 56);
+        // controllerForProduktion.setAlkoholprocentEfterModning(fad4.getFadIndhold(), 56);
 
         // Laver aftapninger
         HashSet<Aftapning> aftapningHashSet = new HashSet<>();
