@@ -284,7 +284,7 @@ public class AftapningPane extends GridPane {
             }
 
             // Opdaterer betegnelse
-            Betegnelse betegnelse = controllerForProduktion.udregnBetgnelse(aftapninger, mængdeVand);
+            Betegnelse betegnelse = controllerForProduktion.udregnBetegnelse(aftapninger, mængdeVand);
             txfBetegnelse.setText(betegnelse.toString());
         } else {
             txfVolume.setText("0");
