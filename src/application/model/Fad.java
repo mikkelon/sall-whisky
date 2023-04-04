@@ -108,6 +108,15 @@ public class Fad {
     }
 
     /**
+     * Registrerer fadets indhold.
+     * @param fadIndhold
+     */
+    public void setFadIndhold(FadIndhold fadIndhold) {
+        this.fadIndhold = fadIndhold;
+        fadIndholdHistorik.add(fadIndhold);
+    }
+
+    /**
      * Returnerer fadets indhold.
      * @return fadets indhold
      */
@@ -119,8 +128,12 @@ public class Fad {
      * Returnerer fadets historik over indhold.
      * @return fadets historik over indhold
      */
-    public Set<FadIndhold> setFadIndhold() {
+    public Set<FadIndhold> getFadIndholdsHistorik() {
         return new HashSet<>(fadIndholdHistorik);
+    }
+
+    public void removeFromFadIndholdHistorik(FadIndhold fadIndhold) {
+        fadIndholdHistorik.remove(fadIndhold);
     }
 
     public boolean isEmpty() {
