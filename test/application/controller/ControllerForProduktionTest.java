@@ -11,7 +11,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class ControllerForProduktionTest {
     private ControllerForProduktion controllerForProduktion;
     private ControllerForLager controllerForLager;
-
     private Destillat destillat;
     private Påfyldning påfyldning;
     private Fad fad;
