@@ -14,13 +14,11 @@ public class Aftapning {
 
     /**
      * Opretter en aftapning af et fad på et bestemt whisky produkt.
-     * <pre>
-     * Pre: fad != null, whisky != null, mængdeILiter > 0, aftappetAf != null, aftapningsDato != null
-     * </pre>
      * @param aftappetAf navnet på den person der aftapper
      * @param mængdeILiter mængden der aftappes i liter
      * @param aftapningsDato dato for aftapningen
      * @param fadIndhold fad indholdet der aftappes
+     * @Pre: fad != null<br />whisky != null<br />mængdeILiter > 0<br />aftappetAf != null<br />aftapningsDato != null
      */
     public Aftapning(String aftappetAf, double mængdeILiter, LocalDate aftapningsDato, FadIndhold fadIndhold) {
         this.aftappetAf = aftappetAf;

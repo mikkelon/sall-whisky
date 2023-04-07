@@ -29,7 +29,7 @@ class FadIndholdTest {
         destillat = new Destillat("77p", "Jens", 80, 2, LocalDate.of(2023, 1, 1), LocalDate.of(2023, 1, 2), 100, "Kommentar", RygeMateriale.TØRV);
         fadLeverandør = new FadLeverandør("Garrison Brothers", "USA");
         lager = new Lager("Baldersgade 39", "Sall Whisky Lager", 100);
-        hylde = new Hylde(lager);
+        hylde = lager.createHylde();
         fad = new Fad(FadType.BOURBON, 90.0, fadLeverandør, hylde);
         fadIndhold = new FadIndhold(fad);
         påfyldningsDato = LocalDate.of(2023, 1, 2);
