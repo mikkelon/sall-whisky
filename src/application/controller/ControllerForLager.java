@@ -8,8 +8,10 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.TreeSet;
 
+/**
+ * ControllerForLager-klassen håndterer forretningslogik for alt der har med destilleriets lager at gøre og binder GUI sammen med modellen og storage-laget.
+ */
 public class ControllerForLager {
-
     private Storage storage;
     private static ControllerForLager controller;
 
@@ -43,7 +45,6 @@ public class ControllerForLager {
         storage.clearStorage();
     }
 
-
     /**
      * Opretter et nyt lager med en angivet antal hylder
      * @param adresse lagerets adresse
@@ -51,9 +52,7 @@ public class ControllerForLager {
      * @param kvm lagerets kvm
      * @param antalHylder antal hylder der skal oprettes
      * @return det oprettede lager
-     * <pre>
-     *     Pre: adresse != null, navn != null, kvm > 0, antalHylder >= 0
-     * </pre>
+     * @Pre: adresse != null<br />navn != null<br />kvm > 0<br />antalHylder >= 0
      */
     public Lager createLagerWithAntalHylder(String adresse, String navn, double kvm, int antalHylder) {
         Lager lager = new Lager(adresse, navn, kvm);
@@ -67,11 +66,9 @@ public class ControllerForLager {
     }
 
     /**
-     * Fjerner et lager fra systemet
+     * Fjerner et lager fra systemet.
      * @param lager lageret
-     * <pre>
-     * Pre: lager != null
-     * </pre>
+     * @Pre: lager != null
      */
     public void removeLager(Lager lager) {
         for (Hylde hylde : lager.getHylder()) {
@@ -83,7 +80,7 @@ public class ControllerForLager {
     }
 
     /**
-     * Returnerer et HashSet med alle lagre
+     * Returnerer et HashSet med alle lagre.
      * @return alle lagre
      */
     public HashSet<Lager> getLagre() {
@@ -91,13 +88,11 @@ public class ControllerForLager {
     }
 
     /**
-     * Opretter en ny fadleverandør
+     * Opretter en ny fadleverandør.
      * @param navn navnet på fadleverandøren
      * @param land landet fadleverandøren kommer fra
      * @return den oprettede fadleverandør
-     * <pre>
-     * Pre: navn != null, land != null
-     * </pre>
+     * @Pre: navn != null<br />land != null
      */
     public FadLeverandør createFadLeverandør(String navn, String land) {
         FadLeverandør fadLeverandør = new FadLeverandør(navn, land);
@@ -107,10 +102,9 @@ public class ControllerForLager {
 
     /**
      * Fjerner en fadleverandør fra systemet
-     * <pre>
-     * Pre: fadLeverandør != null
-     * </pre>
      * @param fadLeverandør fadleverandøren
+     * @throws RuntimeException hvis der er fade tilknyttet fadleverandøren
+     * @Pre: fadLeverandør != null
      */
     public void removeFadLeverandør(FadLeverandør fadLeverandør) {
         if (fadLeverandør.getAntalFade() != 0) {
@@ -120,20 +114,18 @@ public class ControllerForLager {
     }
 
     /**
-     * Returnerer alle fadleverandører
-     * @return alle fadleverandører
+     * Returnerer alle fadleverandører.
+     * @return et HashSet med fadleverandører
      */
     public HashSet<FadLeverandør> getFadLeverandører() {
         return storage.getFadLeverandører();
     }
 
     /**
-     * Opretter en ny hylde i et givent lager
+     * Opretter en ny hylde i et givent lager.
      * @param lager lageret
      * @return den oprettede hylde
-     * <pre>
-     * Pre: lager != null
-     * </pre>
+     * @Pre: lager != null
      */
     public Hylde createHylde(Lager lager) {
         Hylde hylde = lager.createHylde();
@@ -141,11 +133,10 @@ public class ControllerForLager {
     }
 
     /**
-     * Fjerne den specifikke hylde fra et lager
+     * Fjerne den specifikke hylde fra et lager.
      * @param hylde hylden der skal fjernes
-     * <pre>
-     * Pre: hylde != null
-     * </pre>
+     * @throws RuntimeException hvis der er fade tilknyttet hylden
+     * @Pre: hylde != null
      */
     public void removeHylde(Hylde hylde) {
         if (!hylde.getFade().isEmpty()) {
@@ -157,7 +148,7 @@ public class ControllerForLager {
 
     /**
      * Returnerer alle hylder i alle lagre
-     * @return alle hylder i alle lagre
+     * @return en ArrayList med alle hylder i alle lagre
      */
     public ArrayList<Hylde> getHylder() {
         ArrayList<Hylde> hylder = new ArrayList<>();
@@ -173,9 +164,7 @@ public class ControllerForLager {
      * Returnerer alle hylder i et givent lager
      * @param lager lageret
      * @return alle hylder i et givent lager
-     * <pre>
-     * Pre: lager != null
-     * </pre>
+     * @Pre: lager != null
      */
     public ArrayList<Hylde> getHylder(Lager lager) {
         return lager.getHylder();
@@ -188,7 +177,7 @@ public class ControllerForLager {
      * @param fadLeverandør fadleverandøren
      * @param hylde hylde hvor fadet skal placeres
      * @return det oprettede fad
-     * Pre: fadType != null, størrelseILiter > 0, fadLeverandør != null, hylde != null
+     * @Pre: fadType != null<br />størrelseILiter > 0<br />fadLeverandør != null<br />hylde != null
      */
     public Fad createFad(FadType fadType, double størrelseILiter, FadLeverandør fadLeverandør, Hylde hylde) {
         Fad fad = new Fad(fadType, størrelseILiter, fadLeverandør, hylde);
@@ -199,9 +188,7 @@ public class ControllerForLager {
     /**
      * Fjerner det specifikke fad fra en hylde
      * @param fad fadet der skal fjernes
-     * <pre>
-     * Pre: fad != null
-     * </pre>
+     * @Pre: fad != null
      */
     public void removeFad(Fad fad) {
         fad.getHylde().removeFad(fad);
@@ -210,7 +197,7 @@ public class ControllerForLager {
 
     /**
      * Returnerer alle fade fra alle lagre.
-     * @return alle fade fra alle lagre
+     * @return et TreeSet med alle fade fra alle lagre
      */
     public TreeSet<Fad> getAlleFade() {
         TreeSet<Fad> alleFade = new TreeSet<>((a,b) -> a.getFadNr() - b.getFadNr());
@@ -226,9 +213,7 @@ public class ControllerForLager {
      * Returnerer alle fade fra et specifikt lager
      * @param lager lageret der skal hentes fade fra
      * @return alle fade fra et specifikt lager
-     * <pre>
-     *     Pre: lager != null
-     * </pre>
+     * @Pre: lager != null
      */
     public TreeSet<Fad> getAlleFade(Lager lager) {
         TreeSet<Fad> alleFade = new TreeSet<>((a,b) -> a.getFadNr() - b.getFadNr());
@@ -280,9 +265,7 @@ public class ControllerForLager {
      * Sætter alkoholprocenten for et fad, efter modningen er overstået
      * @param fad fadet
      * @param alkoholProcentEfterModning alkoholprocenten
-     * <pre>
-     * Pre: fad != null, 0 <= alkoholProcentEfterModning <= 100
-     * </pre>
+     * @Pre: fad != null<br />0 <= alkoholProcentEfterModning <= 100
      */
     public void setAlkoholProcentEfterModning(Fad fad, double alkoholProcentEfterModning) {
         fad.getFadIndhold().setAlkoholProcentEfterModning(alkoholProcentEfterModning);
