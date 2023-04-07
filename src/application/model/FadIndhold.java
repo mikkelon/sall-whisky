@@ -60,6 +60,10 @@ public class FadIndhold {
         }
     }
 
+    public void removeAftapning(Aftapning aftapning) {
+        aftapninger.remove(aftapning);
+    }
+
     public Fad getFad() {
         return fad;
     }

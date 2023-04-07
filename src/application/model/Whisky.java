@@ -16,18 +16,21 @@ public class Whisky {
     /**
      * Initialiserer et nyt whiskyprodukt med alkoholprocent, betegnelse, mængde vand i liter, vandafstamning, tekstbeskrivelse og et unikt nummer.
      * <pre>
-     * Pre: 0 < alkoholProcent < 100, mængdeVandILiter >= 0, tekstBeskrivelse != null, betegnelse != null, vandAfstamning != null
+     * Pre: mængdeVandILiter >= 0, tekstBeskrivelse != null, vandAfstamning != null
      * </pre>
      * @param mængdeVandILiter mængden af vand i liter der er brugt i whiskyproduktet
      * @param vandAfstamning afstamningen af vandet der er brugt i whiskyproduktet
      * @param tekstBeskrivelse tekstbeskrivelsen af whiskyproduktet
      */
     public Whisky(double mængdeVandILiter, String vandAfstamning, String tekstBeskrivelse) {
-        antalWhiskyProdukter++;
         this.whiskyNr = antalWhiskyProdukter;
         this.mængdeVandILiter = mængdeVandILiter;
         this.vandAfstamning = vandAfstamning;
         this.tekstBeskrivelse = tekstBeskrivelse;
+    }
+
+    public static void tælAntalWhiskyOp() {
+        antalWhiskyProdukter++;
     }
 
     /**

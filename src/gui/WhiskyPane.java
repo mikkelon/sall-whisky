@@ -132,5 +132,9 @@ public class WhiskyPane extends GridPane {
         }
     }
 
+    public void updateControls() {
+        lvwWhiskyer.getItems().setAll(controllerForProduktion.getWhiskyer());
+        getInfo();
+    }
 
 }
