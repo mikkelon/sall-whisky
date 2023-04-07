@@ -213,6 +213,10 @@ public class Destillat {
                 + antalDestilleringer + "\n" + "Startdato: " + startDato + "\n" + "Slutdato: "
                 + slutDato + "\n" + "Mængde i liter: " + mængdeILiter + "\n" + "Kommentar: "
                 + kommentar + "\n" + "Rygemateriale: " + rygeMateriale + "\n");
+
+        for (Maltbatch maltbatch : maltbatches) {
+            sb.append(maltbatch.hentHistorik() + "\n");
+        }
         return sb.toString();
     }
 }

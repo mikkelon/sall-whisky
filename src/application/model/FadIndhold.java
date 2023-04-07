@@ -16,42 +16,22 @@ public class FadIndhold {
         this.fad = fad;
     }
 
-    /**
-     * Sætter alkoholprocenten efter modning
-     * @param alkoholProcentEfterModning
-     */
     public void setAlkoholProcentEfterModning(double alkoholProcentEfterModning) {
         this.alkoholProcentEfterModning = alkoholProcentEfterModning;
     }
 
-    /**
-     * Giver hvor meget alkoholprocenten er efter modning
-     * @return hvor meget alkoholprocenten er efter modning
-     */
     public double getAlkoholProcentEfterModning() {
         return alkoholProcentEfterModning;
     }
 
-    /**
-     * Giver hvornår der senest er påfyldt i fadet
-     * @return hvornår der senest er påfyldt i fadet
-     */
     public LocalDate getSenestPåfyldt() {
         return senestPåfyldt;
     }
 
-    /**
-     * returnerer hvornår fadet forventes at være færdigproduceret
-     * @return hvornår fadet forventes at være færdigproduceret
-     */
     public LocalDate forventetFærdigProduceret() {
         return senestPåfyldt.plusYears(3);
     }
 
-    /**
-     * Returnere settet af påfyldninger
-     * @return  settet af påfyldninger
-     */
     public Set<Påfyldning> getPåfyldninger() {
         return new HashSet<>(påfyldninger);
     }
@@ -70,19 +50,9 @@ public class FadIndhold {
         }
     }
 
-    /**
-     * Returnerer settet med aftapninger
-     * @return settet med aftapninger
-     */
     public Set getAftapninger() {
         return new HashSet<>(aftapninger);
     }
-
-    /**
-     * Tilføjer en aftapning til fadet.
-     * Pre: aftapning != null
-     * @param aftapning aftapningen der skal tilføjes
-     */
 
     public void addAftapning(Aftapning aftapning) {
         if (!aftapninger.contains(aftapning)) {
@@ -90,10 +60,10 @@ public class FadIndhold {
         }
     }
 
-    /**
-     * Returnerer fad
-     * @return fad
-     */
+    public void removeAftapning(Aftapning aftapning) {
+        aftapninger.remove(aftapning);
+    }
+
     public Fad getFad() {
         return fad;
     }
@@ -129,20 +99,10 @@ public class FadIndhold {
         return mængde;
     }
 
-    /**
-     * Udregner om at fadet er modnet altså har stået i 3 år
-     * @return true hvis fadet er modnet
-     */
-
     public boolean isModnet() {
         return senestPåfyldt != null && senestPåfyldt.plusYears(3).isBefore(LocalDate.now());
     }
 
-
-    /**
-     * Finder historikken for fadet fra dets påfyldninger.
-     * @return historikken for fadet
-     */
     public String hentHistorik() {
         String historik = fad.hentHistorik() + "\n";
         for (Påfyldning påfyldning : påfyldninger) {

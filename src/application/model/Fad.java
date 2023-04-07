@@ -108,6 +108,15 @@ public class Fad {
     }
 
     /**
+     * Registrerer fadets indhold.
+     * @param fadIndhold
+     */
+    public void setFadIndhold(FadIndhold fadIndhold) {
+        this.fadIndhold = fadIndhold;
+        fadIndholdHistorik.add(fadIndhold);
+    }
+
+    /**
      * Returnerer fadets indhold.
      * @return fadets indhold
      */
@@ -119,8 +128,12 @@ public class Fad {
      * Returnerer fadets historik over indhold.
      * @return fadets historik over indhold
      */
-    public Set<FadIndhold> setFadIndhold() {
+    public Set<FadIndhold> getFadIndholdsHistorik() {
         return new HashSet<>(fadIndholdHistorik);
+    }
+
+    public void removeFromFadIndholdHistorik(FadIndhold fadIndhold) {
+        fadIndholdHistorik.remove(fadIndhold);
     }
 
     public boolean isEmpty() {
@@ -170,7 +183,15 @@ public class Fad {
 
     @Override
     public String toString() {
-        return "Fad: " + fadNr + ", type: " + fadType + " (" + størrelseILiter + "L)";
+        String informationOmFadIndhold = "";
+        if (fadIndhold != null && fadIndhold.getAlkoholProcentEfterModning() != -1) {
+            informationOmFadIndhold = "(" + roundOfDecimals(fadIndhold.getAlkoholProcent())
+                    + "% / " + roundOfDecimals(fadIndhold.getAlkoholProcentEfterModning()) + "%)";
+        } else if (fadIndhold != null) {
+            informationOmFadIndhold = "(" + roundOfDecimals(fadIndhold.getAlkoholProcent()) + "%)";
+        }
+
+        return "Fad: " + fadNr + ", type: " + fadType + " (" + størrelseILiter + "L) " + informationOmFadIndhold;
     }
 
     /**
@@ -182,5 +203,9 @@ public class Fad {
                 + "Størrelse: " + størrelseILiter + "\n" + "Fadet er på lager: "
                 + hylde.getLager() + ", hylde nr: " + hylde.getHyldeNr() + "\n" + "Fadet er leveret af: " + fadLeverandør + "\n";
         return historik;
+    }
+
+    private double roundOfDecimals(double number) {
+        return Math.round(number * 100.0) / 100.0;
     }
 }

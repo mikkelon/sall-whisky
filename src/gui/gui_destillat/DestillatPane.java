@@ -5,7 +5,6 @@ import application.model.Destillat;
 import application.model.Maltbatch;
 import application.model.RygeMateriale;
 import gui.BekræftSletVindue;
-import javafx.collections.ObservableList;
 import javafx.geometry.Orientation;
 import javafx.geometry.VPos;
 import javafx.scene.control.*;

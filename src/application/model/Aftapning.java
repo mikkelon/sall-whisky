@@ -86,4 +86,13 @@ public class Aftapning {
     public String hentHistorik() {
         return fadIndhold.hentHistorik();
     }
+
+    @Override
+    public String toString() {
+        String s = "Tappet af: " + aftappetAf + ", " + mængdeILiter + "L, " + "fra fad #" + fadIndhold.getFad().getFadNr();
+        if (whisky != null) {
+            s += ", Whisky #" + whisky.getWhiskyNr();
+        }
+        return s;
+    }
 }
