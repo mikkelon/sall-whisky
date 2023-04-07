@@ -22,7 +22,6 @@ public class Destillat {
 
     /**
      * Opretter et nyt destillat med angivet parametre.
-     * pre: alkoholProcent > 0, antalDestilleringer > 0, startDato < slutDato, mængdeILiter > 0, rygeMateriale != null
      * @param newMakeNr           destillates newMakeNr
      * @param medarbejder         hvilket medarbejder der har destilleret dette destillat
      * @param alkoholProcent      destillatets alkoholProcent
@@ -32,6 +31,7 @@ public class Destillat {
      * @param mængdeILiter        hvor mange liter der er af dette destillat
      * @param kommentar           kommentar til destillatet
      * @param rygeMateriale       om der er brugt rygemaateriale til destillatet
+     * @Pre: 0 <= alkoholprocent <= 100<br />antalDestilleringer > 0<br />startDato < slutDato<br />mængdeILiter > 0<br />rygeMateriale != null
      */
     public Destillat(String newMakeNr, String medarbejder, double alkoholProcent,
                      int antalDestilleringer, LocalDate startDato, LocalDate slutDato,
@@ -49,7 +49,6 @@ public class Destillat {
 
     /**
      * Returnerer destillatets newMakeNr.
-     *
      * @return destillatets newMakeNr
      */
     public String getNewMakeNr() {
@@ -58,7 +57,6 @@ public class Destillat {
 
     /**
      * Returnerer hvilket medarbejder der har destilleret dette destillat.
-     *
      * @return hvilket medarbejder der har destilleret dette destillat
      */
     public String getMedarbejder() {
@@ -67,7 +65,6 @@ public class Destillat {
 
     /**
      * Returnerer destillatets alkoholProcent.
-     *
      * @return destillatets alkoholProcent
      */
     public double getAlkoholProcent() {
@@ -76,7 +73,6 @@ public class Destillat {
 
     /**
      * Returnerer hvor mange gange destilattet er destilleret.
-     *
      * @return hvor mange gange destilattet er destilleret
      */
     public int getAntalDestilleringer() {
@@ -85,7 +81,6 @@ public class Destillat {
 
     /**
      * Returnerer startdatoen for destillatet.
-     *
      * @return startdatoen for destillatet
      */
     public LocalDate getStartDato() {
@@ -94,7 +89,6 @@ public class Destillat {
 
     /**
      * Returnerer slutdatoen for destillatet.
-     *
      * @return slutdatoen for destillatet
      */
     public LocalDate getSlutDato() {
@@ -103,7 +97,6 @@ public class Destillat {
 
     /**
      * Returnerer hvor mange liter der er af dette destillat.
-     *
      * @return hvor mange liter der er af dette destillat
      */
     public double getMængdeILiter() {
@@ -112,7 +105,6 @@ public class Destillat {
 
     /**
      * Returnerer kommentar til destillatet.
-     *
      * @return kommentar til destillatet
      */
     public String getKommentar() {
@@ -121,7 +113,6 @@ public class Destillat {
 
     /**
      * Returnerer om der er brugt rygemaateriale til destillatet.
-     *
      * @return om der er brugt rygemaateriale til destillatet
      */
     public RygeMateriale getRygeMateriale() {
@@ -130,7 +121,6 @@ public class Destillat {
 
     /**
      * Returnerer en liste over påfyldninger.
-     *
      * @return en liste over påfyldninger
      */
     public ArrayList<Påfyldning> getPåfyldninger() {
@@ -147,6 +137,10 @@ public class Destillat {
         }
     }
 
+    /**
+     * Fjerner en påfyldning fra destillatet.
+     * @param påfyldning påfyldningen der skal fjernes
+     */
     public void removePåfyldning(Påfyldning påfyldning) {
         if (påfyldninger.contains(påfyldning)){
             påfyldninger.remove(påfyldning);
@@ -155,7 +149,6 @@ public class Destillat {
 
     /**
      * Returnerer resterende mængde i liter.
-     *
      * @return resterende mængde i liter
      */
     public double resterendeMængdeILiter() {
