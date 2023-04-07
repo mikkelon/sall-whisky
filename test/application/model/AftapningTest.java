@@ -21,7 +21,7 @@ class AftapningTest {
     void setUp() {
         fadIndhold = new FadIndhold(fad);
         lager = new Lager("Baldersgade 39", "Sall Whisky Lager", 100);
-        hylde = new Hylde(lager);
+        hylde = lager.createHylde();
         fadLeverandør = new FadLeverandør("Garrison Brothers", "USA");
         fad = new Fad(FadType.BOURBON, 80, fadLeverandør, hylde);
         aftapning = new Aftapning("Frederikke", 40, LocalDate.of(2023, 2, 2), fadIndhold);

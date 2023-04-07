@@ -45,7 +45,7 @@ class WhiskyTest {
     void addAftapningTC2() {
         //Her tester vi om at vi kan tilføje en aftapning til en whisky
         Lager lager = new Lager("Baldersgade 39", "Sall Whisky Lager", 100);
-        Hylde hylde = new Hylde(lager);
+        Hylde hylde = lager.createHylde();
         FadLeverandør fadLeverandør = new FadLeverandør("Garrison Brothers", "USA");
         Fad fad = new Fad(FadType.BOURBON, 80, fadLeverandør, hylde);
         Whisky whisky2 = new Whisky(40.0, "Kilde vand", "En god whisky");
