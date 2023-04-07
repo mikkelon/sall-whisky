@@ -177,7 +177,7 @@ public class PåfyldningPane extends GridPane {
         Fad valgtFad = lvwFade.getSelectionModel().getSelectedItem();
         Lager valgtLager = cbxLager.getSelectionModel().getSelectedItem();
         if (valgtLager != null)
-            lvwFade.getItems().setAll(controllerForLager.getFadeFraLagerSorteret(valgtLager));
+            lvwFade.getItems().setAll(controllerForLager.getAlleFade(valgtLager));
         if (valgtFad != null & lvwFade.getItems().contains(valgtFad))
             lvwFade.getSelectionModel().select(valgtFad);
     }

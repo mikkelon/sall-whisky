@@ -91,7 +91,7 @@ public class Lager {
     /**
      * Opretter en ny hylde til lageret.
      *
-     * @return en ny hylde til lageret
+     * @return den nye hylde
      */
     public Hylde createHylde() {
         antalHylder++;
