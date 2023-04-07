@@ -76,12 +76,14 @@ public class StartVindue extends Application {
         AftapningPane aftapningPane = new AftapningPane();
         aftapningPane.setAlignment(Pos.TOP_CENTER);
         aftapningTab.setContent(aftapningPane);
+        aftapningTab.setOnSelectionChanged(event -> aftapningPane.updateControls());
 
         Tab whiskyTap = new Tab("Whisky");
         tabPane.getTabs().add(whiskyTap);
         WhiskyPane whiskyPane = new WhiskyPane();
-        //whiskyPane.setAlignment(Pos.TOP_CENTER);
+        whiskyPane.setAlignment(Pos.TOP_CENTER);
         whiskyTap.setContent(whiskyPane);
+        whiskyTap.setOnSelectionChanged(event -> whiskyPane.updateControls());
     }
 
     public Pane skiftTab(int index) {

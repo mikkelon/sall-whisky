@@ -261,6 +261,22 @@ public class ControllerForLager {
         return modneFade;
     }
 
+    public ArrayList<Fad> getModneFadeMedRegistreretAlkoholProcent() {
+        ArrayList<Fad> modneFade = new ArrayList<>();
+        for (Lager lager : getLagre()) {
+            for (Hylde hylde : lager.getHylder()) {
+                for (Fad fad : hylde.getFade()) {
+                    if (fad.getFadIndhold() != null
+                            && fad.getFadIndhold().isModnet()
+                            && fad.getFadIndhold().getAlkoholProcentEfterModning() != -1) {
+                        modneFade.add(fad);
+                    }
+                }
+            }
+        }
+        return modneFade;
+    }
+
     /**
      * Sætter alkoholprocenten for et fad, efter modningen er overstået
      * @param fad fadet

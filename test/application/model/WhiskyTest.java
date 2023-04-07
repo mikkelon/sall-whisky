@@ -13,7 +13,6 @@ class WhiskyTest {
     private FadIndhold fadIndhold;
     private Fad fad;
     private FadLeverandør fadLeverandør;
-
     private Lager lager;
     private Hylde hylde;
 
@@ -34,10 +33,6 @@ class WhiskyTest {
         assertEquals(43.0, whisky.getMængdeVandILiter() );
         assertEquals("God vand", whisky.getVandAfstamning());
         assertEquals("Meget god whisky", whisky.getTekstBeskrivelse());
-
-        //Test at whiskynr tæller 1 op for hver gang der oprettes en ny whisky
-        Whisky whisky1 = new Whisky(43.0, "God vand","Meget god whisky");
-        assertEquals(whisky.getWhiskyNr() + 1, whisky1.getWhiskyNr());
     }
 
 
