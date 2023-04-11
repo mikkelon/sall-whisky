@@ -190,8 +190,11 @@ public class Fad {
         } else if (fadIndhold != null) {
             informationOmFadIndhold = "(" + roundOfDecimals(fadIndhold.getAlkoholProcent()) + "%)";
         }
-
-        return "Fad: " + fadNr + ", type: " + fadType + " (" + størrelseILiter + "L) " + informationOmFadIndhold;
+        String mængdeInformation = " (" + størrelseILiter + "L) ";
+        if (fadIndhold != null) {
+            mængdeInformation = " (" + fadIndhold.getMængde() + "/" + størrelseILiter + "L) ";
+        }
+        return "Fad: " + fadNr + ", type: " + fadType + mængdeInformation + informationOmFadIndhold;
     }
 
     public String hentHistorik() {
