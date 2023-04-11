@@ -143,9 +143,12 @@ public class FadIndhold {
         for (Aftapning aftapning : aftapninger) {
             mængde -= aftapning.getMængdeILiter();
         }
-
-        //TODO: Medregn evt. omhældninger
-
+        for (Omhældning omhældning : omhældningerFra) {
+            mængde -= omhældning.getMængdeILiter();
+        }
+        for (Omhældning omhældning : omhældningerTil) {
+            mængde += omhældning.getMængdeILiter();
+        }
         return mængde;
     }
 
@@ -195,11 +198,18 @@ public class FadIndhold {
      */
     public String hentHistorik() {
         String historik = fad.hentHistorik() + "\n";
+
         for (Påfyldning påfyldning : påfyldninger) {
             historik += påfyldning.hentHistorik() + "\n";
         }
 
-        // TODO: Tilføj historik for omhældninger
+        if (omhældningerTil.size() > 0) {
+            historik += "Omhældninger:\n\n";
+        }
+        for (Omhældning omhældning : omhældningerTil) {
+            historik += omhældning.hentHistorik() + "\n";
+        }
+
         return historik;
     }
 }
