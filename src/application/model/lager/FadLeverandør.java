@@ -1,4 +1,4 @@
-package application.model;
+package application.model.lager;
 
 /**
  * Modellerer en leverandør, som leverer fade til Sall Whisky.

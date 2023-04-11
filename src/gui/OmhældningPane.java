@@ -2,7 +2,7 @@ package gui;
 
 import application.controller.ControllerForLager;
 import application.controller.ControllerForProduktion;
-import application.model.Fad;
+import application.model.lager.Fad;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -142,7 +142,7 @@ public class OmhældningPane extends GridPane {
             lblError.setText("Indtast hvem der har omhældt");
         } else{
             try{
-                controllerForProduktion.createOmhældning(omhældtAf, mængde, omhældningsDato, fadFra.getFadIndhold(), fadTil.getFadIndhold());
+                controllerForProduktion.createOmhældning(omhældtAf, mængde, omhældningsDato, fadFra, fadTil);
                 updateControls();
                 txfMængde.clear();
                 txfOmhældtAf.clear();

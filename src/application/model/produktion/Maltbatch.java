@@ -1,4 +1,4 @@
-package application.model;
+package application.model.produktion;
 
 /**
  * Modellerer en maltbatch, som bliver brugt destillering af whisky.

@@ -1,5 +1,11 @@
 package application.model;
 
+import application.model.lager.Fad;
+import application.model.lager.FadLeverandør;
+import application.model.lager.Hylde;
+import application.model.lager.Lager;
+import application.model.produktion.Aftapning;
+import application.model.produktion.FadIndhold;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

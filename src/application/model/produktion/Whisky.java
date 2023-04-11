@@ -1,4 +1,8 @@
-package application.model;
+package application.model.produktion;
+
+import application.model.Betegnelse;
+import application.model.lager.Fad;
+import application.model.produktion.Aftapning;
 
 import java.util.ArrayList;
 

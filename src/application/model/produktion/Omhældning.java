@@ -1,4 +1,6 @@
-package application.model;
+package application.model.produktion;
+
+import application.model.produktion.FadIndhold;
 
 import java.time.LocalDate;
 
@@ -75,6 +77,6 @@ public class Omhældning {
      * @return en tekststreng med historik for omhældningen
      */
     public String hentHistorik() {
-        return fraFadIndhold.hentHistorik();
+        return mængdeILiter + "L fra: \n\n" + fraFadIndhold.hentHistorik();
     }
 }
