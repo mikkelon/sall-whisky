@@ -278,6 +278,24 @@ public class ControllerForLager {
     }
 
     /**
+     * Returnerer alle fade som ikke er tomme.
+     * @return alle fade som ikke er tomme
+     */
+    public ArrayList<Fad> getIkkeTommeFade() {
+        ArrayList<Fad> ikkeTommeFade = new ArrayList<>();
+        for (Lager lager : getLagre()) {
+            for (Hylde hylde : lager.getHylder()) {
+                for (Fad fad : hylde.getFade()) {
+                    if (fad.getFadIndhold() != null) {
+                        ikkeTommeFade.add(fad);
+                    }
+                }
+            }
+        }
+        return ikkeTommeFade;
+    }
+
+    /**
      * Sætter alkoholprocenten for et fad, efter modningen er overstået
      * @param fad fadet
      * @param alkoholProcentEfterModning alkoholprocenten
