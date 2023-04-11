@@ -26,7 +26,7 @@ public class StartVindue extends Application {
         this.initContent(pane);
         stage.setResizable(false);
 
-        stage.setWidth(900);
+        stage.setWidth(1100);
         stage.setHeight(600);
 
         Scene scene = new Scene(pane);
