@@ -37,7 +37,7 @@ public class AftapningPane extends GridPane {
         this.setPadding(new Insets(10));
         this.setHgap(10);
         this.setVgap(10);
-//        this.setGridLinesVisible(true);
+        this.setGridLinesVisible(true);
         this.setAlignment(Pos.CENTER);
 
         // #--- Column 0 ---#
@@ -229,7 +229,7 @@ public class AftapningPane extends GridPane {
 
         // #--- Error Label ---#
         lblError = new Label(" ");
-        this.add(lblError, 1, 11);
+        this.add(lblError, 1, 11, 1, 2);
         lblError.setTextFill(Color.RED);
         GridPane.setHalignment(lblError, HPos.CENTER);
         GridPane.setValignment(lblError, VPos.BOTTOM);
