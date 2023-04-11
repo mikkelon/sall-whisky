@@ -37,7 +37,7 @@ public class AftapningPane extends GridPane {
         this.setPadding(new Insets(10));
         this.setHgap(10);
         this.setVgap(10);
-        //this.setGridLinesVisible(true);
+        this.setGridLinesVisible(true);
         this.setAlignment(Pos.CENTER);
 
         // #--- Column 0 ---#
@@ -229,7 +229,7 @@ public class AftapningPane extends GridPane {
 
         // #--- Error Label ---#
         lblError = new Label(" ");
-        this.add(lblError, 1, 11);
+        this.add(lblError, 1, 11, 1, 2);
         lblError.setTextFill(Color.RED);
         GridPane.setHalignment(lblError, HPos.CENTER);
         GridPane.setValignment(lblError, VPos.BOTTOM);
@@ -265,10 +265,10 @@ public class AftapningPane extends GridPane {
             double alkoholMængde = 0.0;
             for (Aftapning aftapning : aftapninger) {
                 mængde += aftapning.getMængdeILiter();
-                alkoholMængde += aftapning.getFadIndhold().getAlkoholProcent() * aftapning.getMængdeILiter();
+                alkoholMængde += (aftapning.getFadIndhold().getAlkoholProcentEfterModning() / 100.0) * aftapning.getMængdeILiter();
             }
             txfVolume.setText("" + mængde);
-            txfAlkoholProcent.setText("" + String.format("%.2f", alkoholMængde / mængde));
+            txfAlkoholProcent.setText("" + String.format("%.2f", alkoholMængde / mængde * 100));
 
             // Opdaterer antal flasker
             if (txfAntalFlasker.getText().isBlank()) {

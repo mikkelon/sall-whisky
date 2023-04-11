@@ -190,13 +190,16 @@ public class Fad {
         } else if (fadIndhold != null) {
             informationOmFadIndhold = "(" + roundOfDecimals(fadIndhold.getAlkoholProcent()) + "%)";
         }
-
-        return "Fad: " + fadNr + ", type: " + fadType + " (" + størrelseILiter + "L) " + informationOmFadIndhold;
+        String mængdeInformation = " (" + størrelseILiter + "L) ";
+        if (fadIndhold != null) {
+            mængdeInformation = " (" + fadIndhold.getMængde() + "/" + størrelseILiter + "L) ";
+        }
+        return "Fad: " + fadNr + ", type: " + fadType + mængdeInformation + informationOmFadIndhold;
     }
 
     /**
-     * Returnerer fadets historik.
-     * @return fadets historik
+     * Returnerer en tekststreng med historik for fadet.
+     * @return en tekststreng med historik for fadet
      */
     public String hentHistorik() {
         String historik = "Fadtype: " + fadType + "\n" + "Fadnr: " + fadNr + "\n"

@@ -78,8 +78,8 @@ public class Aftapning {
     }
 
     /**
-     * Returnerer en tekststreng med information om aftapningen.
-     * @return en tekststreng med information om aftapningen
+     * Returnerer en tekststreng med historikken for aftapningen.
+     * @return en tekststreng med historikken for aftapningen
      */
     public String hentHistorik() {
         return fadIndhold.hentHistorik();

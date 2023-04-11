@@ -78,8 +78,8 @@ public class Påfyldning {
     }
 
     /**
-     * Returnerer historikken for destillatet der er fyldt på fadet.
-     * @return historikken for destillatet der er fyldt på fadet
+     * Returnerer en tekststreng med historikken for påfyldningen.
+     * @return en tekststreng med historikken for påfyldningen
      */
     public String hentHistorik() {
         return destillat.hentHistorik();

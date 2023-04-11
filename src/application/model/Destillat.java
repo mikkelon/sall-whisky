@@ -195,9 +195,8 @@ public class Destillat {
     }
 
     /**
-     * Returnerer en String med alle informationer om destillatet.
-     *
-     * @return en String med alle informationer om destillatet
+     * Returnerer en tekststreng med historik for destillatet.
+     * @return en tekststreng med historik for destillatet
      */
     public String hentHistorik() {
         StringBuilder sb = new StringBuilder();

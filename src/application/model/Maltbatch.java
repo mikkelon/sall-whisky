@@ -97,6 +97,10 @@ public class Maltbatch {
         antalDestillater--;
     }
 
+    /**
+     * Returnerer maltbatchens historik.
+     * @return maltbatchens historik
+     */
     public String hentHistorik() {
         return this.toString();
     }
