@@ -37,8 +37,8 @@ public class OmhældningPane extends GridPane {
         this.add(lblFadeFra, 0, 0);
 
         lvwFadeFra = new ListView<>();
-        lvwFadeFra.setMinWidth(250);
-        lvwFadeFra.setMaxWidth(250);
+        lvwFadeFra.setMinWidth(300);
+        lvwFadeFra.setMaxWidth(300);
         lvwFadeFra.setMinHeight(300);
         this.add(lvwFadeFra, 0, 1, 1,7);
 
@@ -84,8 +84,8 @@ public class OmhældningPane extends GridPane {
         this.add(lblFadeTil, 2, 0);
 
         lvwFadeTil = new ListView<>();
-        lvwFadeTil.setMinWidth(250);
-        lvwFadeTil.setMaxWidth(250);
+        lvwFadeTil.setMinWidth(300);
+        lvwFadeTil.setMaxWidth(300);
         lvwFadeTil.setMinHeight(300);
         this.add(lvwFadeTil, 2, 1, 1,7);
 
