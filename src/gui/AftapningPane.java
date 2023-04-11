@@ -37,7 +37,7 @@ public class AftapningPane extends GridPane {
         this.setPadding(new Insets(10));
         this.setHgap(10);
         this.setVgap(10);
-        this.setGridLinesVisible(true);
+//        this.setGridLinesVisible(true);
         this.setAlignment(Pos.CENTER);
 
         // #--- Column 0 ---#
