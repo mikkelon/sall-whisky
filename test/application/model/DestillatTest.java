@@ -19,7 +19,7 @@ class DestillatTest {
     @BeforeEach
     void setUp() {
         lager = new Lager("Baldersgade 39", "Sall Whisky Lager", 100);
-        hylde = new Hylde(lager);
+        hylde = lager.createHylde();
         fad = new Fad(FadType.BOURBON, 90.0, new FadLeverandør("Garrison Brothers", "USA"), hylde);
         fadIndhold = new FadIndhold(fad);
         rygeMateriale = RygeMateriale.TØRV;

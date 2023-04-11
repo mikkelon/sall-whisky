@@ -108,6 +108,15 @@ public class Fad {
     }
 
     /**
+     * Registrerer fadets indhold.
+     * @param fadIndhold
+     */
+    public void setFadIndhold(FadIndhold fadIndhold) {
+        this.fadIndhold = fadIndhold;
+        fadIndholdHistorik.add(fadIndhold);
+    }
+
+    /**
      * Returnerer fadets indhold.
      * @return fadets indhold
      */
@@ -119,8 +128,12 @@ public class Fad {
      * Returnerer fadets historik over indhold.
      * @return fadets historik over indhold
      */
-    public Set<FadIndhold> setFadIndhold() {
+    public Set<FadIndhold> getFadIndholdsHistorik() {
         return new HashSet<>(fadIndholdHistorik);
+    }
+
+    public void removeFromFadIndholdHistorik(FadIndhold fadIndhold) {
+        fadIndholdHistorik.remove(fadIndhold);
     }
 
     public boolean isEmpty() {
@@ -177,8 +190,11 @@ public class Fad {
         } else if (fadIndhold != null) {
             informationOmFadIndhold = "(" + roundOfDecimals(fadIndhold.getAlkoholProcent()) + "%)";
         }
-
-        return "Fad: " + fadNr + ", type: " + fadType + " (" + størrelseILiter + "L) " + informationOmFadIndhold;
+        String mængdeInformation = " (" + størrelseILiter + "L) ";
+        if (fadIndhold != null) {
+            mængdeInformation = " (" + fadIndhold.getMængde() + "/" + størrelseILiter + "L) ";
+        }
+        return "Fad: " + fadNr + ", type: " + fadType + mængdeInformation + informationOmFadIndhold;
     }
 
     public String hentHistorik() {
