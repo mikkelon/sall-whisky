@@ -84,6 +84,14 @@ public class StartVindue extends Application {
         whiskyPane.setAlignment(Pos.TOP_CENTER);
         whiskyTap.setContent(whiskyPane);
         whiskyTap.setOnSelectionChanged(event -> whiskyPane.updateControls());
+
+        Tab omhældningTap = new Tab("Omhældning");
+        tabPane.getTabs().add(omhældningTap);
+        OmhældningPane omhældningPane = new OmhældningPane();
+        omhældningPane.setAlignment(Pos.TOP_CENTER);
+        omhældningTap.setContent(omhældningPane);
+        omhældningTap.setOnSelectionChanged(event -> omhældningPane.updateControls());
+
     }
 
     public Pane skiftTab(int index) {
