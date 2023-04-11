@@ -138,14 +138,30 @@ public class Fad {
         return new HashSet<>(fadIndholdHistorik);
     }
 
+    /**
+     * Fjerner et fadindhold fra fadets historik.
+     * @param fadIndhold er det fadindhold der skal fjernes
+     */
     public void removeFromFadIndholdHistorik(FadIndhold fadIndhold) {
         fadIndholdHistorik.remove(fadIndhold);
     }
 
+    /**
+     * Returnerer true hvis fadet er tomt.
+     * @return true hvis fadet er tomt
+     */
     public boolean isEmpty() {
         return fadIndhold == null;
     }
 
+    /**
+     * Påfylder et fad med et destillat.
+     * @param destillat er destillatet der påfyldes
+     * @param mængde er mængden der påfyldes
+     * @param påfyldtAf er navnet på den person, der har påfyldt fadet
+     * @param påfyldningsDato er datoen for påfyldningen
+     * @return
+     */
     public Påfyldning påfyld(Destillat destillat, double mængde, String påfyldtAf, LocalDate påfyldningsDato) {
         Påfyldning påfyldning;
         if (fadIndhold == null) {
@@ -215,6 +231,11 @@ public class Fad {
         return historik;
     }
 
+    /**
+     * Runder et tal af til to decimaler.
+     * @param number er det tal der skal afrundes
+     * @return det afrundede tal
+     */
     private double roundOfDecimals(double number) {
         return Math.round(number * 100.0) / 100.0;
     }

@@ -142,7 +142,7 @@ public class OmhældningPane extends GridPane {
             lblError.setText("Indtast hvem der har omhældt");
         } else{
             try{
-                controllerForProduktion.createOmhældning(omhældtAf, mængde, omhældningsDato, fadFra.getFadIndhold(), fadTil.getFadIndhold());
+                controllerForProduktion.createOmhældning(omhældtAf, mængde, omhældningsDato, fadFra, fadTil);
                 updateControls();
                 txfMængde.clear();
                 txfOmhældtAf.clear();
