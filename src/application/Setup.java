@@ -86,15 +86,26 @@ public class Setup {
         // Sæt alkoholprocent efter modning
         controllerForProduktion.setAlkoholprocentEfterModning(fad2.getFadIndhold(), 52);
         controllerForProduktion.setAlkoholprocentEfterModning(fad4.getFadIndhold(), 56);
+        controllerForProduktion.setAlkoholprocentEfterModning(fad6.getFadIndhold(), 61);
+
+        // Laver omhældninger
+        controllerForProduktion.createOmhældning("Mikkel", 10, LocalDate.now(), fad1, fad2);
+        controllerForProduktion.createOmhældning("Frederikke", 11.5, LocalDate.now(), fad4, fad6);
 
         // Laver aftapninger
-        HashSet<Aftapning> aftapningHashSet = new HashSet<>();
-        Aftapning a1 = controllerForProduktion.createAftapning("Mikkel", 10, LocalDate.now(), fad4);
-        aftapningHashSet.add(a1);
+        HashSet<Aftapning> aftapninger1 = new HashSet<>();
+        Aftapning a1 = controllerForProduktion.createAftapning("Mikkel", 8, LocalDate.now(), fad4);
+        aftapninger1.add(a1);
         Aftapning a2 = controllerForProduktion.createAftapning("Mikkel", 10, LocalDate.now(), fad2);
-        aftapningHashSet.add(a2);
+        aftapninger1.add(a2);
+
+        // Laver aftapning på fad med omhældning
+        HashSet<Aftapning> aftapninger2 = new HashSet<>();
+        Aftapning a3 = controllerForProduktion.createAftapning("Mikkel", 5, LocalDate.now(), fad6);
+        aftapninger2.add(a3);
 
         // Tilføjer en whisky
-        controllerForProduktion.createWhisky(aftapningHashSet, 20, "Begravet Dal", "Lækker whisky :)");
+        controllerForProduktion.createWhisky(aftapninger1, 20, "Begravet Dal", "Lækker whisky :)");
+        controllerForProduktion.createWhisky(aftapninger2, 10, "Begravet Dal 2", "MEGA Lækker whisky!!!");
     }
 }
