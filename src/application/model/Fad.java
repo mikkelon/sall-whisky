@@ -191,7 +191,7 @@ public class Fad {
             informationOmFadIndhold = "(" + roundOfDecimals(fadIndhold.getAlkoholProcent()) + "%)";
         }
 
-        return "Fad: " + fadNr + ", type: " + fadType + " (" + resterendePladsILiter() + "L) " + informationOmFadIndhold;
+        return "Fad: " + fadNr + ", type: " + fadType + " (" + resterendePladsILiter()/størrelseILiter + "L) " + informationOmFadIndhold;
     }
 
     public String hentHistorik() {
