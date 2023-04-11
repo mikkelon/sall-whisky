@@ -9,6 +9,8 @@ public class FadIndhold {
     private LocalDate senestPåfyldt;
     private Set<Påfyldning> påfyldninger = new HashSet<>();
     private Set<Aftapning> aftapninger = new HashSet<>();
+    private Set<Omhældning> omhældningerFra = new HashSet<>();
+    private Set<Omhældning> omhældningerTil = new HashSet<>();
     private Fad fad;
 
     public FadIndhold(Fad fad) {
@@ -99,6 +101,38 @@ public class FadIndhold {
         return mængde;
     }
 
+    /**
+     * Returnerer omhældninger fra dette fad.
+     * @return omhældninger fra dette fad
+     */
+    public Set<Omhældning> getOmhældningerFra() {
+        return new HashSet<>(omhældningerFra);
+    }
+
+    /**
+     * Tilføjer en omhældning fra dette fad.
+     * @param omhældning omhældningen der skal tilføjes fra dette fad
+     */
+    public void addOmhældningFra(Omhældning omhældning) {
+        omhældningerFra.add(omhældning);
+    }
+
+    /**
+     * Returnerer omhældninger til dette fad.
+     * @return omhældninger til dette fad
+     */
+    public Set<Omhældning> getOmhældningerTil() {
+        return new HashSet<>(omhældningerTil);
+    }
+
+    /**
+     * Tilføjer en omhældning til dette fad.
+     * @param omhældning omhældningen der skal tilføjes til dette fad
+     */
+    public void addOmhældningTil(Omhældning omhældning) {
+        omhældningerTil.add(omhældning);
+    }
+
     public boolean isModnet() {
         return senestPåfyldt != null && senestPåfyldt.plusYears(3).isBefore(LocalDate.now());
     }
@@ -108,6 +142,8 @@ public class FadIndhold {
         for (Påfyldning påfyldning : påfyldninger) {
             historik += påfyldning.hentHistorik() + "\n";
         }
+
+        // TODO: Tilføj historik for omhældninger
         return historik;
     }
 }
