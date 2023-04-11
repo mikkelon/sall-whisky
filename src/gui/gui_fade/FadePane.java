@@ -2,6 +2,7 @@ package gui.gui_fade;
 
 import application.controller.ControllerForLager;
 import application.model.*;
+import gui.AftapningPane;
 import gui.BekræftSletVindue;
 import gui.RegistrerAlkoholProcentVindue;
 import javafx.geometry.*;
@@ -9,6 +10,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
+
+import java.security.SecurityPermission;
 
 public class FadePane extends GridPane {
     private final ComboBox<FadLeverandør> cbxFadLeverandør;
@@ -21,11 +24,12 @@ public class FadePane extends GridPane {
     private final Button btnOpretLeverandør;
     private final Label lblError;
     private final Button btnSlet;
+    private final ListView<Aftapning> lvwAftapninger;
     private ControllerForLager controllerForLager = ControllerForLager.getController();
     private ListView<Påfyldning> lvwPåfyldninger;
     private ListView<Fad> lvwFade;
 
-    public FadePane(){
+    public FadePane() {
         this.setPadding(new Insets(10));
         this.setHgap(10);
         this.setVgap(10);
@@ -55,7 +59,7 @@ public class FadePane extends GridPane {
         this.add(cbxLager, 0, 5);
 
         Label lblStørrelse = new Label("Størrelse (Liter)");
-        this.add(lblStørrelse, 1,0);
+        this.add(lblStørrelse, 1, 0);
 
         txfStørrelse = new TextField();
         this.add(txfStørrelse, 1, 1);
@@ -77,13 +81,13 @@ public class FadePane extends GridPane {
         this.add(cbxHylde, 1, 5);
 
         Separator sep1 = new Separator(Orientation.VERTICAL);
-        this.add(sep1, 2, 0,1,8);
+        this.add(sep1, 2, 0, 1, 7);
 
         Label lblPåfyldninger = new Label("Påfyldninger");
         this.add(lblPåfyldninger, 3, 0);
 
         lvwPåfyldninger = new ListView<>();
-        this.add(lvwPåfyldninger, 3, 1,1,7);
+        this.add(lvwPåfyldninger, 3, 1, 1, 7);
         lvwPåfyldninger.setMaxHeight(200);
         lvwPåfyldninger.setCellFactory(param -> new ListCell<>() {
             @Override
@@ -100,22 +104,42 @@ public class FadePane extends GridPane {
             }
         });
 
+        lvwAftapninger = new ListView<>();
+        this.add(lvwAftapninger, 3, 9, 1, 1);
+        lvwAftapninger.setCellFactory(param -> new ListCell<>() {
+            @Override
+            protected void updateItem(Aftapning aftapning, boolean empty) {
+                super.updateItem(aftapning, empty);
+                if (empty || aftapning == null) {
+                    setText(null);
+                } else {
+                    setText(String.format("Whisky #%s\n" +
+                                    "Mængde: %.2f\n" +
+                                    "Dato: %s\n" +
+                                    "Medarbejder: %s",
+                            aftapning.getWhisky().getWhiskyNr(), aftapning.getMængdeILiter(), aftapning.getAftapningsDato(),
+                            aftapning.getAftappetAf()));
+                }
+            }
+        });
+
+
         Separator sep2 = new Separator(Orientation.VERTICAL);
-        this.add(sep2, 4, 0, 1, 12);
+        this.add(sep2, 4, 0, 1, 13);
 
         Label lblAlleFade = new Label("Alle fade");
         this.add(lblAlleFade, 5, 0);
 
         lvwFade = new ListView<>();
         lvwFade.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> selectionChanged());
-        this.add(lvwFade, 5, 1,1,10);
+        this.add(lvwFade, 5, 1, 1, 10);
 
         Separator sep3 = new Separator(Orientation.HORIZONTAL);
-        this.add(sep3, 0, 8,4, 1);
+        this.add(sep3, 0, 7, 2, 1);
 
         btnOpretFravælg = new Button("Opret");
         btnOpretFravælg.setOnAction(event -> opretFravælgAction());
-        this.add(btnOpretFravælg, 0, 9, 2, 1);
+        this.add(btnOpretFravælg, 0, 11, 2, 1);
         GridPane.setHalignment(btnOpretFravælg, HPos.CENTER);
 
         btnSlet = new Button("Slet");
@@ -127,9 +151,24 @@ public class FadePane extends GridPane {
         btnRegistrerAlkoholprocent.setDisable(true);
         btnRegistrerAlkoholprocent.setOnAction(event -> registrerAlkoholprocentAction());
 
+
+        Label lblOmhældning = new Label("Omhældninger");
+        this.add(lblOmhældning, 0, 8);
+
+        ListView<String> lvwOmhældning = new ListView<>();
+        this.add(lvwOmhældning, 0, 9, 2, 1);
+
+        Label lblAftapninger = new Label("Aftapninger");
+        this.add(lblAftapninger, 3, 8);
+
+
+        Separator sep4 = new Separator(Orientation.HORIZONTAL);
+        this.add(sep4, 0, 10, 4, 1);
+
+
         // #--- ErrorLabel ---#
         lblError = new Label(" ");
-        this.add(lblError, 0,7,2,1);
+        this.add(lblError, 0, 7, 2, 1);
         GridPane.setHalignment(lblError, HPos.CENTER);
         lblError.setStyle("-fx-text-fill: red");
 
@@ -149,12 +188,14 @@ public class FadePane extends GridPane {
         if (lvwFade.getSelectionModel().getSelectedItem() != null) {
             btnOpretFravælg.setText("Fravælg");
             updatePåfyldninger();
+            updateAftapninger();
             setControlsDisabled(true);
             getInfo();
             btnSlet.setDisable(false);
         } else {
             btnOpretFravælg.setText("Opret");
             updatePåfyldninger();
+            updateAftapninger();
             setControlsDisabled(false);
             clearInfo();
             btnSlet.setDisable(true);
@@ -180,7 +221,7 @@ public class FadePane extends GridPane {
                 || fad.getFadIndhold().getAlkoholProcentEfterModning() != -1);
     }
 
-    private void opretFadLeverandørAction(){
+    private void opretFadLeverandørAction() {
         OpretFadLeverandør window = new OpretFadLeverandør();
         window.showAndWait();
         updateFadleverandører();
@@ -214,14 +255,21 @@ public class FadePane extends GridPane {
     private void updatePåfyldninger() {
         Fad valgtFad = lvwFade.getSelectionModel().getSelectedItem();
         if (valgtFad != null && !valgtFad.isEmpty()) {
-            if (valgtFad.getFadIndhold() != null) {
-                lvwPåfyldninger.getItems().setAll(valgtFad.getFadIndhold().getPåfyldninger());
-            } else {
-                lvwPåfyldninger.getItems().clear();
-            }
+            lvwPåfyldninger.getItems().setAll(valgtFad.getFadIndhold().getPåfyldninger());
         } else {
             lvwPåfyldninger.getItems().clear();
         }
+
+    }
+
+    private void updateAftapninger() {
+        Fad valgtFad = lvwFade.getSelectionModel().getSelectedItem();
+        if (valgtFad != null && !valgtFad.isEmpty()) {
+            lvwAftapninger.getItems().setAll(valgtFad.getFadIndhold().getAftapninger());
+        } else {
+            lvwAftapninger.getItems().clear();
+        }
+
     }
 
     private void getInfo() {
@@ -249,6 +297,7 @@ public class FadePane extends GridPane {
         updateFade();
         updatePåfyldninger();
         updateInfo();
+        updateAftapninger();
     }
 
     private void opretFravælgAction() {
@@ -275,8 +324,7 @@ public class FadePane extends GridPane {
                 lblError.setText("Størrelse skal være større end 0");
             } else if (hylde == null) {
                 lblError.setText("Vælg en hylde");
-            }
-            else {
+            } else {
                 controllerForLager.createFad(fadType, størrelse, fadLeverandør, hylde);
                 clearInfo();
                 updateFade();

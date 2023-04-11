@@ -141,6 +141,9 @@ public class FadIndhold {
         for (Aftapning aftapning : aftapninger) {
             mængde -= aftapning.getMængdeILiter();
         }
+
+        //TODO: Medregn evt. omhældninger
+
         return mængde;
     }
 
