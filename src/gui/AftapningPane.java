@@ -265,10 +265,10 @@ public class AftapningPane extends GridPane {
             double alkoholMængde = 0.0;
             for (Aftapning aftapning : aftapninger) {
                 mængde += aftapning.getMængdeILiter();
-                alkoholMængde += aftapning.getFadIndhold().getAlkoholProcent() * aftapning.getMængdeILiter();
+                alkoholMængde += (aftapning.getFadIndhold().getAlkoholProcentEfterModning() / 100.0) * aftapning.getMængdeILiter();
             }
             txfVolume.setText("" + mængde);
-            txfAlkoholProcent.setText("" + String.format("%.2f", alkoholMængde / mængde));
+            txfAlkoholProcent.setText("" + String.format("%.2f", alkoholMængde / mængde * 100));
 
             // Opdaterer antal flasker
             if (txfAntalFlasker.getText().isBlank()) {

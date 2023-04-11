@@ -105,7 +105,7 @@ public class WhiskyPane extends GridPane {
             txfVandILiter.setText(String.valueOf(valgtWhisky.getMængdeVandILiter()));
             txfVandILiter.setDisable(false);
             txfVandILiter.setEditable(false);
-            txfAlkoholprocent.setText(String.valueOf(valgtWhisky.getAlkoholProcent()));
+            txfAlkoholprocent.setText(String.format("%.2f", valgtWhisky.getAlkoholProcent()));
             txfAlkoholprocent.setDisable(false);
             txfAlkoholprocent.setEditable(false);
             txaBeskrivelse.setText(String.valueOf(valgtWhisky.getTekstBeskrivelse()));

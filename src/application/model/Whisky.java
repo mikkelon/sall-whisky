@@ -117,10 +117,10 @@ public class Whisky {
             return 0;
         } else {
             double væskeMængde = mængdeVandILiter;
-            double alkoholMængde = 0;
+            double alkoholMængde = 0.0;
             for (Aftapning aftapning : aftapninger) {
-                væskeMængde += aftapning.getFadIndhold().getMængde();
-                alkoholMængde += aftapning.getFadIndhold().getMængde() * aftapning.getFadIndhold().getAlkoholProcentEfterModning();
+                væskeMængde += aftapning.getMængdeILiter();
+                alkoholMængde += (aftapning.getMængdeILiter() / 100.0) * aftapning.getFadIndhold().getAlkoholProcentEfterModning();
             }
             return alkoholMængde / væskeMængde * 100;
         }
