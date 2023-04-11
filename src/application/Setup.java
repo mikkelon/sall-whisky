@@ -88,5 +88,11 @@ public class Setup {
 
         // Tilføjer en whisky
         controllerForProduktion.createWhisky(aftapningHashSet, 20, "Begravet Dal", "Lækker whisky :)");
+
+        //Opretter en omhældning
+        controllerForProduktion.createOmhældning("Mikkel",10,LocalDate.of(2023,4,10),fad4.getFadIndhold(),fad5.getFadIndhold());
+
+
+        controllerForProduktion.createOmhældning("Mads",20,LocalDate.of(2023,4,10),fad1.getFadIndhold(),fad2.getFadIndhold());
     }
 }
