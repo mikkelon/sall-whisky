@@ -77,6 +77,10 @@ public class Påfyldning {
         return destillat.getNewMakeNr() + ", " + mængdeILiter + " liter";
     }
 
+    /**
+     * Returnerer en tekststreng med historikken for påfyldningen.
+     * @return en tekststreng med historikken for påfyldningen
+     */
     public String hentHistorik() {
         return destillat.hentHistorik();
     }

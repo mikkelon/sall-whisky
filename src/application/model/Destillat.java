@@ -194,6 +194,10 @@ public class Destillat {
         return newMakeNr;
     }
 
+    /**
+     * Returnerer en tekststreng med historik for destillatet.
+     * @return en tekststreng med historik for destillatet
+     */
     public String hentHistorik() {
         StringBuilder sb = new StringBuilder();
         sb.append("New make: " + newMakeNr + "\n" + "Medarbejder: " + medarbejder
