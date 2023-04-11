@@ -196,6 +196,7 @@ public class Fad {
         } else if (fadIndhold != null) {
             informationOmFadIndhold = "(" + roundOfDecimals(fadIndhold.getAlkoholProcent()) + "%)";
         }
+
         String mængdeInformation = " (" + størrelseILiter + "L) ";
         if (fadIndhold != null) {
             mængdeInformation = " (" + fadIndhold.getMængde() + "/" + størrelseILiter + "L) ";

@@ -193,7 +193,7 @@ public class Destillat {
 
     @Override
     public String toString() {
-        return newMakeNr;
+        return newMakeNr + " (" + roundOfDecimals(resterendeMængdeILiter()) + "L)";
     }
 
     /**
@@ -212,5 +212,9 @@ public class Destillat {
             sb.append(maltbatch.hentHistorik() + "\n");
         }
         return sb.toString();
+    }
+
+    private double roundOfDecimals(double number) {
+        return Math.round(number * 100.0) / 100.0;
     }
 }
