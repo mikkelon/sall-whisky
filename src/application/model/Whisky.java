@@ -126,6 +126,10 @@ public class Whisky {
         }
     }
 
+    /**
+     * Returnerer en tekststreng med historikken for whiskyproduktet.
+     * @return en tekststreng med historikken for whiskyproduktet
+     */
     public String hentHistorik() {
         String historik = "";
         for (Aftapning aftapning : aftapninger) {
