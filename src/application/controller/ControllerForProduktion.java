@@ -232,6 +232,7 @@ public class ControllerForProduktion {
         Whisky whisky = new Whisky(mængdeVandILiter, vandAfstamning, tekstBeskrivelse);
         for (Aftapning a : aftapninger) {
             whisky.addAftapning(a);
+            a.setWhisky(whisky);
         }
         storage.addWhisky(whisky);
         Whisky.tælAntalWhiskyOp();
