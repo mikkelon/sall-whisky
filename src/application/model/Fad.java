@@ -140,6 +140,10 @@ public class Fad {
         return fadIndhold == null;
     }
 
+    public boolean isFull() {
+        return fadIndhold != null && fadIndhold.getMængde() == størrelseILiter;
+    }
+
     public Påfyldning påfyld(Destillat destillat, double mængde, String påfyldtAf, LocalDate påfyldningsDato) {
         Påfyldning påfyldning;
         if (fadIndhold == null) {
@@ -190,7 +194,7 @@ public class Fad {
         } else if (fadIndhold != null) {
             informationOmFadIndhold = "(" + roundOfDecimals(fadIndhold.getAlkoholProcent()) + "%)";
         }
-        String mængdeInformation = " (" + størrelseILiter + "L) ";
+        String mængdeInformation = " (0.0/" + størrelseILiter + "L) ";
         if (fadIndhold != null) {
             mængdeInformation = " (" + fadIndhold.getMængde() + "/" + størrelseILiter + "L) ";
         }
