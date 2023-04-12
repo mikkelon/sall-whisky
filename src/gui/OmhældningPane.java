@@ -47,7 +47,7 @@ public class OmhældningPane extends GridPane {
         this.add(lblMængde, 1, 1);
 
         txfMængde = new TextField();
-        txfMængde.setMaxSize(100, 20);
+        txfMængde.setMaxSize(150, 20);
         GridPane.setHalignment(txfMængde, HPos.CENTER);
         this.add(txfMængde, 1, 2);
 
@@ -59,6 +59,7 @@ public class OmhældningPane extends GridPane {
         datePicker.setValue(LocalDate.now());
         GridPane.setValignment(datePicker, VPos.TOP);
         GridPane.setHalignment(datePicker, HPos.CENTER);
+        datePicker.setMaxSize(150, 20);
         this.add(datePicker, 1, 4);
 
         Label lblOmhældtAf = new Label("Omhældt af");

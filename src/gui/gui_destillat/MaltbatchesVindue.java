@@ -2,6 +2,7 @@ package gui.gui_destillat;
 
 import application.controller.ControllerForProduktion;
 import application.model.produktion.Maltbatch;
+import gui.BekræftSletVindue;
 import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -74,12 +75,17 @@ public class MaltbatchesVindue extends Stage {
         clearError();
         Maltbatch valgtMaltbatch = lvwMaltbatches.getSelectionModel().getSelectedItem();
         if (valgtMaltbatch != null) {
+            BekræftSletVindue window = new BekræftSletVindue("Slet Maltbatch");
+            window.showAndWait();
+            boolean valg = window.getValg();
+            if(valg){
             try {
                 controllerForProduktion.removeMaltbatch(valgtMaltbatch);
                 updateControls();
             } catch (RuntimeException e) {
                 lblError.setText(e.getMessage());
             }
+        }
         } else {
             lblError.setText("Vælg et maltbatch");
         }
