@@ -151,6 +151,10 @@ public class Fad {
         return fadIndhold == null;
     }
 
+    public boolean isFull() {
+        return fadIndhold != null && fadIndhold.getMængde() == størrelseILiter;
+    }
+
     /**
      * Påfylder et fad med et destillat.
      * @param destillat er destillatet der påfyldes
@@ -231,7 +235,7 @@ public class Fad {
             informationOmFadIndhold = "(" + roundOfDecimals(fadIndhold.getAlkoholProcent()) + "%)";
         }
 
-        String mængdeInformation = " (" + størrelseILiter + "L) ";
+        String mængdeInformation = " (0.0/" + størrelseILiter + "L) ";
         if (fadIndhold != null) {
             mængdeInformation = " (" + fadIndhold.getMængde() + "/" + størrelseILiter + "L) ";
         }
