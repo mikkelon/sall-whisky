@@ -2,9 +2,13 @@ package application.model.produktion;
 
 import application.model.Betegnelse;
 import application.model.lager.Fad;
+import application.model.lager.Flaske;
 import application.model.produktion.Aftapning;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Modellerer et whiskyprodukt som kan bestå af flere forskellige aftapninger på fade.
@@ -16,6 +20,7 @@ public class Whisky {
     private static int antalWhiskyProdukter = 1;
     private int whiskyNr;
     private ArrayList<Aftapning> aftapninger = new ArrayList<>();
+    private Set<Flaske> flasker = new TreeSet<>();
 
     /**
      * Initialiserer et nyt whiskyprodukt med alkoholprocent, betegnelse, mængde vand i liter, vandafstamning, tekstbeskrivelse og et unikt nummer.
@@ -85,6 +90,22 @@ public class Whisky {
         if(!aftapninger.contains(aftapning)){
             aftapninger.add(aftapning);
         }
+    }
+
+    /**
+     * Returnerer alle flasker der er fyldt med whiskyproduktet.
+     * @return alle flasker der er fyldt med whiskyproduktet
+     */
+    public Set<Flaske> getFlasker() {
+        return new TreeSet<>(flasker);
+    }
+
+    /**
+     * Tilføjer en flaske til en whisky.
+     * @param flaske tilføjes til en whisky
+     */
+    public void addFlaske(Flaske flaske) {
+        flasker.add(flaske);
     }
 
     /**

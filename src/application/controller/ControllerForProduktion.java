@@ -2,6 +2,7 @@ package application.controller;
 
 import application.model.*;
 import application.model.lager.Fad;
+import application.model.lager.Flaske;
 import application.model.produktion.*;
 import com.sun.source.tree.Tree;
 import storage.Storage;
@@ -228,18 +229,39 @@ public class ControllerForProduktion {
      * @param mængdeVandILiter mængden af vand i whiskyen
      * @param vandAfstamning   hvor vandet kommer fra
      * @param tekstBeskrivelse tekstbeskrivelse om whiskyen
+     * @param flaskeStørrelseILiter størrelsen af flasken
      * @return den oprettede whisky
-     * @Pre: aftapninger.size() > 0<br />0 <= alkoholprocent <= 100<br />betegnelse != null<br />mængdeVandILiter > 0<br />vandAfstamning != null<br />tekstBeskrivelse != null
+     * @Pre: aftapninger.size() > 0<br />0 <= alkoholprocent <= 100<br />betegnelse != null<br />mængdeVandILiter > 0<br />vandAfstamning != null<br />tekstBeskrivelse != null <br />flaskeStørrelseILiter > 0
      */
-    public Whisky createWhisky(Set<Aftapning> aftapninger, double mængdeVandILiter, String vandAfstamning, String tekstBeskrivelse) {
+    public Whisky createWhisky(Set<Aftapning> aftapninger, double mængdeVandILiter, String vandAfstamning, String tekstBeskrivelse, double flaskeStørrelseILiter) {
         Whisky whisky = new Whisky(mængdeVandILiter, vandAfstamning, tekstBeskrivelse);
+        double totalMængdeILiter = mængdeVandILiter;
         for (Aftapning a : aftapninger) {
             whisky.addAftapning(a);
             a.setWhisky(whisky);
+            totalMængdeILiter += a.getMængdeILiter();
         }
         storage.addWhisky(whisky);
         Whisky.tælAntalWhiskyOp();
+
+        int antalFlasker = (int) Math.floor(totalMængdeILiter / flaskeStørrelseILiter);
+        for (int i = 0; i < antalFlasker; i++) {
+            createFlaske(flaskeStørrelseILiter, whisky);
+        }
+
         return whisky;
+   }
+
+    /**
+     * Opretter en flaske
+     * @param flaskeStørrelseILiter størrelsen af flasken
+     * @param whisky whiskyen der er i flasken
+     * @return den oprettede flaske
+     */
+   public Flaske createFlaske(double flaskeStørrelseILiter, Whisky whisky) {
+       Flaske flaske = new Flaske(flaskeStørrelseILiter, whisky);
+       storage.addFlaske(flaske);
+       return flaske;
    }
 
     /**

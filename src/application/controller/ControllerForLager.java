@@ -1,10 +1,7 @@
 package application.controller;
 
 import application.model.*;
-import application.model.lager.Fad;
-import application.model.lager.FadLeverandør;
-import application.model.lager.Hylde;
-import application.model.lager.Lager;
+import application.model.lager.*;
 import storage.Storage;
 
 import java.util.*;
@@ -325,5 +322,13 @@ public class ControllerForLager {
      */
     public void setAlkoholProcentEfterModning(Fad fad, double alkoholProcentEfterModning) {
         fad.getFadIndhold().setAlkoholProcentEfterModning(alkoholProcentEfterModning);
+    }
+
+    /**
+     * Returnerer alle flasker fra alle lagre.
+     * @return alle flasker fra alle lagre
+     */
+    public Set<Flaske> getFlasker() {
+        return storage.getFlasker();
     }
 }
