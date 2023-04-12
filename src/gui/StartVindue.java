@@ -3,6 +3,7 @@ package gui;
 import application.Setup;
 import gui.gui_destillat.DestillatPane;
 import gui.gui_fade.FadePane;
+import gui.gui_lagerstyring.FlaskePane;
 import gui.gui_lagerstyring.LagerstyringPane;
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -91,6 +92,13 @@ public class StartVindue extends Application {
         whiskyPane.setAlignment(Pos.TOP_CENTER);
         whiskyTap.setContent(whiskyPane);
         whiskyTap.setOnSelectionChanged(event -> whiskyPane.updateControls());
+
+        Tab flaskeTab = new Tab("Flasker");
+        tabPane.getTabs().add(flaskeTab);
+        FlaskePane flaskePane = new FlaskePane();
+        flaskePane.setAlignment(Pos.TOP_CENTER);
+        flaskeTab.setContent(flaskePane);
+        //flaskeTab.setOnSelectionChanged(event -> flaskePane.updateControls());
     }
 
     public Pane skiftTab(int index) {
