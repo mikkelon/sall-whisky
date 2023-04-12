@@ -11,9 +11,16 @@ import application.model.produktion.Omhældning;
 import application.model.produktion.Påfyldning;
 import gui.BekræftSletVindue;
 import gui.RegistrerAlkoholProcentVindue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.geometry.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+
+import java.util.HashSet;
+import java.util.TreeSet;
 
 public class FadePane extends GridPane {
     private final ComboBox<FadLeverandør> cbxFadLeverandør;
@@ -22,15 +29,13 @@ public class FadePane extends GridPane {
     private final ComboBox<FadType> cbxFadType;
     private final ComboBox<Hylde> cbxHylde;
     private final Button btnRegistrerAlkoholprocent = new Button("Registrer alkoholprocent...");
-    private final Button btnOpretFravælg;
-    private final Button btnOpretLeverandør;
+    private final Button btnOpretFravælg, btnOpretLeverandør, btnSlet;
     private final Label lblError;
-    private final Button btnSlet;
     private final ListView<Aftapning> lvwAftapninger;
+    private final RadioButton rbtnModnet, rbtnIkkeModnet, rbtnFyldt, rbtnDelvistFyldt, rbtnTom;
     private ControllerForLager controllerForLager = ControllerForLager.getController();
     private ListView<Påfyldning> lvwPåfyldninger;
     private ListView<Fad> lvwFade;
-
     private ListView<Omhældning> lvwOmhældninger;
 
     public FadePane() {
@@ -109,7 +114,7 @@ public class FadePane extends GridPane {
         });
 
         lvwAftapninger = new ListView<>();
-        this.add(lvwAftapninger, 3, 9, 1, 1);
+        this.add(lvwAftapninger, 3, 9, 1, 2);
         lvwAftapninger.setCellFactory(param -> new ListCell<>() {
             @Override
             protected void updateItem(Aftapning aftapning, boolean empty) {
@@ -147,8 +152,6 @@ public class FadePane extends GridPane {
 
         });
 
-
-
         Separator sep2 = new Separator(Orientation.VERTICAL);
         this.add(sep2, 4, 0, 1, 13);
 
@@ -164,7 +167,7 @@ public class FadePane extends GridPane {
 
         btnOpretFravælg = new Button("Opret");
         btnOpretFravælg.setOnAction(event -> opretFravælgAction());
-        this.add(btnOpretFravælg, 0, 11, 2, 1);
+        this.add(btnOpretFravælg, 0, 12, 2, 1);
         GridPane.setHalignment(btnOpretFravælg, HPos.CENTER);
 
         btnSlet = new Button("Slet");
@@ -176,18 +179,62 @@ public class FadePane extends GridPane {
         btnRegistrerAlkoholprocent.setDisable(true);
         btnRegistrerAlkoholprocent.setOnAction(event -> registrerAlkoholprocentAction());
 
-
         Label lblOmhældning = new Label("Omhældninger");
         this.add(lblOmhældning, 0, 8);
-
 
         Label lblAftapninger = new Label("Aftapninger");
         this.add(lblAftapninger, 3, 8);
 
-
         Separator sep4 = new Separator(Orientation.HORIZONTAL);
-        this.add(sep4, 0, 10, 4, 1);
+        this.add(sep4, 0, 11, 4, 1);
 
+        // #--- Filtrer ---#
+        GridPane gridPaneFilter = new GridPane();
+        gridPaneFilter.setAlignment(Pos.TOP_CENTER);
+        gridPaneFilter.setHgap(10);
+        gridPaneFilter.setVgap(10);
+        gridPaneFilter.setGridLinesVisible(false);
+        this.add(gridPaneFilter, 6, 0,1,12);
+
+        Label lblFilter = new Label("Filtrer");
+        gridPaneFilter.add(lblFilter, 0, 0, 2, 1);
+
+        ToggleGroup tgrpModnet = new ToggleGroup();
+
+        rbtnModnet = new RadioButton("Modnet");
+        rbtnModnet.setToggleGroup(tgrpModnet);
+        gridPaneFilter.add(rbtnModnet, 0, 1);
+
+        rbtnIkkeModnet = new RadioButton("Ikke modnet");
+        rbtnIkkeModnet.setToggleGroup(tgrpModnet);
+        gridPaneFilter.add(rbtnIkkeModnet, 0, 2);
+
+        ToggleGroup tgrpFyldt = new ToggleGroup();
+
+        rbtnFyldt = new RadioButton("Fyldt");
+        rbtnFyldt.setToggleGroup(tgrpFyldt);
+        gridPaneFilter.add(rbtnFyldt, 1, 1);
+
+        rbtnDelvistFyldt = new RadioButton("Delvist fyldt");
+        rbtnDelvistFyldt.setToggleGroup(tgrpFyldt);
+        gridPaneFilter.add(rbtnDelvistFyldt, 1, 2);
+
+        rbtnTom = new RadioButton("Tom");
+        rbtnTom.setToggleGroup(tgrpFyldt);
+        gridPaneFilter.add(rbtnTom, 1, 3);
+
+        HBox hBoxFilter = new HBox();
+        hBoxFilter.setSpacing(10);
+        hBoxFilter.setAlignment(Pos.CENTER);
+        gridPaneFilter.add(hBoxFilter, 0, 4, 2, 1);
+
+        Button btnFiltrer = new Button("Filtrer");
+        btnFiltrer.setOnAction(event -> filtrerAction());
+        hBoxFilter.getChildren().add(btnFiltrer);
+
+        Button btnFjernFilter = new Button("Fjern filter");
+        btnFjernFilter.setOnAction(event -> fjernFilterAction());
+        hBoxFilter.getChildren().add(btnFjernFilter);
 
         // #--- ErrorLabel ---#
         lblError = new Label(" ");
@@ -197,6 +244,48 @@ public class FadePane extends GridPane {
 
         // #--- Update controls ---#
         updateControls();
+    }
+
+    private void filtrerAction() {
+        ObservableList<Fad> fadObservableList = FXCollections.observableArrayList();
+        fadObservableList.addAll(controllerForLager.getAlleFade());
+        FilteredList<Fad> filteredList = new FilteredList<>(fadObservableList, fad -> {
+            if (rbtnModnet.isSelected() && rbtnFyldt.isSelected()) {
+                return !fad.isEmpty() && fad.getFadIndhold().isModnet() && fad.isFull();
+            } else if (rbtnModnet.isSelected() && rbtnDelvistFyldt.isSelected()) {
+                return !fad.isEmpty() && fad.getFadIndhold().isModnet() && !fad.isFull();
+            } else if (rbtnModnet.isSelected() && rbtnTom.isSelected()) {
+                return !fad.isEmpty() && fad.getFadIndhold().isModnet() && fad.isFull();
+            } else if (rbtnIkkeModnet.isSelected() && rbtnFyldt.isSelected()) {
+                return !fad.isEmpty() && !fad.getFadIndhold().isModnet() && fad.isFull();
+            } else if (rbtnIkkeModnet.isSelected() && rbtnDelvistFyldt.isSelected()) {
+                return !fad.isEmpty() && !fad.getFadIndhold().isModnet() && !fad.isFull();
+            } else if (rbtnIkkeModnet.isSelected() && rbtnTom.isSelected()) {
+                return !fad.isEmpty() && !fad.getFadIndhold().isModnet() && fad.isFull();
+            } else if (rbtnModnet.isSelected()) {
+                return !fad.isEmpty() && fad.getFadIndhold().isModnet();
+            } else if (rbtnIkkeModnet.isSelected()) {
+                return !fad.isEmpty() && !fad.getFadIndhold().isModnet();
+            } else if (rbtnFyldt.isSelected()) {
+                return fad.isFull();
+            } else if (rbtnDelvistFyldt.isSelected()) {
+                return fad.getFadIndhold() != null && fad.getFadIndhold().getMængde() != fad.getStørrelseILiter();
+            } else if (rbtnTom.isSelected()) {
+                return fad.isEmpty();
+            } else {
+                return true;
+            }
+        });
+        lvwFade.getItems().setAll(filteredList);
+    }
+
+    private void fjernFilterAction() {
+        rbtnModnet.setSelected(false);
+        rbtnIkkeModnet.setSelected(false);
+        rbtnFyldt.setSelected(false);
+        rbtnDelvistFyldt.setSelected(false);
+        rbtnTom.setSelected(false);
+        lvwFade.getItems().setAll(controllerForLager.getAlleFade());
     }
 
     private void registrerAlkoholprocentAction() {
