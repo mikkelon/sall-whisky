@@ -7,6 +7,7 @@ import application.model.lager.FadLeverandør;
 import application.model.lager.Hylde;
 import application.model.lager.Lager;
 import application.model.produktion.Aftapning;
+import application.model.produktion.Omhældning;
 import application.model.produktion.Påfyldning;
 import gui.BekræftSletVindue;
 import gui.RegistrerAlkoholProcentVindue;
