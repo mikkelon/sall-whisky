@@ -7,6 +7,7 @@ import application.model.lager.FadLeverandør;
 import application.model.lager.Hylde;
 import application.model.lager.Lager;
 import application.model.produktion.Aftapning;
+import application.model.produktion.Omhældning;
 import application.model.produktion.Påfyldning;
 import gui.BekræftSletVindue;
 import gui.RegistrerAlkoholProcentVindue;
@@ -29,6 +30,8 @@ public class FadePane extends GridPane {
     private ControllerForLager controllerForLager = ControllerForLager.getController();
     private ListView<Påfyldning> lvwPåfyldninger;
     private ListView<Fad> lvwFade;
+
+    private ListView<Omhældning> lvwOmhældninger;
 
     public FadePane() {
         this.setPadding(new Insets(10));
@@ -124,6 +127,27 @@ public class FadePane extends GridPane {
             }
         });
 
+        lvwOmhældninger = new ListView<>();
+        this.add(lvwOmhældninger, 0, 9, 2, 1);
+        lvwOmhældninger.setCellFactory(param -> new ListCell<>() {
+            @Override
+            protected void updateItem(Omhældning omhældning, boolean empty) {
+                super.updateItem(omhældning, empty);
+                if (empty || omhældning == null) {
+                    setText(null);
+                } else {
+                    setText(String.format("Fra %s\n" +
+                                    "Mængde: %.2f\n" +
+                                    "Dato: %s\n" +
+                                    "Medarbejder: %s",
+                            omhældning.getFraFadIndhold().getFad(), omhældning.getMængdeILiter(), omhældning.getOmhældningsDato(),
+                            omhældning.getOmhældtAf()));
+                }
+            }
+
+        });
+
+
 
         Separator sep2 = new Separator(Orientation.VERTICAL);
         this.add(sep2, 4, 0, 1, 13);
@@ -156,8 +180,6 @@ public class FadePane extends GridPane {
         Label lblOmhældning = new Label("Omhældninger");
         this.add(lblOmhældning, 0, 8);
 
-        ListView<String> lvwOmhældning = new ListView<>();
-        this.add(lvwOmhældning, 0, 9, 2, 1);
 
         Label lblAftapninger = new Label("Aftapninger");
         this.add(lblAftapninger, 3, 8);
@@ -190,6 +212,7 @@ public class FadePane extends GridPane {
             btnOpretFravælg.setText("Fravælg");
             updatePåfyldninger();
             updateAftapninger();
+            updateOmhældning();
             setControlsDisabled(true);
             getInfo();
             btnSlet.setDisable(false);
@@ -197,6 +220,7 @@ public class FadePane extends GridPane {
             btnOpretFravælg.setText("Opret");
             updatePåfyldninger();
             updateAftapninger();
+            updateOmhældning();
             setControlsDisabled(false);
             clearInfo();
             btnSlet.setDisable(true);
@@ -273,6 +297,15 @@ public class FadePane extends GridPane {
 
     }
 
+    private void updateOmhældning() {
+        Fad valgtFad = lvwFade.getSelectionModel().getSelectedItem();
+        if (valgtFad != null && !valgtFad.isEmpty()) {
+            lvwOmhældninger.getItems().setAll(valgtFad.getFadIndhold().getOmhældningerTil());
+        } else {
+            lvwOmhældninger.getItems().clear();
+        }
+    }
+
     private void getInfo() {
         Fad valgtFad = lvwFade.getSelectionModel().getSelectedItem();
         if (valgtFad != null) {
@@ -299,6 +332,7 @@ public class FadePane extends GridPane {
         updatePåfyldninger();
         updateInfo();
         updateAftapninger();
+        updateOmhældning();
     }
 
     private void opretFravælgAction() {

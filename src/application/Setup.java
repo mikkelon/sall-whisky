@@ -104,7 +104,7 @@ public class Setup {
         Aftapning a3 = controllerForProduktion.createAftapning("Mikkel", 5, LocalDate.now(), fad6);
         aftapninger2.add(a3);
 
-        // Tilføjer en whisky
+        // Tilføjer en whiskyer
         controllerForProduktion.createWhisky(aftapninger1, 20, "Begravet Dal", "Lækker whisky :)");
         controllerForProduktion.createWhisky(aftapninger2, 10, "Begravet Dal 2", "MEGA Lækker whisky!!!");
     }

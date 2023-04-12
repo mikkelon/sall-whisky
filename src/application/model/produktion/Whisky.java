@@ -136,8 +136,11 @@ public class Whisky {
      */
     public String hentHistorik() {
         String historik = "";
+        int aftapningNr = 1;
         for (Aftapning aftapning : aftapninger) {
+            historik += "Aftapning nr: " + aftapningNr + "\n";
             historik += aftapning.hentHistorik();
+            aftapningNr++;
         }
         return historik;
     }
