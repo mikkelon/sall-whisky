@@ -37,7 +37,7 @@ public class AftapningPane extends GridPane {
         this.setPadding(new Insets(10));
         this.setHgap(10);
         this.setVgap(10);
-//        this.setGridLinesVisible(true);
+        this.setGridLinesVisible(false);
         this.setAlignment(Pos.CENTER);
 
         // #--- Column 0 ---#
@@ -184,7 +184,7 @@ public class AftapningPane extends GridPane {
         txfVandILiter.textProperty().addListener((o, ov, nv) -> updateWhiskyInfo());
         this.add(txfVandILiter, 4,7);
         GridPane.setHalignment(txfVandILiter, HPos.CENTER);
-        txfVandILiter.setMaxSize(75,50);
+        txfVandILiter.setMaxSize(150,50);
 
         Label lblVandKilde = new Label("Vandkilde");
         this.add(lblVandKilde, 5,6);
@@ -193,7 +193,7 @@ public class AftapningPane extends GridPane {
         txfVandKilde = new TextField();
         this.add(txfVandKilde, 5,7);
         GridPane.setHalignment(txfVandKilde, HPos.CENTER);
-        txfVandKilde.setMinSize(120,20);
+        txfVandKilde.setMaxSize(150, 50);
 
         Label lblAlkoholProcent = new Label("Alkoholprocent");
         this.add(lblAlkoholProcent, 4,8);
@@ -203,7 +203,7 @@ public class AftapningPane extends GridPane {
         txfAlkoholProcent.setEditable(false);
         this.add(txfAlkoholProcent, 4,9,1,1);
         GridPane.setHalignment(txfAlkoholProcent, HPos.CENTER);
-        txfAlkoholProcent.setMaxSize(75,50);
+        txfAlkoholProcent.setMaxSize(150,50);
 
         Label lblBetegnelse = new Label("Betegnelse");
         this.add(lblBetegnelse, 5,8);
@@ -213,13 +213,14 @@ public class AftapningPane extends GridPane {
         txfBetegnelse.setEditable(false);
         this.add(txfBetegnelse, 5,9);
         GridPane.setHalignment(txfBetegnelse, HPos.CENTER);
-        txfBetegnelse.setMinSize(120,20);
+        txfBetegnelse.setMaxSize(150, 50);
 
         Label lblBeskrivelse = new Label("Beskrivelse");
         this.add(lblBeskrivelse, 4,10,2,1);
 
         txaBeskrivelse = new TextArea();
         this.add(txaBeskrivelse, 4,11,2,1);
+        txaBeskrivelse.setMaxWidth(310);
         GridPane.setHalignment(txaBeskrivelse, HPos.CENTER);
 
         Button btnBekræft = new Button("Bekræft whisky");
