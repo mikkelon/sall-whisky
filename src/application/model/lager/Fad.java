@@ -1,10 +1,7 @@
 package application.model.lager;
 
 import application.model.*;
-import application.model.produktion.Aftapning;
-import application.model.produktion.Destillat;
-import application.model.produktion.FadIndhold;
-import application.model.produktion.Påfyldning;
+import application.model.produktion.*;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -190,6 +187,27 @@ public class Fad {
             fadIndhold = null;
         }
         return aftapning;
+    }
+
+    /**
+     * Omhælder en mængde af fadets indhold til et andet fad.
+     * @param omhældtAf er navnet på den person, der har omhældt fadet
+     * @param mængdeILiter er mængden i liter, der skal omhældes
+     * @param omhældningsDato er datoen for omhældningen
+     * @param til er fadet, der skal omhældes til
+     * @return omhældningen
+     * @Pre: omhældtAf != null<br/> mængdeILiter > 0<br/> omhældningsDato != null<br/> mængdeILiter <= til.resterendeMængdeILiter()<br/> til != null
+     */
+    public Omhældning omhæld(String omhældtAf, double mængdeILiter, LocalDate omhældningsDato, Fad til) {
+        Omhældning omhældning;
+        if (til.isEmpty()) {
+            FadIndhold nytFadIndhold = new FadIndhold(til);
+            til.setFadIndhold(nytFadIndhold);
+            omhældning = new Omhældning(omhældtAf, mængdeILiter, omhældningsDato, fadIndhold, nytFadIndhold);
+        } else {
+            omhældning = new Omhældning(omhældtAf, mængdeILiter, omhældningsDato, fadIndhold, til.getFadIndhold());
+        }
+        return omhældning;
     }
 
     /**
