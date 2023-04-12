@@ -152,8 +152,6 @@ public class FadePane extends GridPane {
 
         });
 
-
-
         Separator sep2 = new Separator(Orientation.VERTICAL);
         this.add(sep2, 4, 0, 1, 13);
 
@@ -183,9 +181,6 @@ public class FadePane extends GridPane {
 
         Label lblOmhældning = new Label("Omhældninger");
         this.add(lblOmhældning, 0, 8);
-
-        ListView<String> lvwOmhældning = new ListView<>();
-        this.add(lvwOmhældning, 0, 9, 2, 1);
 
         Label lblAftapninger = new Label("Aftapninger");
         this.add(lblAftapninger, 3, 8);
