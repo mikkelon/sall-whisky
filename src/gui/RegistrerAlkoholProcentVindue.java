@@ -1,8 +1,7 @@
 package gui;
 
 import application.controller.ControllerForLager;
-import application.model.Fad;
-import application.model.Maltbatch;
+import application.model.lager.Fad;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

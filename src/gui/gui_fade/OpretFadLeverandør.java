@@ -1,8 +1,7 @@
 package gui.gui_fade;
 
 import application.controller.ControllerForLager;
-import application.controller.ControllerForProduktion;
-import application.model.FadLeverandør;
+import application.model.lager.FadLeverandør;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

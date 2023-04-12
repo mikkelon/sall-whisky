@@ -1,9 +1,12 @@
 package application.controller;
 
 import application.model.*;
+import application.model.lager.Fad;
+import application.model.lager.FadLeverandør;
+import application.model.lager.Hylde;
+import application.model.lager.Lager;
 import storage.Storage;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.TreeSet;
@@ -275,6 +278,24 @@ public class ControllerForLager {
             }
         }
         return modneFade;
+    }
+
+    /**
+     * Returnerer alle fade som ikke er tomme.
+     * @return alle fade som ikke er tomme
+     */
+    public ArrayList<Fad> getIkkeTommeFade() {
+        ArrayList<Fad> ikkeTommeFade = new ArrayList<>();
+        for (Lager lager : getLagre()) {
+            for (Hylde hylde : lager.getHylder()) {
+                for (Fad fad : hylde.getFade()) {
+                    if (fad.getFadIndhold() != null) {
+                        ikkeTommeFade.add(fad);
+                    }
+                }
+            }
+        }
+        return ikkeTommeFade;
     }
 
     /**

@@ -1,5 +1,6 @@
 package application.model;
 
+import application.model.produktion.Maltbatch;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
