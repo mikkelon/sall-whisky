@@ -3,7 +3,7 @@ package application.model.produktion;
 /**
  * Modellerer en maltbatch, som bliver brugt destillering af whisky.
  */
-public class Maltbatch {
+public class Maltbatch implements Comparable<Maltbatch>{
     private String kornsort;
     private String mark;
     private String gård;
@@ -116,5 +116,10 @@ public class Maltbatch {
     @Override
     public String toString() {
         return "Maltbatch nr: " + maltbatchNr + ", " + kornsort + " fra " + gård + (økologisk ? " (økologisk)" : "");
+    }
+
+    @Override
+    public int compareTo(Maltbatch o) {
+        return this.maltbatchNr - o.maltbatchNr;
     }
 }

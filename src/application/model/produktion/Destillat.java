@@ -22,7 +22,7 @@ public class Destillat {
     private String kommentar;
     private RygeMateriale rygeMateriale;
     private Set<Påfyldning> påfyldninger = new HashSet<>();
-    private Set<Maltbatch> maltbatches = new TreeSet<>((a, b) -> a.getMaltbatchNr() - b.getMaltbatchNr());
+    private Set<Maltbatch> maltbatches = new TreeSet<>();
 
     /**
      * Opretter et nyt destillat med angivet parametre.

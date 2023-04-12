@@ -12,7 +12,7 @@ public class Lager {
     private String navn;
     private double kvm;
     private int antalHylder;
-    private Set<Hylde> hylder = new TreeSet<>((a ,b) -> a.getHyldeNr() - b.getHyldeNr());
+    private Set<Hylde> hylder = new TreeSet<>();
 
     /**
      * Initialiserer et nyt lager med adresse, navn, og kvm.

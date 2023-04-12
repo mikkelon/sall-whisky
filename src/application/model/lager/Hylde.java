@@ -7,10 +7,10 @@ import java.util.TreeSet;
 /**
  * Modellerer en hylde på et lager.
  */
-public class Hylde {
+public class Hylde implements Comparable<Hylde>{
     private int hyldeNr;
     private Lager lager;
-    private final Set<Fad> fade = new TreeSet<>((a, b) -> a.getFadNr() - b.getFadNr());
+    private final Set<Fad> fade = new TreeSet<>();
 
     /**
      * Opretter en hylde på et specifikt lager.
@@ -70,5 +70,10 @@ public class Hylde {
     @Override
     public String toString() {
         return "Hylde #" + hyldeNr;
+    }
+
+    @Override
+    public int compareTo(Hylde o) {
+        return hyldeNr - o.getHyldeNr();
     }
 }

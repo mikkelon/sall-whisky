@@ -14,6 +14,7 @@ import javafx.geometry.Insets;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Set;
 
 public class DestillatPane extends GridPane {
     private final Label lblError;
@@ -32,7 +33,7 @@ public class DestillatPane extends GridPane {
     private Button btnOpretFravælg = new Button("Opret");
     private ListView<Destillat> lvwDestillater = new ListView<>();
     private Button btnSletDestillat = new Button("Slet");
-    private static ArrayList<Maltbatch> valgteMaltbatches = new ArrayList<>();
+    private static Set<Maltbatch> valgteMaltbatches;
     public DestillatPane() {
         this.setPadding(new Insets(10));
         this.setHgap(10);
@@ -289,7 +290,7 @@ public class DestillatPane extends GridPane {
         btnVælgMaltbatch.setDisable(disable);
     }
 
-    public static void fillMaltbatches(ArrayList<Maltbatch> maltbatches) {
+    public static void fillMaltbatches(Set<Maltbatch> maltbatches) {
         valgteMaltbatches = maltbatches;
         String maltbatchesString = "";
         for (Maltbatch maltbatch : maltbatches) {
