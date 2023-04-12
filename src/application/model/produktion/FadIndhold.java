@@ -208,12 +208,13 @@ public class FadIndhold {
     public String hentHistorik() {
         String historik = fad.hentHistorik() + "\n";
 
+        historik += "Destillater:\n";
         for (Påfyldning påfyldning : påfyldninger) {
             historik += påfyldning.hentHistorik() + "\n";
         }
 
         if (tilføjedeOmhældninger.size() > 0) {
-            historik += "Omhældninger:\n\n";
+            historik += "Omhældninger:\n";
         }
         for (Omhældning omhældning : tilføjedeOmhældninger) {
             historik += omhældning.hentHistorik() + "\n";

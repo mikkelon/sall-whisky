@@ -82,6 +82,6 @@ public class Omhældning {
      * @return en tekststreng med historik for omhældningen
      */
     public String hentHistorik() {
-        return mængdeILiter + "L fra: \n" + fraFadIndhold.hentHistorik();
+        return "(" + mængdeILiter + "L) omhældt fra: \n" + fraFadIndhold.hentHistorik();
     }
 }

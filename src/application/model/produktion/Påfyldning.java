@@ -89,7 +89,7 @@ public class Påfyldning {
      * @return en tekststreng med historikken for påfyldningen
      */
     public String hentHistorik() {
-        return destillat.hentHistorik();
+        return "(" + mængdeILiter + "L) påfyldt fra: \n" + destillat.hentHistorik();
     }
 }
 
