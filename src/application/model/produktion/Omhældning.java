@@ -30,6 +30,11 @@ public class Omhældning {
         fraFadIndhold.addOmhældningFra(this);
         this.tilFadIndhold = tilFadIndhold;
         tilFadIndhold.addOmhældningTil(this);
+
+        if (tilFadIndhold.getModningStartDato() == null
+                || fraFadIndhold.getModningStartDato().isAfter(tilFadIndhold.getModningStartDato())) {
+            tilFadIndhold.setModningStartDato(fraFadIndhold.getModningStartDato());
+        }
     }
 
     /**

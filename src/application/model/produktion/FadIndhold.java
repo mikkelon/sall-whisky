@@ -25,6 +25,7 @@ public class FadIndhold {
     public FadIndhold(Fad fad) {
         this.alkoholProcentEfterModning = -1;
         this.fad = fad;
+        this.modningStartDato = null;
     }
 
     /**
@@ -41,6 +42,14 @@ public class FadIndhold {
      */
     public double getAlkoholProcentEfterModning() {
         return alkoholProcentEfterModning;
+    }
+
+    /**
+     * Registrerer datoen for hvornår modningsprocessen er startet.
+     * @param modningStartDato datoen for hvornår modningsprocessen er startet
+     */
+    public void setModningStartDato(LocalDate modningStartDato) {
+        this.modningStartDato = modningStartDato;
     }
 
     /**

@@ -33,6 +33,10 @@ public class Påfyldning {
         this.påfyldningsDato = påfyldningsDato;
         fadIndhold.addPåfyldning(this);
         destillat.addPåfyldning(this);
+
+        if (fadIndhold.getModningStartDato() == null || påfyldningsDato.isAfter(fadIndhold.getModningStartDato())) {
+            fadIndhold.setModningStartDato(påfyldningsDato);
+        }
     }
 
     /**

@@ -74,7 +74,7 @@ public class Setup {
         // Tilføjer påfyldninger
         LocalDate datoGammel = LocalDate.of(2019, 1,1);
         LocalDate datoNy = LocalDate.of(2023, 1,1);
-        controllerForProduktion.createPåfyldning(d1, fad1, "Mikkel", 80, datoNy);
+        controllerForProduktion.createPåfyldning(d1, fad1, "Mikkel", 80, datoGammel);
         controllerForProduktion.createPåfyldning(d2, fad2, "Mikkel", 20, datoGammel);
         controllerForProduktion.createPåfyldning(d3, fad2, "Mikkel", 40, datoGammel);
         controllerForProduktion.createPåfyldning(d4, fad4, "Mikkel", 10, datoGammel);
