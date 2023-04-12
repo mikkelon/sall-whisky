@@ -3,6 +3,14 @@ package application;
 import application.controller.ControllerForLager;
 import application.controller.ControllerForProduktion;
 import application.model.*;
+import application.model.lager.Fad;
+import application.model.lager.FadLeverandør;
+import application.model.lager.Hylde;
+import application.model.lager.Lager;
+import application.model.produktion.Aftapning;
+import application.model.produktion.Destillat;
+import application.model.produktion.Maltbatch;
+import application.model.RygeMateriale;
 import storage.Storage;
 
 import java.time.LocalDate;
@@ -34,8 +42,8 @@ public class Setup {
         //Tilføjer fade til hylderne
         Fad fad1 = controllerForLager.createFad(FadType.BOURBON, 80, l1, h1);
         Fad fad2 = controllerForLager.createFad(FadType.BOURBON, 90, l1, h1);
-        Fad fad4 = controllerForLager.createFad(FadType.RØDVIN, 60, l1, h2);
         Fad fad3 = controllerForLager.createFad(FadType.BOURBON, 90, l1, h1);
+        Fad fad4 = controllerForLager.createFad(FadType.RØDVIN, 60, l1, h2);
         Fad fad5 = controllerForLager.createFad(FadType.RØDVIN, 70, l1, h2);
         Fad fad6 = controllerForLager.createFad(FadType.RØDVIN, 80, l1, h2);
         Fad fad7 = controllerForLager.createFad(FadType.SHERRY, 110, l1, h3);
@@ -66,7 +74,7 @@ public class Setup {
         // Tilføjer påfyldninger
         LocalDate datoGammel = LocalDate.of(2019, 1,1);
         LocalDate datoNy = LocalDate.of(2023, 1,1);
-        controllerForProduktion.createPåfyldning(d1, fad1, "Mikkel", 80, datoNy);
+        controllerForProduktion.createPåfyldning(d1, fad1, "Mikkel", 80, datoGammel);
         controllerForProduktion.createPåfyldning(d2, fad2, "Mikkel", 20, datoGammel);
         controllerForProduktion.createPåfyldning(d3, fad2, "Mikkel", 40, datoGammel);
         controllerForProduktion.createPåfyldning(d4, fad4, "Mikkel", 10, datoGammel);
@@ -78,15 +86,26 @@ public class Setup {
         // Sæt alkoholprocent efter modning
         controllerForProduktion.setAlkoholprocentEfterModning(fad2.getFadIndhold(), 52);
         controllerForProduktion.setAlkoholprocentEfterModning(fad4.getFadIndhold(), 56);
+        controllerForProduktion.setAlkoholprocentEfterModning(fad6.getFadIndhold(), 61);
+
+        // Laver omhældninger
+        controllerForProduktion.createOmhældning("Mikkel", 10, LocalDate.now(), fad1, fad2);
+        controllerForProduktion.createOmhældning("Frederikke", 11.5, LocalDate.now(), fad4, fad6);
 
         // Laver aftapninger
-        HashSet<Aftapning> aftapningHashSet = new HashSet<>();
-        Aftapning a1 = controllerForProduktion.createAftapning("Mikkel", 10, LocalDate.now(), fad4);
-        aftapningHashSet.add(a1);
+        HashSet<Aftapning> aftapninger1 = new HashSet<>();
+        Aftapning a1 = controllerForProduktion.createAftapning("Mikkel", 8, LocalDate.now(), fad4);
+        aftapninger1.add(a1);
         Aftapning a2 = controllerForProduktion.createAftapning("Mikkel", 10, LocalDate.now(), fad2);
-        aftapningHashSet.add(a2);
+        aftapninger1.add(a2);
 
-        // Tilføjer en whisky
-        controllerForProduktion.createWhisky(aftapningHashSet, 20, "Begravet Dal", "Lækker whisky :)");
+        // Laver aftapning på fad med omhældning
+        HashSet<Aftapning> aftapninger2 = new HashSet<>();
+        Aftapning a3 = controllerForProduktion.createAftapning("Mikkel", 5, LocalDate.now(), fad6);
+        aftapninger2.add(a3);
+
+        // Tilføjer en whiskyer
+        controllerForProduktion.createWhisky(aftapninger1, 20, "Begravet Dal", "Lækker whisky :)");
+        controllerForProduktion.createWhisky(aftapninger2, 10, "Begravet Dal 2", "MEGA Lækker whisky!!!");
     }
 }

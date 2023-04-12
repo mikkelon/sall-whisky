@@ -1,6 +1,10 @@
 package storage;
 
-import application.model.*;
+import application.model.lager.FadLeverandør;
+import application.model.lager.Lager;
+import application.model.produktion.Destillat;
+import application.model.produktion.Maltbatch;
+import application.model.produktion.Whisky;
 
 import java.util.HashSet;
 

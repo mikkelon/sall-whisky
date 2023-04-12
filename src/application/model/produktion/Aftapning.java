@@ -1,4 +1,4 @@
-package application.model;
+package application.model.produktion;
 
 import java.time.LocalDate;
 
@@ -82,7 +82,7 @@ public class Aftapning {
      * @return en tekststreng med historikken for aftapningen
      */
     public String hentHistorik() {
-        return fadIndhold.hentHistorik();
+        return "(" + mængdeILiter + "L) aftappet fra: \n" + fadIndhold.hentHistorik();
     }
 
     @Override

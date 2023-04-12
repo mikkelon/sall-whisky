@@ -78,6 +78,13 @@ public class StartVindue extends Application {
         aftapningTab.setContent(aftapningPane);
         aftapningTab.setOnSelectionChanged(event -> aftapningPane.updateControls());
 
+        Tab omhældningTap = new Tab("Omhældning");
+        tabPane.getTabs().add(omhældningTap);
+        OmhældningPane omhældningPane = new OmhældningPane();
+        omhældningPane.setAlignment(Pos.TOP_CENTER);
+        omhældningTap.setContent(omhældningPane);
+        omhældningTap.setOnSelectionChanged(event -> omhældningPane.updateControls());
+
         Tab whiskyTap = new Tab("Whisky");
         tabPane.getTabs().add(whiskyTap);
         WhiskyPane whiskyPane = new WhiskyPane();

@@ -1,4 +1,6 @@
-package application.model;
+package application.model.produktion;
+
+import application.model.produktion.FadIndhold;
 
 import java.time.LocalDate;
 
@@ -28,6 +30,11 @@ public class Omhældning {
         fraFadIndhold.addOmhældningFra(this);
         this.tilFadIndhold = tilFadIndhold;
         tilFadIndhold.addOmhældningTil(this);
+
+        if (tilFadIndhold.getModningStartDato() == null
+                || fraFadIndhold.getModningStartDato().isAfter(tilFadIndhold.getModningStartDato())) {
+            tilFadIndhold.setModningStartDato(fraFadIndhold.getModningStartDato());
+        }
     }
 
     /**
@@ -75,6 +82,6 @@ public class Omhældning {
      * @return en tekststreng med historik for omhældningen
      */
     public String hentHistorik() {
-        return fraFadIndhold.hentHistorik();
+        return "(" + mængdeILiter + "L) omhældt fra: \n" + fraFadIndhold.hentHistorik();
     }
 }

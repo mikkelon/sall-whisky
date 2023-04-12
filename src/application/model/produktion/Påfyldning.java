@@ -1,4 +1,7 @@
-package application.model;
+package application.model.produktion;
+
+import application.model.produktion.Destillat;
+import application.model.produktion.FadIndhold;
 
 import java.time.LocalDate;
 
@@ -30,6 +33,10 @@ public class Påfyldning {
         this.påfyldningsDato = påfyldningsDato;
         fadIndhold.addPåfyldning(this);
         destillat.addPåfyldning(this);
+
+        if (fadIndhold.getModningStartDato() == null || påfyldningsDato.isAfter(fadIndhold.getModningStartDato())) {
+            fadIndhold.setModningStartDato(påfyldningsDato);
+        }
     }
 
     /**
@@ -82,7 +89,7 @@ public class Påfyldning {
      * @return en tekststreng med historikken for påfyldningen
      */
     public String hentHistorik() {
-        return destillat.hentHistorik();
+        return "(" + mængdeILiter + "L) påfyldt fra: \n" + destillat.hentHistorik();
     }
 }
 

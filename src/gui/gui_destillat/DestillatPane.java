@@ -1,8 +1,8 @@
 package gui.gui_destillat;
 
 import application.controller.ControllerForProduktion;
-import application.model.Destillat;
-import application.model.Maltbatch;
+import application.model.produktion.Destillat;
+import application.model.produktion.Maltbatch;
 import application.model.RygeMateriale;
 import gui.BekræftSletVindue;
 import javafx.geometry.Orientation;
@@ -76,9 +76,9 @@ public class DestillatPane extends GridPane {
 
         Label lblKommentarer = new Label("Kommentarer");
         this.add(lblKommentarer, 2, 4);
-        txaKommentarer.setMinWidth(100);
+        txaKommentarer.setMinWidth(150);
         txaKommentarer.setMinHeight(50);
-        txaKommentarer.setMaxWidth(100);
+        txaKommentarer.setMaxWidth(150);
         txaKommentarer.setMaxHeight(50);
         this.add(txaKommentarer, 2, 5, 1, 2);
 
@@ -268,6 +268,7 @@ public class DestillatPane extends GridPane {
         } else {
             lvwDestillater.getSelectionModel().clearSelection();
             clearFields();
+            txaMaltbatches.setEditable(false);
         }
     }
 
