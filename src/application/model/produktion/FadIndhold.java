@@ -11,7 +11,7 @@ import java.util.Set;
  */
 public class FadIndhold {
     private double alkoholProcentEfterModning;
-    private LocalDate senestPåfyldt;
+    private LocalDate modningStartDato;
     private Set<Påfyldning> påfyldninger = new HashSet<>();
     private Set<Aftapning> aftapninger = new HashSet<>();
     private Set<Omhældning> fjernedeOmhældninger = new HashSet<>();
@@ -47,8 +47,8 @@ public class FadIndhold {
      * Returnerer datoen for seneste påfyldning.
      * @return datoen for seneste påfyldning
      */
-    public LocalDate getSenestPåfyldt() {
-        return senestPåfyldt;
+    public LocalDate getModningStartDato() {
+        return modningStartDato;
     }
 
     /**
@@ -56,7 +56,7 @@ public class FadIndhold {
      * @return datoen for forventet færdig produceret
      */
     public LocalDate forventetFærdigProduceret() {
-        return senestPåfyldt.plusYears(3);
+        return modningStartDato.plusYears(3);
     }
 
     /**
@@ -76,8 +76,8 @@ public class FadIndhold {
         påfyldninger.add(påfyldning);
 
         // Opdatér senestPåfyldt
-        if (senestPåfyldt == null || påfyldning.getPåfyldningsDato().isAfter(senestPåfyldt)) {
-            senestPåfyldt = påfyldning.getPåfyldningsDato();
+        if (modningStartDato == null || påfyldning.getPåfyldningsDato().isAfter(modningStartDato)) {
+            modningStartDato = påfyldning.getPåfyldningsDato();
         }
     }
 
@@ -189,7 +189,7 @@ public class FadIndhold {
      * @return om fadet er modnet
      */
     public boolean isModnet() {
-        return senestPåfyldt != null && senestPåfyldt.plusYears(3).isBefore(LocalDate.now());
+        return modningStartDato != null && modningStartDato.plusYears(3).isBefore(LocalDate.now());
     }
 
     /**

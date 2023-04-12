@@ -42,8 +42,8 @@ public class Setup {
         //Tilføjer fade til hylderne
         Fad fad1 = controllerForLager.createFad(FadType.BOURBON, 80, l1, h1);
         Fad fad2 = controllerForLager.createFad(FadType.BOURBON, 90, l1, h1);
-        Fad fad4 = controllerForLager.createFad(FadType.RØDVIN, 60, l1, h2);
         Fad fad3 = controllerForLager.createFad(FadType.BOURBON, 90, l1, h1);
+        Fad fad4 = controllerForLager.createFad(FadType.RØDVIN, 60, l1, h2);
         Fad fad5 = controllerForLager.createFad(FadType.RØDVIN, 70, l1, h2);
         Fad fad6 = controllerForLager.createFad(FadType.RØDVIN, 80, l1, h2);
         Fad fad7 = controllerForLager.createFad(FadType.SHERRY, 110, l1, h3);
