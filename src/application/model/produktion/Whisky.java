@@ -20,7 +20,7 @@ public class Whisky {
     private static int antalWhiskyProdukter = 1;
     private int whiskyNr;
     private ArrayList<Aftapning> aftapninger = new ArrayList<>();
-    private Set<Flaske> flasker = new TreeSet<>(Comparator.comparingInt(Flaske::getFlaskeNr));
+    private Set<Flaske> flasker = new TreeSet<>();
 
     /**
      * Initialiserer et nyt whiskyprodukt med alkoholprocent, betegnelse, mængde vand i liter, vandafstamning, tekstbeskrivelse og et unikt nummer.

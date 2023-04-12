@@ -298,8 +298,8 @@ public class AftapningPane extends GridPane {
     private void bekræftWhiskyAction() {
         String beskrivelse = txaBeskrivelse.getText().trim();
         String vandKilde = txfVandKilde.getText().trim();
-        double flaskeStørrelse = Double.parseDouble(txfFlaskeStørrelse.getText().trim()) / 10; // Omregner til L fra CL
-        double vandMængde = 0.0;
+        double flaskeStørrelse; // Omregner til L fra CL
+        double vandMængde;
         if (beskrivelse.isBlank()) {
             lblError.setText("Angiv beskrivelse");
         } else if (vandKilde.isBlank()){
@@ -311,8 +311,16 @@ public class AftapningPane extends GridPane {
                 lblError.setText("Vand mængde skal være et tal");
                 return;
             }
+            try {
+                flaskeStørrelse = Double.parseDouble(txfFlaskeStørrelse.getText().trim()) / 10; // Omregner til L fra CL
+            } catch (NumberFormatException e) {
+                lblError.setText("Flaske størrelse skal være et tal");
+                return;
+            }
             if (vandMængde < 0) {
                 lblError.setText("Vand mængde skal være større end 0");
+            }else if(flaskeStørrelse < 0) {
+                lblError.setText("Flaske størrelse skal være større end 0");
             } else {
                 controllerForProduktion.createWhisky(aftapninger, vandMængde, vandKilde, beskrivelse, flaskeStørrelse);
                 aftapninger.clear();
