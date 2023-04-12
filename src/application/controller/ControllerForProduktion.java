@@ -298,13 +298,11 @@ public class ControllerForProduktion {
             throw new RuntimeException("Der kan ikke omhældes mere end der er i fadet.");
         } else if (fraFad == tilFad) {
             throw new RuntimeException("Der kan ikke omhældes fra og til samme fad.");
+        } else if (tilFad.getFadIndhold() != null
+                && mængdeILiter > tilFad.resterendePladsILiter()) {
+            throw new RuntimeException("Der kan ikke omhældes mere end der er plads til i fadet.");
         }
 
-        if (tilFad.isEmpty()) {
-            FadIndhold fadIndhold = new FadIndhold(tilFad);
-            tilFad.setFadIndhold(fadIndhold);
-        }
-
-        return new Omhældning(omhældtAf, mængdeILiter, omhældningsDato, fraFad.getFadIndhold(), tilFad.getFadIndhold());
+        return fraFad.omhæld(omhældtAf, mængdeILiter, omhældningsDato, tilFad);
     }
 }
