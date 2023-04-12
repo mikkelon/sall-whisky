@@ -52,6 +52,7 @@ public class Setup {
         Fad fad10 = controllerForLager.createFad(FadType.UBRUGT, 90, l1, h4);
         Fad fad11 = controllerForLager.createFad(FadType.UBRUGT, 70, l1, h4);
         Fad fad12 = controllerForLager.createFad(FadType.UBRUGT, 60, l1, h4);
+        Fad fad13 = controllerForLager.createFad(FadType.SHERRY,80, l1, h3);
 
 
         Maltbatch m1 = controllerForProduktion.createMaltbatch("Evergreen", "mark1", "Lars' bondegård", "Lars", true);
@@ -99,6 +100,9 @@ public class Setup {
         Aftapning a2 = controllerForProduktion.createAftapning("Mikkel", 10, LocalDate.now(), fad2);
         aftapninger1.add(a2);
 
+        HashSet<Aftapning> aftapninger3 = new HashSet<>();
+        Aftapning a4 = controllerForProduktion.createAftapning("Frederikke", 10, LocalDate.of(2023,4,12), fad2);
+
         // Laver aftapning på fad med omhældning
         HashSet<Aftapning> aftapninger2 = new HashSet<>();
         Aftapning a3 = controllerForProduktion.createAftapning("Mikkel", 5, LocalDate.now(), fad6);
@@ -107,5 +111,7 @@ public class Setup {
         // Tilføjer en whiskyer
         controllerForProduktion.createWhisky(aftapninger1, 20, "Begravet Dal", "Lækker whisky :)");
         controllerForProduktion.createWhisky(aftapninger2, 10, "Begravet Dal 2", "MEGA Lækker whisky!!!");
+        controllerForProduktion.createWhisky(aftapninger3, 5, "Begravet Dal", "Lækker Whisky, blandet med vand");
+
     }
 }
