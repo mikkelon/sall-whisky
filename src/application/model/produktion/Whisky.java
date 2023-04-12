@@ -1,4 +1,8 @@
-package application.model;
+package application.model.produktion;
+
+import application.model.Betegnelse;
+import application.model.lager.Fad;
+import application.model.produktion.Aftapning;
 
 import java.util.ArrayList;
 
@@ -132,8 +136,11 @@ public class Whisky {
      */
     public String hentHistorik() {
         String historik = "";
+        int aftapningNr = 1;
         for (Aftapning aftapning : aftapninger) {
+            historik += "Aftapning nr: " + aftapningNr + "\n";
             historik += aftapning.hentHistorik();
+            aftapningNr++;
         }
         return historik;
     }

@@ -1,5 +1,7 @@
 package application.model;
 
+import application.model.lager.Hylde;
+import application.model.lager.Lager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

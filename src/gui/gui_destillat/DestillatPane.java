@@ -1,8 +1,8 @@
 package gui.gui_destillat;
 
 import application.controller.ControllerForProduktion;
-import application.model.Destillat;
-import application.model.Maltbatch;
+import application.model.produktion.Destillat;
+import application.model.produktion.Maltbatch;
 import application.model.RygeMateriale;
 import gui.BekræftSletVindue;
 import javafx.geometry.Orientation;

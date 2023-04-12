@@ -1,9 +1,12 @@
 package application.controller;
 
 import application.model.*;
+import application.model.lager.Fad;
+import application.model.lager.FadLeverandør;
+import application.model.lager.Hylde;
+import application.model.lager.Lager;
 import storage.Storage;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.TreeSet;

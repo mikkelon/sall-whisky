@@ -1,4 +1,6 @@
-package application.model;
+package application.model.lager;
+
+import application.model.lager.Hylde;
 
 import java.util.*;
 

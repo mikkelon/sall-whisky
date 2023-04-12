@@ -1,6 +1,8 @@
 package application.controller;
 
 import application.model.*;
+import application.model.lager.Fad;
+import application.model.produktion.*;
 import storage.Storage;
 
 import java.time.LocalDate;
@@ -285,12 +287,24 @@ public class ControllerForProduktion {
      * @param omhældtAf hvem der har omhældt
      * @param mængdeILiter mængden der er omhældt
      * @param omhældningsDato hvornår omhældningen er foretaget
-     * @param fraFadIndhold hvilket fadindhold der er omhældt fra
-     * @param tilFadIndhold hvilket fadindhold der er omhældt til
+     * @param fraFad hvilket fad der er omhældt fra
+     * @param tilFad hvilket fad der er omhældt til
      * @return den oprettede omhældning
-     * @Pre: omhældtAf != null<br />mængdeILiter > 0<br />omhældningsDato != null<br />fraFadIndhold != null<br />tilFadIndhold != null
+     * @throws RuntimeException hvis der omhældes mere end der er i fraFadet eller hvis der omhældes fra og til samme fad
+     * @Pre: omhældtAf != null<br />mængdeILiter > 0<br />omhældningsDato != null<br />fraFad != null<br />tilFad != null <br /> fraFad.getFadIndhold() != null
      */
-    public Omhældning createOmhældning(String omhældtAf, double mængdeILiter, LocalDate omhældningsDato, FadIndhold fraFadIndhold, FadIndhold tilFadIndhold) {
-        return new Omhældning(omhældtAf, mængdeILiter, omhældningsDato, fraFadIndhold, tilFadIndhold);
+    public Omhældning createOmhældning(String omhældtAf, double mængdeILiter, LocalDate omhældningsDato, Fad fraFad, Fad tilFad) {
+        if (mængdeILiter > fraFad.getFadIndhold().getMængde()) {
+            throw new RuntimeException("Der kan ikke omhældes mere end der er i fadet.");
+        } else if (fraFad == tilFad) {
+            throw new RuntimeException("Der kan ikke omhældes fra og til samme fad.");
+        }
+
+        if (tilFad.isEmpty()) {
+            FadIndhold fadIndhold = new FadIndhold(tilFad);
+            tilFad.setFadIndhold(fadIndhold);
+        }
+
+        return new Omhældning(omhældtAf, mængdeILiter, omhældningsDato, fraFad.getFadIndhold(), tilFad.getFadIndhold());
     }
 }
