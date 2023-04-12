@@ -3,6 +3,7 @@ package application.controller;
 import application.model.*;
 import application.model.lager.Fad;
 import application.model.produktion.*;
+import com.sun.source.tree.Tree;
 import storage.Storage;
 
 import java.time.LocalDate;
@@ -263,8 +264,10 @@ public class ControllerForProduktion {
      * Returnerer alle whiskyerne
      * @return alle whiskyerne
      */
-   public HashSet<Whisky> getWhiskyer(){
-        return storage.getWhiskyer();
+   public Set<Whisky> getWhiskyer(){
+        TreeSet<Whisky> whiskyer = new TreeSet<>(Comparator.comparingInt(Whisky::getWhiskyNr));
+        whiskyer.addAll(storage.getWhiskyer());
+        return whiskyer;
    }
 
     /**
