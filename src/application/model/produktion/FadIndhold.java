@@ -14,8 +14,8 @@ public class FadIndhold {
     private LocalDate senestPåfyldt;
     private Set<Påfyldning> påfyldninger = new HashSet<>();
     private Set<Aftapning> aftapninger = new HashSet<>();
-    private Set<Omhældning> omhældningerFra = new HashSet<>();
-    private Set<Omhældning> omhældningerTil = new HashSet<>();
+    private Set<Omhældning> fjernedeOmhældninger = new HashSet<>();
+    private Set<Omhældning> tilføjedeOmhældninger = new HashSet<>();
     private Fad fad;
 
     /**
@@ -143,10 +143,10 @@ public class FadIndhold {
         for (Aftapning aftapning : aftapninger) {
             mængde -= aftapning.getMængdeILiter();
         }
-        for (Omhældning omhældning : omhældningerFra) {
+        for (Omhældning omhældning : fjernedeOmhældninger) {
             mængde -= omhældning.getMængdeILiter();
         }
-        for (Omhældning omhældning : omhældningerTil) {
+        for (Omhældning omhældning : tilføjedeOmhældninger) {
             mængde += omhældning.getMængdeILiter();
         }
         return mængde;
@@ -156,8 +156,8 @@ public class FadIndhold {
      * Returnerer omhældninger fra dette fad.
      * @return omhældninger fra dette fad
      */
-    public Set<Omhældning> getOmhældningerFra() {
-        return new HashSet<>(omhældningerFra);
+    public Set<Omhældning> getFjernedeOmhældninger() {
+        return new HashSet<>(fjernedeOmhældninger);
     }
 
     /**
@@ -165,15 +165,15 @@ public class FadIndhold {
      * @param omhældning omhældningen der skal tilføjes fra dette fad
      */
     public void addOmhældningFra(Omhældning omhældning) {
-        omhældningerFra.add(omhældning);
+        fjernedeOmhældninger.add(omhældning);
     }
 
     /**
      * Returnerer omhældninger til dette fad.
      * @return omhældninger til dette fad
      */
-    public Set<Omhældning> getOmhældningerTil() {
-        return new HashSet<>(omhældningerTil);
+    public Set<Omhældning> getTilføjedeOmhældninger() {
+        return new HashSet<>(tilføjedeOmhældninger);
     }
 
     /**
@@ -181,7 +181,7 @@ public class FadIndhold {
      * @param omhældning omhældningen der skal tilføjes til dette fad
      */
     public void addOmhældningTil(Omhældning omhældning) {
-        omhældningerTil.add(omhældning);
+        tilføjedeOmhældninger.add(omhældning);
     }
 
     /**
@@ -203,10 +203,10 @@ public class FadIndhold {
             historik += påfyldning.hentHistorik() + "\n";
         }
 
-        if (omhældningerTil.size() > 0) {
+        if (tilføjedeOmhældninger.size() > 0) {
             historik += "Omhældninger:\n\n";
         }
-        for (Omhældning omhældning : omhældningerTil) {
+        for (Omhældning omhældning : tilføjedeOmhældninger) {
             historik += omhældning.hentHistorik() + "\n";
         }
 
