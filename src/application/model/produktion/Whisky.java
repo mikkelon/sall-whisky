@@ -13,7 +13,7 @@ public class Whisky {
     private double mængdeVandILiter;
     private String vandAfstamning;
     private String tekstBeskrivelse;
-    private static int antalWhiskyProdukter = 0;
+    private static int antalWhiskyProdukter = 1;
     private int whiskyNr;
     private ArrayList<Aftapning> aftapninger = new ArrayList<>();
 

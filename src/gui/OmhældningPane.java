@@ -154,7 +154,7 @@ public class OmhældningPane extends GridPane {
     }
 
     public void updateControls(){
-        lvwFadeTil.getItems().setAll(controllerForLager.getIkkeTommeFade());
+        lvwFadeTil.getItems().setAll(controllerForLager.getIkkeFyldteFade());
         lvwFadeFra.getItems().setAll(controllerForLager.getIkkeTommeFade());
     }
 

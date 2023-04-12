@@ -78,13 +78,6 @@ public class StartVindue extends Application {
         aftapningTab.setContent(aftapningPane);
         aftapningTab.setOnSelectionChanged(event -> aftapningPane.updateControls());
 
-        Tab whiskyTap = new Tab("Whisky");
-        tabPane.getTabs().add(whiskyTap);
-        WhiskyPane whiskyPane = new WhiskyPane();
-        whiskyPane.setAlignment(Pos.TOP_CENTER);
-        whiskyTap.setContent(whiskyPane);
-        whiskyTap.setOnSelectionChanged(event -> whiskyPane.updateControls());
-
         Tab omhældningTap = new Tab("Omhældning");
         tabPane.getTabs().add(omhældningTap);
         OmhældningPane omhældningPane = new OmhældningPane();
@@ -92,6 +85,12 @@ public class StartVindue extends Application {
         omhældningTap.setContent(omhældningPane);
         omhældningTap.setOnSelectionChanged(event -> omhældningPane.updateControls());
 
+        Tab whiskyTap = new Tab("Whisky");
+        tabPane.getTabs().add(whiskyTap);
+        WhiskyPane whiskyPane = new WhiskyPane();
+        whiskyPane.setAlignment(Pos.TOP_CENTER);
+        whiskyTap.setContent(whiskyPane);
+        whiskyTap.setOnSelectionChanged(event -> whiskyPane.updateControls());
     }
 
     public Pane skiftTab(int index) {

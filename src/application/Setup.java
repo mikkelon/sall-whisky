@@ -42,8 +42,8 @@ public class Setup {
         //Tilføjer fade til hylderne
         Fad fad1 = controllerForLager.createFad(FadType.BOURBON, 80, l1, h1);
         Fad fad2 = controllerForLager.createFad(FadType.BOURBON, 90, l1, h1);
-        Fad fad4 = controllerForLager.createFad(FadType.RØDVIN, 60, l1, h2);
         Fad fad3 = controllerForLager.createFad(FadType.BOURBON, 90, l1, h1);
+        Fad fad4 = controllerForLager.createFad(FadType.RØDVIN, 60, l1, h2);
         Fad fad5 = controllerForLager.createFad(FadType.RØDVIN, 70, l1, h2);
         Fad fad6 = controllerForLager.createFad(FadType.RØDVIN, 80, l1, h2);
         Fad fad7 = controllerForLager.createFad(FadType.SHERRY, 110, l1, h3);
@@ -74,7 +74,7 @@ public class Setup {
         // Tilføjer påfyldninger
         LocalDate datoGammel = LocalDate.of(2019, 1,1);
         LocalDate datoNy = LocalDate.of(2023, 1,1);
-        controllerForProduktion.createPåfyldning(d1, fad1, "Mikkel", 80, datoNy);
+        controllerForProduktion.createPåfyldning(d1, fad1, "Mikkel", 80, datoGammel);
         controllerForProduktion.createPåfyldning(d2, fad2, "Mikkel", 20, datoGammel);
         controllerForProduktion.createPåfyldning(d3, fad2, "Mikkel", 40, datoGammel);
         controllerForProduktion.createPåfyldning(d4, fad4, "Mikkel", 10, datoGammel);

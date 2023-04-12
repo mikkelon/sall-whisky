@@ -300,7 +300,7 @@ public class FadePane extends GridPane {
     private void updateOmhældning() {
         Fad valgtFad = lvwFade.getSelectionModel().getSelectedItem();
         if (valgtFad != null && !valgtFad.isEmpty()) {
-            lvwOmhældninger.getItems().setAll(valgtFad.getFadIndhold().getOmhældningerTil());
+            lvwOmhældninger.getItems().setAll(valgtFad.getFadIndhold().getTilføjedeOmhældninger());
         } else {
             lvwOmhældninger.getItems().clear();
         }

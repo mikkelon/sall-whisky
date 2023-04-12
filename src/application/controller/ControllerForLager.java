@@ -7,9 +7,7 @@ import application.model.lager.Hylde;
 import application.model.lager.Lager;
 import storage.Storage;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * ControllerForLager-klassen håndterer forretningslogik for alt der har med destilleriets lager at gøre og binder GUI sammen med modellen og storage-laget.
@@ -284,8 +282,8 @@ public class ControllerForLager {
      * Returnerer alle fade som ikke er tomme.
      * @return alle fade som ikke er tomme
      */
-    public ArrayList<Fad> getIkkeTommeFade() {
-        ArrayList<Fad> ikkeTommeFade = new ArrayList<>();
+    public Set<Fad> getIkkeTommeFade() {
+        Set<Fad> ikkeTommeFade = new TreeSet<>(Comparator.comparingInt(Fad::getFadNr));
         for (Lager lager : getLagre()) {
             for (Hylde hylde : lager.getHylder()) {
                 for (Fad fad : hylde.getFade()) {
@@ -296,6 +294,25 @@ public class ControllerForLager {
             }
         }
         return ikkeTommeFade;
+    }
+
+    /**
+     * Returnerer alle fade som ikke er fyldte.
+     * @return alle fade som ikke er fyldte
+     */
+    public Set<Fad> getIkkeFyldteFade() {
+        Set<Fad> ikkeFyldteFade = new TreeSet<>(Comparator.comparingInt(Fad::getFadNr));
+        for (Lager lager : getLagre()) {
+            for (Hylde hylde : lager.getHylder()) {
+                for (Fad fad : hylde.getFade()) {
+                    if (fad.getFadIndhold() == null
+                            || fad.getFadIndhold().getMængde() != fad.getStørrelseILiter()) {
+                        ikkeFyldteFade.add(fad);
+                    }
+                }
+            }
+        }
+        return ikkeFyldteFade;
     }
 
     /**
