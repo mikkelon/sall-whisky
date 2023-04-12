@@ -45,7 +45,7 @@ class ControllerForLagerTest {
     void removeLagerNormalTC3() {
         for (Hylde h : lager.getHylder()) {
             for (Fad f : h.getFade()) {
-                controllerForLager.removeFad(f);
+                controllerForLager.fjernFadFraHylde(f);
             }
             controllerForLager.removeHylde(h);
         }
@@ -70,7 +70,7 @@ class ControllerForLagerTest {
 
     @Test
     void removeFadLeverandørNormalTC7() {
-        controllerForLager.removeFad(fad);
+        controllerForLager.fjernFadFraHylde(fad);
         controllerForLager.removeFadLeverandør(fadLeverandør);
         assertFalse(controllerForLager.getFadLeverandører().contains(fadLeverandør));
     }
@@ -92,7 +92,7 @@ class ControllerForLagerTest {
 
     @Test
     void removeHyldeNormalTC11() {
-        controllerForLager.removeFad(fad);
+        controllerForLager.fjernFadFraHylde(fad);
         controllerForLager.removeHylde(hylde);
         assertFalse(controllerForLager.getHylder().contains(hylde));
     }
@@ -120,7 +120,7 @@ class ControllerForLagerTest {
     @Test
     void removeFadTC16() {
         int fadLeverandørAntalFade = fad.getFadLeverandør().getAntalFade();
-        controllerForLager.removeFad(fad);
+        controllerForLager.fjernFadFraHylde(fad);
         assertFalse(hylde.getFade().contains(fad));
         assertEquals(fadLeverandørAntalFade - 1, fad.getFadLeverandør().getAntalFade());
     }

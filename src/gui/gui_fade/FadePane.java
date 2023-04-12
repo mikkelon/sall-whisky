@@ -148,7 +148,6 @@ public class FadePane extends GridPane {
         });
 
 
-
         Separator sep2 = new Separator(Orientation.VERTICAL);
         this.add(sep2, 4, 0, 1, 13);
 
@@ -167,7 +166,7 @@ public class FadePane extends GridPane {
         this.add(btnOpretFravælg, 0, 11, 2, 1);
         GridPane.setHalignment(btnOpretFravælg, HPos.CENTER);
 
-        btnSlet = new Button("Slet");
+        btnSlet = new Button("Fjern fad fra hylde");
         btnSlet.setOnAction(event -> sletAction());
         this.add(btnSlet, 5, 11);
         GridPane.setHalignment(btnSlet, HPos.CENTER);
@@ -371,15 +370,20 @@ public class FadePane extends GridPane {
     }
 
     private void sletAction() {
+        clearError();
         Fad valgtFad = lvwFade.getSelectionModel().getSelectedItem();
-        BekræftSletVindue vindue = new BekræftSletVindue("Slet fad");
+        BekræftSletVindue vindue = new BekræftSletVindue("Fjern fad fra hylde");
         vindue.showAndWait();
         if (vindue.getValg()) {
-            controllerForLager.removeFad(valgtFad);
-            updateFade();
-            clearInfo();
+            try {
+                controllerForLager.fjernFadFraHylde(valgtFad);
+                updateFade();
+                clearInfo();
+            } catch (RuntimeException e) {
+                lblError.setText(e.getMessage());
+            }
+
         }
-        clearError();
     }
 
     private void clearError() {
