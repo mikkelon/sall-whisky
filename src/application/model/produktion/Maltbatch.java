@@ -52,6 +52,14 @@ public class Maltbatch {
     }
 
     /**
+     * Returnerer maltbatchens nummer.
+     * @return maltbatchens nummer
+     */
+    public int getMaltbatchNr() {
+        return maltbatchNr;
+    }
+
+    /**
      * Returnerer gården hvor maltet er dyrket.
      * @return gården hvor maltet er dyrket
      */

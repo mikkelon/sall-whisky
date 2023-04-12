@@ -1,6 +1,8 @@
 package application.model.lager;
 
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Modellerer en hylde på et lager.
@@ -8,7 +10,7 @@ import java.util.ArrayList;
 public class Hylde {
     private int hyldeNr;
     private Lager lager;
-    private final ArrayList<Fad> fade = new ArrayList<>();
+    private final Set<Fad> fade = new TreeSet<>((a, b) -> a.getFadNr() - b.getFadNr());
 
     /**
      * Opretter en hylde på et specifikt lager.
@@ -40,8 +42,8 @@ public class Hylde {
      * Returnerer en liste af fade der opbevares på hylden.
      * @return en liste af fade der opbevares på hylden
      */
-    public ArrayList<Fad> getFade(){
-        return new ArrayList<>(fade);
+    public Set<Fad> getFade(){
+        return new TreeSet<>(fade);
     }
 
     /**

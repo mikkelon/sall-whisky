@@ -133,7 +133,7 @@ public class FadePane extends GridPane {
         });
 
         lvwOmhældninger = new ListView<>();
-        this.add(lvwOmhældninger, 0, 9, 2, 1);
+        this.add(lvwOmhældninger, 0, 9, 2, 2);
         lvwOmhældninger.setCellFactory(param -> new ListCell<>() {
             @Override
             protected void updateItem(Omhældning omhældning, boolean empty) {

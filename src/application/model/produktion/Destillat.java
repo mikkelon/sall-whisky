@@ -5,6 +5,8 @@ import application.model.RygeMateriale;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Modellerer et destillat.
@@ -19,8 +21,8 @@ public class Destillat {
     private double mængdeILiter;
     private String kommentar;
     private RygeMateriale rygeMateriale;
-    private HashSet <Påfyldning> påfyldninger = new HashSet<>();
-    private ArrayList<Maltbatch> maltbatches = new ArrayList<>();
+    private Set<Påfyldning> påfyldninger = new HashSet<>();
+    private Set<Maltbatch> maltbatches = new TreeSet<>((a, b) -> a.getMaltbatchNr() - b.getMaltbatchNr());
 
     /**
      * Opretter et nyt destillat med angivet parametre.
@@ -125,8 +127,8 @@ public class Destillat {
      * Returnerer en liste over påfyldninger.
      * @return en liste over påfyldninger
      */
-    public ArrayList<Påfyldning> getPåfyldninger() {
-        return new ArrayList<>(påfyldninger);
+    public Set<Påfyldning> getPåfyldninger() {
+        return new HashSet<>(påfyldninger);
     }
 
     /**
@@ -165,8 +167,8 @@ public class Destillat {
      * Returnerer en liste over maltbatches.
      * @return en liste over maltbatches
      */
-    public ArrayList<Maltbatch> getMaltbatches(){
-        return new ArrayList<>(maltbatches);
+    public Set<Maltbatch> getMaltbatches(){
+        return new TreeSet<>(maltbatches);
     }
 
     /**
