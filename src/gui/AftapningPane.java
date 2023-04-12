@@ -297,6 +297,7 @@ public class AftapningPane extends GridPane {
     private void bekræftWhiskyAction() {
         String beskrivelse = txaBeskrivelse.getText().trim();
         String vandKilde = txfVandKilde.getText().trim();
+        double flaskeStørrelse = Double.parseDouble(txfFlaskeStørrelse.getText().trim()) / 10; // Omregner til L fra CL
         double vandMængde = 0.0;
         if (beskrivelse.isBlank()) {
             lblError.setText("Angiv beskrivelse");
@@ -312,7 +313,7 @@ public class AftapningPane extends GridPane {
             if (vandMængde < 0) {
                 lblError.setText("Vand mængde skal være større end 0");
             } else {
-                controllerForProduktion.createWhisky(aftapninger, vandMængde, vandKilde, beskrivelse);
+                controllerForProduktion.createWhisky(aftapninger, vandMængde, vandKilde, beskrivelse, flaskeStørrelse);
                 aftapninger.clear();
                 updateControls();
                 txfVandILiter.clear();

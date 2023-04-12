@@ -1,12 +1,16 @@
 package storage;
 
 import application.model.lager.FadLeverandør;
+import application.model.lager.Flaske;
 import application.model.lager.Lager;
 import application.model.produktion.Destillat;
 import application.model.produktion.Maltbatch;
 import application.model.produktion.Whisky;
 
+import java.util.Comparator;
 import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class Storage {
 
@@ -101,6 +105,21 @@ public class Storage {
 
     public HashSet<Whisky> getWhiskyer(){
         return whiskyer;
+    }
+
+    // #--- Flasker ---#
+    private Set<Flaske> flasker = new TreeSet<>();
+
+    public void addFlaske(Flaske flaske){
+        flasker.add(flaske);
+    }
+
+    public void removeFlaske(Flaske flaske){
+        flasker.remove(flaske);
+    }
+
+    public Set<Flaske> getFlasker(){
+        return new TreeSet<>(flasker);
     }
 }
 

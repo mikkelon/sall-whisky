@@ -105,7 +105,7 @@ public class Setup {
         aftapninger2.add(a3);
 
         // Tilføjer en whiskyer
-        controllerForProduktion.createWhisky(aftapninger1, 20, "Begravet Dal", "Lækker whisky :)");
-        controllerForProduktion.createWhisky(aftapninger2, 10, "Begravet Dal 2", "MEGA Lækker whisky!!!");
+        controllerForProduktion.createWhisky(aftapninger1, 20, "Begravet Dal", "Lækker whisky :)", 0.7);
+        controllerForProduktion.createWhisky(aftapninger2, 10, "Begravet Dal 2", "MEGA Lækker whisky!!!", 0.7);
     }
 }
