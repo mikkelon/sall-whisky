@@ -256,13 +256,6 @@ public class Fad implements Comparable<Fad>{
                 + "Størrelse: " + størrelseILiter + "\n" + "Fadet er på lager: "
                 + hylde.getLager() + ", hylde nr: " + hylde.getHyldeNr() + "\n" + "Fadet er leveret af: " + fadLeverandør + "\n";
 
-        if (!fadIndholdHistorik.isEmpty()) {
-            historik += "Fadets historik: \n";
-            for (FadIndhold fadIndhold : fadIndholdHistorik) {
-                historik += fadIndhold.getProduktionsHistorik();
-            }
-        }
-
         return historik;
     }
 
