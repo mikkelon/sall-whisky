@@ -181,9 +181,7 @@ public class Fad implements Comparable<Fad>{
      * @param mængdeILiter er mængden i liter, der skal aftappes
      * @param aftapningsDato er datoen for aftapningen
      * @return aftapningen
-     * <pre>
-     *     Pre: aftappet != null, mængdeILiter > 0, aftapningsDato != null, mængdeILiter <= fadIndhold.indeholdtVæskeILiter(), 0 < fadIndhold.getAlkoholProcent() <= 100
-     * </pre>
+     * @Pre aftappet != null, mængdeILiter > 0, aftapningsDato != null, mængdeILiter <= fadIndhold.indeholdtVæskeILiter(), 0 < fadIndhold.getAlkoholProcent() <= 100
      */
     public Aftapning aftap(String aftappetAf, double mængdeILiter, LocalDate aftapningsDato) {
         Aftapning aftapning = new Aftapning(aftappetAf, mængdeILiter, aftapningsDato, fadIndhold);
