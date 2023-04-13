@@ -3,6 +3,7 @@ package application.model.lager;
 import application.model.*;
 import application.model.produktion.*;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -10,7 +11,7 @@ import java.util.Set;
 /**
  * Modellerer et fad, som bruges til at modne destillat til whisky.
  */
-public class Fad implements Comparable<Fad>{
+public class Fad implements Comparable<Fad>, Serializable {
     private FadType fadType;
     private double størrelseILiter;
     private int fadNr;

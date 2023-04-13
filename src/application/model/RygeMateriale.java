@@ -1,6 +1,8 @@
 package application.model;
 
-public enum RygeMateriale {
+import java.io.Serializable;
+
+public enum RygeMateriale implements Serializable {
     TØRV("Tørv"),
     INTET("Intet");
 

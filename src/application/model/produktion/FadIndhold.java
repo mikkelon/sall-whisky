@@ -2,6 +2,7 @@ package application.model.produktion;
 
 import application.model.lager.Fad;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,7 +10,7 @@ import java.util.Set;
 /**
  * Modellerer et fad indhold som ligger på fadet.
  */
-public class FadIndhold {
+public class FadIndhold implements Serializable {
     private double alkoholProcentEfterModning;
     private LocalDate modningStartDato;
     private Set<Påfyldning> påfyldninger = new HashSet<>();

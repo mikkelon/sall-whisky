@@ -5,6 +5,7 @@ import application.model.lager.Fad;
 import application.model.lager.Flaske;
 import application.model.produktion.Aftapning;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -14,7 +15,7 @@ import java.util.TreeSet;
 /**
  * Modellerer et whiskyprodukt som kan bestå af flere forskellige aftapninger på fade.
  */
-public class Whisky implements Comparable<Whisky> {
+public class Whisky implements Comparable<Whisky>, Serializable {
     private double mængdeVandILiter;
     private String vandAfstamning;
     private String tekstBeskrivelse;

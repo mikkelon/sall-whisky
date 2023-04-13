@@ -1,6 +1,8 @@
 package application.model;
 
-public enum Betegnelse {
+import java.io.Serializable;
+
+public enum Betegnelse implements Serializable {
     SINGLE_MALT("Single malt"),
     SINGLE_CASK("Single cask"),
     CASK_STRENGTH("Cask strength");

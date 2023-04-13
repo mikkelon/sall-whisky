@@ -1,6 +1,8 @@
 package application.model;
 
-public enum FadType {
+import java.io.Serializable;
+
+public enum FadType implements Serializable {
     BOURBON("Bourbon"),
     SHERRY("Sherry"),
     RØDVIN("Rødvin"),

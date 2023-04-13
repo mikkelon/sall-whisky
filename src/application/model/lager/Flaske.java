@@ -3,12 +3,13 @@ package application.model.lager;
 import application.model.FadType;
 import application.model.produktion.*;
 
+import java.io.Serializable;
 import java.util.HashSet;
 
 /**
  * Modellerer en flaske som indeholder whisky.
  */
-public class Flaske implements Comparable<Flaske> {
+public class Flaske implements Comparable<Flaske>, Serializable {
     private int flaskeNr;
     private static int antalFlasker = 0;
     private double størrelseILiter;

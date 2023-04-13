@@ -7,12 +7,12 @@ import application.model.produktion.Destillat;
 import application.model.produktion.Maltbatch;
 import application.model.produktion.Whisky;
 
-import java.util.Comparator;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class Storage {
+public class Storage implements Serializable {
 
     private static Storage storage;
 
