@@ -13,13 +13,12 @@ public class FlaskePane extends GridPane {
 
     private ControllerForLager controllerForLager = ControllerForLager.getController();
 
-    private ListView <Flaske> lvwFlaske;
+    private ListView<Flaske> lvwFlaske;
     private TextArea txaBeskrivelse;
     private TextArea txaHistorik;
 
 
-
-    public FlaskePane(){
+    public FlaskePane() {
         this.setPadding(new Insets(10));
         this.setHgap(10);
         this.setVgap(10);
@@ -37,8 +36,6 @@ public class FlaskePane extends GridPane {
         this.add(lvwFlaske, 0, 1);
         lvwFlaske.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> selectionChanged());
         lvwFlaske.getItems().setAll(controllerForLager.getFlasker());
-
-
 
 
         Label lblBeskrivelse = new Label("Beskrivelse");
@@ -65,9 +62,9 @@ public class FlaskePane extends GridPane {
     }
 
 
-    private void getInfo(){
+    private void getInfo() {
         Flaske valgtFlaske = lvwFlaske.getSelectionModel().getSelectedItem();
-        if (valgtFlaske != null){
+        if (valgtFlaske != null) {
             txaBeskrivelse.setText(valgtFlaske.getBeskrivelse());
             txaBeskrivelse.setDisable(false);
             txaBeskrivelse.setEditable(false);
@@ -79,15 +76,9 @@ public class FlaskePane extends GridPane {
     }
 
     private void selectionChanged() {
-        if (lvwFlaske.getSelectionModel().getSelectedItem() != null){
+        if (lvwFlaske.getSelectionModel().getSelectedItem() != null) {
             getInfo();
         }
     }
-
-    private void updateControls(){
-        lvwFlaske.getItems().setAll(controllerForLager.getFlasker());
-        getInfo();
-    }
-
 
 }
