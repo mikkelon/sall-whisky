@@ -162,7 +162,8 @@ public class Fad implements Comparable<Fad>{
      * @param mængde er mængden der påfyldes
      * @param påfyldtAf er navnet på den person, der har påfyldt fadet
      * @param påfyldningsDato er datoen for påfyldningen
-     * @return påfyldningen
+     * @return den påfyldning der er oprettet
+     * Pre: destillat != null, mængde > 0, påfyldningsDato != null, mængde <= fadIndhold.resterendePladsILiter(), mængde <= destillat.getResterendeMængdeILiter()
      */
     public Påfyldning påfyld(Destillat destillat, double mængde, String påfyldtAf, LocalDate påfyldningsDato) {
         Påfyldning påfyldning;
@@ -199,7 +200,7 @@ public class Fad implements Comparable<Fad>{
      * @param omhældningsDato er datoen for omhældningen
      * @param til er fadet, der skal omhældes til
      * @return omhældningen
-     * @Pre: omhældtAf != null<br/> mængdeILiter > 0<br/> omhældningsDato != null<br/> mængdeILiter <= til.resterendeMængdeILiter()<br/> til != null
+     * @Pre: omhældtAf != null<br/> mængdeILiter > 0<br/> omhældningsDato != null<br/> mængdeILiter <= til.resterendeMængdeILiter()<br/>mængdeILiter <= fadIndhold.getMængde() <br/> til != null
      */
     public Omhældning omhæld(String omhældtAf, double mængdeILiter, LocalDate omhældningsDato, Fad til) {
         Omhældning omhældning;

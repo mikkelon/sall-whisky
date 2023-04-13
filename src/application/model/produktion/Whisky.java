@@ -168,7 +168,7 @@ public class Whisky implements Comparable<Whisky> {
 
     @Override
     public String toString(){
-        return "Whisky nr:" + " " + Integer.toString(whiskyNr);
+        return "Whisky nr: " + whiskyNr;
     }
 
     @Override
