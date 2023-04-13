@@ -179,7 +179,7 @@ public class ControllerForProduktion {
      * Returnerer alle maltbatches.
      * @return alle maltbatches
      */
-    public HashSet<Maltbatch> getMaltbatches(){
+    public Set<Maltbatch> getMaltbatches(){
         return storage.getMaltbatches();
     }
 
@@ -287,7 +287,7 @@ public class ControllerForProduktion {
      * @return alle whiskyerne
      */
    public Set<Whisky> getWhiskyer(){
-        TreeSet<Whisky> whiskyer = new TreeSet<>(Comparator.comparingInt(Whisky::getWhiskyNr));
+        Set<Whisky> whiskyer = new TreeSet<>();
         whiskyer.addAll(storage.getWhiskyer());
         return whiskyer;
    }

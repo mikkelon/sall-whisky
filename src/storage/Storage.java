@@ -30,7 +30,7 @@ public class Storage {
     }
 
     // #--- Fadleverandører ---#
-    private HashSet<FadLeverandør> fadLeverandører = new HashSet<>();
+    private final Set<FadLeverandør> fadLeverandører = new HashSet<>();
 
     public void addFadLeverandør(FadLeverandør fadLeverandør) {
         fadLeverandører.add(fadLeverandør);
@@ -40,13 +40,13 @@ public class Storage {
         fadLeverandører.remove(fadLeverandør);
     }
 
-    public HashSet<FadLeverandør> getFadLeverandører() {
+    public Set<FadLeverandør> getFadLeverandører() {
         return new HashSet<>(fadLeverandører);
     }
 
     // #--- Lager ---#
 
-    private HashSet <Lager> lagre = new HashSet<>();
+    private final Set<Lager> lagre = new HashSet<>();
 
     public void addLager(Lager lager){
         lagre.add(lager);
@@ -62,7 +62,7 @@ public class Storage {
 
     // #--- Destillation ---#
 
-    private HashSet<Destillat> destillater = new HashSet<>();
+    private final Set<Destillat> destillater = new HashSet<>();
 
     public void addDestillat(Destillat destillat){
         destillater.add(destillat);
@@ -77,7 +77,7 @@ public class Storage {
     }
 
     // #--- Maltbatch ---#
-    private HashSet<Maltbatch> maltbatches = new HashSet<>();
+    private final Set<Maltbatch> maltbatches = new HashSet<>();
 
     public void addMaltbatch(Maltbatch maltbatch){
         maltbatches.add(maltbatch);
@@ -93,7 +93,7 @@ public class Storage {
 
     // #--- Whisky ---#
 
-    private HashSet<Whisky> whiskyer = new HashSet<>();
+    private final Set<Whisky> whiskyer = new HashSet<>();
 
     public void addWhisky(Whisky whisky){
         whiskyer.add(whisky);
@@ -103,7 +103,7 @@ public class Storage {
         whiskyer.remove(whisky);
     }
 
-    public HashSet<Whisky> getWhiskyer(){
+    public Set<Whisky> getWhiskyer(){
         return whiskyer;
     }
 

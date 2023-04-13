@@ -2,6 +2,7 @@ package gui.gui_destillat;
 
 import application.controller.ControllerForProduktion;
 import application.model.produktion.Maltbatch;
+import com.sun.source.tree.Tree;
 import gui.BekræftSletVindue;
 import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
@@ -15,6 +16,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class MaltbatchesVindue extends Stage {
     private ControllerForProduktion controllerForProduktion = ControllerForProduktion.getController();
@@ -95,10 +98,7 @@ public class MaltbatchesVindue extends Stage {
         clearError();
         ObservableList<Maltbatch> valgtMaltbatches = lvwMaltbatches.getSelectionModel().getSelectedItems();
         if (valgtMaltbatches.size() > 0) {
-            ArrayList<Maltbatch> temp = new ArrayList<>();
-            for (Maltbatch m : valgtMaltbatches) {
-                temp.add(m);
-            }
+            Set<Maltbatch> temp = new TreeSet<>(valgtMaltbatches);
             DestillatPane.fillMaltbatches(temp);
             this.hide();
         } else {

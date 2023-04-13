@@ -10,7 +10,7 @@ import java.util.Set;
 /**
  * Modellerer et fad, som bruges til at modne destillat til whisky.
  */
-public class Fad {
+public class Fad implements Comparable<Fad>{
     private FadType fadType;
     private double størrelseILiter;
     private int fadNr;
@@ -260,5 +260,10 @@ public class Fad {
      */
     private double roundOfDecimals(double number) {
         return Math.round(number * 100.0) / 100.0;
+    }
+
+    @Override
+    public int compareTo(Fad o) {
+        return fadNr - o.getFadNr();
     }
 }

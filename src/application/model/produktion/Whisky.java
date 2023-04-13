@@ -13,7 +13,7 @@ import java.util.TreeSet;
 /**
  * Modellerer et whiskyprodukt som kan bestå af flere forskellige aftapninger på fade.
  */
-public class Whisky {
+public class Whisky implements Comparable<Whisky> {
     private double mængdeVandILiter;
     private String vandAfstamning;
     private String tekstBeskrivelse;
@@ -169,5 +169,10 @@ public class Whisky {
     @Override
     public String toString(){
         return "Whisky nr:" + " " + Integer.toString(whiskyNr);
+    }
+
+    @Override
+    public int compareTo(Whisky o) {
+        return this.whiskyNr - o.whiskyNr;
     }
 }

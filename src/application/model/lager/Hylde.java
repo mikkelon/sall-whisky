@@ -1,14 +1,16 @@
 package application.model.lager;
 
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Modellerer en hylde på et lager.
  */
-public class Hylde {
+public class Hylde implements Comparable<Hylde>{
     private int hyldeNr;
     private Lager lager;
-    private final ArrayList<Fad> fade = new ArrayList<>();
+    private final Set<Fad> fade = new TreeSet<>();
 
     /**
      * Opretter en hylde på et specifikt lager.
@@ -40,8 +42,8 @@ public class Hylde {
      * Returnerer en liste af fade der opbevares på hylden.
      * @return en liste af fade der opbevares på hylden
      */
-    public ArrayList<Fad> getFade(){
-        return new ArrayList<>(fade);
+    public Set<Fad> getFade(){
+        return new TreeSet<>(fade);
     }
 
     /**
@@ -68,5 +70,10 @@ public class Hylde {
     @Override
     public String toString() {
         return "Hylde #" + hyldeNr;
+    }
+
+    @Override
+    public int compareTo(Hylde o) {
+        return hyldeNr - o.getHyldeNr();
     }
 }

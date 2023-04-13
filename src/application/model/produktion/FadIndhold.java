@@ -94,7 +94,7 @@ public class FadIndhold {
      * Returnerer aftapninger fra fadet.
      * @return aftapninger fra fadet
      */
-    public Set getAftapninger() {
+    public Set<Aftapning> getAftapninger() {
         return new HashSet<>(aftapninger);
     }
 
