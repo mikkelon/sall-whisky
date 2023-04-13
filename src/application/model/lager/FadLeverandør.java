@@ -12,6 +12,7 @@ public class FadLeverandør {
      * Initialiserer en ny leverandørs navn og land.
      * @param navn leverandørens navn
      * @param land leverandørens land
+     * @Pre navn != null && land != null
      */
     public FadLeverandør(String navn, String land) {
         this.navn = navn;
