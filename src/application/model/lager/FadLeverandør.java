@@ -1,9 +1,11 @@
 package application.model.lager;
 
+import java.io.Serializable;
+
 /**
  * Modellerer en leverandør, som leverer fade til Sall Whisky.
  */
-public class FadLeverandør {
+public class FadLeverandør implements Serializable {
     private String navn;
     private String land;
     private int antalFade;

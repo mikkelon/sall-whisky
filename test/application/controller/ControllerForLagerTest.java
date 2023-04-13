@@ -68,13 +68,6 @@ class ControllerForLagerTest {
         assertTrue(controllerForLager.getFadLeverandører().contains(fadLeverandør));
     }
 
-   /* @Test //TODO: Fix this test
-    void removeFadLeverandørNormalTC7() {
-        controllerForLager.fjernFadFraHylde(fad);
-        controllerForLager.removeFadLeverandør(fadLeverandør);
-        assertFalse(controllerForLager.getFadLeverandører().contains(fadLeverandør));
-    }*/
-
     @Test
     void removeFadLeverandørFejlTC8() {
         assertThrows(RuntimeException.class, () -> controllerForLager.removeFadLeverandør(fadLeverandør));

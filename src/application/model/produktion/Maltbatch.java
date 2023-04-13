@@ -1,9 +1,11 @@
 package application.model.produktion;
 
+import java.io.Serializable;
+
 /**
  * Modellerer en maltbatch, som bliver brugt destillering af whisky.
  */
-public class Maltbatch implements Comparable<Maltbatch>{
+public class Maltbatch implements Comparable<Maltbatch>, Serializable {
     private String kornsort;
     private String mark;
     private String gård;

@@ -2,12 +2,13 @@ package application.model.produktion;
 
 import application.model.produktion.FadIndhold;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
  * Modellerer en omhældning fra et fad til et andet.
  */
-public class Omhældning {
+public class Omhældning implements Serializable {
     private String omhældtAf;
     private double mængdeILiter;
     private LocalDate omhældningsDato;

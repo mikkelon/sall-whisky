@@ -2,12 +2,13 @@ package application.model.lager;
 
 import application.model.lager.Hylde;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
  * Modellerer et lager med hylder, hvorpå der opbevares whiskyfade.
  */
-public class Lager {
+public class Lager implements Serializable {
     private String adresse;
     private String navn;
     private double kvm;

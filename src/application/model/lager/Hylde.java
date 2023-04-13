@@ -1,5 +1,6 @@
 package application.model.lager;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.TreeSet;
@@ -7,7 +8,7 @@ import java.util.TreeSet;
 /**
  * Modellerer en hylde på et lager.
  */
-public class Hylde implements Comparable<Hylde>{
+public class Hylde implements Comparable<Hylde>, Serializable {
     private int hyldeNr;
     private Lager lager;
     private final Set<Fad> fade = new TreeSet<>();

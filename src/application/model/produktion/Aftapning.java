@@ -1,11 +1,12 @@
 package application.model.produktion;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
  * Modellerer en aftapning af et fad på et bestemt whisky produkt.
  */
-public class Aftapning {
+public class Aftapning implements Serializable {
     private String aftappetAf;
     private double mængdeILiter;
     private LocalDate aftapningsDato;

@@ -2,6 +2,7 @@ package application.model.produktion;
 
 import application.model.RygeMateriale;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -11,7 +12,7 @@ import java.util.TreeSet;
 /**
  * Modellerer et destillat.
  */
-public class Destillat {
+public class Destillat implements Serializable {
     private String newMakeNr;
     private String medarbejder;
     private double alkoholProcent;

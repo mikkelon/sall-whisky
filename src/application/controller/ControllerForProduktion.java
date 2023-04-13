@@ -4,7 +4,6 @@ import application.model.*;
 import application.model.lager.Fad;
 import application.model.lager.Flaske;
 import application.model.produktion.*;
-import com.sun.source.tree.Tree;
 import storage.Storage;
 
 import java.time.LocalDate;
@@ -18,6 +17,13 @@ public class ControllerForProduktion {
     private static ControllerForProduktion controllerForProduktion;
 
     private ControllerForProduktion() {
+        updateStorage();
+    }
+
+    /**
+     * Opdaterer controllerens instans af Storage
+     */
+    public void updateStorage() {
         storage = Storage.getStorage();
     }
 

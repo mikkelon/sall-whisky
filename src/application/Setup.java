@@ -56,8 +56,8 @@ public class Setup {
 
 
         Maltbatch m1 = controllerForProduktion.createMaltbatch("Evergreen", "mark1", "Lars' bondegård", "Lars", true);
-        Maltbatch m2 = controllerForProduktion.createMaltbatch("Evergreen", "mark2", "Lars' bondegård", "Lars", true);
-        Maltbatch m3 = controllerForProduktion.createMaltbatch("Evergreen", "mark3", "Lars' bondegård", "Lars", true);
+        Maltbatch m2 = controllerForProduktion.createMaltbatch("Stairway", "mark2", "Lars' bondegård", "Lars", true);
+        Maltbatch m3 = controllerForProduktion.createMaltbatch("Irina", "mark3", "Lars' bondegård", "Lars", true);
 
         //Tilføjer destillater
         Destillat d1 = controllerForProduktion.createDestillat("77p", "Mikkel", 53, 2, LocalDate.of(2023, 3, 27), LocalDate.of(2023, 3, 30), 80, "Kommentar", RygeMateriale.INTET);
@@ -73,16 +73,17 @@ public class Setup {
         controllerForProduktion.addMaltbatchToDestillat(d5, m3);
 
         // Tilføjer påfyldninger
-        LocalDate datoGammel = LocalDate.of(2019, 1,1);
+        LocalDate datoGammel1 = LocalDate.of(2019, 1,1);
+        LocalDate datoGammel2 = LocalDate.of(2020, 1,1);
         LocalDate datoNy = LocalDate.of(2023, 1,1);
-        controllerForProduktion.createPåfyldning(d1, fad1, "Mikkel", 80, datoGammel);
-        controllerForProduktion.createPåfyldning(d2, fad2, "Mikkel", 20, datoGammel);
-        controllerForProduktion.createPåfyldning(d3, fad2, "Mikkel", 40, datoGammel);
-        controllerForProduktion.createPåfyldning(d4, fad4, "Mikkel", 10, datoGammel);
-        controllerForProduktion.createPåfyldning(d5, fad4, "Mikkel", 10, datoGammel);
+        controllerForProduktion.createPåfyldning(d1, fad1, "Mikkel", 80, datoGammel1);
+        controllerForProduktion.createPåfyldning(d2, fad2, "Mikkel", 20, datoGammel1);
+        controllerForProduktion.createPåfyldning(d3, fad2, "Mikkel", 40, datoGammel1);
+        controllerForProduktion.createPåfyldning(d4, fad4, "Mikkel", 10, datoGammel2);
+        controllerForProduktion.createPåfyldning(d5, fad4, "Mikkel", 10, datoGammel2);
         controllerForProduktion.createPåfyldning(d2, fad5, "Mikkel", 10, datoNy);
-        controllerForProduktion.createPåfyldning(d2, fad6, "Mikkel", 10, datoGammel);
-        controllerForProduktion.createPåfyldning(d2, fad7, "Mikkel", 10, datoGammel);
+        controllerForProduktion.createPåfyldning(d2, fad6, "Mikkel", 10, datoGammel1);
+        controllerForProduktion.createPåfyldning(d2, fad7, "Mikkel", 10, datoGammel2);
 
         // Sæt alkoholprocent efter modning
         controllerForProduktion.setAlkoholprocentEfterModning(fad2.getFadIndhold(), 52);

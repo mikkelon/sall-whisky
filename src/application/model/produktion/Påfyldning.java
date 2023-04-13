@@ -3,12 +3,13 @@ package application.model.produktion;
 import application.model.produktion.Destillat;
 import application.model.produktion.FadIndhold;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
  * Modellerer en påfyldning af et fad med et bestemt destillat.
  */
-public class Påfyldning {
+public class Påfyldning implements Serializable {
     private String påfyldtAf;
     private double mængdeILiter;
     private LocalDate påfyldningsDato;

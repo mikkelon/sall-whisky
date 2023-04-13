@@ -1,5 +1,6 @@
 package storage;
 
+import application.Setup;
 import application.model.lager.FadLeverandør;
 import application.model.lager.Flaske;
 import application.model.lager.Lager;
@@ -7,26 +8,64 @@ import application.model.produktion.Destillat;
 import application.model.produktion.Maltbatch;
 import application.model.produktion.Whisky;
 
-import java.util.Comparator;
+import java.io.*;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class Storage {
-
-    private static Storage storage;
-
+public class Storage implements Serializable {
+    public static final String PATH = "src/storage/storage.ser";
+    private static Storage instance;
     private Storage(){}
 
-    public static Storage getStorage(){
-        if (storage == null){
-            storage = new Storage();
-        }
-        return storage;
+    public static Storage getStorage() {
+        if (instance == null)
+            if (new File(PATH).exists()) load();
+            else {
+                instance = new Storage();
+                Setup.initMockData();
+            }
+        return instance;
     }
 
     public void clearStorage(){
-        storage = new Storage();
+        instance = new Storage();
+    }
+
+    // #--- Metoder for Serializable ---#
+    public void save() {
+        try {
+            FileOutputStream f_out = new FileOutputStream(PATH);
+            ObjectOutputStream obj_out = new ObjectOutputStream(f_out);
+            obj_out.writeObject(instance);
+            System.out.println("Storage is serialized...");
+            obj_out.close();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void load() {
+        Storage storage = null;
+        try {
+            FileInputStream f_in = new FileInputStream(PATH);
+            ObjectInputStream obj_in = new ObjectInputStream(f_in);
+            Object obj = obj_in.readObject();
+            if (obj instanceof Storage) {
+                storage = (Storage) obj;
+            }
+            obj_in.close();
+            f_in.close();
+        }
+        catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        instance = storage;
     }
 
     // #--- Fadleverandører ---#
