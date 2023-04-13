@@ -1,6 +1,9 @@
 package application.model.lager;
 
-import application.model.produktion.Whisky;
+import application.model.FadType;
+import application.model.produktion.*;
+
+import java.util.HashSet;
 
 /**
  * Modellerer en flaske som indeholder whisky.
@@ -65,6 +68,77 @@ public class Flaske implements Comparable<Flaske> {
      */
     public String hentHistorik() {
         return whisky.hentHistorik();
+    }
+
+    public String hentLabel() {
+        HashSet<String> korn = new HashSet<>();
+        HashSet<FadType> fadTyper = new HashSet<>();
+        HashSet<String> destilleretAf = new HashSet<>();
+        HashSet<String> aftappetAf = new HashSet<>();
+        for (Aftapning aftapning : whisky.getAftapninger()) {
+            for (Påfyldning påfyldning : aftapning.getFadIndhold().getPåfyldninger()) {
+                // Henter alle kornsorter
+                for (Maltbatch maltbatch : påfyldning.getDestillat().getMaltbatches()) {
+                    korn.add(maltbatch.getKornsort());
+                }
+
+                // Henter alle medarbejdere, der har været med til destilleringen
+                destilleretAf.add(påfyldning.getDestillat().getMedarbejder());
+            }
+
+            // Henter alle fadTyper som whiskyen har ligget på igennem tiden
+            for (Omhældning omhældningTil : aftapning.getFadIndhold().getTilføjedeOmhældninger()) {
+                fadTyper.add(omhældningTil.getFraFadIndhold().getFad().getFadType());
+            }
+            fadTyper.add(aftapning.getFadIndhold().getFad().getFadType());
+
+            // Henter alle medarbejdere, der har været med til aftapningen
+            aftappetAf.add(aftapning.getAftappetAf());
+        }
+
+        String kornString = "";
+        for (String kornSort : korn) {
+            kornString += kornSort + ", ";
+        }
+        kornString = kornString.substring(0, kornString.length() - 2); // fjern det sidste ", "
+
+        String fadTypeString = "";
+        for (FadType fadType : fadTyper) {
+            fadTypeString += fadType + ", ";
+        }
+        fadTypeString = fadTypeString.substring(0, fadTypeString.length() - 2); // fjern det sidste ", "
+
+        String destilleretAfString = "";
+        for (String medarbejder : destilleretAf) {
+            destilleretAfString += medarbejder + ", ";
+        }
+        destilleretAfString = destilleretAfString.substring(0, destilleretAfString.length() - 2); // fjern det sidste ", "
+
+        String aftappetAfString = "";
+        for (String medarbejder : aftappetAf) {
+            aftappetAfString += medarbejder + ", ";
+        }
+        aftappetAfString = aftappetAfString.substring(0, aftappetAfString.length() - 2); // fjern det sidste ", "
+
+        String label = "Type: " + whisky.getBetegnelse()
+                + "\nKorn: " + kornString
+                + "\nFad: " + fadTypeString
+                + "\nDyrket af: Sall Whisky"
+                + "\nAlder: " + whisky.getAlderIÅr() + " år"
+                + "\nAntal flasker: " + whisky.getFlasker().size()
+                + "\nAlkohol: " + String.format("%.1f", whisky.getAlkoholProcent()) + "%"
+                + "\nVolume: ";
+
+        if (størrelseILiter >= 1) {
+            label += String.format("%.0f L", størrelseILiter);
+        } else {
+            label += String.format("%.0f cl", størrelseILiter * 100);
+        }
+
+        label += "\n\nDestilleret af: " + destilleretAfString
+                + "\nAftappet af: " + aftappetAfString;
+
+        return label;
     }
 
     @Override

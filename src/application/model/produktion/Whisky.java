@@ -5,6 +5,7 @@ import application.model.lager.Fad;
 import application.model.lager.Flaske;
 import application.model.produktion.Aftapning;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Set;
@@ -36,6 +37,18 @@ public class Whisky implements Comparable<Whisky> {
         this.mængdeVandILiter = mængdeVandILiter;
         this.vandAfstamning = vandAfstamning;
         this.tekstBeskrivelse = tekstBeskrivelse;
+    }
+
+    public int getAlderIÅr() {
+        int alder = 0;
+        for (Aftapning aftapning : aftapninger) {
+            long årstal = aftapning.getFadIndhold().getModningStartDato().getYear();
+            int tempAlder = LocalDate.now().minusYears(årstal).getYear();
+            if (tempAlder > alder) {
+                alder = tempAlder;
+            }
+        }
+        return alder;
     }
 
     public static void tælAntalWhiskyOp() {

@@ -3,7 +3,6 @@ package gui;
 import application.Setup;
 import gui.gui_destillat.DestillatPane;
 import gui.gui_fade.FadePane;
-import gui.gui_lagerstyring.FlaskePane;
 import gui.gui_lagerstyring.LagerstyringPane;
 import javafx.application.Application;
 import javafx.geometry.Pos;
