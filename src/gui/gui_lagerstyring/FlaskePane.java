@@ -34,7 +34,7 @@ public class FlaskePane extends GridPane {
         lvwFlaske.setMinHeight(300);
         lvwFlaske.setMaxWidth(240);
         this.add(lvwFlaske, 0, 1);
-        lvwFlaske.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> selectionChanged());
+        lvwFlaske.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> getInfo());
         lvwFlaske.getItems().setAll(controllerForLager.getFlasker());
 
 
@@ -45,7 +45,7 @@ public class FlaskePane extends GridPane {
         txaBeskrivelse.setMinWidth(120);
         txaBeskrivelse.setMinHeight(300);
         txaBeskrivelse.setMaxWidth(200);
-        txaBeskrivelse.setDisable(true);
+        txaBeskrivelse.setEditable(false);
 
         this.add(txaBeskrivelse, 1, 1);
 
@@ -56,29 +56,24 @@ public class FlaskePane extends GridPane {
         txaHistorik.setMinWidth(120);
         txaHistorik.setMinHeight(300);
         txaHistorik.setMaxWidth(200);
-        txaHistorik.setDisable(true);
+        txaHistorik.setEditable(false);
         this.add(txaHistorik, 2, 1);
-
     }
-
 
     private void getInfo() {
         Flaske valgtFlaske = lvwFlaske.getSelectionModel().getSelectedItem();
         if (valgtFlaske != null) {
             txaBeskrivelse.setText(valgtFlaske.getBeskrivelse());
-            txaBeskrivelse.setDisable(false);
-            txaBeskrivelse.setEditable(false);
             txaHistorik.setText(valgtFlaske.hentHistorik());
-            txaHistorik.setEditable(false);
-            txaHistorik.setDisable(false);
-
+        } else {
+            txaBeskrivelse.clear();
+            txaHistorik.clear();
         }
     }
 
-    private void selectionChanged() {
-        if (lvwFlaske.getSelectionModel().getSelectedItem() != null) {
-            getInfo();
-        }
+    public void updateControls() {
+        lvwFlaske.getItems().setAll(controllerForLager.getFlasker());
+        getInfo();
     }
 
 }
