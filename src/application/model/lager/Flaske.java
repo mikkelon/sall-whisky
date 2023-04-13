@@ -15,6 +15,7 @@ public class Flaske implements Comparable<Flaske> {
      * Opretter en flaske med en given størrelse og whisky.
      * @param størrelseILiter størrelsen på flasken i liter
      * @param whisky whiskyen i flasken
+     * @Pre størrelseILiter > 0 && whisky != null
      */
     public Flaske(double størrelseILiter, Whisky whisky) {
         antalFlasker++;
