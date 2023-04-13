@@ -51,7 +51,7 @@ public class Flaske implements Comparable<Flaske> {
 
     @Override
     public String toString() {
-        return "# "+ flaskeNr;
+        return "# "+ flaskeNr + ", " + whisky.getBetegnelse() + " whisky, " + størrelseILiter + " liter";
 
     }
 }
