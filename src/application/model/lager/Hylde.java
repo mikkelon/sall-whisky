@@ -16,6 +16,7 @@ public class Hylde implements Comparable<Hylde>{
      * Opretter en hylde på et specifikt lager.
      * Hylden får et unikt hyldenummer for det specifikke lager.
      * @param lager lageret hvor hylden skal oprettes
+     * @Pre lager != null
      */
     Hylde(Lager lager) {
         this.hyldeNr = lager.getAntalHylder();

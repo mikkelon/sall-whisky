@@ -27,6 +27,7 @@ public class Fad implements Comparable<Fad>{
      * @param størrelseILiter størrelsen på fadet i liter
      * @param fadLeverandør   fadleverandøren, der har leveret fadet
      * @param hylde           hylden hvor fadet er opbevaret
+     * @Pre fadType != null && størrelseILiter > 0 && fadLeverandør != null && hylde != null
      */
     public Fad(FadType fadType, double størrelseILiter, FadLeverandør fadLeverandør, Hylde hylde) {
         antalFade++;
@@ -162,9 +163,7 @@ public class Fad implements Comparable<Fad>{
      * @param påfyldtAf er navnet på den person, der har påfyldt fadet
      * @param påfyldningsDato er datoen for påfyldningen
      * @return den påfyldning der er oprettet
-     * <pre>
-     *     Pre: destillat != null, mængde > 0, påfyldningsDato != null, mængde <= fadIndhold.resterendePladsILiter(), mængde <= destillat.getResterendeMængdeILiter()
-     * </pre>
+     * Pre: destillat != null, mængde > 0, påfyldningsDato != null, mængde <= fadIndhold.resterendePladsILiter(), mængde <= destillat.getResterendeMængdeILiter()
      */
     public Påfyldning påfyld(Destillat destillat, double mængde, String påfyldtAf, LocalDate påfyldningsDato) {
         Påfyldning påfyldning;
@@ -183,9 +182,7 @@ public class Fad implements Comparable<Fad>{
      * @param mængdeILiter er mængden i liter, der skal aftappes
      * @param aftapningsDato er datoen for aftapningen
      * @return aftapningen
-     * <pre>
-     *     Pre: aftappet != null, mængdeILiter > 0, aftapningsDato != null, mængdeILiter <= fadIndhold.getMængde()
-     * </pre>
+     * @Pre aftappet != null, mængdeILiter > 0, aftapningsDato != null, mængdeILiter <= fadIndhold.indeholdtVæskeILiter(), 0 < fadIndhold.getAlkoholProcent() <= 100
      */
     public Aftapning aftap(String aftappetAf, double mængdeILiter, LocalDate aftapningsDato) {
         Aftapning aftapning = new Aftapning(aftappetAf, mængdeILiter, aftapningsDato, fadIndhold);
