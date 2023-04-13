@@ -98,7 +98,7 @@ public class StartVindue extends Application {
         FlaskePane flaskePane = new FlaskePane();
         flaskePane.setAlignment(Pos.TOP_CENTER);
         flaskeTab.setContent(flaskePane);
-        //flaskeTab.setOnSelectionChanged(event -> flaskePane.updateControls());
+        flaskeTab.setOnSelectionChanged(event -> flaskePane.updateControls());
     }
 
     public Pane skiftTab(int index) {

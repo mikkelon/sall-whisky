@@ -48,4 +48,10 @@ public class Flaske implements Comparable<Flaske> {
     public int compareTo(Flaske flaske) {
         return this.flaskeNr - flaske.flaskeNr;
     }
+
+    @Override
+    public String toString() {
+        return "# "+ flaskeNr + ", " + whisky.getBetegnelse() + " whisky, " + størrelseILiter + " liter";
+
+    }
 }
