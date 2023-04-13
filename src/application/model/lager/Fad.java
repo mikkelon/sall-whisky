@@ -27,6 +27,7 @@ public class Fad implements Comparable<Fad>{
      * @param størrelseILiter størrelsen på fadet i liter
      * @param fadLeverandør   fadleverandøren, der har leveret fadet
      * @param hylde           hylden hvor fadet er opbevaret
+     * @Pre fadType != null && størrelseILiter > 0 && fadLeverandør != null && hylde != null
      */
     public Fad(FadType fadType, double størrelseILiter, FadLeverandør fadLeverandør, Hylde hylde) {
         antalFade++;
