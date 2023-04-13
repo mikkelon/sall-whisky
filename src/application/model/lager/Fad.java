@@ -211,6 +211,11 @@ public class Fad implements Comparable<Fad>{
         } else {
             omhældning = new Omhældning(omhældtAf, mængdeILiter, omhældningsDato, fadIndhold, til.getFadIndhold());
         }
+
+        if (fadIndhold.getMængde() <= 0) {
+            fadIndholdHistorik.add(fadIndhold);
+            fadIndhold = null;
+        }
         return omhældning;
     }
 
@@ -250,6 +255,14 @@ public class Fad implements Comparable<Fad>{
         String historik = "Fadtype: " + fadType + "\n" + "Fadnr: " + fadNr + "\n"
                 + "Størrelse: " + størrelseILiter + "\n" + "Fadet er på lager: "
                 + hylde.getLager() + ", hylde nr: " + hylde.getHyldeNr() + "\n" + "Fadet er leveret af: " + fadLeverandør + "\n";
+
+        if (!fadIndholdHistorik.isEmpty()) {
+            historik += "Fadets historik: \n";
+            for (FadIndhold fadIndhold : fadIndholdHistorik) {
+                historik += fadIndhold.getProduktionsHistorik();
+            }
+        }
+
         return historik;
     }
 
