@@ -238,7 +238,7 @@ public class Fad implements Comparable<Fad>{
             informationOmFadIndhold = "(" + roundOfDecimals(fadIndhold.getAlkoholProcent()) + "%)";
         }
 
-        String mængdeInformation = " (0.0/" + størrelseILiter + "L) ";
+        String mængdeInformation = " (0.0/" + størrelseILiter + "L)";
         if (fadIndhold != null) {
             mængdeInformation = " (" + fadIndhold.getMængde() + "/" + størrelseILiter + "L) ";
         }
