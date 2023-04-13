@@ -58,6 +58,8 @@ class WhiskyTest {
         assertTrue(whisky.getAftapninger().contains(aftapning));
     }
 
+    // #--- TESTS FOR getBetegnelse (TC1-5) ---#
+
     @Test
     void getBetegnelseTC1() {
         Whisky whisky = new Whisky(40.0, "Kilde vand", "En god whisky");
@@ -102,5 +104,37 @@ class WhiskyTest {
         whisky.addAftapning(aftapning2);
 
         assertEquals(Betegnelse.SINGLE_MALT, whisky.getBetegnelse());
+    }
+
+    // #--- TESTS FOR getAlkoholProcent (TC1-3) ---#
+
+    @Test void getAlkoholProcentTC1() {
+        Whisky whisky = new Whisky(10, "Kilde vand", "En god whisky");
+
+        assertEquals(0.0, whisky.getAlkoholProcent());
+    }
+
+    @Test void getAlkoholProcentTC2() {
+        fad1.getFadIndhold().setAlkoholProcentEfterModning(60);
+        fad2.getFadIndhold().setAlkoholProcentEfterModning(59);
+        Aftapning aftapning1 = new Aftapning("Frederikke", 10, LocalDate.of(2023, 2, 2), fad1.getFadIndhold());
+        Aftapning aftapning2 = new Aftapning("Frederikke", 10, LocalDate.of(2023, 2, 2), fad2.getFadIndhold());
+        Whisky whisky = new Whisky(10, "Kilde vand", "En god whisky");
+        whisky.addAftapning(aftapning1);
+        whisky.addAftapning(aftapning2);
+
+        assertEquals(39.66, whisky.getAlkoholProcent(), 0.01);
+    }
+
+    @Test void getAlkoholProcentTC3() {
+        fad1.getFadIndhold().setAlkoholProcentEfterModning(60);
+        fad2.getFadIndhold().setAlkoholProcentEfterModning(59);
+        Aftapning aftapning1 = new Aftapning("Frederikke", 10, LocalDate.of(2023, 2, 2), fad1.getFadIndhold());
+        Aftapning aftapning2 = new Aftapning("Frederikke", 10, LocalDate.of(2023, 2, 2), fad2.getFadIndhold());
+        Whisky whisky = new Whisky(0, "Kilde vand", "En god whisky");
+        whisky.addAftapning(aftapning1);
+        whisky.addAftapning(aftapning2);
+
+        assertEquals(59.5, whisky.getAlkoholProcent(), 0.01);
     }
 }
