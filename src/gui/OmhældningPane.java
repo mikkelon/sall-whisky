@@ -33,7 +33,7 @@ public class OmhældningPane extends GridPane {
         this.setGridLinesVisible(false);
         this.setAlignment(Pos.CENTER);
 
-        Label lblFadeFra = new Label("Fade");
+        Label lblFadeFra = new Label("Fra");
         this.add(lblFadeFra, 0, 0);
 
         lvwFadeFra = new ListView<>();
@@ -81,7 +81,7 @@ public class OmhældningPane extends GridPane {
         btnOmhæld.setOnAction(event -> omhældAction());
         this.add(btnOmhæld, 1, 8);
 
-        Label lblFadeTil = new Label("Fade");
+        Label lblFadeTil = new Label("Til");
         this.add(lblFadeTil, 2, 0);
 
         lvwFadeTil = new ListView<>();
