@@ -162,7 +162,7 @@ public class Fad implements Comparable<Fad>{
      * @param mængde er mængden der påfyldes
      * @param påfyldtAf er navnet på den person, der har påfyldt fadet
      * @param påfyldningsDato er datoen for påfyldningen
-     * @return
+     * @return påfyldningen
      */
     public Påfyldning påfyld(Destillat destillat, double mængde, String påfyldtAf, LocalDate påfyldningsDato) {
         Påfyldning påfyldning;
