@@ -100,17 +100,18 @@ public class Setup {
         Aftapning a2 = controllerForProduktion.createAftapning("Mikkel", 10, LocalDate.now(), fad2);
         aftapninger1.add(a2);
 
-        HashSet<Aftapning> aftapninger3 = new HashSet<>();
-        Aftapning a4 = controllerForProduktion.createAftapning("Frederikke", 10, LocalDate.of(2023,4,12), fad2);
-
         // Laver aftapning på fad med omhældning
         HashSet<Aftapning> aftapninger2 = new HashSet<>();
         Aftapning a3 = controllerForProduktion.createAftapning("Mikkel", 5, LocalDate.now(), fad6);
         aftapninger2.add(a3);
 
+        HashSet<Aftapning> aftapninger3 = new HashSet<>();
+        Aftapning a4 = controllerForProduktion.createAftapning("Frederikke", 10, LocalDate.of(2023,4,12), fad2);
+        aftapninger3.add(a4);
+
         // Tilføjer en whiskyer
-        controllerForProduktion.createWhisky(aftapninger1, 20, "Begravet Dal", "Lækker whisky :)", 0.7);
-        controllerForProduktion.createWhisky(aftapninger2, 10, "Begravet Dal 2", "MEGA Lækker whisky!!!", 0.7);
+        controllerForProduktion.createWhisky(aftapninger1, 20, "Begravet Dal", "Lækker whisky :)", 0.5);
+        controllerForProduktion.createWhisky(aftapninger2, 10, "Begravet Dal 2", "MEGA Lækker whisky!!!", 1);
         controllerForProduktion.createWhisky(aftapninger3, 5, "Begravet Dal", "Lækker Whisky, blandet med vand", 0.7);
     }
 }
