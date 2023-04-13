@@ -224,24 +224,6 @@ public class ControllerForLager {
     }
 
     /**
-     * Returnerer alle fade med indhold der har modnet i mere end 3 år
-     * @return en ArrayList med fadene
-     */
-    public Set<Fad> getModneFade() { //TODO: Hvis ikke metoden bliver brugt, skal den fjernes
-        Set<Fad> modneFade = new TreeSet<>();
-        for (Lager lager : getLagre()) {
-            for (Hylde hylde : lager.getHylder()) {
-                for (Fad fad : hylde.getFade()) {
-                    if (fad.getFadIndhold() != null && fad.getFadIndhold().isModnet()) {
-                        modneFade.add(fad);
-                    }
-                }
-            }
-        }
-        return modneFade;
-    }
-
-    /**
      * Returnerer alle fade med indhold der har modnet i mere end 3 år og hvor der ikke er registreret alkoholprocent
      * @return en ArrayList med fadene
      */
