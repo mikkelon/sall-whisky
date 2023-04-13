@@ -42,7 +42,6 @@ public class Storage implements Serializable {
             obj_out.close();
         }
         catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -60,11 +59,9 @@ public class Storage implements Serializable {
             f_in.close();
         }
         catch (ClassNotFoundException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
