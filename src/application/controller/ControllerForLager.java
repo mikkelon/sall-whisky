@@ -152,7 +152,7 @@ public class ControllerForLager {
      * @return en ArrayList med alle hylder i alle lagre
      */
     public Set<Hylde> getHylder() {
-        Set<Hylde> hylder = new TreeSet<>((a, b) -> a.getHyldeNr() - b.getHyldeNr());
+        Set<Hylde> hylder = new TreeSet<>();
         if (!storage.getLagre().isEmpty()) {
             for (Lager lager : storage.getLagre()) {
                 hylder.addAll(lager.getHylder());
@@ -201,7 +201,7 @@ public class ControllerForLager {
      * @return et TreeSet med alle fade fra alle lagre
      */
     public Set<Fad> getAlleFade() {
-        Set<Fad> alleFade = new TreeSet<>((a,b) -> a.getFadNr() - b.getFadNr());
+        Set<Fad> alleFade = new TreeSet<>();
         for (Lager lager : getLagre()) {
             for (Hylde hylde : lager.getHylder()) {
                 alleFade.addAll(hylde.getFade());
@@ -217,7 +217,7 @@ public class ControllerForLager {
      * @Pre: lager != null
      */
     public Set<Fad> getAlleFade(Lager lager) {
-        Set<Fad> alleFade = new TreeSet<>((a,b) -> a.getFadNr() - b.getFadNr());
+        Set<Fad> alleFade = new TreeSet<>();
         for (Hylde hylde : lager.getHylder()) {
             alleFade.addAll(hylde.getFade());
         }
@@ -229,7 +229,7 @@ public class ControllerForLager {
      * @return en ArrayList med fadene
      */
     public Set<Fad> getModneFade() { //TODO: Hvis ikke metoden bliver brugt, skal den fjernes
-        Set<Fad> modneFade = new TreeSet<>((a, b) -> a.getFadNr() - b.getFadNr());
+        Set<Fad> modneFade = new TreeSet<>();
         for (Lager lager : getLagre()) {
             for (Hylde hylde : lager.getHylder()) {
                 for (Fad fad : hylde.getFade()) {
@@ -247,7 +247,7 @@ public class ControllerForLager {
      * @return en ArrayList med fadene
      */
     public Set<Fad> getModneFadeUdenRegistreretAlkoholProcent() {
-        Set<Fad> modneFade = new TreeSet<>((a, b) -> a.getFadNr() - b.getFadNr());
+        Set<Fad> modneFade = new TreeSet<>();
         for (Lager lager : getLagre()) {
             for (Hylde hylde : lager.getHylder()) {
                 for (Fad fad : hylde.getFade()) {
@@ -263,7 +263,7 @@ public class ControllerForLager {
     }
 
     public Set<Fad> getModneFadeMedRegistreretAlkoholProcent() {
-        Set<Fad> modneFade = new TreeSet<>((a, b) -> a.getFadNr() - b.getFadNr());
+        Set<Fad> modneFade = new TreeSet<>();
         for (Lager lager : getLagre()) {
             for (Hylde hylde : lager.getHylder()) {
                 for (Fad fad : hylde.getFade()) {

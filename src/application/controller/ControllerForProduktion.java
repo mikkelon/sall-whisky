@@ -265,7 +265,7 @@ public class ControllerForProduktion {
      * @return alle whiskyerne
      */
    public Set<Whisky> getWhiskyer(){
-        Set<Whisky> whiskyer = new TreeSet<>(Comparator.comparingInt(Whisky::getWhiskyNr));
+        Set<Whisky> whiskyer = new TreeSet<>();
         whiskyer.addAll(storage.getWhiskyer());
         return whiskyer;
    }
