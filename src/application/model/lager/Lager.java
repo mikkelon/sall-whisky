@@ -19,6 +19,7 @@ public class Lager {
      * @param adresse lagerets adresse
      * @param navn    lagerets navn
      * @param kvm     lagerets kvm
+     * @Pre adresse != null && navn != null && kvm > 0
      */
     public Lager(String adresse, String navn, double kvm) {
         this.adresse = adresse;
