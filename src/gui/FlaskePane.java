@@ -1,4 +1,4 @@
-package gui.gui_lagerstyring;
+package gui;
 
 import application.controller.ControllerForLager;
 import application.model.lager.Flaske;
@@ -15,7 +15,7 @@ public class FlaskePane extends GridPane {
 
     private ListView<Flaske> lvwFlaske;
     private TextArea txaBeskrivelse;
-    private TextArea txaHistorik;
+    private TextArea txaLabel;
 
 
     public FlaskePane() {
@@ -49,25 +49,25 @@ public class FlaskePane extends GridPane {
 
         this.add(txaBeskrivelse, 1, 1);
 
-        Label lblHistorik = new Label("Historik");
-        this.add(lblHistorik, 2, 0);
+        Label lblLabel = new Label("Label");
+        this.add(lblLabel, 2, 0);
 
-        txaHistorik = new TextArea();
-        txaHistorik.setMinWidth(120);
-        txaHistorik.setMinHeight(300);
-        txaHistorik.setMaxWidth(200);
-        txaHistorik.setEditable(false);
-        this.add(txaHistorik, 2, 1);
+        txaLabel = new TextArea();
+        txaLabel.setMinWidth(120);
+        txaLabel.setMinHeight(300);
+        txaLabel.setMaxWidth(200);
+        txaLabel.setEditable(false);
+        this.add(txaLabel, 2, 1);
     }
 
     private void getInfo() {
         Flaske valgtFlaske = lvwFlaske.getSelectionModel().getSelectedItem();
         if (valgtFlaske != null) {
             txaBeskrivelse.setText(valgtFlaske.getBeskrivelse());
-            txaHistorik.setText(valgtFlaske.hentHistorik());
+            txaLabel.setText(valgtFlaske.hentLabel());
         } else {
             txaBeskrivelse.clear();
-            txaHistorik.clear();
+            txaLabel.clear();
         }
     }
 
