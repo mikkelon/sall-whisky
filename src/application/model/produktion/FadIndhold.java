@@ -208,26 +208,18 @@ public class FadIndhold {
     public String hentHistorik() {
         String historik = fad.hentHistorik() + "\n";
 
-        historik += getProduktionsHistorik();
-
-        return historik;
-    }
-
-    public String getProduktionsHistorik() {
-        String identifikation = "";
-
-        identifikation += "Destillater:\n";
+        historik += "Destillater:\n";
         for (Påfyldning påfyldning : påfyldninger) {
-            identifikation += påfyldning.hentHistorik() + "\n";
+            historik += påfyldning.hentHistorik() + "\n";
         }
 
         if (tilføjedeOmhældninger.size() > 0) {
-            identifikation += "Omhældninger:\n";
+            historik += "Omhældninger:\n";
         }
         for (Omhældning omhældning : tilføjedeOmhældninger) {
-            identifikation += omhældning.hentHistorik() + "\n";
+            historik += omhældning.hentHistorik() + "\n";
         }
 
-        return identifikation;
+        return historik;
     }
 }
