@@ -14,6 +14,13 @@ public class ControllerForLager {
     private static ControllerForLager controller;
 
     private ControllerForLager() {
+        updateStorage();
+    }
+
+    /**
+     * Opdaterer controllerens instans af Storage
+     */
+    public void updateStorage() {
         storage = Storage.getStorage();
     }
 

@@ -1,6 +1,7 @@
 package gui;
 
 import application.Setup;
+import application.controller.StorageController;
 import gui.gui_destillat.DestillatPane;
 import gui.gui_fade.FadePane;
 import gui.gui_lagerstyring.LagerstyringPane;
@@ -14,9 +15,11 @@ import javafx.stage.Stage;
 
 public class StartVindue extends Application {
     private TabPane tabPane;
+    private StorageController storageController = StorageController.getInstance();
+
     @Override
-    public void init() {
-        Setup.initMockData();
+    public void stop() {
+        storageController.saveStorage();
     }
 
     @Override
