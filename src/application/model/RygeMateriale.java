@@ -6,6 +6,11 @@ public enum RygeMateriale {
 
     private final String navn;
 
+    /**
+     * Initialiserer et nyt rygemateriale med navn.
+     * @param navn rygematerialets navn
+     * @Pre navn != null
+     */
     RygeMateriale(String navn) {
         this.navn = navn;
     }

@@ -7,6 +7,12 @@ public enum Betegnelse {
 
     private String navn;
 
+
+    /**
+     * Initialiserer en ny betegnelse med navn.
+     * @param navn betegnelsens navn
+     * @Pre navn != null
+     */
     Betegnelse(String navn) {
         this.navn = navn;
     }
